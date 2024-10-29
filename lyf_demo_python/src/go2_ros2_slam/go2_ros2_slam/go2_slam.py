@@ -103,7 +103,8 @@ class SlamNode(Node):
 
         # 创建定时器，定期发送速度命令   
         self.dt = 0.5                                                                  # 设置控制时间步长
-        self.turn_timer = None                                                          # 转弯期间的定时器
+        self.turn_timer = self.create_timer(0.5, self.turn_timer_callback)         # 转弯期间的定时器
+        self.condition_trigger = True
         # self.timer = self.create_timer(self.dt, self.timer_callback)                    # 创建一个定时器，每0.5秒（create_time单位秒）调用一次timer_callback函数
         
         # 创建建图等待时长
@@ -184,32 +185,46 @@ class SlamNode(Node):
     # 读取当前最新传感器数据
     def turn_timer_callback(self):
         self.get_logger().info('turn_timer_callback called')  # 添加日志确认回调被调用
+
         if self.current_scan is not None:
             self.front = self.current_scan.point.x
             self.left = self.current_scan.point.y
             self.right = self.current_scan.point.z
+
+            self.get_logger().info(f'{BLUE}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}') 
+            if (self.front <= SAFE_DISTANCE_HEAD or self.left <= SAFE_DISTANCE_FLANK or self.right <= SAFE_DISTANCE_FLANK):
+                self.condition_trigger = False
+                self.get_logger().info(f'{RED}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}')   
+
         else:
             self.get_logger().warning('当前扫描数据为空，无法更新距离信息')
 
 
-    def stop_turn(self):
-        """停止转弯"""
-        self.get_logger().info('Stopping turn')
-        # 取消转弯期间的定时器
-        if self.turn_timer is not None:
-            self.turn_timer.cancel()
-        # 恢复主定时器
-        self.timer.reset()
 
 
-    # 自主运动逻辑
-    def autonomous_motion(self):
-
+    def action_test(self):
 
         
-        # 调用TrajectoryFollow记录起始点
+        vx = 0.05
+        vy = 0.0
+        vyaw = -np.pi/8                 # 转向速度要足够，不然来不及转      
+        for i in range(11):
+            self.vel_contrl(vx,vy,vyaw)
+            self.get_logger().info(f'{RED}第{i+1}次右转{RESET}')
+            time.sleep(self.dt)        
+        for i in range(35):
+            if not self.condition_trigger :
+                self.condition_trigger = True
+                break
 
-        #调用避障方法
+            self.vel_contrl(0.1,vy,0)
+            self.get_logger().info(f'{YELLOW}第{i+1}次直行稳定{RESET}')
+            # time.sleep(self.dt)
+            rclpy.spin_once(self)
+
+
+    def action_formal(self):
+  #调用避障方法
         action = self.avoid_obstacle()
 
         # 根据状态设置速度
@@ -225,6 +240,7 @@ class SlamNode(Node):
         10步/0.5米——1个瓷砖格
         30步/1.5米
         """
+
 
         if action == 'Turn left':
             vx = 0.05
@@ -254,6 +270,8 @@ class SlamNode(Node):
                 time.sleep(self.dt)        
             for i in range(35):
 
+                rclpy.spin_once(self)
+
                 self.get_logger().info(f'{BLUE}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}') 
                 if (self.front <= SAFE_DISTANCE_HEAD or self.left <= SAFE_DISTANCE_FLANK or self.right <= SAFE_DISTANCE_FLANK):
                     self.get_logger().info(f'{RED}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}')   
@@ -262,7 +280,9 @@ class SlamNode(Node):
                       
                 self.vel_contrl(0.1,vy,0)
                 self.get_logger().info(f'{YELLOW}第{i+1}次直行稳定{RESET}')
-                time.sleep(self.dt)
+
+                rclpy.spin_once(self)
+                # time.sleep(self.dt)
 
             self.stop_turn()
             
@@ -328,6 +348,14 @@ class SlamNode(Node):
             vy = 0.0
             vyaw = 0.0
             self.vel_contrl(vx,vy,vyaw)
+
+    # 自主运动逻辑
+    def autonomous_motion(self):
+
+
+        # self.action_formal()
+        self.action_test()
+      
         
 
         # 调用TrajectoryFollow回到起始点
