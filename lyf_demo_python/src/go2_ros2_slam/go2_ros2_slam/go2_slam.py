@@ -46,6 +46,8 @@ YELLOW = '\033[93m'
 BLUE = '\033[94m'
 RESET = '\033[0m'  # 重置颜色
 
+# 小花兔
+
 
 # 定义通过日志数据调试所需变量
 log_file_path = '/home/flyivan/dog_robot/ros2_demo/analy/python3_11366_1729653417357.log'                   # 日志文件路径
