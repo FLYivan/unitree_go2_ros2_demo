@@ -48,7 +48,7 @@ RESET = '\033[0m'  # 重置颜色
 
 
 # 定义通过日志数据调试所需变量
-log_file_path = '/home/flyivan/dog_robot/ros2_demo/analy/python3_13105_1730093869605.log'                   # 日志文件路径
+log_file_path = '/home/flyivan/dog_robot/ros2_demo/analy/python3_11366_1729653417357.log'                   # 日志文件路径
 keyword = '前方障碍距离' 
 LOGTEST = 0                                                                                    # 日志关键词，=0取传感器真实数据，=1取日志模拟数据
 
