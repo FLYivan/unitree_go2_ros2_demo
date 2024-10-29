@@ -18,7 +18,6 @@ from unitree_interfaces.msg import QtCommand,QtEdge,QtNode
 # 自定义服务类型（用于响应主控程序的slam请求指令）
 from custom_interface.srv import UnitreeSlam
 
-# 小猪
 
 # 定义话题名称
 COMMANDTOPIC = "qt_command"                              # Qt命令话题
