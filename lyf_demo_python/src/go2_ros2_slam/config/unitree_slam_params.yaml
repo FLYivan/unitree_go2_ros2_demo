@@ -1,0 +1,29 @@
+# 节点参数示例
+my_node:
+  ros__parameters:
+    param1: 42
+    param2: "Hello, ROS 2"
+    my list:
+      - item1
+      - item2
+      - item3
+    nested_param:
+      sub_param1: true
+      sub_param2: 3.14
+    sensors dictionary:
+      - type: "lidar"
+      - range: "10.0"
+      - type: "camera"
+      - resolution: "640x480"
+
+
+
+
+# unitree_slam_params.yaml
+go2_ros2_slam:
+  ros__parameters:
+    param1: value1
+    param2: value2
+    nested_param:
+      sub_param1: sub_value1
+      sub_param2: sub_value2

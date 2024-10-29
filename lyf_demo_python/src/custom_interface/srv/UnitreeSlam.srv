@@ -1,0 +1,6 @@
+# Request
+string command         # 请求命令类型
+---
+
+# Response
+bool result            # 服务响应结果
