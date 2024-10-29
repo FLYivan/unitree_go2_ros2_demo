@@ -48,7 +48,6 @@ RESET = '\033[0m'  # 重置颜色
 
 
 
-
 # 定义通过日志数据调试所需变量
 log_file_path = '/home/flyivan/dog_robot/ros2_demo/analy/python3_11366_1729653417357.log'                   # 日志文件路径
 keyword = '前方障碍距离' 
@@ -81,9 +80,9 @@ class SlamNode(Node):
 
 
         # 初始化变向定时器传感参数
-        self.front = 0.0  # 初始化前方距离
-        self.left = 0.0   # 初始化左侧距离
-        self.right = 0.0  # 初始化右侧距离
+        self.front = 100.0  # 初始化前方距离
+        self.left = 100.0   # 初始化左侧距离
+        self.right = 100.0  # 初始化右侧距离
       
 
         # 创建自带激光雷达数据的订阅者 
