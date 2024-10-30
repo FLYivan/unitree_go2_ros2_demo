@@ -37,7 +37,7 @@ MOVETYPE = 1                            # 移动路径开关  1：沿右侧逆�
 SAFE_DISTANCE_HEAD = 0.7                    # 前侧安全距离，单位：米
 SAFE_DISTANCE_FLANK = 0.25                   # 两侧安全距离，单位：米  
 GO_DISTANCE = 2                             # 可前进距离 
-CONFIRM_TIME = 2                            # 90度转弯传感器确认次数
+CONFIRM_TIME = 3                            # 90度转弯传感器确认次数
 
 # ANSI 转义序列，定义打印颜色
 RED = '\033[91m'
@@ -102,10 +102,10 @@ class SlamNode(Node):
 
 
         # 创建定时器，定期发送速度命令   
-        self.dt = 0.5                                                                  # 设置控制时间步长   
+        self.dt = 0.5                                                                   # 设置控制时间步长   
         self.detect_dt = 0.5                                                            # 不能小于控制步长
         self.timer = self.create_timer(self.dt, self.timer_callback)                    # 创建一个定时器，每0.5秒（create_time单位秒）调用一次timer_callback函数
-        self.turn_timer = self.create_timer(self.detect_dt, self.turn_timer_callback)         # 转弯期间的定时器
+        self.turn_timer = self.create_timer(self.detect_dt, self.turn_timer_callback)   # 转弯期间的定时器
         self.condition_trigger = False
         self.execute_move = False  # 标志变量 
 
@@ -129,8 +129,8 @@ class SlamNode(Node):
 
     # 主定时器回调函数
     def timer_callback(self):
-        self.get_logger().info(f'{GREEN}主回调启动{RESET}')  # 添加日志确认回调被调用
-        self.start_time += self.dt                                                      # 等待1秒后启动
+        # self.get_logger().info(f'{GREEN}主回调启动{RESET}')                               # 添加日志确认回调被调用
+        self.start_time += self.dt                                                      # 等待2秒后启动
         if 0 <= self.start_time < self.map_dt:                                          # 检查运行时间计数是否为非负，是否到达建图时间上限
                 
                 self.execute_move = True
@@ -149,20 +149,20 @@ class SlamNode(Node):
 
     # 转向定时器回调函数
     def turn_timer_callback(self):
-        self.get_logger().info(f'{GREEN}转向定时器启动{RESET}')  # 添加日志确认回调被调用
+        # self.get_logger().info(f'{GREEN}转向定时器启动{RESET}')  # 添加日志确认回调被调用
 
         if self.current_scan is not None:
-            self.front = self.current_scan.point.x
+            self.front = self.current_scan.point.x                  # 订阅当前障碍距离
             self.left = self.current_scan.point.y
             self.right = self.current_scan.point.z
 
-            self.get_logger().info(f'{BLUE}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}') 
+            # self.get_logger().info(f'{BLUE}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}') 
             if ((self.front <= SAFE_DISTANCE_HEAD and not math.isinf(self.front)) or 
                 (self.left <= SAFE_DISTANCE_FLANK and not math.isinf(self.left)) or 
                 (self.right <= SAFE_DISTANCE_FLANK) and not math.isinf(self.right)) :
 
                 self.condition_trigger = True
-                self.get_logger().info(f'{BLUE}触发停止转向条件，标志位:{self.condition_trigger}{RESET}')
+                self.get_logger().info(f'{YELLOW}触发停止转向条件，标志位置为:{self.condition_trigger}{RESET}')
 
         else:
             # self.front = 100
@@ -213,14 +213,12 @@ class SlamNode(Node):
         action = self.avoid_obstacle()
 
 
-        # 根据状态设置速度
         """
         经测试，按pi/8的角速度，每转90度，所需步数和步长大致对应关系如下
         8次/1秒
         10次/0.5秒
         48次/0.1秒
         """
-
         """
         经测试，按0.1的线速度，所行走步数和对应步长如下
         10步/0.5米——1个瓷砖格
@@ -237,12 +235,12 @@ class SlamNode(Node):
                 self.vel_contrl(vx,vy,vyaw)
                 self.get_logger().info(f'{RED}第{i+1}次左转{RESET}')
                 time.sleep(self.dt)
-            for i in range(20):
+            for i in range(35):
                 
                 # 在每次迭代中调用 spin_once
-                rclpy.spin_once(self)  # 处理事件循环
+                rclpy.spin_once(self)           # 处理事件循环
                 time.sleep(self.detect_dt)
-                self.get_logger().info(f'{YELLOW}触发停止转向条件，标志位:{self.condition_trigger}{RESET}')
+                # self.get_logger().info(f'{BLUE}当前转向标志位:{self.condition_trigger}{RESET}')
                 if self.condition_trigger :
                     self.get_logger().info(f'{RED}周围有障碍, 停止行进，重新规划{RESET}')
                     self.condition_trigger = False
@@ -256,7 +254,7 @@ class SlamNode(Node):
 
             vx = 0.05
             vy = 0.0
-            vyaw = -np.pi/8                 # 转向速度要足够，不然来不及转      
+            vyaw = -np.pi/8                                         # 转向速度要足够，不然来不及转      
             for i in range(11):
                 self.vel_contrl(vx,vy,vyaw)
                 self.get_logger().info(f'{RED}第{i+1}次右转{RESET}')
@@ -264,10 +262,10 @@ class SlamNode(Node):
 
             for i in range(35):
                 # 在每次迭代中调用 spin_once
-                rclpy.spin_once(self)  # 处理事件循环
+                rclpy.spin_once(self)                               # 处理事件循环
                 time.sleep(self.detect_dt)
 
-                self.get_logger().info(f'{YELLOW}触发停止转向条件，标志位:{self.condition_trigger}{RESET}')
+                # self.get_logger().info(f'{BLUE}当前转向标志位:{self.condition_trigger}{RESET}')
                 if self.condition_trigger :
                     self.get_logger().info(f'{RED}周围有障碍, 停止行进，重新规划{RESET}')
                     self.condition_trigger = False
@@ -343,10 +341,12 @@ class SlamNode(Node):
     # 自主运动逻辑
     def autonomous_motion(self):
 
-        self.condition_trigger = False
-        self.get_logger().info(f'{RED}触发停止转向条件，标志位:{self.condition_trigger}{RESET}')
-        self.action_formal()      # 运动控制正式方法
-        # self.action_test()      # 运动控制测试方法
+        # self.get_logger().info(f'{RED}重置转向条件标志位为:{self.condition_trigger}{RESET}')
+        self.condition_trigger = False                                                          # 每次运动控制前，需重置转向停止标志位
+        self.action_formal()                                                                    # 运动控制正式方法
+
+
+        # self.action_test()                                                                    # 运动控制测试方法
       
         
         # 调用TrajectoryFollow回到起始点
@@ -355,7 +355,6 @@ class SlamNode(Node):
     def vel_contrl(self,vx :float,vy : float,vyaw : float):
 
         self.sport_req.Move(self.req,vx, vy, vyaw)                              # 获取与高级运动命令对应的请求消息
-     
         self.cmd_vel_pub.publish(self.req)                                      # 发布速度命令
 
 
@@ -660,9 +659,11 @@ class SlamNode(Node):
 
         return action  
 
+
     # 记录起始点及回到起始点
     def start_end_record(self):
         pass
+
 
     # 实现 SLAM 算法
     # 算法1：宇数自带slam算法节点
@@ -711,7 +712,8 @@ def main(args=None):
 
             while rclpy.ok():
                 rclpy.spin_once(node)  # 处理事件循环
-                    # 检查标志变量并执行 B 的逻辑
+
+                    # 检查主定时器标志变量并执行运动控制的逻辑
                 if node.execute_move:
                     node.get_logger().info('unitree的SLAM服务已成功启动, 准备行进中建图...')
                     node.trigger_motion_control()  # 调用运动控制方法
@@ -730,7 +732,7 @@ def main(args=None):
         while rclpy.ok():
             rclpy.spin_once(node)  # 处理事件循环
 
-            # 检查标志变量并执行 B 的逻辑
+            # 检查主定时器标志变量并执行运动控制的逻辑
             if node.execute_move:
                 node.trigger_motion_control()  # 调用运动控制方法
                 node.execute_move = False  # 重置标志变量
