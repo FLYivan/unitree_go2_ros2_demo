@@ -107,7 +107,7 @@ class SlamNode(Node):
         self.timer = self.create_timer(self.dt, self.timer_callback)                    # 创建一个定时器，每0.5秒（create_time单位秒）调用一次timer_callback函数
         self.turn_timer = self.create_timer(self.detect_dt, self.turn_timer_callback)         # 转弯期间的定时器
         self.condition_trigger = False
-        self.execute_turn = False  # 标志变量 
+        self.execute_move = False  # 标志变量 
 
 
         # 创建建图等待时长
@@ -129,28 +129,26 @@ class SlamNode(Node):
 
     # 主定时器回调函数
     def timer_callback(self):
-        self.get_logger().info('主回调 called')  # 添加日志确认回调被调用
-        self.get_logger().info(f'当前时间{self.start_time}')  # 添加日志确认回调被调用
+        self.get_logger().info(f'{GREEN}主回调启动{RESET}')  # 添加日志确认回调被调用
         self.start_time += self.dt                                                      # 等待1秒后启动
         if 0 <= self.start_time < self.map_dt:                                          # 检查运行时间计数是否为非负，是否到达建图时间上限
                 
-                self.execute_turn = True
-                # self.autonomous_motion()
+                self.execute_move = True
                 self.log_count += 1
                 self.get_logger().info(f'当前运行时长:{self.start_time}')
 
-
+        # 待调整
         elif self.start_time >= self.map_dt:
-            self.execute_turn = False
+            self.execute_move = False
             self.get_logger().info(f'已运行{self.map_dt}秒，建图结束..')
-            # self.unitree_slam('e')
-            # self.timer.cancel()  # 取消定时器
-            # return
+            self.unitree_slam('e')
+            self.timer.cancel()  # 取消定时器
+            return
         
 
-    # 读取当前最新传感器数据
+    # 转向定时器回调函数
     def turn_timer_callback(self):
-        self.get_logger().info('turn_timer_callback called')  # 添加日志确认回调被调用
+        self.get_logger().info(f'{GREEN}转向定时器启动{RESET}')  # 添加日志确认回调被调用
 
         if self.current_scan is not None:
             self.front = self.current_scan.point.x
@@ -160,7 +158,6 @@ class SlamNode(Node):
             self.get_logger().info(f'{BLUE}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}') 
             if (self.front <= SAFE_DISTANCE_HEAD or self.left <= SAFE_DISTANCE_FLANK or self.right <= SAFE_DISTANCE_FLANK):
                 self.condition_trigger = True
-                self.get_logger().info(f'{RED}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}')   
 
         else:
             self.get_logger().warning('当前扫描数据为空，无法更新距离信息')
@@ -175,9 +172,10 @@ class SlamNode(Node):
 
         self.autonomous_motion()
 
-
+    # 运动方向策略执行测试模块
     def action_test(self):
 
+        # 单独测试各类行进模式
         
         vx = 0.05
         vy = 0.0
@@ -200,9 +198,7 @@ class SlamNode(Node):
                 self.condition_trigger = False
                 break
 
-            
-
-
+    # 运动方向策略执行模块
     def action_formal(self):
         #调用避障方法
         action = self.avoid_obstacle()
@@ -224,6 +220,7 @@ class SlamNode(Node):
 
 
         if action == 'Turn left':
+
             vx = 0.05
             vy = 0.0
             vyaw = np.pi/8                  # 转向速度要足够，不然来不及转
@@ -233,14 +230,20 @@ class SlamNode(Node):
                 time.sleep(self.dt)
             for i in range(20):
                 
+                # 在每次迭代中调用 spin_once
+                rclpy.spin_once(self)  # 处理事件循环
+                time.sleep(self.detect_dt)
+
+                if self.condition_trigger :
+                    self.get_logger().info(f'{RED}周围有障碍, 停止行进，重新规划{RESET}')
+                    self.condition_trigger = False
+                    break
+
                 self.vel_contrl(0.1,vy,0)
                 self.get_logger().info(f'{YELLOW}第{i+1}次直行稳定{RESET}')
-                time.sleep(self.dt)
+
                 
         elif action == 'Turn right':
-
-            self.timer.cancel()
-            self.turn_timer = self.create_timer(self.dt, self.turn_timer_callback)
 
             vx = 0.05
             vy = 0.0
@@ -248,24 +251,21 @@ class SlamNode(Node):
             for i in range(11):
                 self.vel_contrl(vx,vy,vyaw)
                 self.get_logger().info(f'{RED}第{i+1}次右转{RESET}')
-                time.sleep(self.dt)        
+                # time.sleep(self.dt)        
+
             for i in range(35):
+                # 在每次迭代中调用 spin_once
+                rclpy.spin_once(self)  # 处理事件循环
+                time.sleep(self.detect_dt)
 
-                rclpy.spin_once(self)
-
-                self.get_logger().info(f'{BLUE}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}') 
-                if (self.front <= SAFE_DISTANCE_HEAD or self.left <= SAFE_DISTANCE_FLANK or self.right <= SAFE_DISTANCE_FLANK):
-                    self.get_logger().info(f'{RED}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}')   
-                    self.stop_turn()
+                if self.condition_trigger :
+                    self.get_logger().info(f'{RED}周围有障碍, 停止行进，重新规划{RESET}')
+                    self.condition_trigger = False
                     break
-                      
+
                 self.vel_contrl(0.1,vy,0)
                 self.get_logger().info(f'{YELLOW}第{i+1}次直行稳定{RESET}')
-
-                rclpy.spin_once(self)
-                # time.sleep(self.dt)
-
-            self.stop_turn()
+                
             
         elif action == 'little Rotate left':
             vx = 0.05
@@ -334,11 +334,10 @@ class SlamNode(Node):
     def autonomous_motion(self):
 
 
-        # self.action_formal()
-        self.action_test()
+        self.action_formal()      # 运动控制正式方法
+        # self.action_test()      # 运动控制测试方法
       
         
-
         # 调用TrajectoryFollow回到起始点
 
     # 向狗子高层控制接口发送速度指令
@@ -348,10 +347,6 @@ class SlamNode(Node):
      
         self.cmd_vel_pub.publish(self.req)                                      # 发布速度命令
 
-
-    def scan_move(self):
-        # 简单地形扫描行走逻辑
-        pass
 
 
     # 简单的避障逻辑
@@ -688,7 +683,7 @@ def main(args=None):
     rclpy.init(args=args)
     node = SlamNode('slam_node_test')
 
-    # 使用 spin() 来保持节点运行
+
     for remaining in range(2, 0, -1):
         node.get_logger().info(f"倒计时: {remaining}秒")
         time.sleep(1)
@@ -710,19 +705,34 @@ def main(args=None):
                         # print(f"倒计时: {remaining}秒", end='\r',flush=True)
                         time.sleep(1)
                 node.get_logger().info("倒计时结束！")      
-                # print("倒计时结束！")     
-                node.get_logger().info('unitree的SLAM服务已成功启动, 准备行进中建图...')
-                node.trigger_motion_control()  # 调用运动控制方法
+
+                while rclpy.ok():
+                    rclpy.spin_once(node)  # 处理事件循环
+                        # 检查标志变量并执行 B 的逻辑
+                    if node.execute_move:
+                        node.get_logger().info('unitree的SLAM服务已成功启动, 准备行进中建图...')
+                        node.trigger_motion_control()  # 调用运动控制方法
+                        node.execute_move = False  # 重置标志变量
+                    
             else:
                 node.get_logger().error('Failed to receive a successful response from SLAM service.')
 
         elif TESTSWITCH == False :  
-            # 检查标志变量并执行 B 的逻辑
-            if node.execute_turn:
-                node.trigger_motion_control()  # 调用运动控制方法
-                node.execute_turn = False  # 重置标志变量
 
-            # elif not node.execute_turn :
+            for remaining in range(2, 0, -1):
+                node.get_logger().info(f"倒计时: {remaining}秒")
+                time.sleep(1)
+            node.get_logger().info("倒计时结束！")  
+            
+            while rclpy.ok():
+                rclpy.spin_once(node)  # 处理事件循环
+
+                # 检查标志变量并执行 B 的逻辑
+                if node.execute_move:
+                    node.trigger_motion_control()  # 调用运动控制方法
+                    node.execute_move = False  # 重置标志变量
+
+            # elif not node.execute_move :
             #     node.get_logger().info('SLAM服务开始关闭')
             #     node.unitree_slam('e')
  
