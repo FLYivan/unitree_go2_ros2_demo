@@ -184,7 +184,7 @@ class SlamNode(Node):
     def action_test(self):
 
         # 单独测试各类行进模式
-        
+    
         vx = 0.05
         vy = 0.0
         vyaw = -np.pi/8                 # 转向速度要足够，不然来不及转      
@@ -194,17 +194,18 @@ class SlamNode(Node):
             time.sleep(self.dt)        
 
         for i in range(35):
-            self.vel_contrl(0.1,vy,0)
-            self.get_logger().info(f'{YELLOW}第{i+1}次直行稳定{RESET}')
-            time.sleep(self.dt)
-
             # 在每次迭代中调用 spin_once
             rclpy.spin_once(self)  # 处理事件循环
+            time.sleep(self.detect_dt)
 
+            self.get_logger().info(f'{YELLOW}触发停止转向条件，标志位:{self.condition_trigger}{RESET}')
             if self.condition_trigger :
-                self.get_logger().info(f'{RED}前方有障碍, 停止前进，跳出主定时器{RESET}')
+                self.get_logger().info(f'{RED}周围有障碍, 停止行进，重新规划{RESET}')
                 self.condition_trigger = False
                 break
+
+            self.vel_contrl(0.1,vy,0)
+            self.get_logger().info(f'{YELLOW}第{i+1}次直行稳定{RESET}')
 
     # 运动方向策略执行模块
     def action_formal(self):
@@ -259,7 +260,7 @@ class SlamNode(Node):
             for i in range(11):
                 self.vel_contrl(vx,vy,vyaw)
                 self.get_logger().info(f'{RED}第{i+1}次右转{RESET}')
-                # time.sleep(self.dt)        
+                time.sleep(self.dt)        
 
             for i in range(35):
                 # 在每次迭代中调用 spin_once
@@ -342,6 +343,7 @@ class SlamNode(Node):
     # 自主运动逻辑
     def autonomous_motion(self):
 
+        self.condition_trigger = False
         self.get_logger().info(f'{RED}触发停止转向条件，标志位:{self.condition_trigger}{RESET}')
         self.action_formal()      # 运动控制正式方法
         # self.action_test()      # 运动控制测试方法
