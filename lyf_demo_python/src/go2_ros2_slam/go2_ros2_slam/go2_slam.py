@@ -684,57 +684,49 @@ def main(args=None):
     node = SlamNode('slam_node')
 
 
-    for remaining in range(2, 0, -1):
-        node.get_logger().info(f"倒计时: {remaining}秒")
-        time.sleep(1)
-    node.get_logger().info("倒计时结束！")  
-    
-    while rclpy.ok():
-        rclpy.spin_once(node)  # 处理事件循环
+    """
+    调试控制节点专用开关
+    """
+    if TESTSWITCH == True :
+        result = node.unitree_slam('w')
 
-        """
-        调试控制节点专用开关
-        """
-        if TESTSWITCH == True :
-            result = node.unitree_slam('w')
+        if result:
+        # 倒计时40秒，等建图服务开启
+            for remaining in range(40, 0, -1):
+                    node.get_logger().info(f"倒计时: {remaining}秒")
+                    # print(f"倒计时: {remaining}秒", end='\r',flush=True)
+                    time.sleep(1)
+            node.get_logger().info("倒计时结束！")      
 
-            if result:
-            # 倒计时40秒，等建图服务开启
-                for remaining in range(40, 0, -1):
-                        node.get_logger().info(f"倒计时: {remaining}秒")
-                        # print(f"倒计时: {remaining}秒", end='\r',flush=True)
-                        time.sleep(1)
-                node.get_logger().info("倒计时结束！")      
-
-                while rclpy.ok():
-                    rclpy.spin_once(node)  # 处理事件循环
-                        # 检查标志变量并执行 B 的逻辑
-                    if node.execute_move:
-                        node.get_logger().info('unitree的SLAM服务已成功启动, 准备行进中建图...')
-                        node.trigger_motion_control()  # 调用运动控制方法
-                        node.execute_move = False  # 重置标志变量
-                    
-            else:
-                node.get_logger().error('Failed to receive a successful response from SLAM service.')
-
-        elif TESTSWITCH == False :  
-
-            for remaining in range(2, 0, -1):
-                node.get_logger().info(f"倒计时: {remaining}秒")
-                time.sleep(1)
-            node.get_logger().info("倒计时结束！")  
-            
             while rclpy.ok():
                 rclpy.spin_once(node)  # 处理事件循环
-
-                # 检查标志变量并执行 B 的逻辑
+                    # 检查标志变量并执行 B 的逻辑
                 if node.execute_move:
+                    node.get_logger().info('unitree的SLAM服务已成功启动, 准备行进中建图...')
                     node.trigger_motion_control()  # 调用运动控制方法
                     node.execute_move = False  # 重置标志变量
+                
+        else:
+            node.get_logger().error('Failed to receive a successful response from SLAM service.')
 
-            # elif not node.execute_move :
-            #     node.get_logger().info('SLAM服务开始关闭')
-            #     node.unitree_slam('e')
+    elif TESTSWITCH == False :  
+
+        for remaining in range(2, 0, -1):
+            node.get_logger().info(f"倒计时: {remaining}秒")
+            time.sleep(1)
+        node.get_logger().info("倒计时结束！")  
+        
+        while rclpy.ok():
+            rclpy.spin_once(node)  # 处理事件循环
+
+            # 检查标志变量并执行 B 的逻辑
+            if node.execute_move:
+                node.trigger_motion_control()  # 调用运动控制方法
+                node.execute_move = False  # 重置标志变量
+
+        # elif not node.execute_move :
+        #     node.get_logger().info('SLAM服务开始关闭')
+        #     node.unitree_slam('e')
  
     node.destroy_node()
     rclpy.shutdown()
