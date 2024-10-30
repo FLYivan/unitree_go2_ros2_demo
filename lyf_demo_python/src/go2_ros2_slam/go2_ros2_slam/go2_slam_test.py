@@ -722,9 +722,9 @@ def main(args=None):
                 node.trigger_motion_control()  # 调用运动控制方法
                 node.execute_turn = False  # 重置标志变量
 
-            elif not node.execute_turn :
-                node.get_logger().info('SLAM服务开始关闭')
-                node.unitree_slam('e')
+            # elif not node.execute_turn :
+            #     node.get_logger().info('SLAM服务开始关闭')
+            #     node.unitree_slam('e')
  
     node.destroy_node()
     rclpy.shutdown()
