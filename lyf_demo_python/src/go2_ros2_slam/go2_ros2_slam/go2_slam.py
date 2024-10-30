@@ -49,7 +49,7 @@ RESET = '\033[0m'  # 重置颜色
 
 
 # 定义通过日志数据调试所需变量
-log_file_path = '/home/flyivan/dog_robot/ros2_demo/analy/python3_11366_1729653417357.log'                   # 日志文件路径
+log_file_path = '/home/flyivan/dog_robot/ros2_demo/analy/python3_4198_1730266567230.log'                   # 日志文件路径
 keyword = '前方障碍距离' 
 LOGTEST = 0                                                                                    # 日志关键词，=0取传感器真实数据，=1取日志模拟数据
 
@@ -68,7 +68,7 @@ class SlamNode(Node):
         self.current_scan = None
         self.current_odom = None
         self.action = 'Move forward'
-        self.start_time = 0                                                            # 初始化运行时间计数
+        self.start_time = -2                                                            # 初始化运行时间计数
         self.vx0 = 0                                                                    # 初始化初始x位置
         self.vy0 = 0                                                                    # 初始化初始y位置
         self.vyaw0 = 0                                                                  # 初始化初始偏航角
@@ -137,6 +137,7 @@ class SlamNode(Node):
                 self.log_count += 1
                 self.get_logger().info(f'当前运行时长:{self.start_time}')
 
+
         # 待调整
         elif self.start_time >= self.map_dt:
             self.execute_move = False
@@ -156,10 +157,17 @@ class SlamNode(Node):
             self.right = self.current_scan.point.z
 
             self.get_logger().info(f'{BLUE}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}') 
-            if (self.front <= SAFE_DISTANCE_HEAD or self.left <= SAFE_DISTANCE_FLANK or self.right <= SAFE_DISTANCE_FLANK):
+            if ((self.front <= SAFE_DISTANCE_HEAD and not math.isinf(self.front)) or 
+                (self.left <= SAFE_DISTANCE_FLANK and not math.isinf(self.left)) or 
+                (self.right <= SAFE_DISTANCE_FLANK) and not math.isinf(self.right)) :
+
                 self.condition_trigger = True
+                self.get_logger().info(f'{BLUE}触发停止转向条件，标志位:{self.condition_trigger}{RESET}')
 
         else:
+            # self.front = 100
+            # self.left = 100
+            # self.right = 100
             self.get_logger().warning('当前扫描数据为空，无法更新距离信息')
 
 
@@ -233,7 +241,7 @@ class SlamNode(Node):
                 # 在每次迭代中调用 spin_once
                 rclpy.spin_once(self)  # 处理事件循环
                 time.sleep(self.detect_dt)
-
+                self.get_logger().info(f'{YELLOW}触发停止转向条件，标志位:{self.condition_trigger}{RESET}')
                 if self.condition_trigger :
                     self.get_logger().info(f'{RED}周围有障碍, 停止行进，重新规划{RESET}')
                     self.condition_trigger = False
@@ -258,6 +266,7 @@ class SlamNode(Node):
                 rclpy.spin_once(self)  # 处理事件循环
                 time.sleep(self.detect_dt)
 
+                self.get_logger().info(f'{YELLOW}触发停止转向条件，标志位:{self.condition_trigger}{RESET}')
                 if self.condition_trigger :
                     self.get_logger().info(f'{RED}周围有障碍, 停止行进，重新规划{RESET}')
                     self.condition_trigger = False
@@ -333,7 +342,7 @@ class SlamNode(Node):
     # 自主运动逻辑
     def autonomous_motion(self):
 
-
+        self.get_logger().info(f'{RED}触发停止转向条件，标志位:{self.condition_trigger}{RESET}')
         self.action_formal()      # 运动控制正式方法
         # self.action_test()      # 运动控制测试方法
       
