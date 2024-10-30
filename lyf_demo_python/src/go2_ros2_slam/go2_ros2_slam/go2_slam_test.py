@@ -689,6 +689,11 @@ def main(args=None):
     node = SlamNode('slam_node_test')
 
     # 使用 spin() 来保持节点运行
+    for remaining in range(2, 0, -1):
+        node.get_logger().info(f"倒计时: {remaining}秒")
+        time.sleep(1)
+    node.get_logger().info("倒计时结束！")  
+    
     while rclpy.ok():
         rclpy.spin_once(node)  # 处理事件循环
 
@@ -711,11 +716,7 @@ def main(args=None):
             else:
                 node.get_logger().error('Failed to receive a successful response from SLAM service.')
 
-        elif TESTSWITCH == False :
-            for remaining in range(2, 0, -1):
-                    node.get_logger().info(f"倒计时: {remaining}秒")
-                    time.sleep(1)
-            node.get_logger().info("倒计时结束！")    
+        elif TESTSWITCH == False :  
             # 检查标志变量并执行 B 的逻辑
             if node.execute_turn:
                 node.trigger_motion_control()  # 调用运动控制方法
