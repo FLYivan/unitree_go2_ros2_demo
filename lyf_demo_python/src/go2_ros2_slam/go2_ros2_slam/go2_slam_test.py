@@ -104,7 +104,8 @@ class SlamNode(Node):
         # 创建定时器，定期发送速度命令   
         self.dt = 0.5                                                                  # 设置控制时间步长
         self.turn_timer = self.create_timer(0.5, self.turn_timer_callback)         # 转弯期间的定时器
-        self.condition_trigger = True
+        self.condition_trigger = False
+        self.execute_turn = False  # 标志变量
         # self.timer = self.create_timer(self.dt, self.timer_callback)                    # 创建一个定时器，每0.5秒（create_time单位秒）调用一次timer_callback函数
         
         # 创建建图等待时长
@@ -123,64 +124,25 @@ class SlamNode(Node):
     def odom_callback(self, msg):
         self.current_odom = msg
 
-    # 启动运动控制模块函数
-    def trigger_motion_control(self):
-        self.get_logger().info('启动运动控制模块') 
-
-        # 导入日志模拟数据（如需）
-        self.test_scan.parse_log_file(log_file_path,keyword)
-
-
-        # front_distance, left_distance, right_distance = self.test_scan.get_all_distances()[5]
-        # self.get_logger().info(f"{YELLOW}第 5 组距离值：左侧距离：{left_distance}({type(left_distance)}){RESET}")
-
-        # 定义定时器
-        self.timer = self.create_timer(self.dt, self.timer_callback)
-
 
     # 主定时器回调函数
     def timer_callback(self):
         self.start_time += self.dt                                                      # 等待1秒后启动
         if 0 <= self.start_time < self.map_dt:                                          # 检查运行时间计数是否为非负，是否到达建图时间上限
                 
-                self.autonomous_motion()
+                self.execute_turn = True
+                # self.autonomous_motion()
                 self.log_count += 1
                 self.get_logger().info(f'当前运行时长:{self.start_time}')
 
 
         elif self.start_time >= self.map_dt:
+            self.execute_turn = False
             self.get_logger().info(f'已运行{self.map_dt}秒，建图结束..')
-            self.unitree_slam('e')
-            self.timer.cancel()  # 取消定时器
-            return
+            # self.unitree_slam('e')
+            # self.timer.cancel()  # 取消定时器
+            # return
         
-
-            
-
-    # 实现 SLAM 算法
-    # 算法1：宇数自带slam算法节点
-    def unitree_slam(self,command_key):                                                 # 创建一个发送服务请求的函数
-        self.request.command = command_key
-        self.future = self.slam_client.call_async(self.request)                         # 异步方式发送服务请求
-
-        # 添加日志，记录开始等待服务响应
-        self.get_logger().info('等待服务器的响应...')
-
-        # 等待服务器响应结果
-        rclpy.spin_until_future_complete(self, self.future)
-
-
-        # 添加日志，记录服务响应已接收
-        self.get_logger().info('收到服务器响应！')
-        
-        try:
-            response = self.future.result()
-            self.get_logger().info(f'服务器的响应结果为: {response.result}')
-            return response.result
-        except Exception as e:                                                          # 把异常类捕获的具体异常实例付给e
-            self.get_logger().error(f'服务器响应失败，失败原因: {e}')
-            return None
-
 
     # 读取当前最新传感器数据
     def turn_timer_callback(self):
@@ -193,13 +155,21 @@ class SlamNode(Node):
 
             self.get_logger().info(f'{BLUE}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}') 
             if (self.front <= SAFE_DISTANCE_HEAD or self.left <= SAFE_DISTANCE_FLANK or self.right <= SAFE_DISTANCE_FLANK):
-                self.condition_trigger = False
+                self.condition_trigger = True
                 self.get_logger().info(f'{RED}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}')   
 
         else:
             self.get_logger().warning('当前扫描数据为空，无法更新距离信息')
 
 
+    # 启动运动控制模块函数
+    def trigger_motion_control(self):
+        self.get_logger().info('启动运动控制模块') 
+
+        # 导入日志模拟数据（如需）
+        self.test_scan.parse_log_file(log_file_path,keyword)
+
+        self.autonomous_motion()
 
 
     def action_test(self):
@@ -212,19 +182,25 @@ class SlamNode(Node):
             self.vel_contrl(vx,vy,vyaw)
             self.get_logger().info(f'{RED}第{i+1}次右转{RESET}')
             time.sleep(self.dt)        
-        for i in range(35):
-            if not self.condition_trigger :
-                self.condition_trigger = True
-                break
 
+        for i in range(35):
             self.vel_contrl(0.1,vy,0)
             self.get_logger().info(f'{YELLOW}第{i+1}次直行稳定{RESET}')
-            # time.sleep(self.dt)
-            rclpy.spin_once(self)
+            time.sleep(self.dt)
+
+            # 在每次迭代中调用 spin_once
+            rclpy.spin_once(self)  # 处理事件循环
+
+            if self.condition_trigger :
+                self.get_logger().info(f'{RED}前方有障碍, 停止前进，跳出主定时器{RESET}')
+                self.condition_trigger = False
+                break
+
+            
 
 
     def action_formal(self):
-  #调用避障方法
+        #调用避障方法
         action = self.avoid_obstacle()
 
 
@@ -678,44 +654,78 @@ class SlamNode(Node):
     def start_end_record(self):
         pass
 
+    # 实现 SLAM 算法
+    # 算法1：宇数自带slam算法节点
+    def unitree_slam(self,command_key):                                                 # 创建一个发送服务请求的函数
+        self.request.command = command_key
+        self.future = self.slam_client.call_async(self.request)                         # 异步方式发送服务请求
+
+        # 添加日志，记录开始等待服务响应
+        self.get_logger().info('等待服务器的响应...')
+
+        # 等待服务器响应结果
+        rclpy.spin_until_future_complete(self, self.future)
+
+
+        # 添加日志，记录服务响应已接收
+        self.get_logger().info('收到服务器响应！')
+        
+        try:
+            response = self.future.result()
+            self.get_logger().info(f'服务器的响应结果为: {response.result}')
+            return response.result
+        except Exception as e:                                                          # 把异常类捕获的具体异常实例付给e
+            self.get_logger().error(f'服务器响应失败，失败原因: {e}')
+            return None
+
+
 
 def main(args=None):
     rclpy.init(args=args)
-    node = SlamNode('slam_node')
+    node = SlamNode('slam_node_test')
 
-    """
-    调试控制节点专用开关
-    """
+    # 使用 spin() 来保持节点运行
+    while rclpy.ok():
+        rclpy.spin_once(node)  # 处理事件循环
 
-    if TESTSWITCH == True :
-        result = node.unitree_slam('w')
-        if result:
-        # 倒计时40秒，等建图服务开启
-            for remaining in range(40, 0, -1):
+        """
+        调试控制节点专用开关
+        """
+        if TESTSWITCH == True :
+            result = node.unitree_slam('w')
+
+            if result:
+            # 倒计时40秒，等建图服务开启
+                for remaining in range(40, 0, -1):
+                        node.get_logger().info(f"倒计时: {remaining}秒")
+                        # print(f"倒计时: {remaining}秒", end='\r',flush=True)
+                        time.sleep(1)
+                node.get_logger().info("倒计时结束！")      
+                # print("倒计时结束！")     
+                node.get_logger().info('unitree的SLAM服务已成功启动, 准备行进中建图...')
+                node.trigger_motion_control()  # 调用运动控制方法
+            else:
+                node.get_logger().error('Failed to receive a successful response from SLAM service.')
+
+        elif TESTSWITCH == False :
+            for remaining in range(2, 0, -1):
                     node.get_logger().info(f"倒计时: {remaining}秒")
-                    # print(f"倒计时: {remaining}秒", end='\r',flush=True)
                     time.sleep(1)
-            node.get_logger().info("倒计时结束！")      
-            # print("倒计时结束！")     
-            node.get_logger().info('unitree的SLAM服务已成功启动, 准备行进中建图...')
-            node.trigger_motion_control()  # 调用运动控制方法
-        else:
-            node.get_logger().error('Failed to receive a successful response from SLAM service.')
+            node.get_logger().info("倒计时结束！")    
+            # 检查标志变量并执行 B 的逻辑
+            if node.execute_turn:
+                node.trigger_motion_control()  # 调用运动控制方法
+                node.execute_turn = False  # 重置标志变量
 
-    elif TESTSWITCH == False :
-        for remaining in range(2, 0, -1):
-                node.get_logger().info(f"倒计时: {remaining}秒")
-                time.sleep(1)
-        node.get_logger().info("倒计时结束！")      
-        node.trigger_motion_control()  # 调用运动控制方法
-
-
-
-
-
-    rclpy.spin(node)
+            elif not node.execute_turn :
+                node.get_logger().info('SLAM服务开始关闭')
+                node.unitree_slam('e')
+ 
     node.destroy_node()
     rclpy.shutdown()
+
+
+
 
 if __name__ == '__main__':
     main()

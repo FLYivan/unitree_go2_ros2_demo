@@ -26,7 +26,8 @@ setup(
     entry_points={
         'console_scripts': [
             'slam_node  = go2_ros2_slam.go2_slam:main',   
-            'unitree_slam_service  = go2_ros2_slam.unitree_slam:main',                   
+            'unitree_slam_service  = go2_ros2_slam.unitree_slam:main',  
+            'slam_node_test  = go2_ros2_slam.go2_slam_test:main',                              
         ],
     },
 )
