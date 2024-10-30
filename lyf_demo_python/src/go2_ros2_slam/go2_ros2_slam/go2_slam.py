@@ -30,7 +30,7 @@ SPORTTOPIC = "api/sport/request"                                     # 添加运
 SLAMCOMMANDSERVICE = "unitree_slam_command"                          # unitree的slam步骤指令服务
 
 # 定义调试开关
-TESTSWITCH = False                      # slam节点开关
+TESTSWITCH = True                      # slam节点开关
 MOVETYPE = 1                            # 移动路径开关  1：沿右侧逆时针绕行 2：普通直行 
 
 # 定义安全距离 
