@@ -68,7 +68,7 @@ class SlamNode(Node):
         self.current_scan = None
         self.current_odom = None
         self.action = 'Move forward'
-        self.start_time = -1                                                            # 初始化运行时间计数
+        self.start_time = 0                                                            # 初始化运行时间计数
         self.vx0 = 0                                                                    # 初始化初始x位置
         self.vy0 = 0                                                                    # 初始化初始y位置
         self.vyaw0 = 0                                                                  # 初始化初始偏航角
@@ -102,12 +102,14 @@ class SlamNode(Node):
 
 
         # 创建定时器，定期发送速度命令   
-        self.dt = 0.5                                                                  # 设置控制时间步长
-        self.turn_timer = self.create_timer(0.5, self.turn_timer_callback)         # 转弯期间的定时器
+        self.dt = 0.5                                                                  # 设置控制时间步长   
+        self.detect_dt = 0.5                                                            # 不能小于控制步长
+        self.timer = self.create_timer(self.dt, self.timer_callback)                    # 创建一个定时器，每0.5秒（create_time单位秒）调用一次timer_callback函数
+        self.turn_timer = self.create_timer(self.detect_dt, self.turn_timer_callback)         # 转弯期间的定时器
         self.condition_trigger = False
-        self.execute_turn = False  # 标志变量
-        # self.timer = self.create_timer(self.dt, self.timer_callback)                    # 创建一个定时器，每0.5秒（create_time单位秒）调用一次timer_callback函数
-        
+        self.execute_turn = False  # 标志变量 
+
+
         # 创建建图等待时长
         self.map_dt = 600
     
@@ -127,6 +129,8 @@ class SlamNode(Node):
 
     # 主定时器回调函数
     def timer_callback(self):
+        self.get_logger().info('主回调 called')  # 添加日志确认回调被调用
+        self.get_logger().info(f'当前时间{self.start_time}')  # 添加日志确认回调被调用
         self.start_time += self.dt                                                      # 等待1秒后启动
         if 0 <= self.start_time < self.map_dt:                                          # 检查运行时间计数是否为非负，是否到达建图时间上限
                 
