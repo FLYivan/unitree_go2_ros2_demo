@@ -11,7 +11,7 @@ import sys                                                                  # �
 import tty                                                                  # 导入终端控制模块（按键输入相关）
 import math                                                                 # 导入数学函数模块
 
-# xiaozhu
+
 
 # 自定义消息类型（用于在ros2框架下的宇数slam算法通信）
 from unitree_interfaces.msg import QtCommand,QtEdge,QtNode
