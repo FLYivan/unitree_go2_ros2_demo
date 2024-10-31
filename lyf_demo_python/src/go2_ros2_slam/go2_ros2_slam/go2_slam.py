@@ -117,7 +117,7 @@ class SlamNode(Node):
 
 
         # 创建建图等待时长
-        self.map_dt = 600
+        self.map_dt = 300
     
         # 初始化测试常用变量
         self.test_scan = PathData()
@@ -339,7 +339,7 @@ class SlamNode(Node):
             vx = -0.1
             vy = 0.0
             vyaw = 0.0
-            for i in range(10):
+            for i in range(5):
                 self.vel_contrl(vx,vy,vyaw)  
                 self.get_logger().info(f'{YELLOW}第{i+1}次后退{RESET}')
                 time.sleep(self.dt)     
@@ -415,8 +415,8 @@ class SlamNode(Node):
                         self.right_confirm_count = 0
 
                     elif right_distance >= SAFE_DISTANCE_FLANK and right_distance < GO_DISTANCE :
-                        # 右平移
-                        action = "right move" 
+                        # 原地小右转
+                        action = "place right" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
 
@@ -432,8 +432,8 @@ class SlamNode(Node):
 
                 elif left_distance >= SAFE_DISTANCE_FLANK and left_distance < GO_DISTANCE :
                     if right_distance < SAFE_DISTANCE_FLANK :
-                        # 左平移
-                        action = "left move" 
+                        # 原地左小转
+                        action = "place left" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0      
 
@@ -596,8 +596,8 @@ class SlamNode(Node):
                         self.right_confirm_count = 0
 
                     elif right_distance >= SAFE_DISTANCE_FLANK and right_distance < GO_DISTANCE :
-                        # 右平移
-                        action = "right move" 
+                        # 原地右转
+                        action = "palce right" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
 
@@ -614,8 +614,8 @@ class SlamNode(Node):
 
                 elif left_distance >= SAFE_DISTANCE_FLANK and left_distance < GO_DISTANCE :
                     if right_distance < SAFE_DISTANCE_FLANK :
-                        # 左平移
-                        action = "left move" 
+                        # 原地左转
+                        action = "place left" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0     
 
