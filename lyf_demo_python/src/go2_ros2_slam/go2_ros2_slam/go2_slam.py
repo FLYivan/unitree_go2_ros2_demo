@@ -33,15 +33,15 @@ SPORTTOPIC = "api/sport/request"                                     # 添加运
 SLAMCOMMANDSERVICE = "unitree_slam_command"                          # unitree的slam步骤指令服务
 
 # 定义调试开关
-TESTSWITCH = False                    # slam节点开关
+TESTSWITCH = True                    # slam节点开关
 MOVETYPE = 1                            # 移动路径开关  1：沿右侧逆时针绕行 2：普通直行 
 
 # 定义安全距离 
 SAFE_DISTANCE_HEAD = 0.7                    # 前侧安全距离，单位：米
-SAFE_DISTANCE_FLANK = 0.29                   # 两侧安全距离，单位：米  
+SAFE_DISTANCE_FLANK = 0.35                   # 两侧安全距离，单位：米  
 GO_DISTANCE = 2                             # 可前进距离 
 CONFIRM_TIME = 2                            # 90度转弯传感器确认次数
-BREAK_CONFIRM_TIME = 6
+BREAK_CONFIRM_TIME = 5                      # 转弯直行打断步数
 
 # ANSI 转义序列，定义打印颜色
 RED = '\033[91m'
@@ -243,7 +243,7 @@ class SlamNode(Node):
             vx = 0.05
             vy = 0.0
             vyaw = np.pi/8                  # 转向速度要足够，不然来不及转
-            for i in range(10):
+            for i in range(11):
                 self.vel_contrl(vx,vy,vyaw)
                 self.get_logger().info(f'{RED}第{i+1}次左转{RESET}')
                 time.sleep(self.dt)
