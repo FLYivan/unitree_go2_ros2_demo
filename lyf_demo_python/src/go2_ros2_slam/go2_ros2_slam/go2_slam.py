@@ -19,6 +19,9 @@ import time
 import math
 import numpy as np
 
+import threading
+import queue
+
 # 自定义服务类型（用于响应主控程序的slam请求指令）
 from custom_interface.srv import UnitreeSlam
 
@@ -30,14 +33,15 @@ SPORTTOPIC = "api/sport/request"                                     # 添加运
 SLAMCOMMANDSERVICE = "unitree_slam_command"                          # unitree的slam步骤指令服务
 
 # 定义调试开关
-TESTSWITCH = True                      # slam节点开关
+TESTSWITCH = False                    # slam节点开关
 MOVETYPE = 1                            # 移动路径开关  1：沿右侧逆时针绕行 2：普通直行 
 
 # 定义安全距离 
 SAFE_DISTANCE_HEAD = 0.7                    # 前侧安全距离，单位：米
-SAFE_DISTANCE_FLANK = 0.25                   # 两侧安全距离，单位：米  
+SAFE_DISTANCE_FLANK = 0.29                   # 两侧安全距离，单位：米  
 GO_DISTANCE = 2                             # 可前进距离 
-CONFIRM_TIME = 3                            # 90度转弯传感器确认次数
+CONFIRM_TIME = 2                            # 90度转弯传感器确认次数
+BREAK_CONFIRM_TIME = 6
 
 # ANSI 转义序列，定义打印颜色
 RED = '\033[91m'
@@ -68,7 +72,7 @@ class SlamNode(Node):
         self.current_scan = None
         self.current_odom = None
         self.action = 'Move forward'
-        self.start_time = -2                                                            # 初始化运行时间计数
+        self.start_time = -2                                                           # 初始化运行时间计数
         self.vx0 = 0                                                                    # 初始化初始x位置
         self.vy0 = 0                                                                    # 初始化初始y位置
         self.vyaw0 = 0                                                                  # 初始化初始偏航角
@@ -77,6 +81,8 @@ class SlamNode(Node):
         self.front_confirm_count = 0
         self.left_confirm_count = 0
         self.right_confirm_count = 0
+
+        self.break_confirm_count = 0
 
 
         # 初始化变向定时器传感参数
@@ -156,13 +162,19 @@ class SlamNode(Node):
             self.left = self.current_scan.point.y
             self.right = self.current_scan.point.z
 
-            # self.get_logger().info(f'{BLUE}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}') 
+            self.get_logger().info(f'{BLUE}最新！！前距障碍物：{self.front},左距障碍物：{self.left},右距障碍物：{self.right}{RESET}') 
             if ((self.front <= SAFE_DISTANCE_HEAD and not math.isinf(self.front)) or 
                 (self.left <= SAFE_DISTANCE_FLANK and not math.isinf(self.left)) or 
                 (self.right <= SAFE_DISTANCE_FLANK) and not math.isinf(self.right)) :
 
-                self.condition_trigger = True
-                self.get_logger().info(f'{YELLOW}触发停止转向条件，标志位置为:{self.condition_trigger}{RESET}')
+                self.break_confirm_count += 1
+                if self.break_confirm_count >= BREAK_CONFIRM_TIME :
+                    self.condition_trigger = True
+                    self.break_confirm_count = 0
+                    self.get_logger().info(f'{YELLOW}触发停止转向条件，标志位置为:{self.condition_trigger}{RESET}')
+
+            else :
+                self.break_confirm_count = 0
 
         else:
             # self.front = 100
@@ -231,7 +243,7 @@ class SlamNode(Node):
             vx = 0.05
             vy = 0.0
             vyaw = np.pi/8                  # 转向速度要足够，不然来不及转
-            for i in range(11):
+            for i in range(10):
                 self.vel_contrl(vx,vy,vyaw)
                 self.get_logger().info(f'{RED}第{i+1}次左转{RESET}')
                 time.sleep(self.dt)
@@ -255,7 +267,7 @@ class SlamNode(Node):
             vx = 0.05
             vy = 0.0
             vyaw = -np.pi/8                                         # 转向速度要足够，不然来不及转      
-            for i in range(11):
+            for i in range(10):
                 self.vel_contrl(vx,vy,vyaw)
                 self.get_logger().info(f'{RED}第{i+1}次右转{RESET}')
                 time.sleep(self.dt)        
@@ -590,8 +602,8 @@ class SlamNode(Node):
                         self.right_confirm_count = 0
 
                     elif (right_distance >= SAFE_DISTANCE_FLANK or math.isinf(right_distance)) :
-                        # 右小转
-                        action = "little Rotate right" 
+                        # 原地右转
+                        action = "palce right" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
 
@@ -626,8 +638,8 @@ class SlamNode(Node):
                 elif (left_distance >= SAFE_DISTANCE_FLANK or math.isinf(left_distance)) :
 
                     if right_distance < SAFE_DISTANCE_FLANK : 
-                        # 左小转
-                        action = "little Rotate left" 
+                        # 原地左转
+                        action = "place left" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0  
 
@@ -671,24 +683,45 @@ class SlamNode(Node):
         self.request.command = command_key
         self.future = self.slam_client.call_async(self.request)                         # 异步方式发送服务请求
 
-        # 添加日志，记录开始等待服务响应
-        self.get_logger().info('等待服务器的响应...')
+        return self.future
+        # # 添加日志，记录开始等待服务响应
+        # self.get_logger().info('等待服务器的响应...')
 
-        # 等待服务器响应结果
-        rclpy.spin_until_future_complete(self, self.future)
+        # # 等待服务器响应结果
+        # rclpy.spin_until_future_complete(self, self.future)
 
 
-        # 添加日志，记录服务响应已接收
-        self.get_logger().info('收到服务器响应！')
+        # # 添加日志，记录服务响应已接收
+        # self.get_logger().info('收到服务器响应！')
         
-        try:
-            response = self.future.result()
-            self.get_logger().info(f'服务器的响应结果为: {response.result}')
-            return response.result
-        except Exception as e:                                                          # 把异常类捕获的具体异常实例付给e
-            self.get_logger().error(f'服务器响应失败，失败原因: {e}')
-            return None
+        # try:
+        #     response = self.future.result()
+        #     self.get_logger().info(f'服务器的响应结果为: {response.result}')
+        #     return response.result
+        # except Exception as e:                                                          # 把异常类捕获的具体异常实例付给e
+        #     self.get_logger().error(f'服务器响应失败，失败原因: {e}')
+        #     return None
 
+
+def wait_for_future(node, future, result):
+    # 添加日志，记录开始等待服务响应
+    node.get_logger().info('等待服务器的响应...')
+
+    rclpy.spin_until_future_complete(node, future)
+
+    # 添加日志，记录服务响应已接收
+    node.get_logger().info('收到服务器响应！')
+
+    # 处理完成后的逻辑
+    try:
+        response = future.result()
+        node.get_logger().info(f'服务器的响应结果为: {response.result}')
+        result.put(response.result)
+        # return response.result
+    except Exception as e:                                                          # 把异常类捕获的具体异常实例付给e
+        node.get_logger().error(f'服务器响应失败，失败原因: {e}')
+        result.put(None)
+        # return None
 
 
 def main(args=None):
@@ -700,11 +733,20 @@ def main(args=None):
     调试控制节点专用开关
     """
     if TESTSWITCH == True :
-        result = node.unitree_slam('w')
+        # result = node.unitree_slam('w')
+
+        # 使用类方法进行异步服务调用
+        future = node.unitree_slam('w')
+
+        # 创建一个队列用于获取线程返回值
+        result = queue.Queue()
+
+        # 在单独的线程中等待 future 完成
+        threading.Thread(target=wait_for_future, args=(node, future, result)).start()
 
         if result:
-        # 倒计时40秒，等建图服务开启
-            for remaining in range(40, 0, -1):
+        # 倒计时30秒，等建图服务开启
+            for remaining in range(30, 0, -1):
                     node.get_logger().info(f"倒计时: {remaining}秒")
                     # print(f"倒计时: {remaining}秒", end='\r',flush=True)
                     time.sleep(1)
@@ -713,9 +755,9 @@ def main(args=None):
             while rclpy.ok():
                 rclpy.spin_once(node)  # 处理事件循环
 
-                    # 检查主定时器标志变量并执行运动控制的逻辑
+                # 检查主定时器标志变量并执行运动控制的逻辑
                 if node.execute_move:
-                    node.get_logger().info('unitree的SLAM服务已成功启动, 准备行进中建图...')
+                    # node.get_logger().info('unitree的SLAM服务已成功启动, 准备行进中建图...')
                     node.trigger_motion_control()  # 调用运动控制方法
                     node.execute_move = False  # 重置标志变量
                 
@@ -736,6 +778,9 @@ def main(args=None):
             if node.execute_move:
                 node.trigger_motion_control()  # 调用运动控制方法
                 node.execute_move = False  # 重置标志变量
+
+
+
 
         # elif not node.execute_move :
         #     node.get_logger().info('SLAM服务开始关闭')
