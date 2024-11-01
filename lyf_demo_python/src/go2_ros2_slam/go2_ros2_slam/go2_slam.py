@@ -33,7 +33,7 @@ SPORTTOPIC = "api/sport/request"                                     # 添加运
 SLAMCOMMANDSERVICE = "unitree_slam_command"                          # unitree的slam步骤指令服务
 
 # 定义调试开关
-TESTSWITCH = False                    # slam节点开关
+TESTSWITCH = True                       # slam节点开关
 MOVETYPE = 1                            # 移动路径开关  1：沿右侧逆时针绕行 2：普通直行 
 
 # 定义安全距离 
@@ -242,10 +242,10 @@ class SlamNode(Node):
 
             vx = 0.05
             vy = 0.0
-            vyaw = -np.pi/8                                         # 转向速度要足够，不然来不及转      
-            for i in range(10):
+            vyaw = np.pi/8                                         # 转向速度要足够，不然来不及转      
+            for i in range(11):
                 self.vel_contrl(vx,vy,vyaw)
-                self.get_logger().info(f'{RED}第{i+1}次右转{RESET}')
+                self.get_logger().info(f'{RED}第{i+1}次左转{RESET}')
                 time.sleep(self.dt)        
 
             for i in range(35):
@@ -357,10 +357,10 @@ class SlamNode(Node):
 
         # self.get_logger().info(f'{RED}重置转向条件标志位为:{self.condition_trigger}{RESET}')
         self.condition_trigger = False                                                          # 每次运动控制前，需重置转向停止标志位
-        # self.action_formal()                                                                    # 运动控制正式方法
+        self.action_formal()                                                                    # 运动控制正式方法
 
 
-        self.action_test()                                                                    # 运动控制测试方法
+        # self.action_test()                                                                    # 运动控制测试方法
       
         
         # 调用TrajectoryFollow回到起始点
