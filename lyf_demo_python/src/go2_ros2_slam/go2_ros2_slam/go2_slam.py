@@ -33,7 +33,7 @@ SPORTTOPIC = "api/sport/request"                                     # 添加运
 SLAMCOMMANDSERVICE = "unitree_slam_command"                          # unitree的slam步骤指令服务
 
 # 定义调试开关
-TESTSWITCH = True                    # slam节点开关
+TESTSWITCH = False                    # slam节点开关
 MOVETYPE = 1                            # 移动路径开关  1：沿右侧逆时针绕行 2：普通直行 
 
 # 定义安全距离 
@@ -439,15 +439,15 @@ class SlamNode(Node):
 
                     elif right_distance >= SAFE_DISTANCE_FLANK and right_distance < GO_DISTANCE :
                         # 直行
-                        if right_distance > left_distance :
-                            # 原地右小转
-                            action = "place right" 
+                        if left_distance > right_distance + SAFE_DISTANCE_FLANK :
+                            # 原地左小转
+                            action = "place left" 
                             self.left_confirm_count = 0
                             self.right_confirm_count = 0
 
                         else :
-                            # 原地左小转
-                            action = "place left" 
+                            # 原地右小转
+                            action = "place right" 
                             self.left_confirm_count = 0
                             self.right_confirm_count = 0  
 
@@ -597,13 +597,13 @@ class SlamNode(Node):
 
                     elif right_distance >= SAFE_DISTANCE_FLANK and right_distance < GO_DISTANCE :
                         # 原地右转
-                        action = "palce right" 
+                        action = "place right" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
 
                     elif (right_distance >= SAFE_DISTANCE_FLANK or math.isinf(right_distance)) :
                         # 原地右转
-                        action = "palce right" 
+                        action = "place right" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
 
