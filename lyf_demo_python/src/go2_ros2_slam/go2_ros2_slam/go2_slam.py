@@ -41,7 +41,7 @@ SAFE_DISTANCE_HEAD = 0.7                    # 前侧安全距离，单位：米
 SAFE_DISTANCE_FLANK = 0.35                   # 两侧安全距离，单位：米  
 GO_DISTANCE = 2                             # 可前进距离 
 CONFIRM_TIME = 2                            # 90度转弯传感器确认次数
-BREAK_CONFIRM_TIME = 5                      # 转弯直行打断步数
+BREAK_CONFIRM_TIME = 2                      # 转弯直行打断步数
 
 # ANSI 转义序列，定义打印颜色
 RED = '\033[91m'
@@ -117,7 +117,7 @@ class SlamNode(Node):
 
 
         # 创建建图等待时长
-        self.map_dt = 300
+        self.map_dt = 80
     
         # 初始化测试常用变量
         self.test_scan = PathData()
@@ -242,17 +242,18 @@ class SlamNode(Node):
 
             vx = 0.05
             vy = 0.0
-            vyaw = np.pi/8                  # 转向速度要足够，不然来不及转
-            for i in range(11):
+            vyaw = -np.pi/8                                         # 转向速度要足够，不然来不及转      
+            for i in range(10):
                 self.vel_contrl(vx,vy,vyaw)
-                self.get_logger().info(f'{RED}第{i+1}次左转{RESET}')
-                time.sleep(self.dt)
+                self.get_logger().info(f'{RED}第{i+1}次右转{RESET}')
+                time.sleep(self.dt)        
+
             for i in range(35):
-                
                 # 在每次迭代中调用 spin_once
-                rclpy.spin_once(self)           # 处理事件循环
+                rclpy.spin_once(self)                               # 处理事件循环
                 time.sleep(self.detect_dt)
-                # self.get_logger().info(f'{BLUE}当前转向标志位:{self.condition_trigger}{RESET}')
+
+                self.get_logger().info(f'{BLUE}当前转向标志位:{self.condition_trigger}{RESET}')
                 if self.condition_trigger :
                     self.get_logger().info(f'{RED}周围有障碍, 停止行进，重新规划{RESET}')
                     self.condition_trigger = False
@@ -260,6 +261,7 @@ class SlamNode(Node):
 
                 self.vel_contrl(0.1,vy,0)
                 self.get_logger().info(f'{YELLOW}第{i+1}次直行稳定{RESET}')
+                
 
                 
         elif action == 'Turn right':
@@ -355,10 +357,10 @@ class SlamNode(Node):
 
         # self.get_logger().info(f'{RED}重置转向条件标志位为:{self.condition_trigger}{RESET}')
         self.condition_trigger = False                                                          # 每次运动控制前，需重置转向停止标志位
-        self.action_formal()                                                                    # 运动控制正式方法
+        # self.action_formal()                                                                    # 运动控制正式方法
 
 
-        # self.action_test()                                                                    # 运动控制测试方法
+        self.action_test()                                                                    # 运动控制测试方法
       
         
         # 调用TrajectoryFollow回到起始点
