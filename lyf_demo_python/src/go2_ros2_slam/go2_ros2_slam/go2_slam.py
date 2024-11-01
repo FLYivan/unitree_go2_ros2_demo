@@ -117,7 +117,7 @@ class SlamNode(Node):
 
 
         # 创建建图等待时长
-        self.map_dt = 80
+        self.map_dt = 240
     
         # 初始化测试常用变量
         self.test_scan = PathData()
@@ -149,7 +149,8 @@ class SlamNode(Node):
             self.execute_move = False
             self.get_logger().info(f'已运行{self.map_dt}秒，建图结束..')
             self.unitree_slam('e')
-            self.timer.cancel()  # 取消定时器
+            self.timer.cancel()  # 取消主定时器
+            self.turn_timer.cancel() # 取消转向定时器
             return
         
 
@@ -218,6 +219,12 @@ class SlamNode(Node):
 
             self.vel_contrl(0.1,vy,0)
             self.get_logger().info(f'{YELLOW}第{i+1}次直行稳定{RESET}')
+
+    def action_stand(self):
+        vx = 0.0
+        vy = 0.0
+        vyaw = 0.0
+        self.vel_contrl(vx,vy,vyaw)
 
     # 运动方向策略执行模块
     def action_formal(self):
@@ -361,7 +368,7 @@ class SlamNode(Node):
 
 
         # self.action_test()                                                                    # 运动控制测试方法
-      
+        # self.action_stand()
         
         # 调用TrajectoryFollow回到起始点
 
