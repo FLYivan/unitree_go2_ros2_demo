@@ -104,7 +104,7 @@
 /lio_sam_ros2/mapping/lasercloud_in_world
 /lio_sam_ros2/mapping/level
 /lio_sam_ros2/mapping/map_local
-/lio_sam_ros2/mapping/odometry
+/lio_sam_ros2/mapping/odometry                  # 地图odom
 /lio_sam_ros2/mapping/odometry_incremental
 /lio_sam_ros2/mapping/path
 /lio_sam_ros2/mapping/pose_odomTo_map
