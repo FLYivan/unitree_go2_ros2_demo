@@ -15,6 +15,7 @@ setup(
          # 安装launch文件和YAML文件
         (os.path.join('share', package_name, 'launch'), ['launch/slam_launch.py']),
         (os.path.join('share', package_name, 'config'), ['config/unitree_slam_params.yaml']),
+        (os.path.join('share', package_name, 'launch'), ['launch/cloud_to_scan.py']),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
