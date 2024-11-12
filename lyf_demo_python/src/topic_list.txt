@@ -47,7 +47,7 @@
 /dog_contour
 /dog_imu_raw
 /dog_movement
-/dog_odom
+/dog_odom               # 里程计   frame_id: odom；child_frame_id: robot_center
 /door_costmap_change
 /door_name
 /door_state
@@ -87,7 +87,7 @@
 /lio_sam_door_id
 /lio_sam_ros2/deskew/cloud_deskewed
 /lio_sam_ros2/deskew/cloud_info
-/lio_sam_ros2/dogOdomProcess/DogOdomGlobal
+/lio_sam_ros2/dogOdomProcess/DogOdomGlobal       # 里程计   frame_id: odom ；child_frame_id: base_link
 /lio_sam_ros2/feature/cloud_corner
 /lio_sam_ros2/feature/cloud_info
 /lio_sam_ros2/feature/cloud_surface
@@ -104,8 +104,8 @@
 /lio_sam_ros2/mapping/lasercloud_in_world
 /lio_sam_ros2/mapping/level
 /lio_sam_ros2/mapping/map_local
-/lio_sam_ros2/mapping/odometry                  # 地图odom
-/lio_sam_ros2/mapping/odometry_incremental
+/lio_sam_ros2/mapping/odometry                  # 地图odom     frame_id: odom； child_frame_id: odom_mapping
+/lio_sam_ros2/mapping/odometry_incremental      # 里程计   frame_id: odom；    child_frame_id: odom_mapping
 /lio_sam_ros2/mapping/path
 /lio_sam_ros2/mapping/pose_odomTo_map
 /lio_sam_ros2/mapping/re_location_laser_to_map
@@ -135,7 +135,8 @@
 /node_control
 /notGround_pointCloud
 /notGround_pointCloud3
-/odometry/imu
+/odometry/imu                           # 里程计   frame_id: odom； child_frame_id: odom_imu
+
 /odometry/imu_incremental
 /odometry_1
 /original_graph
@@ -167,7 +168,7 @@
 /qt_notice
 /query_result_edge
 /query_result_floor
-/query_result_node
+/query_result_nodeDogOdomGlobal
 /query_result_pcd
 /query_result_topo
 /recharge_feedback
@@ -196,7 +197,7 @@
 /uslam/client_command
 /uslam/cloud_map
 /uslam/frontend/cloud_world_ds
-/uslam/frontend/odom
+/uslam/frontend/odom        
 /uslam/server_log
 /utlidar/cloud
 /utlidar/cloud_deskewed
@@ -210,7 +211,7 @@
 /utlidar/mapping_cmd
 /utlidar/range_info
 /utlidar/range_map
-/utlidar/robot_odom
+/utlidar/robot_odom         # 里程计 frame_id: odom； child_frame_id: base_link
 /utlidar/robot_pose
 /utlidar/switch
 /utlidar/voxel_map

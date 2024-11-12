@@ -3,7 +3,7 @@ import os
 from glob import glob
 
 
-package_name = 'go2_urdf'
+package_name = 'go2_description'
 
 setup(
     name=package_name,

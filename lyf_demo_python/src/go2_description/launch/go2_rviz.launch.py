@@ -14,13 +14,13 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time')
 
     # 获取URDF文件的路径
-    pkg_path = os.path.join(get_package_share_directory('go2_urdf'))
+    pkg_path = os.path.join(get_package_share_directory('go2_description'))
     xacro_file = os.path.join(pkg_path,'urdf','mbot_gazebo.xacro')          #放在gazebo的模型文件
     robot_description_config = xacro.process_file(xacro_file)         #保存机器人模型的完整路径
 
     # 获取rviz配置文件路径
     rviz_file = os.path.join(
-        get_package_share_directory('go2_urdf'),
+        get_package_share_directory('go2_description'),
         'launch',
         'check_joint.rviz'
     )

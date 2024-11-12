@@ -13,7 +13,7 @@ from launch_ros.actions import Node  # 导入Node类
 def generate_launch_description():  # 定义generate_launch_description函数
 
 
-    package_name='go2_urdf'                                         # 设置包名 #<--- CHANGE ME
+    package_name='go2_description'                                         # 设置包名 #<--- CHANGE ME
     world_file_path = 'world/custom_room.world'                    # 设置世界文件路径
     
     pkg_path = os.path.join(get_package_share_directory(package_name))  # 获取包路径
@@ -31,7 +31,7 @@ def generate_launch_description():  # 定义generate_launch_description函数
 
     go2_robot = IncludeLaunchDescription(                                                       # 包含go2启动文件
                 PythonLaunchDescriptionSource([os.path.join(                                    # 获取go2启动文件路径
-                    get_package_share_directory('go2_urdf'),'launch','go2_rviz.launch.py'     # 获取包路径和启动文件名
+                    get_package_share_directory('go2_description'),'launch','go2_rviz.launch.py'     # 获取包路径和启动文件名
                 )]), 
                 launch_arguments={'use_sim_time': 'true', 'world':world_path}.items()      # 设置启动参数
                 # launch_arguments={'use_sim_time': 'true'}.items()      # 设置启动参数
