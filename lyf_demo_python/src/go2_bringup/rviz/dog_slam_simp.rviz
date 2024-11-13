@@ -6,9 +6,11 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /LaserScan1
         - /LaserScan1/Topic1
         - /RobotModel1/Description Topic1
         - /TF1
+        - /TF1/Status1
         - /TF1/Frames1
         - /Map1
       Splitter Ratio: 0.5
@@ -64,7 +66,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 5
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -85,7 +87,7 @@ Visualization Manager:
         Value: /scan
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 1
       Class: rviz_default_plugins/RobotModel
       Collision Enabled: false
@@ -117,14 +119,24 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        base:
+          Value: true
         base_link:
           Value: true
         map:
           Value: true
+        map_slamtoolbox:
+          Value: true
         odom:
           Value: true
-        utlidar_lidar:
-          Value: false
+        odom_slamtoolbox:
+          Value: true
+        ridar:
+          Value: true
+        robot_center:
+          Value: true
+        rslidar:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
@@ -134,8 +146,16 @@ Visualization Manager:
         map:
           odom:
             base_link:
-              utlidar_lidar:
+              robot_center:
                 {}
+              rslidar:
+                {}
+        map_slamtoolbox:
+          {}
+        odom_slamtoolbox:
+          base:
+            ridar:
+              {}
       Update Interval: 0
       Value: true
     - Alpha: 0.699999988079071
@@ -150,19 +170,19 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /map
+        Value: /new_map_topic
       Update Topic:
         Depth: 5
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /map_updates
+        Value: /new_map_topic_updates
       Use Timestamp: false
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: map
+    Fixed Frame: map_slamtoolbox
     Frame Rate: 30
   Name: root
   Tools:
@@ -205,25 +225,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 3.9845006465911865
+      Distance: 9.697111129760742
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -1.0080872774124146
-        Y: -0.166463702917099
-        Z: 0.9807096123695374
+        X: -0.026336874812841415
+        Y: -0.16718675196170807
+        Z: 0.7091542482376099
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.4547964334487915
+      Pitch: 1.1597970724105835
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.6535773277282715
+      Yaw: 4.658571243286133
     Saved: ~
 Window Geometry:
   Displays:
