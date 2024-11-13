@@ -24,7 +24,8 @@ def generate_launch_description():
                 'inf_epsilon': 1.0,
             }],
             remappings=[
-                ('cloud_in', '/rslidar_points'),                
+                # ('cloud_in', '/lidar_points'),                
+                ('cloud_in', '/rslidar_points'), 
                 ('scan', '/scan_old'),
             ]
         )

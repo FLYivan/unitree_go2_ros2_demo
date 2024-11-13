@@ -39,7 +39,7 @@ class FrameIdModifier(Node):
     def publish_new_topic(self):
          if self.latest_msg is not None:
             self.publisher.publish(self.latest_msg)
-            self.get_logger().info(f'Publishing modified message with frame_id: "{self.latest_msg.header.frame_id}"')
+            # self.get_logger().info(f'Publishing modified message with frame_id: "{self.latest_msg.header.frame_id}"')
 
 def main(args=None):
     rclpy.init(args=args)
