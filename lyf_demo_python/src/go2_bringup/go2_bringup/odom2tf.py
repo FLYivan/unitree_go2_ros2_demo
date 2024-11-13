@@ -5,8 +5,8 @@ from geometry_msgs.msg import TransformStamped
 from nav_msgs.msg import Odometry
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy
 
-# ODOMTOPIC = 'utlidar/robot_odom'
-ODOMTOPIC = 'lio_sam_ros2/dogOdomProcess/DogOdomGlobal'
+ODOMTOPIC = 'utlidar/robot_odom'
+# ODOMTOPIC = 'lio_sam_ros2/dogOdomProcess/DogOdomGlobal'
 
 
 class OdomTopic2TF(Node):
