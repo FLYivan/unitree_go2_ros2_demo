@@ -15,8 +15,6 @@ from launch_ros.actions import Node  # 导入Node类
 def generate_launch_description():  # 定义generate_launch_description函数
 
 
-
-
     # 获取默认路径
 
     go2_urdf_path = get_package_share_directory('go2_description')
