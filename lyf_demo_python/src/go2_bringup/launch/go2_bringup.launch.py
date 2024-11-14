@@ -22,7 +22,7 @@ def generate_launch_description():
     declare_slam_params_file_cmd = DeclareLaunchArgument(
         'slam_params_file',
         default_value=os.path.join(get_package_share_directory("go2_bringup"),
-                                   'config', 'mapper_params_online_async.yaml'),
+                                   'config', 'mapper_params_online_async.yaml'),                
         description='Full path to the ROS2 parameters file to use for the slam_toolbox node')
 
 
@@ -46,7 +46,7 @@ def generate_launch_description():
             output='screen',
             remappings=[
                     ('/map', '/map_slamtoolbox_go2')  # 将 /map 重映射为 /map_slamtoolbox_go2
-                     ],
+                     ]
         )
  
 

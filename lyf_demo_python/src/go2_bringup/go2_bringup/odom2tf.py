@@ -56,7 +56,7 @@ class OdomTopic2TF(Node):
 
         # 将定时器间隔设置为0.05秒（即20Hz）
         self.dt = 0.05 
-        self.timer = self.create_timer(self.dt , self.publish_transform)
+        self.timer = self.create_timer(self.dt , self.publish_transform)        # 动态tf发布的频率为20hz(不可动参数)
         
 
 
