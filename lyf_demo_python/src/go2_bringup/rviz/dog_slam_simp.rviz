@@ -6,10 +6,11 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /LaserScan1
         - /LaserScan1/Topic1
         - /RobotModel1/Description Topic1
         - /TF1
-        - /TF1/Frames1
+        - /TF1/Status1
         - /Map1
       Splitter Ratio: 0.5
     Tree Height: 549
@@ -117,25 +118,32 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: false
+        base:
+          Value: true
         base_link:
           Value: true
         map:
           Value: true
         odom:
           Value: true
-        utlidar_lidar:
-          Value: false
+        odom_slamtoolbox:
+          Value: true
+        ridar:
+          Value: true
+        robot_center:
+          Value: true
+        rslidar:
+          Value: true
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        map:
-          odom:
-            base_link:
-              utlidar_lidar:
-                {}
+        odom_slamtoolbox:
+          base:
+            ridar:
+              {}
       Update Interval: 0
       Value: true
     - Alpha: 0.699999988079071
@@ -150,19 +158,19 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /map
+        Value: /map_slam
       Update Topic:
         Depth: 5
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /map_updates
+        Value: /map_slam_updates
       Use Timestamp: false
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: map
+    Fixed Frame: ridar
     Frame Rate: 30
   Name: root
   Tools:
@@ -205,25 +213,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 3.9845006465911865
+      Distance: 10.3701753616333
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -1.0080872774124146
-        Y: -0.166463702917099
-        Z: 0.9807096123695374
+        X: 1.6713135242462158
+        Y: 0.7232285737991333
+        Z: 1.1364519596099854
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.4547964334487915
+      Pitch: 0.4047973155975342
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.6535773277282715
+      Yaw: 3.513573408126831
     Saved: ~
 Window Geometry:
   Displays:

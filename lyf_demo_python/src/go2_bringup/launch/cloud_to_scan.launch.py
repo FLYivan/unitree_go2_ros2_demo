@@ -17,15 +17,16 @@ def generate_launch_description():
                 'angle_min': -3.14,                     # -M_PI/2
                 'angle_max': 3.14,                      # M_PI/2
                 'angle_increment': 0.0087,              # M_PI/360.0
-                'scan_time': 0.05,                      # 20Hz
+                'scan_time': 0.1,                       # 10Hz
                 'range_min': 0.2,
-                'range_max': 30.0,
+                'range_max': 20.0,
                 'use_inf': True,
                 'inf_epsilon': 1.0,
             }],
             remappings=[
-                # ('cloud_in', '/rslidar_points'),      
-                ('cloud_in', '/utlidar/cloud'),           
+                # ('cloud_in', '/lidar_points'),         # 禾赛sdk独立驱动xt16雷达     
+                ('cloud_in', '/rslidar_points'),       # 宇数slam接口启动禾赛xt16雷达
+                # ('cloud_in', '/utlidar/cloud'),        # 宇数自带雷达
                 ('scan', '/scan_old'),
             ]
         )
@@ -45,7 +46,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         node_p2l,
-        delayed_node
+        delayed_node,
     ])
 
 
