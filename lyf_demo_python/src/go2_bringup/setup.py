@@ -33,6 +33,8 @@ setup(
             'frame_id_modifier  = go2_bringup.frame_id_modifier:main',   
             'motion_to_odom_node  = go2_bringup.motion_to_odom_node:main',   
 
+            'timestamp_test  = go2_bringup.timestamp_test:main',   
+
 
         ],
     },
