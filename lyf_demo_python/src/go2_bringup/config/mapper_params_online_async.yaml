@@ -9,7 +9,7 @@ slam_toolbox:
     ceres_dogleg_type: TRADITIONAL_DOGLEG
     ceres_loss_function: None
 
-    # ROS Parameters
+    # ROS Parameters(只有这部分参数可以动)
     odom_frame: odom_slamtoolbox
     map_frame: map_slamtoolbox
     base_frame: base
@@ -26,7 +26,9 @@ slam_toolbox:
 
     debug_logging: false
     throttle_scans: 1
-    transform_publish_period: 0.08 #if 0 never publishes odometry
+
+    # map到odom的tf发布周期参数0.02.对应频率50hz(不可动参数)
+    transform_publish_period: 0.02 #if 0 never publishes odometry 
     map_update_interval: 5.0
     resolution: 0.05
     max_laser_range: 20.0 #for rastering images

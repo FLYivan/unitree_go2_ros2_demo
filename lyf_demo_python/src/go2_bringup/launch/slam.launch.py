@@ -33,7 +33,7 @@ def generate_launch_description():
             output='screen',
             remappings=[
                     ('/map', '/map_slamtoolbox_go2')  # 将 /map 重映射为 /map_slamtoolbox_go2
-                     ],
+                     ]
         )
  
 
