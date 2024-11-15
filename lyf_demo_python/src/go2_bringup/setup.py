@@ -17,7 +17,7 @@ setup(
         (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*.launch.py'))),
         (os.path.join('share', package_name, 'config'), glob(os.path.join('config', '*.*'))), 
         (os.path.join('share', package_name, 'rviz'), glob(os.path.join('rviz', '*.rviz'))),
-
+        (os.path.join('share', package_name, 'map'), glob(os.path.join('map', '*.*'))),
 
     ],
     install_requires=['setuptools'],
@@ -32,6 +32,8 @@ setup(
             'odom2tf  = go2_bringup.odom2tf:main',   
             'frame_id_modifier  = go2_bringup.frame_id_modifier:main',   
             'motion_to_odom_node  = go2_bringup.motion_to_odom_node:main',   
+            'go2_move  = go2_bringup.go2_move:main',  
+
 
             'timestamp_test  = go2_bringup.timestamp_test:main',   
 
