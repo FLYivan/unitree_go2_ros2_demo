@@ -15,7 +15,7 @@
   <depend>nav_msgs</depend>  
   <depend>sensor_msgs</depend>
   <depend>std_msgs</depend>
-
+  <depend>subprocess</depend>
 
   <depend>unitree_go</depend>
   <depend>unitree_api</depend>
