@@ -5,40 +5,39 @@ from geometry_msgs.msg import PoseWithCovarianceStamped
 class InitialPosePublisher(Node):
     def __init__(self):
         super().__init__('initialpose_publisher')
-        self.publisher_ = self.create_publisher(PoseWithCovarianceStamped, '/initialpose', 10)
-        self.publish_initial_pose()
+        # 用于存储接收到的消息
+        self.latest_msg = None
+
+        # 将frame_id进行重映射
+        self.declare_parameter('new_frame_id', 'map_slamtoolbox')
+        self.new_frame_id = self.get_parameter('new_frame_id').get_parameter_value().string_value
+
+        self.sub =self.create_subscription(
+            PoseWithCovarianceStamped,
+            '/initialpose',
+            self.listener_callback,
+            10)
+        
+        self.publisher = self.create_publisher(PoseWithCovarianceStamped, '/initialpose', 10)
+
+        # 将定时器间隔设置为0.2秒（即5Hz）
+        self.timer = self.create_timer(0.2, self.publish_initial_pose)             # /scan话题的发布频率保证为5hz(不可动参数)
+
+
+    def listener_callback(self,msg):
+
+        self.latest_msg = msg
+        self.latest_msg.header.frame_id = self.new_frame_id
+     
 
     def publish_initial_pose(self):
-        msg = PoseWithCovarianceStamped()
-        
-        # 设置 header
-        msg.header.stamp.sec = 33644786  # 设置秒
-        msg.header.stamp.nanosec = 69688244  # 设置纳秒
-        msg.header.frame_id = 'map_slamtoolbox'  # 设置 frame_id
+        if self.latest_msg is not None:
+            self.get_logger().info(f'Publishing initial pose:{self.latest_msg.pose.pose}')
+            self.publisher.publish(self.latest_msg)
+            
+            self.get_logger().info('任务已执行，正在关闭节点。')
+            rclpy.shutdown()  # 执行任务后关闭节点
 
-        # 设置位姿
-        msg.pose.pose.position.x = 0.7671076655387878
-        msg.pose.pose.position.y = -1.2045036554336548
-        msg.pose.pose.position.z = 0.0
-        msg.pose.pose.orientation.x = 0.0
-        msg.pose.pose.orientation.y = 0.0
-        msg.pose.pose.orientation.z = -0.7071080860634099
-        msg.pose.pose.orientation.w = 0.7071054763072772
-
-        # 设置协方差
-        msg.pose.covariance = [
-            0.25, 0.0, 0.0, 0.0, 0.0, 0.0,
-            0.0, 0.25, 0.0, 0.0, 0.0, 0.0,
-            0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-            0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-            0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
-            0.0, 0.0, 0.0, 0.0, 0.0, 
-            0.06853891909122467  # 确保这是一个浮点数
-        ]
-
-        # 发布消息
-        self.publisher_.publish(msg)
-        self.get_logger().info(f'Publishing initial pose:{msg.header.stamp}')
 
 def main(args=None):
     rclpy.init(args=args)
