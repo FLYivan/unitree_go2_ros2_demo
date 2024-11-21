@@ -35,8 +35,10 @@ setup(
             'initialpose_publisher  = go2_bringup.initialpose_publisher:main',  
             'motion_to_tf  = go2_bringup.motion_to_tf:main',  
 
+            'wavefront_frontier  = go2_bringup.wavefront_frontier:main', 
 
             'timestamp_test  = go2_bringup.timestamp_test:main',   
+          
 
 
         ],

@@ -17,12 +17,15 @@
   <depend>std_msgs</depend>
   <depend>subprocess</depend>
 
+  <depend>numpy</depend>
+
   <depend>unitree_go</depend>
   <depend>unitree_api</depend>
   <depend>unitree_interfaces</depend>
   <depend>custom_interface</depend> 
   <depend>go2_sport</depend>
 
+  <exec_depend>python3-scipy</exec_depend>
 
 
   <test_depend>ament_copyright</test_depend>

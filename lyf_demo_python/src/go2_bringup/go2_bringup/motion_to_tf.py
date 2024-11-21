@@ -1,12 +1,13 @@
 import rclpy
 import subprocess
+import numpy as np
 
 from rclpy.node import Node
 from geometry_msgs.msg import TransformStamped
 from tf2_ros import StaticTransformBroadcaster, TransformBroadcaster, Buffer
 from nav_msgs.msg import Odometry
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy
-
+from scipy.spatial.transform import Rotation as R
 
 from unitree_go.msg import SportModeState
 
@@ -39,7 +40,6 @@ class DynamicTFPublisher(Node):
         self.x = 0.0                                    # 初始化x位置
         self.y = 0.0                                    # 初始化y位置
         self.z = 0.0                                    # 初始化z位置
-        self.th = 0.0                                   # 初始化角度
         self.vx = 0.0                                   # 初始化x方向速度
         self.vy = 0.0                                   # 初始化y方向速度
         self.vz = 0.0                                   # 初始化z方向速度
@@ -51,6 +51,9 @@ class DynamicTFPublisher(Node):
         self.quat_y = 0.0
         self.quat_z = 0.0
 
+        self.initial_position = None
+        self.initial_orientation = None
+        
         # 自定义QoS配置
         qos_profile = QoSProfile(
             reliability=QoSReliabilityPolicy.RELIABLE,     # 可靠性策略： 确保消息被传递，如果失败会尝试重传
@@ -84,28 +87,54 @@ class DynamicTFPublisher(Node):
         """
         获取基本状态
         """
-        # 更新角速度和方向 
+        # 获取当前位置信息
+        current_position = np.array([
+            float(msg.position[0]),
+            float(msg.position[1]),
+            float(msg.position[2])
+        ])
+
+        # 获取当前四元数
+        current_orientation = np.array([
+            float(msg.imu_state.quaternion[1]),
+            float(msg.imu_state.quaternion[2]),
+            float(msg.imu_state.quaternion[3]),
+            float(msg.imu_state.quaternion[0])
+        ])
+
+        if self.initial_position is None and self.initial_orientation is None:
+            # 设置初始位置和姿态偏移
+            self.initial_position = current_position
+            self.initial_orientation = R.from_quat(current_orientation)
+            self.get_logger().info(f'Set initial position: {self.initial_position}')
+            self.get_logger().info(f'Set initial orientation: {self.initial_orientation.as_quat()}')
+            return  # 记录初始位置和姿态后，返回以等待下一个回调
+        
+        # 计算相对于初始位置的偏移
+        adjusted_position = current_position - self.initial_position
+ 
+
+        # 计算相对于初始姿态的偏移
+        current_rot = R.from_quat(current_orientation)
+        adjusted_orientation = current_rot * self.initial_orientation.inv()
+        adjusted_quat = adjusted_orientation.as_quat()
+
+        # 输出调整后的位置信息和姿态
+        self.get_logger().info(f'Adjusted Position: {adjusted_position}')
+        self.get_logger().info(f'Adjusted Orientation: {adjusted_quat}')
+
+
+        # 更新角速度
         self.vthx = float(msg.imu_state.gyroscope[0])                           # 从消息中获取x轴角速度
         self.vthy = float(msg.imu_state.gyroscope[1])                           # 从消息中获取y轴角速度
         self.vthz = float(msg.imu_state.gyroscope[2])                           # 从消息中获取z轴角速度
 
-
-        self.quat_w = float(msg.imu_state.quaternion[0])           # 四元数w
-        self.quat_x = float(msg.imu_state.quaternion[1])           # 四元数x
-        self.quat_y = float(msg.imu_state.quaternion[2])           # 四元数y
-        self.quat_z = float(msg.imu_state.quaternion[3])           # 四元数z
-    
-        self.th  = float(msg.imu_state.rpy[2])                     # 更新yaw度数
 
         # 获取并更新线速度
         self.vx = float(msg.velocity[0])   # 获取x轴线速度
         self.vy = float(msg.velocity[1])   # 获取y轴线速度
         self.vz = float(msg.velocity[2])   # 获取z轴线速度
 
-        # 获取并更新位置
-        self.x = float(msg.position[0])    # 获取x轴位置
-        self.y = float(msg.position[1])    # 获取y轴位置
-        self.z = float(msg.position[2])    # 获取z轴位置
 
 
         """
@@ -135,13 +164,16 @@ class DynamicTFPublisher(Node):
         self.odom.header.frame_id = 'odom_slamtoolbox'                   # 设置消息的坐标系ID
         self.odom.child_frame_id = 'base'               # 设置子坐标系ID
 
-        self.odom.pose.pose.position.x = self.x              # 设置位置x
-        self.odom.pose.pose.position.y = self.y              # 设置位置y
-        self.odom.pose.pose.position.z = self.z              # 设置位置z
-        self.odom.pose.pose.orientation.x = self.quat_x      # 设置姿态四元数
-        self.odom.pose.pose.orientation.y = self.quat_y
-        self.odom.pose.pose.orientation.z = self.quat_z
-        self.odom.pose.pose.orientation.w = self.quat_w
+        # 设置位置
+        self.odom.pose.pose.position.x = adjusted_position[0]
+        self.odom.pose.pose.position.y = adjusted_position[1]
+        self.odom.pose.pose.position.z = float(msg.position[2])           # 狗上电时，z轴是按站立姿态的位置定义的，如果slam里程也按站立姿态启动，则无需加0.05
+
+        # 设置姿态
+        self.odom.pose.pose.orientation.x = adjusted_quat[0]
+        self.odom.pose.pose.orientation.y = adjusted_quat[1]
+        self.odom.pose.pose.orientation.z = adjusted_quat[2]
+        self.odom.pose.pose.orientation.w = adjusted_quat[3]
 
         self.odom.twist.twist.linear.x = self.vx                     # 设置线速度x
         self.odom.twist.twist.linear.y = self.vy                     # 设置线速度y
@@ -162,9 +194,10 @@ class DynamicTFPublisher(Node):
         self.static_transform_stamped.child_frame_id = 'ridar'  # 原始frame_id rslidar
 
 
-        self.static_transform_stamped.transform.translation.x = 0.0
+        self.static_transform_stamped.transform.translation.x = 0.171
         self.static_transform_stamped.transform.translation.y = 0.0
-        self.static_transform_stamped.transform.translation.z = 0.0
+        self.static_transform_stamped.transform.translation.z = 0.0908
+
         self.static_transform_stamped.transform.rotation.x = 0.0
         self.static_transform_stamped.transform.rotation.y = 0.0
         self.static_transform_stamped.transform.rotation.z = 0.0
@@ -184,13 +217,13 @@ class DynamicTFPublisher(Node):
         self.transform.child_frame_id = 'base'                                       # 设置一个坐标变换的目标坐标系
 
         # 设置转化参数
-        self.transform.transform.translation.x = self.x
-        self.transform.transform.translation.y = self.y
-        self.transform.transform.translation.z = self.z
-        self.transform.transform.rotation.x = self.quat_x
-        self.transform.transform.rotation.y = self.quat_y
-        self.transform.transform.rotation.z = self.quat_z
-        self.transform.transform.rotation.w = self.quat_w
+        self.transform.transform.translation.x = adjusted_position[0]
+        self.transform.transform.translation.y = adjusted_position[1]
+        self.transform.transform.translation.z = float(msg.position[2])
+        self.transform.transform.rotation.x = adjusted_quat[0]
+        self.transform.transform.rotation.y = adjusted_quat[1]
+        self.transform.transform.rotation.z = adjusted_quat[2]
+        self.transform.transform.rotation.w = adjusted_quat[3]
         
 
     # 回调函数，处理接收到的odom消息，并发布tf
