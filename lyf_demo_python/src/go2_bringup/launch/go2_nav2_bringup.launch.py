@@ -39,6 +39,7 @@ def generate_launch_description():
                 'use_sim_time': use_sim_time,
                 'params_file': nav2_param_path}.items(),
         )
+    
     # 激光frame_id修改launch文件
     launch_lidar = launch.actions.IncludeLaunchDescription(
         PythonLaunchDescriptionSource([get_package_share_directory(

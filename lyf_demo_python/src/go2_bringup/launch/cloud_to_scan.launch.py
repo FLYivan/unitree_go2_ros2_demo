@@ -24,8 +24,8 @@ def generate_launch_description():
                 'inf_epsilon': 1.0,
             }],
             remappings=[
-                # ('cloud_in', '/lidar_points'),         # 禾赛sdk独立驱动xt16雷达     
-                ('cloud_in', '/rslidar_points'),       # 宇数slam接口启动禾赛xt16雷达
+                ('cloud_in', '/lidar_points'),         # 禾赛sdk独立驱动xt16雷达     
+                # ('cloud_in', '/rslidar_points'),       # 宇数slam接口启动禾赛xt16雷达
                 # ('cloud_in', '/utlidar/cloud'),        # 宇数自带雷达
                 ('scan', '/scan_old'),
             ]

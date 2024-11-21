@@ -30,9 +30,9 @@ class OdomTopic2TF(Node):
         self.static_transform_stamped.header.stamp = self.get_clock().now().to_msg()
         self.static_transform_stamped.header.frame_id = 'base'  # 目标frame_id
         self.static_transform_stamped.child_frame_id = 'ridar'  # 原始frame_id rslidar
-        self.static_transform_stamped.transform.translation.x = 0.0
+        self.static_transform_stamped.transform.translation.x = 0.171
         self.static_transform_stamped.transform.translation.y = 0.0
-        self.static_transform_stamped.transform.translation.z = 0.0
+        self.static_transform_stamped.transform.translation.z = 0.0908
         self.static_transform_stamped.transform.rotation.x = 0.0
         self.static_transform_stamped.transform.rotation.y = 0.0
         self.static_transform_stamped.transform.rotation.z = 0.0
