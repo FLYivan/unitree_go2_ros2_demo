@@ -22,6 +22,8 @@ setup(
         'console_scripts': [
             'dog_state_sub  = go2_ros2_basic.read_motion_state:main',
             'dog_control_pub  = go2_ros2_basic.sport_mode_ctrl:main',
+            'sport_demo  = go2_ros2_basic.sport_demo:main',
+
 
         ],
     },

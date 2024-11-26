@@ -15,7 +15,9 @@ def generate_launch_description():
                 'min_height': 0.0,
                 'max_height': 2.0,
                 'angle_min': -3.14,                     # -M_PI/2
+                # 'angle_min': -3.14,                     # -135度对应弧度
                 'angle_max': 3.14,                      # M_PI/2
+                # 'angle_max': 0.0,                      # 135度对应弧度
                 'angle_increment': 0.0087,              # M_PI/360.0
                 'scan_time': 0.1,                       # 10Hz，点云生成的激光雷达频率(不可动参数)
                 'range_min': 0.2,

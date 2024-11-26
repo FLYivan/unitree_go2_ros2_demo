@@ -10,7 +10,6 @@ Panels:
         - /LaserScan1/Topic1
         - /RobotModel1/Description Topic1
         - /TF1
-        - /TF1/Status1
         - /Map1
       Splitter Ratio: 0.5
     Tree Height: 549
@@ -120,19 +119,9 @@ Visualization Manager:
         All Enabled: false
         base:
           Value: true
-        base_link:
-          Value: true
-        map:
-          Value: true
-        odom:
-          Value: true
         odom_slamtoolbox:
           Value: true
         ridar:
-          Value: true
-        robot_center:
-          Value: true
-        rslidar:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -140,10 +129,11 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
+        base:
+          ridar:
+            {}
         odom_slamtoolbox:
-          base:
-            ridar:
-              {}
+          {}
       Update Interval: 0
       Value: true
     - Alpha: 0.699999988079071
@@ -170,7 +160,7 @@ Visualization Manager:
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: ridar
+    Fixed Frame: odom_slamtoolbox
     Frame Rate: 30
   Name: root
   Tools:
@@ -213,25 +203,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 10.3701753616333
+      Distance: 3.7737252712249756
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 1.6713135242462158
-        Y: 0.7232285737991333
-        Z: 1.1364519596099854
+        X: 0.4119928777217865
+        Y: 0.4232719838619232
+        Z: 1.1024503707885742
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.4047973155975342
+      Pitch: 1.3747965097427368
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 3.513573408126831
+      Yaw: 5.946758270263672
     Saved: ~
 Window Geometry:
   Displays:

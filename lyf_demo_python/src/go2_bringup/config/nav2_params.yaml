@@ -11,7 +11,8 @@ amcl:
     beam_skip_error_threshold: 0.9
     beam_skip_threshold: 0.3
     do_beamskip: false
-    global_frame_id: "map_slamtoolbox"              # mapfind
+    # global_frame_id: "map_slamtoolbox"              # mapfind
+    global_frame_id: "map"              # mapfind   
     lambda_short: 0.1
     laser_likelihood_max_dist: 2.0
     laser_max_range: 100.0
@@ -42,7 +43,8 @@ amcl:
 bt_navigator:
   ros__parameters:
     use_sim_time: True
-    global_frame: map_slamtoolbox               # mapfind
+    # global_frame: map_slamtoolbox               # mapfind
+    global_frame: map 
     robot_base_frame: base
     odom_topic: /lio_sam_ros2/dogOdomProcess/DogOdomGlobal
     bt_loop_duration: 10
@@ -199,7 +201,7 @@ local_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
-        inflation_radius: 0.4                  # 参数不要动
+        inflation_radius: 0.25                # 参数不要动
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
@@ -230,7 +232,8 @@ global_costmap:
     ros__parameters:
       update_frequency: 1.0
       publish_frequency: 1.0
-      global_frame: map_slamtoolbox               # mapfind
+      # global_frame: map_slamtoolbox               # mapfind
+      global_frame: map
       robot_base_frame: base
       use_sim_time: True
       robot_radius: 0.4                           # 参数不要动
@@ -258,7 +261,7 @@ global_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         cost_scaling_factor: 3.0
-        inflation_radius: 0.4                # 参数不要动
+        inflation_radius: 0.25                # 参数不要动
       always_send_full_costmap: True
 
 map_server:
@@ -268,8 +271,8 @@ map_server:
     # To use in yaml, remove the default "map" value in the tb3_simulation_launch.py file & provide full path to map below.
     yaml_filename: ""
     # topic_name: "map_amcl"            # 由于amcl订阅的map话题名写死为/map，所以这里不能调整参数  
-    frame_id: "map_slamtoolbox"         # acml模式下，map_server发布的map话题坐标id要和acml订阅的一致 mapfind
-
+    # frame_id: "map_slamtoolbox"         # acml模式下，map_server发布的map话题坐标id要和acml订阅的一致 mapfind
+    frame_id: "map" 
 
 map_saver:
   ros__parameters:

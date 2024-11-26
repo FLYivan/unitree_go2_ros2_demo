@@ -51,8 +51,13 @@ class DynamicTFPublisher(Node):
         self.quat_y = 0.0
         self.quat_z = 0.0
 
-        self.initial_position = None
-        self.initial_orientation = None
+        # 初始变换：从坐标系A到坐标系B
+        self.initial_position_A = None
+        self.initial_orientation_A = None
+
+        # 坐标系B的初始位置和旋转
+        self.initial_position_B = np.array([0, 0, 0.3])
+        self.initial_orientation_B = R.from_quat([0.0, 0.0, 0.0, 1.0])
         
         # 自定义QoS配置
         qos_profile = QoSProfile(
@@ -72,10 +77,12 @@ class DynamicTFPublisher(Node):
         self.static_broadcaster = StaticTransformBroadcaster(self)
         self.static_transform_stamped = TransformStamped()
 
+
         # 创建动态 TF 缓存和广播器
         self.tf_buffer = Buffer(cache_time=rclpy.duration.Duration(seconds=10))  # 设置缓存时间
         self.tf_broadcaster = TransformBroadcaster(self)
         self.transform = TransformStamped()  # 初始化 transform
+
 
         # 将定时器间隔设置为0.05秒（即20Hz）
         self.publish_frequency = 20                  # 设置发布频率为20Hz
@@ -87,41 +94,41 @@ class DynamicTFPublisher(Node):
         """
         获取基本状态
         """
-        # 获取当前位置信息
-        current_position = np.array([
+        # 获取基于坐标系A的位置信息
+            # 获取当前位置信息
+        position_A = np.array([
             float(msg.position[0]),
             float(msg.position[1]),
             float(msg.position[2])
         ])
 
-        # 获取当前四元数
-        current_orientation = np.array([
+             # 获取当前四元数
+        orientation_A = np.array([
             float(msg.imu_state.quaternion[1]),
             float(msg.imu_state.quaternion[2]),
             float(msg.imu_state.quaternion[3]),
             float(msg.imu_state.quaternion[0])
         ])
 
-        if self.initial_position is None and self.initial_orientation is None:
+        if self.initial_position_A is None and self.initial_orientation_A is None:
             # 设置初始位置和姿态偏移
-            self.initial_position = current_position
-            self.initial_orientation = R.from_quat(current_orientation)
-            self.get_logger().info(f'Set initial position: {self.initial_position}')
-            self.get_logger().info(f'Set initial orientation: {self.initial_orientation.as_quat()}')
+            self.initial_position_A = position_A
+            self.initial_orientation_A = R.from_quat(orientation_A)
+
+            self.get_logger().info(f'Set initial position: {self.initial_position_A}')
+            self.get_logger().info(f'Set initial orientation: {self.initial_orientation_A.as_quat()}')
             return  # 记录初始位置和姿态后，返回以等待下一个回调
         
-        # 计算相对于初始位置的偏移
-        adjusted_position = current_position - self.initial_position
- 
+        # 计算从A到B的变换
+        self.position_offset = self.initial_position_B - self.initial_position_A
+        self.rotation_offset = self.initial_orientation_B * self.initial_orientation_A.inv()    # 将坐标系A的方向调整到坐标系B的方向
 
-        # 计算相对于初始姿态的偏移
-        current_rot = R.from_quat(current_orientation)
-        adjusted_orientation = current_rot * self.initial_orientation.inv()
-        adjusted_quat = adjusted_orientation.as_quat()
+        # 计算相对于坐标系B的位置信息
+        relative_position = self.rotation_offset.apply(position_A - self.initial_position_A)
 
-        # 输出调整后的位置信息和姿态
-        self.get_logger().info(f'Adjusted Position: {adjusted_position}')
-        self.get_logger().info(f'Adjusted Orientation: {adjusted_quat}')
+        # 计算相对于坐标系B的旋转
+        rotation_A = R.from_quat(orientation_A)
+        relative_rotation = self.rotation_offset * rotation_A
 
 
         # 更新角速度
@@ -151,7 +158,7 @@ class DynamicTFPublisher(Node):
         # 分离秒和纳秒
         sec = timestamp // 1000000000  # 秒部分
         nanosec = timestamp % 1000000000  # 纳秒部分
-        self.get_logger().info(f'{RED}系统时间: sec={sec}, nano={nanosec}{RESET}')
+        # self.get_logger().info(f'{RED}系统时间: sec={sec}, nano={nanosec}{RESET}')
 
 
         """
@@ -165,15 +172,18 @@ class DynamicTFPublisher(Node):
         self.odom.child_frame_id = 'base'               # 设置子坐标系ID
 
         # 设置位置
-        self.odom.pose.pose.position.x = adjusted_position[0]
-        self.odom.pose.pose.position.y = adjusted_position[1]
-        self.odom.pose.pose.position.z = float(msg.position[2])           # 狗上电时，z轴是按站立姿态的位置定义的，如果slam里程也按站立姿态启动，则无需加0.05
+        self.odom.pose.pose.position.x = relative_position[0]
+        self.odom.pose.pose.position.y = relative_position[1]
+        self.odom.pose.pose.position.z = relative_position[2]
+        # self.odom.pose.pose.position.z = float(msg.position[2])           # 狗上电时，z轴是按站立姿态的位置定义的，如果slam里程也按站立姿态启动，则无需加0.05
+
 
         # 设置姿态
-        self.odom.pose.pose.orientation.x = adjusted_quat[0]
-        self.odom.pose.pose.orientation.y = adjusted_quat[1]
-        self.odom.pose.pose.orientation.z = adjusted_quat[2]
-        self.odom.pose.pose.orientation.w = adjusted_quat[3]
+        self.odom.pose.pose.orientation.x = relative_rotation.as_quat()[0]
+        self.odom.pose.pose.orientation.y = relative_rotation.as_quat()[1]
+        self.odom.pose.pose.orientation.z = relative_rotation.as_quat()[2]
+        self.odom.pose.pose.orientation.w = relative_rotation.as_quat()[3]
+
 
         self.odom.twist.twist.linear.x = self.vx                     # 设置线速度x
         self.odom.twist.twist.linear.y = self.vy                     # 设置线速度y
@@ -198,11 +208,11 @@ class DynamicTFPublisher(Node):
         self.static_transform_stamped.transform.translation.y = 0.0
         self.static_transform_stamped.transform.translation.z = 0.0908
 
-        self.static_transform_stamped.transform.rotation.x = 0.0
-        self.static_transform_stamped.transform.rotation.y = 0.0
-        self.static_transform_stamped.transform.rotation.z = 0.0
-        self.static_transform_stamped.transform.rotation.w = 1.0
-        
+        q = R.from_euler('z', np.radians(90)).as_quat()                 # 雷达坐标系默认方向和本体实际坐标系默认方向相差90度,故需修正
+        self.static_transform_stamped.transform.rotation.x = q[0]
+        self.static_transform_stamped.transform.rotation.y = q[1]
+        self.static_transform_stamped.transform.rotation.z = q[2]
+        self.static_transform_stamped.transform.rotation.w = q[3]
 
 
         """
@@ -217,31 +227,34 @@ class DynamicTFPublisher(Node):
         self.transform.child_frame_id = 'base'                                       # 设置一个坐标变换的目标坐标系
 
         # 设置转化参数
-        self.transform.transform.translation.x = adjusted_position[0]
-        self.transform.transform.translation.y = adjusted_position[1]
-        self.transform.transform.translation.z = float(msg.position[2])
-        self.transform.transform.rotation.x = adjusted_quat[0]
-        self.transform.transform.rotation.y = adjusted_quat[1]
-        self.transform.transform.rotation.z = adjusted_quat[2]
-        self.transform.transform.rotation.w = adjusted_quat[3]
+        self.transform.transform.translation.x = relative_position[0]
+        self.transform.transform.translation.y = relative_position[1]
+        self.transform.transform.translation.z = relative_position[2]
+        # self.transform.transform.translation.z = float(msg.position[2])
+
+        self.transform.transform.rotation.x = relative_rotation.as_quat()[0]
+        self.transform.transform.rotation.y = relative_rotation.as_quat()[1]
+        self.transform.transform.rotation.z = relative_rotation.as_quat()[2]
+        self.transform.transform.rotation.w = relative_rotation.as_quat()[3]
+
         
+
 
     # 回调函数，处理接收到的odom消息，并发布tf
     def publish_all(self):
         
         # 发布里程计消息
         self.odom_pub.publish(self.odom) 
-        self.get_logger().info(f'{BLUE}里程计时间戳: {self.transform.header.stamp}{RESET}')                           
+        # self.get_logger().info(f'{BLUE}里程计时间戳: {self.transform.header.stamp}{RESET}')                           
 
         # 发布静态变换
         self.static_broadcaster.sendTransform(self.static_transform_stamped)
-        self.get_logger().info(f'{RED}静态TF时间戳: {self.transform.header.stamp}{RESET}')
+        # self.get_logger().info(f'{RED}静态TF时间戳: {self.transform.header.stamp}{RESET}')
 
 
         # 广播坐标变换信息
         self.tf_broadcaster.sendTransform(self.transform)
-        self.get_logger().info(f'{YELLOW}动态TF时间戳: {self.transform.header.stamp}{RESET}')
-
+        # self.get_logger().info(f'{YELLOW}动态TF时间戳: {self.transform.header.stamp}{RESET}')
 
         
 

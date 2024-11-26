@@ -103,6 +103,14 @@ def generate_launch_description():
             output='screen',
         )
     
+    # 自定义odom的tf关系发布节点
+    start_cus_tftree_node =  Node(
+            package='go2_bringup',                      
+            executable='motion_to_tf',             
+            name='motion_to_tf',
+            output='screen',
+        )
+    
     # slam-toolbox节点
     start_async_slam_toolbox_node = Node(
             parameters=[
@@ -113,9 +121,9 @@ def generate_launch_description():
             executable='async_slam_toolbox_node',
             name='slam_toolbox',
             output='screen',
-            remappings=[
-                    ('/map', '/map_slamtoolbox_go2')  # 将 /map 重映射为 /map_slamtoolbox_go2
-                     ]
+            # remappings=[
+            #         ('/map', '/map_slamtoolbox_go2')  # 将 /map 重映射为 /map_slamtoolbox_go2
+            #          ]
         )
  
     # 激光frame_id修改launch文件
@@ -148,7 +156,8 @@ def generate_launch_description():
         start_map_saver_server_cmd,
         start_lifecycle_manager_cmd,
         start_lidar_launch_file,        # 启动激光frame_id修改launch文件
-        start_tftree_node,              # 启动tf关系发布节点
+        # start_tftree_node,              # 启动tf关系发布节点
+        start_cus_tftree_node,
         # start_go2_model_launch_file,               # 启动go2实体模型launch文件
         start_async_slam_toolbox_node,  # slam-toolbox算法节点
 
