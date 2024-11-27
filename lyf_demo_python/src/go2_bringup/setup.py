@@ -29,7 +29,6 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'odom2tf  = go2_bringup.odom2tf:main',   
             'frame_id_modifier  = go2_bringup.frame_id_modifier:main',   
             'go2_move  = go2_bringup.go2_move:main',  
             'initialpose_publisher  = go2_bringup.initialpose_publisher:main',  
@@ -37,7 +36,8 @@ setup(
 
             'wavefront_frontier  = go2_bringup.wavefront_frontier:main', 
 
-            'timestamp_test  = go2_bringup.timestamp_test:main',   
+            'timestamp_test  = go2_bringup.timestamp_test:main', 
+            
           
 
 

@@ -54,14 +54,22 @@ def generate_launch_description():
             output='screen',
         )
     
-    # tf关系发布节点
+    # 使用自定义odom，进行tf关系发布节点
+    start_cus_tftree_node =  Node(
+            package='go2_bringup',                      
+            executable='motion_to_tf',             
+            name='motion_to_tf',
+            output='screen',
+        )
+    
+    # 运动控制节点
     node_go2Move =  Node(
             package='go2_bringup',                      
             executable='go2_move',             
             name='go2_move',
             output='screen',
         )
-
+    
     # RViz2节点
     node_rviz =Node(
             package='rviz2',
@@ -87,7 +95,8 @@ def generate_launch_description():
         declare_map_yaml_path_cmd,
         declare_nav2_param_path_cmd,
         launch_lidar,
-        node_tftree,
+        # node_tftree,
+        start_cus_tftree_node,
         node_go2Move,
         nav2_bringup,
         node_rviz,

@@ -261,13 +261,13 @@ class WaypointFollowerTest(Node):  # 定义WaypointFollowerTest类，继承自No
         self.lastWaypoint = None  # 初始化lastWaypoint为None
 
         # 定义地图坐标id参数
-        self.declare_parameter('map_frame_id', 'map_slamtoolbox')
+        self.declare_parameter('map_frame_id', 'map')
         self.map_frame_id_cmd = self.get_parameter('map_frame_id').get_parameter_value().string_value
         # 定义odom话题参数
-        self.declare_parameter('odom_topic', 'lio_sam_ros2/dogOdomProcess/DogOdomGlobal')
+        self.declare_parameter('odom_topic', 'odom')
         self.odom_topic_cmd = self.get_parameter('odom_topic').get_parameter_value().string_value
         # 定义map话题参数
-        self.declare_parameter('map_topic', 'map_slamtoolbox_go2')
+        self.declare_parameter('map_topic', 'map')
         self.map_topic_cmd = self.get_parameter('map_topic').get_parameter_value().string_value
 
    
