@@ -10,7 +10,9 @@ Panels:
         - /LaserScan1/Topic1
         - /RobotModel1/Description Topic1
         - /TF1
+        - /TF1/Frames1
         - /Map1
+        - /Map1/Status1
       Splitter Ratio: 0.5
     Tree Height: 549
   - Class: rviz_common/Selection
@@ -64,7 +66,7 @@ Visualization Manager:
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 5
-      Enabled: true
+      Enabled: false
       Invert Rainbow: false
       Max Color: 255; 255; 255
       Max Intensity: 4096
@@ -85,7 +87,7 @@ Visualization Manager:
         Value: /scan
       Use Fixed Frame: true
       Use rainbow: true
-      Value: true
+      Value: false
     - Alpha: 1
       Class: rviz_default_plugins/RobotModel
       Collision Enabled: false
@@ -119,21 +121,23 @@ Visualization Manager:
         All Enabled: false
         base:
           Value: true
+        map:
+          Value: true
         odom_slamtoolbox:
           Value: true
         ridar:
-          Value: true
+          Value: false
       Marker Scale: 1
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: true
       Tree:
-        base:
-          ridar:
-            {}
-        odom_slamtoolbox:
-          {}
+        map:
+          odom_slamtoolbox:
+            base:
+              ridar:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 0.699999988079071
@@ -148,19 +152,19 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /map_slam
+        Value: /map
       Update Topic:
         Depth: 5
         Durability Policy: Volatile
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /map_slam_updates
+        Value: /map_updates
       Use Timestamp: false
       Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
-    Fixed Frame: odom_slamtoolbox
+    Fixed Frame: map
     Frame Rate: 30
   Name: root
   Tools:
@@ -203,25 +207,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 3.7737252712249756
+      Distance: 3.400156259536743
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.4119928777217865
-        Y: 0.4232719838619232
-        Z: 1.1024503707885742
+        X: -0.4582543969154358
+        Y: 0.706839382648468
+        Z: 1.375837802886963
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.3747965097427368
+      Pitch: 0.9647967219352722
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 5.946758270263672
+      Yaw: 1.8867546319961548
     Saved: ~
 Window Geometry:
   Displays:

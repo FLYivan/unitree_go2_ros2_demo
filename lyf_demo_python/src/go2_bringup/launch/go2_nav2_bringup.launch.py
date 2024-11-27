@@ -62,7 +62,7 @@ def generate_launch_description():
             output='screen',
         )
     
-    # tf关系发布节点
+    # 运动控制节点
     node_go2Move =  Node(
             package='go2_bringup',                      
             executable='go2_move',             
