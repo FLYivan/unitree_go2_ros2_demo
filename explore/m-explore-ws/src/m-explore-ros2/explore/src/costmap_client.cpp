@@ -1,40 +1,3 @@
-/*********************************************************************
- *
- * Software License Agreement (BSD License)
- *
- *  Copyright (c) 2015-2016, Jiri Horner.
- *  Copyright (c) 2021, Carlos Alvarez, Juan Galvis.
- *  All rights reserved.
- *
- *  Redistribution and use in source and binary forms, with or without
- *  modification, are permitted provided that the following conditions
- *  are met:
- *
- *   * Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- *   * Redistributions in binary form must reproduce the above
- *     copyright notice, this list of conditions and the following
- *     disclaimer in the documentation and/or other materials provided
- *     with the distribution.
- *   * Neither the name of the Jiri Horner nor the names of its
- *     contributors may be used to endorse or promote products derived
- *     from this software without specific prior written permission.
- *
- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
- *  FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
- *  COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- *  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- *  BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- *  LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- *  CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- *  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
- *  ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- *  POSSIBILITY OF SUCH DAMAGE.
- *
- *********************************************************************/
-
 #include <explore/costmap_client.h>
 #include <unistd.h>
 
@@ -44,31 +7,34 @@
 
 namespace explore
 {
-// static translation table to speed things up
+// 初始化转换表以加快速度
 std::array<unsigned char, 256> init_translation_table();
 static const std::array<unsigned char, 256> cost_translation_table__ =
     init_translation_table();
 
+// Costmap2DClient类的构造函数
 Costmap2DClient::Costmap2DClient(rclcpp::Node& node, const tf2_ros::Buffer* tf)
   : tf_(tf), node_(node)
 {
-  std::string costmap_topic;
-  std::string costmap_updates_topic;
+  std::string costmap_topic; // 定义costmap主题
+  std::string costmap_updates_topic; // 定义costmap更新主题
 
+  // 声明参数并设置默认值
   node_.declare_parameter<std::string>("costmap_topic", std::string("costmap"));
   node_.declare_parameter<std::string>("costmap_updates_topic",
                                        std::string("costmap_updates"));
   node_.declare_parameter<std::string>("robot_base_frame", std::string("base_"
                                                                        "link"));
-  // transform tolerance is used for all tf transforms here
+  // transform_tolerance用于所有tf变换
   node_.declare_parameter<double>("transform_tolerance", 0.3);
 
+  // 获取参数值
   node_.get_parameter("costmap_topic", costmap_topic);
   node_.get_parameter("costmap_updates_topic", costmap_updates_topic);
   node_.get_parameter("robot_base_frame", robot_base_frame_);
-  node_.get_parameter("transform_tolerance", transform_tolerance_);
+  node_.get_parameter("transform_tolerance", transform_tolerance_);       
 
-  /* initialize costmap */
+  /* 初始化costmap */
   costmap_sub_ = node_.create_subscription<nav_msgs::msg::OccupancyGrid>(
       costmap_topic, 1000,
       [this](const nav_msgs::msg::OccupancyGrid::SharedPtr msg) {
@@ -76,25 +42,24 @@ Costmap2DClient::Costmap2DClient(rclcpp::Node& node, const tf2_ros::Buffer* tf)
         updateFullMap(msg);
       });
 
-  // ROS1 CODE
+  // ROS1代码
   // auto costmap_msg =
   // ros::topic::waitForMessage<nav_msgs::msg::OccupancyGrid>(
   //     costmap_topic, subscription_nh);
 
-  // Spin some until the callback gets called to replicate
+  // 旋转一些直到回调被调用以复制
   // ros::topic::waitForMessage
   RCLCPP_INFO(node_.get_logger(),
               "Waiting for costmap to become available, topic: %s",
               costmap_topic.c_str());
   while (!costmap_received_) {
     rclcpp::spin_some(node_.get_node_base_interface());
-    // Wait for a second
+    // 等待一秒
     usleep(1000000);
   }
-  // updateFullMap(costmap_msg); // this is already called in the callback of
-  // the costmap_sub_
+  // updateFullMap(costmap_msg); // 这已经在costmap_sub_的回调中调用
 
-  /* subscribe to map updates */
+  /* 订阅地图更新 */
   costmap_updates_sub_ =
       node_.create_subscription<map_msgs::msg::OccupancyGridUpdate>(
           costmap_updates_topic, 1000,
@@ -102,19 +67,18 @@ Costmap2DClient::Costmap2DClient(rclcpp::Node& node, const tf2_ros::Buffer* tf)
             updatePartialMap(msg);
           });
 
-  // ROS1 CODE.
-  // TODO: Do we need this?
-  /* resolve tf prefix for robot_base_frame */
+  // ROS1代码
+  // TODO: 我们需要这个吗？
+  /* 解析tf前缀以获取robot_base_frame */
   // std::string tf_prefix = tf::getPrefixParam(node_);
   // robot_base_frame_ = tf::resolve(tf_prefix, robot_base_frame_);
 
-  // we need to make sure that the transform between the robot base frame and
-  // the global frame is available
+  // 我们需要确保机器人基座框架和全局框架之间的变换是可用的
 
-  // the global frame is set in the costmap callback. This is why we need to
-  // ensure that a costmap is received
+  // 全局框架在costmap回调中设置。这就是为什么我们需要
+  // 确保接收到costmap
 
-  /* tf transform is necessary for getRobotPose */
+  /* tf变换对于getRobotPose是必要的 */
   auto last_error = node_.now();
   std::string tf_error;
   while (rclcpp::ok() &&
@@ -132,35 +96,34 @@ Costmap2DClient::Costmap2DClient(rclcpp::Node& node, const tf2_ros::Buffer* tf)
       last_error = node_.now();
       ;
     }
-    // The error string will accumulate and errors will typically be the same,
-    // so the last
-    // will do for the warning above. Reset the string here to avoid
-    // accumulation.
+    // 错误字符串将累积，错误通常是相同的，
+    // 所以最后一个警告就够了。重置字符串以避免累积。
     tf_error.clear();
   }
 }
 
+// 更新完整地图
 void Costmap2DClient::updateFullMap(
     const nav_msgs::msg::OccupancyGrid::SharedPtr msg)
 {
-  global_frame_ = msg->header.frame_id;
+  global_frame_ = msg->header.frame_id; // 设置全局框架
 
-  unsigned int size_in_cells_x = msg->info.width;
-  unsigned int size_in_cells_y = msg->info.height;
-  double resolution = msg->info.resolution;
-  double origin_x = msg->info.origin.position.x;
-  double origin_y = msg->info.origin.position.y;
+  unsigned int size_in_cells_x = msg->info.width; // 获取地图宽度
+  unsigned int size_in_cells_y = msg->info.height; // 获取地图高度
+  double resolution = msg->info.resolution; // 获取地图分辨率
+  double origin_x = msg->info.origin.position.x; // 获取地图原点x坐标
+  double origin_y = msg->info.origin.position.y; // 获取地图原点y坐标
 
   RCLCPP_DEBUG(node_.get_logger(), "received full new map, resizing to: %d, %d",
                size_in_cells_x, size_in_cells_y);
   costmap_.resizeMap(size_in_cells_x, size_in_cells_y, resolution, origin_x,
-                     origin_y);
+                     origin_y); // 调整地图大小
 
-  // lock as we are accessing raw underlying map
+  // 锁定以访问底层地图
   auto* mutex = costmap_.getMutex();
   std::lock_guard<nav2_costmap_2d::Costmap2D::mutex_t> lock(*mutex);
 
-  // fill map with data
+  // 用数据填充地图
   unsigned char* costmap_data = costmap_.getCharMap();
   size_t costmap_size = costmap_.getSizeInCellsX() * costmap_.getSizeInCellsY();
   RCLCPP_DEBUG(node_.get_logger(), "full map update, %lu values", costmap_size);
@@ -172,11 +135,12 @@ void Costmap2DClient::updateFullMap(
                costmap_size);
 }
 
+// 更新部分地图
 void Costmap2DClient::updatePartialMap(
     const map_msgs::msg::OccupancyGridUpdate::SharedPtr msg)
 {
   RCLCPP_DEBUG(node_.get_logger(), "received partial map update");
-  global_frame_ = msg->header.frame_id;
+  global_frame_ = msg->header.frame_id; // 设置全局框架
 
   if (msg->x < 0 || msg->y < 0) {
     RCLCPP_DEBUG(node_.get_logger(),
@@ -185,17 +149,17 @@ void Costmap2DClient::updatePartialMap(
     return;
   }
 
-  size_t x0 = static_cast<size_t>(msg->x);
-  size_t y0 = static_cast<size_t>(msg->y);
-  size_t xn = msg->width + x0;
-  size_t yn = msg->height + y0;
+  size_t x0 = static_cast<size_t>(msg->x); // 获取更新区域的起始x坐标
+  size_t y0 = static_cast<size_t>(msg->y); // 获取更新区域的起始y坐标
+  size_t xn = msg->width + x0; // 获取更新区域的结束x坐标
+  size_t yn = msg->height + y0; // 获取更新区域的结束y坐标
 
-  // lock as we are accessing raw underlying map
+  // 锁定以访问底层地图
   auto* mutex = costmap_.getMutex();
   std::lock_guard<nav2_costmap_2d::Costmap2D::mutex_t> lock(*mutex);
 
-  size_t costmap_xn = costmap_.getSizeInCellsX();
-  size_t costmap_yn = costmap_.getSizeInCellsY();
+  size_t costmap_xn = costmap_.getSizeInCellsX(); // 获取地图宽度
+  size_t costmap_yn = costmap_.getSizeInCellsY(); // 获取地图高度
 
   if (xn > costmap_xn || x0 > costmap_xn || yn > costmap_yn ||
       y0 > costmap_yn) {
@@ -206,7 +170,7 @@ void Costmap2DClient::updatePartialMap(
                 x0, xn, y0, yn, costmap_xn, costmap_yn);
   }
 
-  // update map with data
+  // 用数据更新地图
   unsigned char* costmap_data = costmap_.getCharMap();
   size_t i = 0;
   for (size_t y = y0; y < yn && y < costmap_yn; ++y) {
@@ -219,6 +183,7 @@ void Costmap2DClient::updatePartialMap(
   }
 }
 
+// 获取机器人位姿
 geometry_msgs::msg::Pose Costmap2DClient::getRobotPose() const
 {
   geometry_msgs::msg::PoseStamped robot_pose;
@@ -228,7 +193,7 @@ geometry_msgs::msg::Pose Costmap2DClient::getRobotPose() const
 
   auto& clk = *node_.get_clock();
 
-  // get the global pose of the robot
+  // 获取机器人的全局位姿
   try {
     robot_pose = tf_->transform(robot_pose, global_frame_,
                                 tf2::durationFromSec(transform_tolerance_));
@@ -257,21 +222,22 @@ geometry_msgs::msg::Pose Costmap2DClient::getRobotPose() const
   return robot_pose.pose;
 }
 
+// 初始化转换表
 std::array<unsigned char, 256> init_translation_table()
 {
   std::array<unsigned char, 256> cost_translation_table;
 
-  // lineary mapped from [0..100] to [0..255]
+  // 线性映射从[0..100]到[0..255]
   for (size_t i = 0; i < 256; ++i) {
     cost_translation_table[i] =
         static_cast<unsigned char>(1 + (251 * (i - 1)) / 97);
   }
 
-  // special values:
-  cost_translation_table[0] = 0;      // NO obstacle
-  cost_translation_table[99] = 253;   // INSCRIBED obstacle
-  cost_translation_table[100] = 254;  // LETHAL obstacle
-  cost_translation_table[static_cast<unsigned char>(-1)] = 255;  // UNKNOWN
+  // 特殊值:
+  cost_translation_table[0] = 0;      // 无障碍物
+  cost_translation_table[99] = 253;   // 内部障碍物
+  cost_translation_table[100] = 254;  // 致命障碍物
+  cost_translation_table[static_cast<unsigned char>(-1)] = 255;  // 未知
 
   return cost_translation_table;
 }
