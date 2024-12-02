@@ -8,7 +8,7 @@ class FrameIdModifier(Node):
     def __init__(self):
         super().__init__('frame_id_modifier')
         # 将frame_id进行重映射
-        self.declare_parameter('new_frame_id', 'ridar')
+        self.declare_parameter('new_frame_id', 'go2_lidar')
         self.new_frame_id = self.get_parameter('new_frame_id').get_parameter_value().string_value
 
         # 设置 QoS 策略
@@ -41,12 +41,15 @@ class FrameIdModifier(Node):
     def listener_callback(self, msg):
         self.latest_msg = msg
         self.latest_msg.header.frame_id = self.new_frame_id
+        self.latest_msg.header.stamp = self.get_clock().now().to_msg()
+        
 
 
     def publish_new_topic(self):
          if self.latest_msg is not None:
             self.publisher.publish(self.latest_msg)
-
+            
+            # self.get_logger().info(f'当前话题的frame_id是{self.latest_msg.header.frame_id},时间戳是{self.latest_msg.header.stamp}')
 
 def main(args=None):
     rclpy.init(args=args)

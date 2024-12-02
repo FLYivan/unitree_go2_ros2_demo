@@ -90,7 +90,7 @@ Visualization Manager:
           Value: true
         odom_slamtoolbox:
           Value: true
-        ridar:
+        go2_lidar:
           Value: true
       Marker Scale: 2
       Name: TF
@@ -101,7 +101,7 @@ Visualization Manager:
         map:
           odom_slamtoolbox:
             base:
-              ridar:
+              go2_lidar:
                 {}
       Update Interval: 0
       Value: true

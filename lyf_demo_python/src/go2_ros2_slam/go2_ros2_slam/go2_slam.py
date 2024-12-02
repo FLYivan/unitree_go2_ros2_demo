@@ -413,7 +413,6 @@ class SlamNode(Node):
 
             # 前方有障碍物，左右两侧有出口
             if front_distance < SAFE_DISTANCE_HEAD:            # 如果前方距离小于安全距离  
-
                 # 左侧距离不足
                 if left_distance < SAFE_DISTANCE_FLANK :
                     # 死胡同
@@ -422,15 +421,15 @@ class SlamNode(Node):
                         action = "Back" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
-
+                    # 门逢右侧宽 & 过道右侧宽 
                     elif right_distance >= SAFE_DISTANCE_FLANK and right_distance < GO_DISTANCE :
-                        # 原地小右转
+                        # 原地右小转
                         action = "place right" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
-
+                    # 左小右大斜撞墙
                     elif (right_distance >= SAFE_DISTANCE_FLANK or math.isinf(right_distance)) :
-                        # 原地小右转
+                        # 原地右小转
                         action = "place right" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
@@ -438,14 +437,16 @@ class SlamNode(Node):
                     else :
                         action = 'Stand'
 
-
+                # 左侧距离适中
                 elif left_distance >= SAFE_DISTANCE_FLANK and left_distance < GO_DISTANCE :
+                    # 门逢左侧宽 & 过道左侧宽 
                     if right_distance < SAFE_DISTANCE_FLANK :
                         # 原地左小转
                         action = "place left" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0      
 
+                    # 左右距离均适中，到底哪个方向由nav2决定
                     elif right_distance >= SAFE_DISTANCE_FLANK and right_distance < GO_DISTANCE :
                         # 直行
                         if left_distance > right_distance + SAFE_DISTANCE_FLANK :
@@ -460,6 +461,7 @@ class SlamNode(Node):
                             self.left_confirm_count = 0
                             self.right_confirm_count = 0  
 
+                    # 左小右大斜撞墙
                     elif (right_distance >= SAFE_DISTANCE_FLANK or math.isinf(right_distance)) :
                         # 右小转
                         action = "little Rotate right" 
@@ -470,15 +472,16 @@ class SlamNode(Node):
                         action = 'Stand'
 
 
-
+                # 左侧距离大
                 elif (left_distance >= SAFE_DISTANCE_FLANK or math.isinf(left_distance)) :
+                    # 右大左小斜撞墙
                     if right_distance < SAFE_DISTANCE_FLANK :
                         # 原地左小转
                         action = "place left" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0     
 
-
+                    # 右大左小斜撞墙
                     elif right_distance >= SAFE_DISTANCE_FLANK and right_distance < GO_DISTANCE :
                         # 左小转
                         action = "little Rotate left" 
@@ -497,19 +500,21 @@ class SlamNode(Node):
             
                 else :
                     action = 'Stand'
-        
+
+
             # 前方大于出口距离
             elif (front_distance >= GO_DISTANCE or math.isinf(front_distance)):
                 # 左侧距离不足
                 if left_distance < SAFE_DISTANCE_FLANK :
 
-                    # 狭窄胡同
+                    # 狭窄胡同 & 狭窄门缝
                     if right_distance < SAFE_DISTANCE_FLANK :
                         # 后退
                         action = "Back" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
 
+                    # 左侧有平行障碍物
                     elif right_distance >= SAFE_DISTANCE_FLANK and right_distance < GO_DISTANCE :
                         # 右平移
                         action = "right move" 
@@ -530,15 +535,16 @@ class SlamNode(Node):
                         action = 'Stand'
 
 
-
+                # 左侧距离适中
                 elif left_distance >= SAFE_DISTANCE_FLANK and left_distance < GO_DISTANCE :
+                    # 右侧有平行障碍物
                     if right_distance < SAFE_DISTANCE_FLANK :
                         # 左平移
                         action = "left move" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0     
 
-
+                    # 可通行场景
                     elif right_distance >= SAFE_DISTANCE_FLANK and right_distance < GO_DISTANCE :
                         # 直行
                         action = "Move forward" 
@@ -559,7 +565,7 @@ class SlamNode(Node):
                         action = 'Stand'
 
 
-
+                # 左侧距离大
                 elif (left_distance >= SAFE_DISTANCE_FLANK or math.isinf(left_distance)) :
                     # 前 左空间大
                     if right_distance < SAFE_DISTANCE_FLANK :
@@ -579,7 +585,7 @@ class SlamNode(Node):
                             self.left_confirm_count = 0
                         else:
                             action = "Move forward" 
-
+                    # 可通行场景
                     elif (right_distance >= SAFE_DISTANCE_FLANK or math.isinf(right_distance)) :
                         # 直行
                         action = "Move forward" 
@@ -597,21 +603,23 @@ class SlamNode(Node):
                 # 左侧距离不足
                 if left_distance < SAFE_DISTANCE_FLANK :
 
-                    # 狭窄胡同
+                    # 潜在死胡同
                     if right_distance < SAFE_DISTANCE_FLANK :
                         # 后退
                         action = "Back" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
 
+                    # 门逢右侧宽 & 过道右侧宽 
                     elif right_distance >= SAFE_DISTANCE_FLANK and right_distance < GO_DISTANCE :
-                        # 原地右转
+                        # 原地右小转
                         action = "place right" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
 
+                    # 左小右大斜撞墙
                     elif (right_distance >= SAFE_DISTANCE_FLANK or math.isinf(right_distance)) :
-                        # 原地右转
+                        # 原地右小转
                         action = "place right" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
@@ -620,20 +628,23 @@ class SlamNode(Node):
                         action = 'Stand'
 
 
-
+                # 左侧距离适中
                 elif left_distance >= SAFE_DISTANCE_FLANK and left_distance < GO_DISTANCE :
+                    # 门逢左侧宽 & 过道左侧宽 
                     if right_distance < SAFE_DISTANCE_FLANK :
-                        # 原地左转
+                        # 原地左小转
                         action = "place left" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0     
 
+                    # 可通行场景
                     elif right_distance >= SAFE_DISTANCE_FLANK and right_distance < GO_DISTANCE :
                         # 直行
                         action = "Move forward" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
 
+                    # 可通行场景
                     elif (right_distance >= SAFE_DISTANCE_FLANK or math.isinf(right_distance)) :
                         # 直行
                         action = "Move forward" 
@@ -643,21 +654,24 @@ class SlamNode(Node):
                     else :
                         action = 'Stand'
 
-
+                # 左侧距离大
                 elif (left_distance >= SAFE_DISTANCE_FLANK or math.isinf(left_distance)) :
 
+                    # 右小左大斜撞墙
                     if right_distance < SAFE_DISTANCE_FLANK : 
-                        # 原地左转
+                        # 原地左小转
                         action = "place left" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0  
 
+                    # 可通行场景
                     elif right_distance >= SAFE_DISTANCE_FLANK and right_distance < GO_DISTANCE :
                         # 直行
                         action = "Move forward" 
                         self.left_confirm_count = 0
                         self.right_confirm_count = 0
 
+                    # 可通行场景
                     elif (right_distance >= SAFE_DISTANCE_FLANK or math.isinf(right_distance)) :
                         # 直行
                         action = "Move forward" 
@@ -668,7 +682,8 @@ class SlamNode(Node):
                         action = 'Stand'  
                 
                 else :
-                    action = 'Stand'                            
+                    action = 'Stand'                     
+          
 
 
 

@@ -9,7 +9,7 @@ from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy
 ODOMTOPIC = 'utlidar/robot_odom'                                      # 自带odom
 # ODOMTOPIC = 'lio_sam_ros2/dogOdomProcess/DogOdomGlobal'               # 宇数slam接口中基于禾赛雷达的odom
 
-RIDARTOPIC = 'scan'
+LIDARTOPIC = 'scan'
 
 class OdomTopic2TF(Node):
     def __init__(self, name):
@@ -29,7 +29,7 @@ class OdomTopic2TF(Node):
         # 使用雷达的时间戳
         self.static_transform_stamped.header.stamp = self.get_clock().now().to_msg()
         self.static_transform_stamped.header.frame_id = 'base'  # 目标frame_id
-        self.static_transform_stamped.child_frame_id = 'ridar'  # 原始frame_id rslidar
+        self.static_transform_stamped.child_frame_id = 'go2_lidar'  # 原始frame_id rslidar
         self.static_transform_stamped.transform.translation.x = 0.171
         self.static_transform_stamped.transform.translation.y = 0.0
         self.static_transform_stamped.transform.translation.z = 0.0908

@@ -79,7 +79,7 @@ class DynamicTFPublisher(Node):
 
 
         # 创建动态 TF 缓存和广播器
-        self.tf_buffer = Buffer(cache_time=rclpy.duration.Duration(seconds=10))  # 设置缓存时间
+        self.tf_buffer = Buffer(cache_time=rclpy.duration.Duration(seconds=20))  # 设置缓存时间
         self.tf_broadcaster = TransformBroadcaster(self)
         self.transform = TransformStamped()  # 初始化 transform
 
@@ -165,8 +165,10 @@ class DynamicTFPublisher(Node):
         里程计话题信息生成
         """
         self.odom = Odometry()                               # 创建一个Odometry消息对象
-        self.odom.header.stamp.sec = sec                     # 设置消息的时间戳
-        self.odom.header.stamp.nanosec = nanosec             # 设置消息的时间戳
+        # self.odom.header.stamp.sec = sec                     # 设置消息的时间戳
+        # self.odom.header.stamp.nanosec = nanosec             # 设置消息的时间戳
+
+        self.odom.header.stamp = self.get_clock().now().to_msg()    # 以上位机时间戳为准
 
         self.odom.header.frame_id = 'odom_slamtoolbox'                   # 设置消息的坐标系ID
         self.odom.child_frame_id = 'base'               # 设置子坐标系ID
@@ -197,11 +199,13 @@ class DynamicTFPublisher(Node):
         静态tf生成
         """
         # 使用雷达的时间戳
-        self.static_transform_stamped.header.stamp.sec = sec
-        self.static_transform_stamped.header.stamp.nanosec = nanosec
+        # self.static_transform_stamped.header.stamp.sec = sec
+        # self.static_transform_stamped.header.stamp.nanosec = nanosec
+
+        self.static_transform_stamped.header.stamp = self.get_clock().now().to_msg()    # 以上位机时间戳为准
 
         self.static_transform_stamped.header.frame_id = 'base'  # 目标frame_id
-        self.static_transform_stamped.child_frame_id = 'ridar'  # 原始frame_id rslidar
+        self.static_transform_stamped.child_frame_id = 'go2_lidar'  # 原始frame_id rslidar
 
 
         self.static_transform_stamped.transform.translation.x = 0.171
@@ -219,8 +223,10 @@ class DynamicTFPublisher(Node):
         动态tf关系生成
         """
         # 设置变换的时间戳
-        self.transform.header.stamp.sec = sec
-        self.transform.header.stamp.nanosec = nanosec
+        # self.transform.header.stamp.sec = sec
+        # self.transform.header.stamp.nanosec = nanosec
+
+        self.transform.header.stamp = self.get_clock().now().to_msg()    # 以上位机时间戳为准
 
         # 设置坐标系
         self.transform.header.frame_id = 'odom_slamtoolbox'                          # 设置一个坐标变换的源坐标系
