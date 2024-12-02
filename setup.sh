@@ -3,6 +3,7 @@ echo "Setup unitree ros2 python environment"
 source /opt/ros/humble/setup.bash
 # source $HOME/dog_robot/unitree/unitree_ros2/cyclonedds_ws/install/setup.bash
 source $HOME/dog_robot/ros2_demo/cyclonedds_ws/install/setup.bash
+source $HOME/dog_robot/ros2_demo/explore/m-explore_ws/install/setup.bash
 
 
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
