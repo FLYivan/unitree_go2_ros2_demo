@@ -72,6 +72,7 @@ class DynamicTFPublisher(Node):
 
         # 创建一个发布器，用于发布Odometry消息
         self.odom_pub = self.create_publisher(Odometry, 'odom', qos_profile)    
+        self.odom = Odometry()                               # 创建一个Odometry消息对象
 
         # 创建静态变换广播器
         self.static_broadcaster = StaticTransformBroadcaster(self)
@@ -164,7 +165,7 @@ class DynamicTFPublisher(Node):
         """
         里程计话题信息生成
         """
-        self.odom = Odometry()                               # 创建一个Odometry消息对象
+        
         # self.odom.header.stamp.sec = sec                     # 设置消息的时间戳
         # self.odom.header.stamp.nanosec = nanosec             # 设置消息的时间戳
 
@@ -251,16 +252,16 @@ class DynamicTFPublisher(Node):
         
         # 发布里程计消息
         self.odom_pub.publish(self.odom) 
-        # self.get_logger().info(f'{BLUE}里程计时间戳: {self.transform.header.stamp}{RESET}')                           
+        self.get_logger().info(f'{BLUE}里程计时间戳: {self.transform.header.stamp}{RESET}')                           
 
         # 发布静态变换
         self.static_broadcaster.sendTransform(self.static_transform_stamped)
-        # self.get_logger().info(f'{RED}静态TF时间戳: {self.transform.header.stamp}{RESET}')
+        self.get_logger().info(f'{RED}静态TF时间戳: {self.transform.header.stamp}{RESET}')
 
 
         # 广播坐标变换信息
         self.tf_broadcaster.sendTransform(self.transform)
-        # self.get_logger().info(f'{YELLOW}动态TF时间戳: {self.transform.header.stamp}{RESET}')
+        self.get_logger().info(f'{YELLOW}动态TF时间戳: {self.transform.header.stamp}{RESET}')
 
         
 
