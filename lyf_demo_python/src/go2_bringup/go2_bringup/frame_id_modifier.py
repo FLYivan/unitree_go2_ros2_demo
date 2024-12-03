@@ -36,7 +36,9 @@ class FrameIdModifier(Node):
         self.latest_msg = None
 
         # 将定时器间隔设置为0.2秒（即5Hz）
-        self.timer = self.create_timer(0.2, self.publish_new_topic)             # /scan话题的发布频率保证为5hz(不可动参数)
+        # self.dt = 0.2                                                   # /scan话题的发布频率保证为5hz(不可动参数) (用于台式机)
+        self.dt = 1                                                   # /scan话题的发布频率保证为5hz(不可动参数) (用于笔记本)
+        self.timer = self.create_timer(self.dt, self.publish_new_topic)             
 
     def listener_callback(self, msg):
         self.latest_msg = msg
@@ -49,7 +51,7 @@ class FrameIdModifier(Node):
          if self.latest_msg is not None:
             self.publisher.publish(self.latest_msg)
             
-            # self.get_logger().info(f'当前话题的frame_id是{self.latest_msg.header.frame_id},时间戳是{self.latest_msg.header.stamp}')
+            self.get_logger().info(f'当前话题的frame_id是{self.latest_msg.header.frame_id},时间戳是{self.latest_msg.header.stamp}')
 
 def main(args=None):
     rclpy.init(args=args)
