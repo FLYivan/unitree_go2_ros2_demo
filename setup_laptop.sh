@@ -8,5 +8,5 @@ source $HOME/dog_robot/ros2_demo/lyf_demo_python/install/local_setup.bash
 
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export CYCLONEDDS_URI='<CycloneDDS><Domain><General><Interfaces>
-                            <NetworkInterface name="ens37" priority="default" multicast="default" />
+                            <NetworkInterface name="enp0s31f6" priority="default" multicast="default" />
                         </Interfaces></General></Domain></CycloneDDS>'

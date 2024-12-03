@@ -36,8 +36,8 @@ class FrameIdModifier(Node):
         self.latest_msg = None
 
         # 将定时器间隔设置为0.2秒（即5Hz）
-        # self.dt = 0.2                                                   # /scan话题的发布频率保证为5hz(不可动参数) (用于台式机)
-        self.dt = 1                                                   # /scan话题的发布频率保证为5hz(不可动参数) (用于笔记本)
+        self.dt = 0.2                                                   # /scan话题的发布频率保证为5hz(不可动参数) (用于台式机)
+        # self.dt = 1                                                   # /scan话题的发布频率保证为5hz(不可动参数) (用于笔记本)
         self.timer = self.create_timer(self.dt, self.publish_new_topic)             
 
     def listener_callback(self, msg):
