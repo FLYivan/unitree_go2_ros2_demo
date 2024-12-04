@@ -1,0 +1,37 @@
+[INFO] [1733294581.986346834] [bt_navigator]: 
+	bt_navigator lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1733294581.986420710] [bt_navigator]: Creating
+[INFO] [1733294582.162660957] [bt_navigator]: Configuring
+[INFO] [1733294586.818191702] [bt_navigator]: Activating
+[INFO] [1733294586.839389208] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[INFO] [1733294604.654290443] [bt_navigator]: Begin navigating from current location (-0.00, 0.02) to (2.24, 3.17)
+[INFO] [1733294632.524612536] [bt_navigator]: Goal succeeded
+[INFO] [1733294632.677260406] [bt_navigator]: Begin navigating from current location (2.11, 3.09) to (5.49, 17.07)
+[INFO] [1733294639.017440419] [bt_navigator]: Received goal preemption request
+[INFO] [1733294639.017553482] [bt_navigator]: Begin navigating from current location (2.10, 3.10) to (14.92, -1.04)
+[INFO] [1733294673.467461208] [bt_navigator]: Received goal preemption request
+[INFO] [1733294673.467663202] [bt_navigator]: Begin navigating from current location (5.18, 1.71) to (9.26, 1.21)
+[INFO] [1733294690.027499232] [bt_navigator]: Goal succeeded
+[INFO] [1733294690.187528781] [bt_navigator]: Begin navigating from current location (9.19, 1.11) to (7.20, 24.16)
+[ERROR] [1733294691.328238362] [bt_navigator_navigate_to_pose_rclcpp_node]: Failed to get result for compute_path_to_pose in node halt!
+[WARN] [1733294691.328576450] [BehaviorTreeEngine]: Behavior Tree tick rate 100.00 was exceeded!
+[ERROR] [1733294701.009223479] [bt_navigator_navigate_to_pose_rclcpp_node]: Failed to get result for compute_path_to_pose in node halt!
+[WARN] [1733294701.010804282] [BehaviorTreeEngine]: Behavior Tree tick rate 100.00 was exceeded!
+[ERROR] [1733294703.821676447] [bt_navigator_navigate_to_pose_rclcpp_node]: Failed to get result for compute_path_to_pose in node halt!
+[WARN] [1733294703.822053315] [BehaviorTreeEngine]: Behavior Tree tick rate 100.00 was exceeded!
+[INFO] [1733294708.122229243] [bt_navigator]: Received goal preemption request
+[INFO] [1733294708.122379993] [bt_navigator]: Begin navigating from current location (8.90, 0.80) to (10.62, 5.57)
+[INFO] [1733294730.872282788] [bt_navigator]: Goal succeeded
+[INFO] [1733294731.049378312] [bt_navigator]: Begin navigating from current location (10.58, 5.45) to (12.08, 0.01)
+[INFO] [1733294757.509712377] [bt_navigator]: Goal succeeded
+[INFO] [1733294757.664184804] [bt_navigator]: Begin navigating from current location (11.87, -0.00) to (-0.00, 0.02)
+[INFO] [1733294814.874422096] [bt_navigator]: Goal succeeded
+[INFO] [1733295050.337729324] [rclcpp]: signal_handler(signum=2)
+[INFO] [1733295050.337831283] [bt_navigator]: Running Nav2 LifecycleNode rcl preshutdown (bt_navigator)
+[INFO] [1733295050.337927633] [bt_navigator]: Deactivating
+[INFO] [1733295050.337968300] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[INFO] [1733295050.348214596] [bt_navigator]: Cleaning up
+[INFO] [1733295050.512113441] [bt_navigator]: Completed Cleaning up
+[INFO] [1733295050.512189534] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.

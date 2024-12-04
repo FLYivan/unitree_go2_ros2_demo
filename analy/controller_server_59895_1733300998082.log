@@ -1,0 +1,513 @@
+[INFO] [1733300998.093672838] [controller_server]: 
+	controller_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1733300998.099872398] [controller_server]: Creating controller server
+[INFO] [1733300998.105486536] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1733300998.106045287] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [1733300998.107299013] [controller_server]: Configuring controller interface
+[INFO] [1733300998.107371800] [controller_server]: getting goal checker plugins..
+[INFO] [1733300998.107432675] [controller_server]: Controller frequency set to 20.0000Hz
+[INFO] [1733300998.107454826] [local_costmap.local_costmap]: Configuring
+[INFO] [1733300998.109917445] [local_costmap.local_costmap]: Using plugin "voxel_layer"
+[INFO] [1733300998.113195543] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[INFO] [1733300998.115909423] [local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[INFO] [1733300998.115938577] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[INFO] [1733300998.116366309] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1733300998.119619405] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[INFO] [1733300998.120085795] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[INFO] [1733300998.120284540] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[INFO] [1733300998.121869450] [controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[INFO] [1733300998.122390355] [controller_server]: Setting transform_tolerance to 1.300000
+[INFO] [1733300998.126911669] [controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[INFO] [1733300998.127200104] [controller_server]: Critic plugin initialized
+[INFO] [1733300998.127285443] [controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[INFO] [1733300998.127562250] [controller_server]: Critic plugin initialized
+[INFO] [1733300998.127653078] [controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[INFO] [1733300998.127741240] [controller_server]: Critic plugin initialized
+[INFO] [1733300998.127789893] [controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[INFO] [1733300998.127917911] [controller_server]: Critic plugin initialized
+[INFO] [1733300998.127960781] [controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[INFO] [1733300998.128068158] [controller_server]: Critic plugin initialized
+[INFO] [1733300998.128108511] [controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[INFO] [1733300998.128190317] [controller_server]: Critic plugin initialized
+[INFO] [1733300998.128232589] [controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[INFO] [1733300998.128313118] [controller_server]: Critic plugin initialized
+[INFO] [1733300998.128328276] [controller_server]: Controller Server has FollowPath  controllers available.
+[INFO] [1733300998.214137467] [controller_server]: Activating
+[INFO] [1733300998.214172068] [local_costmap.local_costmap]: Activating
+[INFO] [1733300998.214182898] [local_costmap.local_costmap]: Checking transform
+[INFO] [1733300998.214200993] [local_costmap.local_costmap]: Timed out waiting for transform from base to odom_slamtoolbox to become available, tf error: Invalid frame ID "odom_slamtoolbox" passed to canTransform argument target_frame - frame does not exist
+[INFO] [1733300998.714272618] [local_costmap.local_costmap]: Timed out waiting for transform from base to odom_slamtoolbox to become available, tf error: Invalid frame ID "odom_slamtoolbox" passed to canTransform argument target_frame - frame does not exist
+[INFO] [1733300999.214268984] [local_costmap.local_costmap]: Timed out waiting for transform from base to odom_slamtoolbox to become available, tf error: Invalid frame ID "odom_slamtoolbox" passed to canTransform argument target_frame - frame does not exist
+[INFO] [1733300999.714279433] [local_costmap.local_costmap]: Timed out waiting for transform from base to odom_slamtoolbox to become available, tf error: Invalid frame ID "odom_slamtoolbox" passed to canTransform argument target_frame - frame does not exist
+[INFO] [1733301000.214435660] [local_costmap.local_costmap]: start
+[INFO] [1733301000.415288993] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[INFO] [1733301015.090316530] [controller_server]: Received a goal, begin computing control effort.
+[WARN] [1733301015.090375637] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[INFO] [1733301016.140585086] [controller_server]: Passing new path to controller.
+[INFO] [1733301017.190593615] [controller_server]: Passing new path to controller.
+[INFO] [1733301018.190576963] [controller_server]: Passing new path to controller.
+[INFO] [1733301019.240602972] [controller_server]: Passing new path to controller.
+[INFO] [1733301020.240580436] [controller_server]: Passing new path to controller.
+[INFO] [1733301021.290582667] [controller_server]: Passing new path to controller.
+[INFO] [1733301022.340584171] [controller_server]: Passing new path to controller.
+[INFO] [1733301023.340584636] [controller_server]: Passing new path to controller.
+[INFO] [1733301024.390583979] [controller_server]: Passing new path to controller.
+[INFO] [1733301025.390584256] [controller_server]: Passing new path to controller.
+[INFO] [1733301026.440579915] [controller_server]: Passing new path to controller.
+[INFO] [1733301027.490574257] [controller_server]: Passing new path to controller.
+[INFO] [1733301028.490575999] [controller_server]: Passing new path to controller.
+[INFO] [1733301029.540584604] [controller_server]: Passing new path to controller.
+[INFO] [1733301029.544192635] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301029.242 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301029.744124126] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301029.430 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301030.540583340] [controller_server]: Passing new path to controller.
+[INFO] [1733301031.590582936] [controller_server]: Passing new path to controller.
+[INFO] [1733301032.640585404] [controller_server]: Passing new path to controller.
+[INFO] [1733301033.640581930] [controller_server]: Passing new path to controller.
+[INFO] [1733301034.690581263] [controller_server]: Passing new path to controller.
+[INFO] [1733301035.643823599] [controller_server]: Reached the goal!
+[INFO] [1733301035.875966439] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [1733301036.926247735] [controller_server]: Passing new path to controller.
+[INFO] [1733301037.976248659] [controller_server]: Passing new path to controller.
+[INFO] [1733301039.026246630] [controller_server]: Passing new path to controller.
+[INFO] [1733301040.026238627] [controller_server]: Passing new path to controller.
+[INFO] [1733301041.076248238] [controller_server]: Passing new path to controller.
+[INFO] [1733301042.126238413] [controller_server]: Passing new path to controller.
+[INFO] [1733301043.126248351] [controller_server]: Passing new path to controller.
+[INFO] [1733301044.176255562] [controller_server]: Passing new path to controller.
+[INFO] [1733301045.226235355] [controller_server]: Passing new path to controller.
+[INFO] [1733301046.226240546] [controller_server]: Passing new path to controller.
+[INFO] [1733301047.276256378] [controller_server]: Passing new path to controller.
+[INFO] [1733301048.276240698] [controller_server]: Passing new path to controller.
+[INFO] [1733301049.326246275] [controller_server]: Passing new path to controller.
+[INFO] [1733301050.376251720] [controller_server]: Passing new path to controller.
+[INFO] [1733301051.376243276] [controller_server]: Passing new path to controller.
+[INFO] [1733301052.426239653] [controller_server]: Passing new path to controller.
+[INFO] [1733301053.426233070] [controller_server]: Passing new path to controller.
+[INFO] [1733301054.476244811] [controller_server]: Passing new path to controller.
+[INFO] [1733301055.526235710] [controller_server]: Passing new path to controller.
+[INFO] [1733301056.526235099] [controller_server]: Passing new path to controller.
+[INFO] [1733301057.576240751] [controller_server]: Passing new path to controller.
+[INFO] [1733301058.576249420] [controller_server]: Passing new path to controller.
+[INFO] [1733301059.626240020] [controller_server]: Passing new path to controller.
+[INFO] [1733301060.676246665] [controller_server]: Passing new path to controller.
+[INFO] [1733301061.676262340] [controller_server]: Passing new path to controller.
+[INFO] [1733301062.726244746] [controller_server]: Passing new path to controller.
+[INFO] [1733301063.726237839] [controller_server]: Passing new path to controller.
+[INFO] [1733301064.776252362] [controller_server]: Passing new path to controller.
+[INFO] [1733301065.826243993] [controller_server]: Passing new path to controller.
+[INFO] [1733301066.826231584] [controller_server]: Passing new path to controller.
+[INFO] [1733301067.876249031] [controller_server]: Passing new path to controller.
+[INFO] [1733301068.876249830] [controller_server]: Passing new path to controller.
+[INFO] [1733301069.926241765] [controller_server]: Passing new path to controller.
+[INFO] [1733301070.976249433] [controller_server]: Passing new path to controller.
+[INFO] [1733301071.976240909] [controller_server]: Passing new path to controller.
+[INFO] [1733301073.026238840] [controller_server]: Passing new path to controller.
+[INFO] [1733301074.026234822] [controller_server]: Passing new path to controller.
+[INFO] [1733301075.076245049] [controller_server]: Passing new path to controller.
+[INFO] [1733301076.076239295] [controller_server]: Passing new path to controller.
+[INFO] [1733301077.126242665] [controller_server]: Passing new path to controller.
+[INFO] [1733301078.176250584] [controller_server]: Passing new path to controller.
+[ERROR] [1733301078.176557071] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733301078.176589402] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733301078.202014589] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733301078.202843908] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [1733301078.202916940] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733301078.202953839] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733301078.242627064] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733301078.675119111] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [1733301079.725466806] [controller_server]: Passing new path to controller.
+[INFO] [1733301080.775475852] [controller_server]: Passing new path to controller.
+[INFO] [1733301081.775475850] [controller_server]: Passing new path to controller.
+[INFO] [1733301082.825471122] [controller_server]: Passing new path to controller.
+[INFO] [1733301083.825463880] [controller_server]: Passing new path to controller.
+[ERROR] [1733301083.825826572] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733301083.825858338] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733301083.853850248] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733301083.854429557] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [1733301083.854551510] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733301083.854597523] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733301095.344107160] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301095.036 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301095.544240085] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301095.161 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301098.275263039] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733301098.659616152] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [1733301099.709903301] [controller_server]: Passing new path to controller.
+[INFO] [1733301100.759915869] [controller_server]: Passing new path to controller.
+[ERROR] [1733301100.760507520] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733301100.760560450] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733301100.785276402] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733301100.786086766] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [1733301100.786208956] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733301100.786273608] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733301120.344160423] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301120.042 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301120.544286469] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301120.162 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301142.074309359] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733301160.654251986] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733301165.019129707] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [1733301166.069482561] [controller_server]: Passing new path to controller.
+[ERROR] [1733301166.069855305] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733301166.069888292] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733301166.094281462] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733301166.095097093] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [1733301166.095205164] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733301166.095263380] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733301181.344228974] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301180.946 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301181.544205243] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301181.151 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301181.744468576] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301181.444 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301181.944198779] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301181.554 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301182.144240125] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301181.789 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301182.344295513] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301181.945 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301182.544242084] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301182.240 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301182.744255691] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301182.347 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301182.944026163] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301182.643 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301183.144144712] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301182.843 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301183.344234760] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301182.944 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301183.544181421] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301183.240 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301183.744100640] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301183.441 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301183.944200209] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301183.548 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301184.144095628] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301183.842 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301184.344157039] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301184.039 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301184.544202657] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301184.244 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301184.744077999] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301184.443 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301184.944005897] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301184.643 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301185.144072432] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301184.842 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301185.344159943] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301184.945 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301185.544275851] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301185.244 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301185.744278044] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301185.345 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301185.944302891] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301185.543 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301186.144127337] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301185.840 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301186.344213432] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301186.040 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301186.544191382] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301186.140 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301186.744119176] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301186.440 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301186.944167380] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301186.640 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301187.144169827] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301186.842 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301187.344147437] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301187.039 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301187.544169460] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301187.145 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301187.744048472] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301187.442 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301187.944053033] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301187.640 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301188.144033452] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301187.843 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301188.344068295] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301188.041 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301188.544062650] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301188.241 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301188.744153941] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301188.342 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301188.944070008] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301188.640 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301189.144181351] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301188.744 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301189.344208721] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301188.945 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301189.544196812] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301189.141 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301189.744183273] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301189.342 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301189.944223898] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301189.547 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301190.144333941] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301189.759 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301190.344259099] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301189.964 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301190.544222159] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301190.152 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301190.744181965] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301190.347 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301190.944289574] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301190.549 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301191.144210461] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301190.749 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301191.344206009] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301190.847 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301191.544208741] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301191.145 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301191.744315723] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301191.361 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301191.944184541] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301191.548 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301192.144175261] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301191.747 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301192.344057291] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301192.042 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301192.544105842] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301192.243 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301192.744218226] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301192.356 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301192.944222712] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301192.549 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301193.144171757] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301192.748 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301193.344262621] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301192.960 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301193.544269090] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301193.161 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301193.744189889] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301193.354 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301193.944278428] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301193.548 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301194.144298404] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301193.752 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301194.344276698] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301193.949 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301194.544249365] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301194.152 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301194.744238038] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301194.374 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301194.944242910] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301194.561 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301195.144252807] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301194.753 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301195.344165306] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301194.955 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301195.544338958] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301195.152 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301195.744200143] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301195.353 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301195.944341426] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301195.557 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301196.144218063] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301195.750 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301196.344230974] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301195.949 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301196.544190104] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301196.146 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301196.744239990] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301196.358 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301196.944244208] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301196.550 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301197.144317038] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301196.752 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301197.344361306] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301196.949 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301197.544350827] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301197.150 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301197.744299563] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301197.356 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301197.944356894] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301197.551 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301198.144302572] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301197.768 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301198.344335213] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301197.955 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301198.544358090] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301198.148 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301198.744385922] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301198.357 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301198.944240030] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301198.357 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301199.144367940] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301198.750 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301199.344293276] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301198.950 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301199.544196360] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301199.146 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301199.744124990] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301199.440 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301199.944379904] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301199.544 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301200.144311459] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301199.742 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301200.344291552] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301199.945 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301200.544238148] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301200.144 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301200.744225444] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301200.355 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301200.944316811] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301200.550 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301201.144266801] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301200.550 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301201.344269699] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301200.950 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301201.544311199] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301201.150 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301201.744288251] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301201.347 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301201.944299006] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301201.548 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301202.144311265] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301201.762 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301202.344281363] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301201.978 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301202.544210534] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301202.181 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301202.744234589] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301202.375 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301202.924762939] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [1733301202.944253423] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301202.569 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301203.144232443] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301202.809 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301203.344295473] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301202.992 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301203.544165941] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301203.172 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301203.744232769] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301203.383 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301203.944134697] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301203.603 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301203.975059964] [controller_server]: Passing new path to controller.
+[INFO] [1733301204.144097004] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301203.810 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301204.344127465] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301204.010 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301204.544127468] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301204.207 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301204.744130200] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301204.399 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301204.944134101] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301204.580 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301205.025058742] [controller_server]: Passing new path to controller.
+[INFO] [1733301205.144169297] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301204.784 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301205.344164408] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301204.996 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301205.544206472] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301205.192 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301205.744177436] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301205.374 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301205.944161752] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301205.581 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301206.025050764] [controller_server]: Passing new path to controller.
+[INFO] [1733301206.144172651] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301205.765 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301206.344164637] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301205.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301206.544203096] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301206.188 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301206.744147420] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301206.374 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301206.944234121] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301206.575 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301207.075056826] [controller_server]: Passing new path to controller.
+[INFO] [1733301207.144212833] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301206.779 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301207.344247735] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301206.963 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301207.544234737] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301206.963 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301207.744178176] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.407 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301207.944180908] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.611 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301208.075051500] [controller_server]: Passing new path to controller.
+[INFO] [1733301208.144168335] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.829 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301208.344210387] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301208.544269226] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301208.744155493] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301208.944210331] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301209.125055773] [controller_server]: Passing new path to controller.
+[INFO] [1733301209.144219158] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301209.344228258] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301209.544233734] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301209.744261351] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301209.944223596] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301210.144276479] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301210.175060460] [controller_server]: Passing new path to controller.
+[INFO] [1733301210.344202022] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301210.544318160] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301210.744228026] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301210.944288218] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301211.144226603] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301211.175060472] [controller_server]: Passing new path to controller.
+[INFO] [1733301211.344266711] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301211.544241851] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301207.962 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301211.744278515] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301211.326 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301211.944228376] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301211.326 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301212.144227695] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301211.326 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301212.225055031] [controller_server]: Passing new path to controller.
+[INFO] [1733301212.344220644] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301211.326 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301212.544180757] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301211.326 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301212.744167337] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301211.326 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [1733301212.925117372] [controller_server]: Failed to make progress
+[WARN] [1733301212.925206295] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733301212.942068045] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733301212.944163670] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301211.326 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301212.945721772] [controller_server]: Received a goal, begin computing control effort.
+[WARN] [1733301213.019310451] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[INFO] [1733301213.144166105] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301212.814 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301213.245995201] [controller_server]: Passing new path to controller.
+[INFO] [1733301213.344180079] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301212.814 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301213.544148215] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301212.814 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301213.744168499] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301212.814 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301213.944194487] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301212.814 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301214.144157345] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301212.814 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301214.296001785] [controller_server]: Passing new path to controller.
+[INFO] [1733301214.344212487] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301212.814 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301214.544234645] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301214.047 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301214.744251432] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301214.047 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301214.944236046] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301214.518 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301215.144174755] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301214.518 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301215.344245058] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301214.518 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301215.544220817] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301214.518 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301215.744217434] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301214.518 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733301215.825874116] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[INFO] [1733301215.825931595] [controller_server]: Passing new path to controller.
+[INFO] [1733301215.944343734] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301214.518 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301216.144103619] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301216.344212772] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301216.465039480] [controller_server]: Passing new path to controller.
+[INFO] [1733301216.544237915] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301216.744179958] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301216.944216245] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301217.144175960] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301217.344290133] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301217.475945215] [controller_server]: Passing new path to controller.
+[INFO] [1733301217.544197057] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301217.744193444] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301217.944220562] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301218.144219253] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301218.344140720] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301218.525938146] [controller_server]: Passing new path to controller.
+[INFO] [1733301218.544186970] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301218.744212860] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301218.944244500] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301219.144242715] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301219.344263972] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301219.544302280] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301219.575946154] [controller_server]: Passing new path to controller.
+[INFO] [1733301219.744250237] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301219.944288528] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301220.144151102] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301220.344218616] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301220.544280057] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301220.575938386] [controller_server]: Passing new path to controller.
+[INFO] [1733301220.744310884] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301220.944167257] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301221.144227455] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301221.344626059] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301221.544223858] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301221.625942953] [controller_server]: Passing new path to controller.
+[INFO] [1733301221.744281507] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301221.944172408] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301222.144294797] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301222.344177040] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301222.544412858] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301222.625945164] [controller_server]: Passing new path to controller.
+[INFO] [1733301222.744349122] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301222.944260227] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [1733301223.026003801] [controller_server]: Failed to make progress
+[WARN] [1733301223.026158675] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733301223.144215573] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301223.344345115] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301223.544222062] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301223.744212819] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301223.944302744] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301224.144177595] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301224.344131254] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301224.544248256] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301224.744249009] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301224.944210437] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301225.144221435] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301225.344184453] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301225.544239604] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301225.744220065] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301225.944285640] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301226.144277421] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301226.344309838] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301226.544284800] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301226.744493525] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301226.944339833] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301227.144212766] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301227.344167878] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301227.544207722] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301227.745197938] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301227.944382591] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301228.095647331] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [1733301228.144256487] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301228.344199473] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301228.544215960] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301228.744336485] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301228.944236968] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301229.144381124] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301229.145954038] [controller_server]: Passing new path to controller.
+[INFO] [1733301229.344218657] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301229.544137178] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301229.744183611] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301229.944219806] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301230.144209490] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301230.195958023] [controller_server]: Passing new path to controller.
+[INFO] [1733301230.344184640] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301230.544178495] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301230.744224660] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301230.944207672] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301231.144271188] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301231.195952770] [controller_server]: Passing new path to controller.
+[INFO] [1733301231.344195384] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301231.544320122] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301231.744197453] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301231.944189177] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301232.144476899] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301232.245951242] [controller_server]: Passing new path to controller.
+[INFO] [1733301232.344267413] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301232.544334498] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301232.744245926] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301232.944263457] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301233.144222448] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301233.245952335] [controller_server]: Passing new path to controller.
+[INFO] [1733301233.344231407] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301233.544230090] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301233.744142861] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301233.944147060] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301234.144167115] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301234.295953081] [controller_server]: Passing new path to controller.
+[INFO] [1733301234.344203753] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301234.544232187] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301234.744192884] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301234.944307345] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301235.144190895] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301235.344239947] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301235.345950508] [controller_server]: Passing new path to controller.
+[INFO] [1733301235.544318289] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301235.744306284] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301235.944310273] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301236.144299511] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301236.344234215] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301236.345951302] [controller_server]: Passing new path to controller.
+[INFO] [1733301236.544287853] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301236.744251631] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301236.944180598] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301237.144224805] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301237.344199530] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301237.395954339] [controller_server]: Passing new path to controller.
+[INFO] [1733301237.544248422] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301237.744208917] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301237.944181259] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [1733301238.095995862] [controller_server]: Failed to make progress
+[WARN] [1733301238.096080377] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733301238.112326620] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733301238.115404670] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [1733301238.144307923] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733301238.218921732] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[INFO] [1733301238.344239000] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301238.430105996] [controller_server]: Passing new path to controller.
+[INFO] [1733301238.544313358] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301238.744169084] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301238.944177441] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301239.144165476] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301239.344235867] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301239.468993338] [controller_server]: Passing new path to controller.
+[INFO] [1733301239.544243124] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301239.744288689] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301239.944232954] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301240.144184326] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301240.344153229] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301240.468989635] [controller_server]: Passing new path to controller.
+[INFO] [1733301240.544241878] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301240.744220728] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301240.881969621] [rclcpp]: signal_handler(signum=2)
+[INFO] [1733301240.882073294] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[INFO] [1733301240.882176431] [controller_server]: Deactivating
+[WARN] [1733301240.882209224] [controller_server]: [follow_path] [ActionServer] Requested to deactivate server but goal is still executing. Should check if action server is running before deactivating.
+[WARN] [1733301240.918994196] [controller_server]: [follow_path] [ActionServer] Stopping the thread per request.
+[INFO] [1733301240.919082755] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[INFO] [1733301240.919764330] [local_costmap.local_costmap]: Deactivating
+[INFO] [1733301240.944338140] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733301215.834 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733301241.014696187] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[INFO] [1733301241.035009923] [controller_server]: Cleaning up
+[INFO] [1733301241.035311657] [local_costmap.local_costmap]: Cleaning up
+[INFO] [1733301241.063685759] [controller_server]: Destroying bond (controller_server) to lifecycle manager.

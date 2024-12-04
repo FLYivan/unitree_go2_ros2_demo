@@ -42,7 +42,7 @@ def generate_launch_description():
         package="explore_lite",
         name="explore_node",
         executable="explore",
-        arguments=['--ros-args', '--log-level', log_level],
+        arguments=['--ros-args', '--log-level', 'ExploreNode:=DEBUG'],
         parameters=[
             explore_param_path, 
             {"use_sim_time": use_sim_time}

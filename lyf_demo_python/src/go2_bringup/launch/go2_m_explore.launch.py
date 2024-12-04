@@ -60,23 +60,12 @@ def generate_launch_description():
     # https://github.com/ros/robot_state_publisher/pull/30
     remappings = [("/tf", "tf"), ("/tf_static", "tf_static")]
     
+
     start_explore_node = Node(
         package="explore_lite",
         name="explore_node",
         executable="explore",
-        parameters=[
-            explore_param_path, 
-            {"use_sim_time": use_sim_time}
-            
-            ],
-        output="screen",
-        remappings=remappings,
-    )
-
-    start_explore_update_node = Node(
-        package="explore_lite",
-        name="explore_update_node",
-        executable="explore_update",
+        arguments=['--ros-args', '--log-level', 'ExploreNode:=DEBUG'],
         parameters=[
             explore_param_path, 
             {"use_sim_time": use_sim_time}

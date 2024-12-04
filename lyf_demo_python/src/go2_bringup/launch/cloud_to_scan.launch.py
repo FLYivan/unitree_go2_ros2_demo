@@ -14,24 +14,18 @@ def generate_launch_description():
                 # 'target_frame': 'cloud_test',
                 'transform_tolerance': 0.01,
                 'min_height': 0.0,
-                'max_height': 0.5,                      # 障碍物最大高度 （长直走廊如果设的过大，会把过道的屋顶作为障碍物，投射到2d平面）
-                'angle_min': -3.14,                     # -M_PI/2
-                'angle_max': 3.14,                      # M_PI/2
-
-                # 'angle_min': -3.14,                     # -M_PI/2
-                # 'angle_max': 1.57,                      # M_PI/2
-
-                'angle_increment': 0.0087,              # M_PI/360.0
-                'scan_time': 0.1,                       # 10Hz，点云生成的激光雷达频率(不可动参数)
-                'range_min': 0.05,                      # 激光扫描中测量的最小和最大距离，单位为米
-                'range_max': 100.0,
+                'max_height': 0.5,                       # 障碍物最大高度 （长直走廊如果设的过大，会把过道的屋顶作为障碍物，投射到2d平面）
+                'angle_min': -3.14,                      # -M_PI/2
+                'angle_max': 3.14,                       # M_PI/2
+                'angle_increment': 0.0087,               # M_PI/360.0
+                'scan_time': 0.1,                        # 10Hz，点云生成的激光雷达频率(不可动参数)
+                'range_min': 0.3,                        # 激光扫描中测量的最小距离，单位为米(为了避开路由器，最小距离必须大于0.3米)
+                'range_max': 100.0,                      # 激光扫描中测量的最大距离，单位为米
                 'use_inf': False,                        # 是否使用无穷大值来表示超出测量范围的点。
-                'inf_epsilon': 0.001,                   # 是一个小的正数，用于替代激光扫描数据中超出测量范围的无穷大值
+                'inf_epsilon': 0.001,                    # 是一个小的正数，用于替代激光扫描数据中超出测量范围的无穷大值
             }],
             remappings=[
-                ('cloud_in', '/lidar_points'),         # 禾赛sdk独立驱动xt16雷达     
-                # ('cloud_in', '/rslidar_points'),       # 宇数slam接口启动禾赛xt16雷达
-                # ('cloud_in', '/utlidar/cloud'),        # 宇数自带雷达
+                ('cloud_in', '/lidar_points'),           # 禾赛sdk独立驱动xt16雷达     
                 ('scan', '/scan_old'),
             ]
         )

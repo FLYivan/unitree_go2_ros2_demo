@@ -91,6 +91,7 @@ private:
    * @brief  Make a global plan
    */
   void makePlan();
+  void restart();
 
   // /**
   //  * @brief  Publish a frontiers as markers

@@ -1,0 +1,25 @@
+[INFO] [1733292971.943648437] [bt_navigator]: 
+	bt_navigator lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1733292971.943718215] [bt_navigator]: Creating
+[INFO] [1733292972.370409691] [bt_navigator]: Configuring
+[INFO] [1733292977.697977976] [bt_navigator]: Activating
+[INFO] [1733292977.741100260] [bt_navigator]: Creating bond (bt_navigator) to lifecycle manager.
+[INFO] [1733292997.005654834] [bt_navigator]: Begin navigating from current location (-0.01, 0.02) to (2.10, 3.58)
+[INFO] [1733293031.465878930] [bt_navigator]: Received goal preemption request
+[INFO] [1733293031.466095589] [bt_navigator]: Begin navigating from current location (-0.02, -0.20) to (4.51, 11.37)
+[ERROR] [1733293034.736209508] [bt_navigator_navigate_to_pose_rclcpp_node]: Failed to get result for compute_path_to_pose in node halt!
+[WARN] [1733293034.736423162] [BehaviorTreeEngine]: Behavior Tree tick rate 100.00 was exceeded!
+[WARN] [1733293034.736457825] [bt_navigator]: [navigate_to_pose] [ActionServer] Aborting handle.
+[ERROR] [1733293034.736608041] [bt_navigator]: Goal failed
+[INFO] [1733293065.996241374] [bt_navigator]: Begin navigating from current location (-0.10, -0.14) to (-0.01, 0.02)
+[WARN] [1733293065.996356122] [bt_navigator]: [navigate_to_pose] [ActionServer] Client requested to cancel the goal. Cancelling.
+[INFO] [1733293065.996490824] [bt_navigator]: Goal canceled
+[INFO] [1733293115.433485686] [rclcpp]: signal_handler(signum=2)
+[INFO] [1733293115.433556923] [bt_navigator]: Running Nav2 LifecycleNode rcl preshutdown (bt_navigator)
+[INFO] [1733293115.433667262] [bt_navigator]: Deactivating
+[INFO] [1733293115.433728605] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.
+[INFO] [1733293115.444073517] [bt_navigator]: Cleaning up
+[INFO] [1733293115.610053221] [bt_navigator]: Completed Cleaning up
+[INFO] [1733293115.610107435] [bt_navigator]: Destroying bond (bt_navigator) to lifecycle manager.

@@ -9,7 +9,7 @@ explore_node:
     # costmap_updates_topic: map_updates
 
     visualize: true
-    planner_frequency: 0.01     # 频率为0.2Hz,即1/planner_frequency 秒触发一次定时器，改变一次策略
+    planner_frequency: 0.016     # 频率为0.2Hz,即1/planner_frequency 秒触发一次定时器，改变一次策略（60秒自启动一次）
     progress_timeout: 30.0
     potential_scale: 3.0        # 用于对边界进行加权。较大的 potential_scale_ 值会使得距离对成本的影响更大。
     orientation_scale: 0.5
@@ -140,7 +140,7 @@ controller_server:
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
-    failure_tolerance: 0.3
+    failure_tolerance: 0.3                       
     progress_checker_plugin: "progress_checker"
     goal_checker_plugins: ["general_goal_checker"] # "precise_goal_checker"
     controller_plugins: ["FollowPath"]
@@ -187,7 +187,7 @@ controller_server:
       sim_time: 1.7
       linear_granularity: 0.05
       angular_granularity: 0.025
-      transform_tolerance: 0.2
+      transform_tolerance: 1.3                 # controller的transform最大容忍时间差，实际工况下1.5秒内的时间差都存在
       xy_goal_tolerance: 0.25
       trans_stopped_velocity: 0.25
       short_circuit_trajectory_evaluation: True
@@ -317,7 +317,7 @@ planner_server:
     planner_plugins: ["GridBased"]
     GridBased:
       plugin: "nav2_navfn_planner/NavfnPlanner"
-      tolerance: 0.2
+      tolerance: 0.2                        # 允许到达目标点附近的距离容差
       use_astar: false
       allow_unknown: true
 

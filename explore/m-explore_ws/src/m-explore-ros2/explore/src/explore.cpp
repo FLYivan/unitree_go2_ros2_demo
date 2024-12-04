@@ -133,9 +133,20 @@ Explore::Explore()
   // 创建定时器，定期调用makePlan函数
   exploring_timer_ = this->create_wall_timer(
       std::chrono::milliseconds((uint16_t)(1000.0 / planner_frequency_)),
-      [this]() { makePlan(); });
+      [this]() { restart(); });
   // 立即开始探索
   makePlan();
+}
+
+
+// 定义定时器回调函数restart
+
+void Explore::restart()
+{
+
+  RCLCPP_INFO(logger_, "定时器被触发，调用makePlan函数"); // 打印定时器触发信息
+  makePlan();
+
 }
 
 // Explore类的析构函数

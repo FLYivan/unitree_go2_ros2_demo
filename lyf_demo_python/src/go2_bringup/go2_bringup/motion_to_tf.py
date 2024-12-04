@@ -116,8 +116,8 @@ class DynamicTFPublisher(Node):
             self.initial_position_A = position_A
             self.initial_orientation_A = R.from_quat(orientation_A)
 
-            self.get_logger().info(f'Set initial position: {self.initial_position_A}')
-            self.get_logger().info(f'Set initial orientation: {self.initial_orientation_A.as_quat()}')
+            # self.get_logger().info(f'Set initial position: {self.initial_position_A}')
+            # self.get_logger().info(f'Set initial orientation: {self.initial_orientation_A.as_quat()}')
             return  # 记录初始位置和姿态后，返回以等待下一个回调
         
         # 计算从A到B的变换
@@ -252,16 +252,16 @@ class DynamicTFPublisher(Node):
         
         # 发布里程计消息
         self.odom_pub.publish(self.odom) 
-        self.get_logger().info(f'{BLUE}里程计时间戳: {self.transform.header.stamp}{RESET}')                           
+        # self.get_logger().info(f'{BLUE}里程计时间戳: {self.transform.header.stamp}{RESET}')                           
 
         # 发布静态变换
         self.static_broadcaster.sendTransform(self.static_transform_stamped)
-        self.get_logger().info(f'{RED}静态TF时间戳: {self.transform.header.stamp}{RESET}')
+        # self.get_logger().info(f'{RED}静态TF时间戳: {self.transform.header.stamp}{RESET}')
 
 
         # 广播坐标变换信息
         self.tf_broadcaster.sendTransform(self.transform)
-        self.get_logger().info(f'{YELLOW}动态TF时间戳: {self.transform.header.stamp}{RESET}')
+        # self.get_logger().info(f'{YELLOW}动态TF时间戳: {self.transform.header.stamp}{RESET}')
 
         
 

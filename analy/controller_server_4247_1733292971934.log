@@ -1,0 +1,72 @@
+[INFO] [1733292971.945605523] [controller_server]: 
+	controller_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1733292971.954746454] [controller_server]: Creating controller server
+[INFO] [1733292971.959755613] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1733292971.960206902] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [1733292971.960952360] [controller_server]: Configuring controller interface
+[INFO] [1733292971.961006320] [controller_server]: getting goal checker plugins..
+[INFO] [1733292971.961044107] [controller_server]: Controller frequency set to 20.0000Hz
+[INFO] [1733292971.961059509] [local_costmap.local_costmap]: Configuring
+[INFO] [1733292971.964417713] [local_costmap.local_costmap]: Using plugin "voxel_layer"
+[INFO] [1733292971.971545028] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[INFO] [1733292971.973923619] [local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[INFO] [1733292971.973964706] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[INFO] [1733292971.974319157] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1733292971.977821789] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[INFO] [1733292971.978658513] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[INFO] [1733292971.978934208] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[INFO] [1733292971.983999483] [controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[INFO] [1733292971.984528954] [controller_server]: Setting transform_tolerance to 0.200000
+[INFO] [1733292971.993011887] [controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[INFO] [1733292971.993279341] [controller_server]: Critic plugin initialized
+[INFO] [1733292971.993354361] [controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[INFO] [1733292971.993630539] [controller_server]: Critic plugin initialized
+[INFO] [1733292971.993691821] [controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[INFO] [1733292971.993791060] [controller_server]: Critic plugin initialized
+[INFO] [1733292971.993844030] [controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[INFO] [1733292971.993979876] [controller_server]: Critic plugin initialized
+[INFO] [1733292971.994024406] [controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[INFO] [1733292971.994140366] [controller_server]: Critic plugin initialized
+[INFO] [1733292971.994187247] [controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[INFO] [1733292971.994273079] [controller_server]: Critic plugin initialized
+[INFO] [1733292971.994317870] [controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[INFO] [1733292971.994406147] [controller_server]: Critic plugin initialized
+[INFO] [1733292971.994419908] [controller_server]: Controller Server has FollowPath  controllers available.
+[INFO] [1733292972.480308402] [controller_server]: Activating
+[INFO] [1733292972.480360312] [local_costmap.local_costmap]: Activating
+[INFO] [1733292972.480380808] [local_costmap.local_costmap]: Checking transform
+[INFO] [1733292972.480407855] [local_costmap.local_costmap]: Timed out waiting for transform from base to odom_slamtoolbox to become available, tf error: Invalid frame ID "odom_slamtoolbox" passed to canTransform argument target_frame - frame does not exist
+[INFO] [1733292972.980554664] [local_costmap.local_costmap]: start
+[INFO] [1733292973.231256986] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[INFO] [1733292997.465955608] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733293015.495944228] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733293033.618530633] [controller_server]: Received a goal, begin computing control effort.
+[WARN] [1733293033.618611326] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[INFO] [1733293034.668947812] [controller_server]: Passing new path to controller.
+[ERROR] [1733293034.669163904] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733293034.669193870] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733293034.695994306] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733293034.696505882] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [1733293034.696588627] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733293034.696642614] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733293037.623465849] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733293037.269 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733293037.814846523] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733293037.502 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733293038.215762168] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733293037.900 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733293038.419650690] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733293038.114 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733293038.615999970] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733293038.227 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733293038.814848635] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733293038.508 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733293039.214463417] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733293038.904 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733293039.412738878] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733293039.099 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733293115.433516894] [rclcpp]: signal_handler(signum=2)
+[INFO] [1733293115.433602468] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[INFO] [1733293115.433709457] [controller_server]: Deactivating
+[INFO] [1733293115.433781065] [local_costmap.local_costmap]: Deactivating
+[INFO] [1733293115.580862200] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[INFO] [1733293115.580952584] [controller_server]: Cleaning up
+[INFO] [1733293115.581098154] [local_costmap.local_costmap]: Cleaning up
+[INFO] [1733293115.609953004] [controller_server]: Destroying bond (controller_server) to lifecycle manager.

@@ -51,7 +51,7 @@ class FrameIdModifier(Node):
          if self.latest_msg is not None:
             self.publisher.publish(self.latest_msg)
             
-            self.get_logger().info(f'当前话题的frame_id是{self.latest_msg.header.frame_id},时间戳是{self.latest_msg.header.stamp}')
+            # self.get_logger().info(f'当前话题的frame_id是{self.latest_msg.header.frame_id},时间戳是{self.latest_msg.header.stamp}')
 
 def main(args=None):
     rclpy.init(args=args)
