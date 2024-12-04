@@ -80,7 +80,6 @@ install(DIRECTORY
 add_executable(explore
   src/costmap_client.cpp
   src/explore.cpp
-  src/explore_update.cpp
   src/frontier_search.cpp
 )
 

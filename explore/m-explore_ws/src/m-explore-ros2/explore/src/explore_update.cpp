@@ -35,7 +35,7 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *
  *********************************************************************/
-#include <explore/explore_update.h> // 导入explore_update头文件
+#include <explore/explore.h> // 导入explore头文件
 
 #include <thread> // 导入线程库
 
@@ -49,11 +49,11 @@ inline static bool same_point(const geometry_msgs::msg::Point& one,
   return dist < 0.01; // 如果距离小于0.01，则认为两点相同
 }
 
-namespace explore_update
+namespace explore
 {
 // Explore类的构造函数
 Explore::Explore()
-  : Node("explore_update_node") // 初始化节点名称为"explore_node"
+  : Node("explore_node") // 初始化节点名称为"explore_node"
   , tf_buffer_(this->get_clock()) // 初始化tf_buffer_
   , tf_listener_(tf_buffer_) // 初始化tf_listener_
   , costmap_client_(*this, &tf_buffer_) // 初始化costmap_client_
@@ -434,7 +434,7 @@ int main(int argc, char** argv)
 {
   rclcpp::init(argc, argv); // 初始化rclcpp
   rclcpp::spin(
-      std::make_shared<explore_update::Explore>()); // 创建Explore对象并运行
+      std::make_shared<explore::Explore>()); // 创建Explore对象并运行
   rclcpp::shutdown(); // 关闭rclcpp
   return 0; // 返回0
 }
