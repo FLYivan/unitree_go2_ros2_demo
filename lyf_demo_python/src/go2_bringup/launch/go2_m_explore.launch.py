@@ -73,6 +73,18 @@ def generate_launch_description():
         remappings=remappings,
     )
 
+    start_explore_update_node = Node(
+        package="explore_lite",
+        name="explore_update_node",
+        executable="explore_update",
+        parameters=[
+            explore_param_path, 
+            {"use_sim_time": use_sim_time}
+            
+            ],
+        output="screen",
+        remappings=remappings,
+    )
 
 
     # 运动控制节点

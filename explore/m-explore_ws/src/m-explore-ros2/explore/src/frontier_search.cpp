@@ -23,7 +23,7 @@ FrontierSearch::FrontierSearch(nav2_costmap_2d::Costmap2D* costmap,
 {
 }
 
-// 从指定位置开始搜索前沿
+// searchFrom方法——从指定pose.position开始搜索前沿
 std::vector<Frontier>
 FrontierSearch::searchFrom(geometry_msgs::msg::Point position)
 {
