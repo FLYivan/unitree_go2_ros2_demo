@@ -9,7 +9,7 @@ explore_node:
     # costmap_updates_topic: map_updates
 
     visualize: true
-    planner_frequency: 0.01      # 频率为0.2Hz,即1/planner_frequency 秒触发一次定时器，改变一次策略
+    planner_frequency: 0.01     # 频率为0.2Hz,即1/planner_frequency 秒触发一次定时器，改变一次策略
     progress_timeout: 30.0
     potential_scale: 3.0        # 用于对边界进行加权。较大的 potential_scale_ 值会使得距离对成本的影响更大。
     orientation_scale: 0.5
@@ -243,9 +243,9 @@ local_costmap:
           marking: True
           data_type: "LaserScan"
           raytrace_max_range: 4.0         # 射线追踪最大范围
-          raytrace_min_range: 0.15        # 射线追踪最小范围
+          raytrace_min_range: 0.35        # 射线追踪最小范围 (路由器盒子距离0.3)
           obstacle_max_range: 3.5         # 障碍物最大范围
-          obstacle_min_range: 0.15         # 障碍物最小范围
+          obstacle_min_range: 0.3         # 障碍物最小范围  (路由器盒子距离0.3)
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
         enabled: True
@@ -278,9 +278,9 @@ global_costmap:
           marking: True
           data_type: "LaserScan"
           raytrace_max_range: 4.0         # 射线追踪最大范围，范围太大会使得探索时出现频繁切换路线
-          raytrace_min_range: 0.15        # 射线追踪最小范围
+          raytrace_min_range: 0.35        # 射线追踪最小范围 (路由器盒子距离0.3)
           obstacle_max_range: 3.5         # 检测到障碍物最大范围（这个参数是否跟地图障碍物标记有关）
-          obstacle_min_range: 0.15         # 障碍物最小范围，小于这个范围的被忽略，路由器问题解决
+          obstacle_min_range: 0.3         # 障碍物最小范围，小于这个范围的被忽略，路由器问题解决 (路由器盒子距离0.3)
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
         enabled: True
