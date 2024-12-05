@@ -1,11 +1,13 @@
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, TimerAction
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_share_directory
 import os
+
+
 
 def generate_launch_description():
     go2_dir = FindPackageShare('go2_bringup')
@@ -75,6 +77,8 @@ def generate_launch_description():
         remappings=remappings,
     )
 
+ # 延迟启动 node_frame
+    delayed_start_explore_node = TimerAction(period=10.0,  actions=[start_explore_node]) # 延迟 10 秒启动
 
     # 运动控制节点
     start_go2Move_node =  Node(
@@ -107,6 +111,7 @@ def generate_launch_description():
             slam_launch,                    # 启动slam功能
             nav2_bringup_launch,            # 启动nav2功能
             # start_explore_node,            # 启动探索节点
+            delayed_start_explore_node,       # 延迟启动探索节点
             # start_go2Move_node,             # 运动控制节点
             start_rviz_node,
         ]
