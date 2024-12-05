@@ -41,6 +41,11 @@ ros2 launch hesai_ros_driver start.py
 # 优化explore算法
 colcon build --packages-select explore_lite
 
+# nav2调试
+
+colcon build --packages-select nav2_bringup
+colcon build --packages-select nav2_navfn_planner
+
 ros2 launch nav2_bringup tb3_simulation_launch.py slam:=True
 ros2 launch explore_lite explore.launch.py
 
