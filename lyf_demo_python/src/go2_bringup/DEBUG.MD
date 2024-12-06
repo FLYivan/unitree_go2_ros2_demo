@@ -46,6 +46,11 @@ colcon build --packages-select explore_lite
 colcon build --packages-select nav2_bringup
 colcon build --packages-select nav2_navfn_planner
 
+
+   export RCUTILS_LOGGING_BUFFERED_STREAM=1
+   export RCUTILS_CONSOLE_OUTPUT_FORMAT="[{severity}] [{name}]: {message}"
+   export RCUTILS_LOGGING_SEVERITY_THRESHOLD=DEBUG
+
 ros2 launch nav2_bringup tb3_simulation_launch.py slam:=True
 ros2 launch explore_lite explore.launch.py
 
