@@ -82,12 +82,12 @@ class CmdVelSubscriber(Node):
         self.sport_req.Move(self.req,vx, vy, vyaw)                              # 获取与高级运动命令对应的请求消息
         self.cmd_vel_pub.publish(self.req)                                      # 发布速度命令
 
-        self.get_logger().info(f'{YELLOW}Sending to go2: vx ={vx}, vy={vy}, vyaw={vyaw}{RESET}')
+        # self.get_logger().info(f'{YELLOW}Sending to go2: vx ={vx}, vy={vy}, vyaw={vyaw}{RESET}')
 
     # 定时器回调，启动主控
     def timer_callback(self):
-        # self.active_control()
-        self.only_nav2()
+        self.active_control()             # 避障行进
+        # self.only_nav2()
 
     # 只用nav2的结果来控制的方法
     def only_nav2(self):
@@ -97,7 +97,10 @@ class CmdVelSubscriber(Node):
     def active_control(self):
 
         # 调用避障函数，判断如何行进
-        action = self.avoid_obstacle()
+        # action = self.avoid_obstacle()
+
+        # 调用简化避障函数，判断如何行进
+        action = self.avoid_obstacle_simply()
 
 
         # 左小转     
@@ -168,6 +171,43 @@ class CmdVelSubscriber(Node):
         # 使用nav2的规划命令
         elif action == 'Nav2':
             self.send_to_go2(self.nav2_vx, self.nav2_vy, self.nav2_vyaw)
+
+    # 上下楼梯函数
+    def climb_stairs(self):
+        pass
+
+    # 简化的避障函数
+    def avoid_obstacle_simply(self):
+        front_distance = self.current_scan.point.x
+        left_distance = self.current_scan.point.y
+        right_distance = self.current_scan.point.z
+
+        self.get_logger().info(f'{YELLOW}前方障碍距离：{self.current_scan.point.x:.3f},{RESET}'
+                        f'{RED}左侧障碍距离：{self.current_scan.point.y:.3f},{RESET}'
+                        f'{BLUE}右侧障碍距离：{self.current_scan.point.z:.3f}{RESET}')                          # 打印最新障碍位置
+
+        if front_distance <= SAFE_DISTANCE_HEAD:
+            # 后退
+            action = "Back"
+
+        elif left_distance <= SAFE_DISTANCE_FLANK:
+            # 右平移
+            action = "right move" 
+
+        elif right_distance <= SAFE_DISTANCE_FLANK:
+            # 左平移
+            action = "left move"
+        else:
+            action = "Nav2"
+
+        self.get_logger().info(f'{RED}当前运动方向{action}{RESET}')                   # 打印该步运动方向
+        return action  
+        
+        
+        
+        
+
+
 
     # 避障函数
     def avoid_obstacle(self):
