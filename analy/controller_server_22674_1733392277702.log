@@ -1,0 +1,924 @@
+[INFO] [1733392277.712993440] [controller_server]: 
+	controller_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1733392277.721931065] [controller_server]: Creating controller server
+[INFO] [1733392277.727668575] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [1733392277.728485957] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [1733392277.953636876] [controller_server]: Configuring controller interface
+[INFO] [1733392277.968223189] [controller_server]: getting goal checker plugins..
+[INFO] [1733392277.968401321] [controller_server]: Controller frequency set to 20.0000Hz
+[INFO] [1733392277.968463790] [local_costmap.local_costmap]: Configuring
+[INFO] [1733392278.091566404] [local_costmap.local_costmap]: Using plugin "voxel_layer"
+[INFO] [1733392278.112237307] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[INFO] [1733392278.135975340] [local_costmap.local_costmap]: Initialized plugin "voxel_layer"
+[INFO] [1733392278.136015043] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[INFO] [1733392278.136572186] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[INFO] [1733392278.154250249] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[INFO] [1733392278.154682686] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[INFO] [1733392278.154846000] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[INFO] [1733392278.156371065] [controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[INFO] [1733392278.156775606] [controller_server]: Setting transform_tolerance to 1.300000
+[INFO] [1733392278.167521940] [controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[INFO] [1733392278.167848855] [controller_server]: Critic plugin initialized
+[INFO] [1733392278.167919884] [controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[INFO] [1733392278.168155826] [controller_server]: Critic plugin initialized
+[INFO] [1733392278.168213384] [controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[INFO] [1733392278.168303028] [controller_server]: Critic plugin initialized
+[INFO] [1733392278.168358366] [controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[INFO] [1733392278.168548301] [controller_server]: Critic plugin initialized
+[INFO] [1733392278.168619388] [controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[INFO] [1733392278.168778828] [controller_server]: Critic plugin initialized
+[INFO] [1733392278.168845440] [controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[INFO] [1733392278.168960247] [controller_server]: Critic plugin initialized
+[INFO] [1733392278.169026127] [controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[INFO] [1733392278.169143596] [controller_server]: Critic plugin initialized
+[INFO] [1733392278.169165030] [controller_server]: Controller Server has FollowPath  controllers available.
+[INFO] [1733392278.334767135] [controller_server]: Activating
+[INFO] [1733392278.334821651] [local_costmap.local_costmap]: Activating
+[INFO] [1733392278.334860051] [local_costmap.local_costmap]: Checking transform
+[INFO] [1733392278.334885919] [local_costmap.local_costmap]: Timed out waiting for transform from base to odom_slamtoolbox to become available, tf error: Invalid frame ID "odom_slamtoolbox" passed to canTransform argument target_frame - frame does not exist
+[INFO] [1733392278.835053354] [local_costmap.local_costmap]: start
+[INFO] [1733392279.085903878] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[INFO] [1733392289.670666092] [controller_server]: Received a goal, begin computing control effort.
+[WARN] [1733392289.670785468] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[INFO] [1733392290.720992725] [controller_server]: Passing new path to controller.
+[INFO] [1733392291.587292175] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392291.218 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392291.771131338] [controller_server]: Passing new path to controller.
+[INFO] [1733392291.788155377] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392291.411 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392292.189688796] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392291.798 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392292.389799872] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392292.049 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392292.588209954] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392292.277 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [1733392292.771783144] [tf_help]: Transform data too old when converting from odom_slamtoolbox to map
+[ERROR] [1733392292.771966875] [tf_help]: Data time: 1733392292s 733146888ns, Transform time: 1733392291s 418388947ns
+[WARN] [1733392292.772415062] [controller_server]: Unable to transform robot pose into global plan's frame
+[INFO] [1733392292.786696222] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392292.428 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392292.821172649] [controller_server]: Passing new path to controller.
+[ERROR] [1733392292.823656816] [tf_help]: Transform data too old when converting from odom_slamtoolbox to map
+[ERROR] [1733392292.823751007] [tf_help]: Data time: 1733392292s 733146888ns, Transform time: 1733392291s 418388947ns
+[WARN] [1733392292.823945327] [controller_server]: Unable to transform robot pose into global plan's frame
+[ERROR] [1733392292.871575318] [tf_help]: Transform data too old when converting from odom_slamtoolbox to map
+[ERROR] [1733392292.871690238] [tf_help]: Data time: 1733392292s 733146888ns, Transform time: 1733392291s 418388947ns
+[WARN] [1733392292.871895533] [controller_server]: Unable to transform robot pose into global plan's frame
+[ERROR] [1733392292.921646611] [tf_help]: Transform data too old when converting from odom_slamtoolbox to map
+[ERROR] [1733392292.921775398] [tf_help]: Data time: 1733392292s 733146888ns, Transform time: 1733392291s 418388947ns
+[WARN] [1733392292.921996412] [controller_server]: Unable to transform robot pose into global plan's frame
+[ERROR] [1733392292.971588127] [tf_help]: Transform data too old when converting from odom_slamtoolbox to map
+[ERROR] [1733392292.971713608] [tf_help]: Data time: 1733392292s 733146888ns, Transform time: 1733392291s 418388947ns
+[WARN] [1733392292.971918552] [controller_server]: Unable to transform robot pose into global plan's frame
+[ERROR] [1733392293.021874534] [tf_help]: Transform data too old when converting from odom_slamtoolbox to map
+[ERROR] [1733392293.022134657] [tf_help]: Data time: 1733392292s 733146888ns, Transform time: 1733392291s 418388947ns
+[WARN] [1733392293.022447178] [controller_server]: Unable to transform robot pose into global plan's frame
+[ERROR] [1733392293.071190038] [tf_help]: Transform data too old when converting from odom_slamtoolbox to map
+[ERROR] [1733392293.071216871] [tf_help]: Data time: 1733392292s 733146888ns, Transform time: 1733392291s 418388947ns
+[WARN] [1733392293.071298183] [controller_server]: Unable to transform robot pose into global plan's frame
+[ERROR] [1733392293.071356413] [controller_server]: Controller patience exceeded
+[WARN] [1733392293.071414441] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733392293.089768250] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733392293.090777776] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [1733392293.187496133] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392292.862 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [1733392293.240997784] [tf_help]: Transform data too old when converting from odom_slamtoolbox to map
+[ERROR] [1733392293.241026756] [tf_help]: Data time: 1733392293s 194696080ns, Transform time: 1733392291s 418388947ns
+[WARN] [1733392293.241053725] [controller_server]: Unable to transform robot pose into global plan's frame
+[WARN] [1733392293.241137890] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[ERROR] [1733392293.241193860] [tf_help]: Transform data too old when converting from odom_slamtoolbox to map
+[ERROR] [1733392293.241208054] [tf_help]: Data time: 1733392293s 194696080ns, Transform time: 1733392291s 418388947ns
+[WARN] [1733392293.241252699] [controller_server]: Unable to transform robot pose into global plan's frame
+[ERROR] [1733392293.291506846] [tf_help]: Transform data too old when converting from odom_slamtoolbox to map
+[ERROR] [1733392293.291523072] [tf_help]: Data time: 1733392293s 194696080ns, Transform time: 1733392291s 418388947ns
+[WARN] [1733392293.291544960] [controller_server]: Unable to transform robot pose into global plan's frame
+[ERROR] [1733392293.341745798] [tf_help]: Transform data too old when converting from odom_slamtoolbox to map
+[ERROR] [1733392293.341769924] [tf_help]: Data time: 1733392293s 194696080ns, Transform time: 1733392291s 418388947ns
+[WARN] [1733392293.341800671] [controller_server]: Unable to transform robot pose into global plan's frame
+[INFO] [1733392293.384455433] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392293.069 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [1733392293.392057758] [tf_help]: Transform data too old when converting from odom_slamtoolbox to map
+[ERROR] [1733392293.392069867] [tf_help]: Data time: 1733392293s 194696080ns, Transform time: 1733392291s 418388947ns
+[WARN] [1733392293.392099085] [controller_server]: Unable to transform robot pose into global plan's frame
+[ERROR] [1733392293.392122512] [controller_server]: Controller patience exceeded
+[WARN] [1733392293.392146400] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733392293.409861101] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733392293.820622101] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [1733392294.870799796] [controller_server]: Passing new path to controller.
+[INFO] [1733392295.920795570] [controller_server]: Passing new path to controller.
+[INFO] [1733392296.920791897] [controller_server]: Passing new path to controller.
+[INFO] [1733392297.970804828] [controller_server]: Passing new path to controller.
+[INFO] [1733392298.970792354] [controller_server]: Passing new path to controller.
+[INFO] [1733392300.020794221] [controller_server]: Passing new path to controller.
+[INFO] [1733392301.070799925] [controller_server]: Passing new path to controller.
+[INFO] [1733392302.070789395] [controller_server]: Passing new path to controller.
+[INFO] [1733392303.120796433] [controller_server]: Passing new path to controller.
+[INFO] [1733392304.120793362] [controller_server]: Passing new path to controller.
+[INFO] [1733392305.170815214] [controller_server]: Passing new path to controller.
+[INFO] [1733392305.584599782] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392305.207 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392305.784478824] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392305.404 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392305.923186593] [controller_server]: Reached the goal!
+[INFO] [1733392305.984469658] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392305.605 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392314.584719297] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392314.209 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392314.784774099] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392314.408 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392314.871235425] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [1733392314.984566879] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392314.609 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392315.921508166] [controller_server]: Passing new path to controller.
+[INFO] [1733392316.971524950] [controller_server]: Passing new path to controller.
+[INFO] [1733392318.021511974] [controller_server]: Passing new path to controller.
+[ERROR] [1733392318.021729523] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733392318.021756244] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733392318.047676859] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733392318.048424311] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [1733392318.048529206] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733392318.048572933] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733392321.784683489] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392321.426 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392321.984695302] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392321.613 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392322.184534080] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392321.613 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392322.384615139] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392322.011 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392322.584604074] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392322.011 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392322.784756551] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392322.413 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392327.818805081] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733392337.881836192] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [1733392338.932169768] [controller_server]: Passing new path to controller.
+[INFO] [1733392339.982170632] [controller_server]: Passing new path to controller.
+[INFO] [1733392341.032176985] [controller_server]: Passing new path to controller.
+[INFO] [1733392341.184574978] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392340.808 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392341.384600681] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392341.015 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392341.584657886] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392341.218 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392341.784512280] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392341.423 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392342.032164354] [controller_server]: Passing new path to controller.
+[INFO] [1733392343.082169466] [controller_server]: Passing new path to controller.
+[INFO] [1733392344.132168947] [controller_server]: Passing new path to controller.
+[INFO] [1733392344.784757315] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392344.412 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392344.984577060] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392344.616 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392345.182174893] [controller_server]: Passing new path to controller.
+[INFO] [1733392346.182173339] [controller_server]: Passing new path to controller.
+[INFO] [1733392347.232174710] [controller_server]: Passing new path to controller.
+[INFO] [1733392348.232164311] [controller_server]: Passing new path to controller.
+[INFO] [1733392349.282165520] [controller_server]: Passing new path to controller.
+[INFO] [1733392350.332175172] [controller_server]: Passing new path to controller.
+[INFO] [1733392351.332170840] [controller_server]: Passing new path to controller.
+[INFO] [1733392352.382168405] [controller_server]: Passing new path to controller.
+[INFO] [1733392353.382165949] [controller_server]: Passing new path to controller.
+[INFO] [1733392354.432172227] [controller_server]: Passing new path to controller.
+[INFO] [1733392355.482173478] [controller_server]: Passing new path to controller.
+[INFO] [1733392356.482161922] [controller_server]: Passing new path to controller.
+[INFO] [1733392357.532186381] [controller_server]: Passing new path to controller.
+[INFO] [1733392358.532169328] [controller_server]: Passing new path to controller.
+[INFO] [1733392359.582173747] [controller_server]: Passing new path to controller.
+[INFO] [1733392359.584485806] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392359.201 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392359.784587372] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392359.401 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392359.984471000] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392359.616 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392360.632172783] [controller_server]: Passing new path to controller.
+[INFO] [1733392361.632165977] [controller_server]: Passing new path to controller.
+[INFO] [1733392362.682184212] [controller_server]: Passing new path to controller.
+[INFO] [1733392363.682166379] [controller_server]: Passing new path to controller.
+[INFO] [1733392364.732165633] [controller_server]: Passing new path to controller.
+[INFO] [1733392365.782170583] [controller_server]: Passing new path to controller.
+[INFO] [1733392366.782176094] [controller_server]: Passing new path to controller.
+[INFO] [1733392367.832163756] [controller_server]: Passing new path to controller.
+[INFO] [1733392368.832173296] [controller_server]: Passing new path to controller.
+[WARN] [1733392369.235326869] [local_costmap.local_costmap]: Sensor origin at (-2.45, 5.49 0.60) is out of map bounds (-3.75, 4.00, -0.20) to (-0.77, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392369.435323511] [local_costmap.local_costmap]: Sensor origin at (-2.50, 5.49 0.61) is out of map bounds (-3.85, 4.00, -0.20) to (-0.87, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392369.635324501] [local_costmap.local_costmap]: Sensor origin at (-2.55, 5.48 0.62) is out of map bounds (-3.90, 4.00, -0.20) to (-0.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392369.835322579] [local_costmap.local_costmap]: Sensor origin at (-2.61, 5.48 0.62) is out of map bounds (-3.95, 4.00, -0.20) to (-0.97, 6.97, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392369.882174259] [controller_server]: Passing new path to controller.
+[WARN] [1733392370.035322650] [local_costmap.local_costmap]: Sensor origin at (-2.66, 5.47 0.63) is out of map bounds (-4.00, 4.00, -0.20) to (-1.02, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392370.235964385] [local_costmap.local_costmap]: Sensor origin at (-2.66, 5.47 0.63) is out of map bounds (-4.05, 4.00, -0.20) to (-1.07, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392370.435329120] [local_costmap.local_costmap]: Sensor origin at (-2.77, 5.47 0.64) is out of map bounds (-4.10, 4.00, -0.20) to (-1.12, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392370.635325604] [local_costmap.local_costmap]: Sensor origin at (-2.82, 5.47 0.64) is out of map bounds (-4.20, 4.00, -0.20) to (-1.22, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392370.835321151] [local_costmap.local_costmap]: Sensor origin at (-2.82, 5.47 0.64) is out of map bounds (-4.20, 4.00, -0.20) to (-1.22, 6.97, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392370.932173667] [controller_server]: Passing new path to controller.
+[WARN] [1733392371.035315667] [local_costmap.local_costmap]: Sensor origin at (-2.88, 5.48 0.65) is out of map bounds (-4.25, 4.00, -0.20) to (-1.27, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392371.235316600] [local_costmap.local_costmap]: Sensor origin at (-2.97, 5.50 0.66) is out of map bounds (-4.30, 4.00, -0.20) to (-1.32, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392371.435319832] [local_costmap.local_costmap]: Sensor origin at (-3.02, 5.51 0.66) is out of map bounds (-4.35, 4.00, -0.20) to (-1.37, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392371.635325913] [local_costmap.local_costmap]: Sensor origin at (-3.08, 5.52 0.67) is out of map bounds (-4.40, 4.00, -0.20) to (-1.42, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392371.835326727] [local_costmap.local_costmap]: Sensor origin at (-3.13, 5.52 0.67) is out of map bounds (-4.45, 4.00, -0.20) to (-1.47, 6.97, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392371.932173219] [controller_server]: Passing new path to controller.
+[WARN] [1733392372.035322684] [local_costmap.local_costmap]: Sensor origin at (-3.18, 5.52 0.68) is out of map bounds (-4.50, 4.00, -0.20) to (-1.52, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392372.235302980] [local_costmap.local_costmap]: Sensor origin at (-3.24, 5.53 0.68) is out of map bounds (-4.60, 4.00, -0.20) to (-1.62, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392372.435299531] [local_costmap.local_costmap]: Sensor origin at (-3.24, 5.53 0.68) is out of map bounds (-4.65, 4.00, -0.20) to (-1.67, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392372.637558078] [local_costmap.local_costmap]: Sensor origin at (-3.34, 5.53 0.70) is out of map bounds (-4.70, 4.00, -0.20) to (-1.72, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392372.835319996] [local_costmap.local_costmap]: Sensor origin at (-3.34, 5.53 0.70) is out of map bounds (-4.70, 4.00, -0.20) to (-1.72, 6.97, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392372.982176235] [controller_server]: Passing new path to controller.
+[WARN] [1733392373.035318232] [local_costmap.local_costmap]: Sensor origin at (-3.39, 5.54 0.70) is out of map bounds (-4.75, 4.00, -0.20) to (-1.77, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392373.235354316] [local_costmap.local_costmap]: Sensor origin at (-3.49, 5.55 0.71) is out of map bounds (-4.80, 4.00, -0.20) to (-1.82, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392373.435306675] [local_costmap.local_costmap]: Sensor origin at (-3.54, 5.55 0.71) is out of map bounds (-4.85, 4.00, -0.20) to (-1.87, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392373.635312590] [local_costmap.local_costmap]: Sensor origin at (-3.57, 5.55 0.72) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392373.835326675] [local_costmap.local_costmap]: Sensor origin at (-3.59, 5.56 0.72) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392373.982186511] [controller_server]: Passing new path to controller.
+[WARN] [1733392374.035813376] [local_costmap.local_costmap]: Sensor origin at (-3.59, 5.57 0.72) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392374.235311292] [local_costmap.local_costmap]: Sensor origin at (-3.57, 5.59 0.72) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392374.435343594] [local_costmap.local_costmap]: Sensor origin at (-3.54, 5.61 0.72) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392374.635603700] [local_costmap.local_costmap]: Sensor origin at (-3.54, 5.61 0.72) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392374.836144913] [local_costmap.local_costmap]: Sensor origin at (-3.51, 5.64 0.71) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392375.032167548] [controller_server]: Passing new path to controller.
+[WARN] [1733392375.035299720] [local_costmap.local_costmap]: Sensor origin at (-3.47, 5.67 0.71) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392375.235507501] [local_costmap.local_costmap]: Sensor origin at (-3.45, 5.67 0.71) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392375.435321754] [local_costmap.local_costmap]: Sensor origin at (-3.42, 5.67 0.70) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392375.635433508] [local_costmap.local_costmap]: Sensor origin at (-3.38, 5.67 0.70) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392375.835305653] [local_costmap.local_costmap]: Sensor origin at (-3.36, 5.67 0.70) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392376.035331371] [local_costmap.local_costmap]: Sensor origin at (-3.34, 5.67 0.70) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392376.082197284] [controller_server]: Passing new path to controller.
+[WARN] [1733392376.235317779] [local_costmap.local_costmap]: Sensor origin at (-3.34, 5.67 0.70) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392376.435314833] [local_costmap.local_costmap]: Sensor origin at (-3.32, 5.65 0.70) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392376.635315122] [local_costmap.local_costmap]: Sensor origin at (-3.30, 5.63 0.69) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392376.835330806] [local_costmap.local_costmap]: Sensor origin at (-3.30, 5.63 0.69) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392377.035301363] [local_costmap.local_costmap]: Sensor origin at (-3.29, 5.61 0.69) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392377.082168145] [controller_server]: Passing new path to controller.
+[WARN] [1733392377.235680677] [local_costmap.local_costmap]: Sensor origin at (-3.29, 5.61 0.69) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392377.435327070] [local_costmap.local_costmap]: Sensor origin at (-3.28, 5.60 0.69) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392377.635310297] [local_costmap.local_costmap]: Sensor origin at (-3.28, 5.60 0.69) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392377.784749823] [controller_server]: Reached the goal!
+[WARN] [1733392377.835339614] [local_costmap.local_costmap]: Sensor origin at (-3.28, 5.60 0.69) is out of map bounds (-4.90, 4.00, -0.20) to (-1.92, 6.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392378.035322218] [local_costmap.local_costmap]: Sensor origin at (-3.28, 5.59 0.69) is out of map bounds (-4.90, 4.05, -0.20) to (-1.92, 7.02, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392378.074703769] [controller_server]: Received a goal, begin computing control effort.
+[WARN] [1733392378.235323222] [local_costmap.local_costmap]: Sensor origin at (-3.28, 5.59 0.69) is out of map bounds (-4.90, 4.05, -0.20) to (-1.92, 7.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392378.435304024] [local_costmap.local_costmap]: Sensor origin at (-3.27, 5.60 0.69) is out of map bounds (-4.90, 4.05, -0.20) to (-1.92, 7.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392378.635317940] [local_costmap.local_costmap]: Sensor origin at (-3.27, 5.60 0.69) is out of map bounds (-4.90, 4.05, -0.20) to (-1.92, 7.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392378.835309140] [local_costmap.local_costmap]: Sensor origin at (-3.26, 5.60 0.69) is out of map bounds (-4.90, 4.05, -0.20) to (-1.92, 7.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392379.035317724] [local_costmap.local_costmap]: Sensor origin at (-3.23, 5.61 0.69) is out of map bounds (-4.90, 4.05, -0.20) to (-1.92, 7.02, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392379.125021420] [controller_server]: Passing new path to controller.
+[WARN] [1733392379.235320835] [local_costmap.local_costmap]: Sensor origin at (-3.19, 5.63 0.68) is out of map bounds (-4.80, 4.10, -0.20) to (-1.82, 7.07, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392379.435302883] [local_costmap.local_costmap]: Sensor origin at (-3.19, 5.63 0.68) is out of map bounds (-4.80, 4.10, -0.20) to (-1.82, 7.07, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392379.635323477] [local_costmap.local_costmap]: Sensor origin at (-3.07, 5.65 0.67) is out of map bounds (-4.75, 4.10, -0.20) to (-1.77, 7.07, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392379.835327944] [local_costmap.local_costmap]: Sensor origin at (-3.02, 5.66 0.66) is out of map bounds (-4.70, 4.15, -0.20) to (-1.72, 7.12, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392380.035340873] [local_costmap.local_costmap]: Sensor origin at (-2.96, 5.68 0.65) is out of map bounds (-4.60, 4.15, -0.20) to (-1.62, 7.12, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392380.175021441] [controller_server]: Passing new path to controller.
+[WARN] [1733392380.235318750] [local_costmap.local_costmap]: Sensor origin at (-2.96, 5.68 0.65) is out of map bounds (-4.60, 4.15, -0.20) to (-1.62, 7.12, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392380.384546931] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392380.022 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392380.435303383] [local_costmap.local_costmap]: Sensor origin at (-2.96, 5.68 0.65) is out of map bounds (-4.60, 4.15, -0.20) to (-1.62, 7.12, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392380.584643753] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392380.212 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392380.635304533] [local_costmap.local_costmap]: Sensor origin at (-2.96, 5.68 0.65) is out of map bounds (-4.60, 4.15, -0.20) to (-1.62, 7.12, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392380.784663211] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392380.416 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392380.835310650] [local_costmap.local_costmap]: Sensor origin at (-2.96, 5.68 0.65) is out of map bounds (-4.55, 4.15, -0.20) to (-1.57, 7.12, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392380.984553213] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392380.614 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392381.035322194] [local_costmap.local_costmap]: Sensor origin at (-2.96, 5.68 0.65) is out of map bounds (-4.55, 4.15, -0.20) to (-1.57, 7.12, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392381.175018973] [controller_server]: Passing new path to controller.
+[WARN] [1733392381.235309070] [local_costmap.local_costmap]: Sensor origin at (-2.70, 5.79 0.63) is out of map bounds (-4.35, 4.25, -0.20) to (-1.37, 7.22, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392381.435302337] [local_costmap.local_costmap]: Sensor origin at (-2.62, 5.81 0.62) is out of map bounds (-4.30, 4.25, -0.20) to (-1.32, 7.22, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392381.635320833] [local_costmap.local_costmap]: Sensor origin at (-2.57, 5.83 0.62) is out of map bounds (-4.25, 4.30, -0.20) to (-1.27, 7.27, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392381.835326755] [local_costmap.local_costmap]: Sensor origin at (-2.51, 5.83 0.61) is out of map bounds (-4.15, 4.30, -0.20) to (-1.17, 7.27, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392382.035325103] [local_costmap.local_costmap]: Sensor origin at (-2.46, 5.82 0.61) is out of map bounds (-4.10, 4.30, -0.20) to (-1.12, 7.27, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392382.225044713] [controller_server]: Passing new path to controller.
+[WARN] [1733392382.235319855] [local_costmap.local_costmap]: Sensor origin at (-2.41, 5.81 0.60) is out of map bounds (-4.05, 4.30, -0.20) to (-1.07, 7.27, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392383.225031242] [controller_server]: Passing new path to controller.
+[INFO] [1733392384.275027253] [controller_server]: Passing new path to controller.
+[INFO] [1733392385.325022073] [controller_server]: Passing new path to controller.
+[INFO] [1733392386.325020404] [controller_server]: Passing new path to controller.
+[INFO] [1733392387.375023380] [controller_server]: Passing new path to controller.
+[INFO] [1733392388.375116721] [controller_server]: Passing new path to controller.
+[INFO] [1733392389.425016929] [controller_server]: Passing new path to controller.
+[INFO] [1733392390.475025891] [controller_server]: Passing new path to controller.
+[INFO] [1733392391.475017423] [controller_server]: Passing new path to controller.
+[INFO] [1733392392.525020784] [controller_server]: Passing new path to controller.
+[INFO] [1733392393.525019095] [controller_server]: Passing new path to controller.
+[INFO] [1733392394.575027183] [controller_server]: Passing new path to controller.
+[INFO] [1733392395.625025428] [controller_server]: Passing new path to controller.
+[INFO] [1733392396.625019741] [controller_server]: Passing new path to controller.
+[INFO] [1733392397.675023153] [controller_server]: Passing new path to controller.
+[INFO] [1733392398.675032875] [controller_server]: Passing new path to controller.
+[INFO] [1733392399.725029860] [controller_server]: Passing new path to controller.
+[INFO] [1733392400.775028726] [controller_server]: Passing new path to controller.
+[INFO] [1733392401.775031116] [controller_server]: Passing new path to controller.
+[INFO] [1733392402.825032070] [controller_server]: Passing new path to controller.
+[INFO] [1733392403.825015193] [controller_server]: Passing new path to controller.
+[INFO] [1733392404.875024973] [controller_server]: Passing new path to controller.
+[INFO] [1733392405.925024607] [controller_server]: Passing new path to controller.
+[INFO] [1733392406.925018395] [controller_server]: Passing new path to controller.
+[INFO] [1733392407.975026614] [controller_server]: Passing new path to controller.
+[INFO] [1733392408.975023391] [controller_server]: Passing new path to controller.
+[INFO] [1733392410.025021205] [controller_server]: Passing new path to controller.
+[INFO] [1733392411.075035196] [controller_server]: Passing new path to controller.
+[INFO] [1733392412.075026522] [controller_server]: Passing new path to controller.
+[INFO] [1733392413.125029294] [controller_server]: Passing new path to controller.
+[INFO] [1733392414.125019719] [controller_server]: Passing new path to controller.
+[INFO] [1733392415.175018354] [controller_server]: Passing new path to controller.
+[INFO] [1733392416.225015676] [controller_server]: Passing new path to controller.
+[INFO] [1733392416.384605751] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392415.999 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392416.584675924] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392416.200 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392416.784684860] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392416.400 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392416.984675137] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392416.608 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392417.275025427] [controller_server]: Passing new path to controller.
+[INFO] [1733392418.325016993] [controller_server]: Passing new path to controller.
+[INFO] [1733392419.325014940] [controller_server]: Passing new path to controller.
+[INFO] [1733392420.375022483] [controller_server]: Passing new path to controller.
+[INFO] [1733392421.425016455] [controller_server]: Passing new path to controller.
+[INFO] [1733392422.384622855] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392422.010 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392422.475036836] [controller_server]: Passing new path to controller.
+[INFO] [1733392422.584745846] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392422.210 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392422.784682682] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392422.410 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392423.525016569] [controller_server]: Passing new path to controller.
+[INFO] [1733392424.525016486] [controller_server]: Passing new path to controller.
+[INFO] [1733392425.575018832] [controller_server]: Passing new path to controller.
+[INFO] [1733392426.625018113] [controller_server]: Passing new path to controller.
+[INFO] [1733392427.675025969] [controller_server]: Passing new path to controller.
+[INFO] [1733392428.675035191] [controller_server]: Passing new path to controller.
+[INFO] [1733392429.725019375] [controller_server]: Passing new path to controller.
+[INFO] [1733392430.775034168] [controller_server]: Passing new path to controller.
+[INFO] [1733392431.775023428] [controller_server]: Passing new path to controller.
+[INFO] [1733392432.825020771] [controller_server]: Passing new path to controller.
+[INFO] [1733392433.875027464] [controller_server]: Passing new path to controller.
+[INFO] [1733392434.875019247] [controller_server]: Passing new path to controller.
+[INFO] [1733392435.925042185] [controller_server]: Passing new path to controller.
+[INFO] [1733392436.975021146] [controller_server]: Passing new path to controller.
+[INFO] [1733392437.975025883] [controller_server]: Passing new path to controller.
+[INFO] [1733392439.025034474] [controller_server]: Passing new path to controller.
+[INFO] [1733392440.075022525] [controller_server]: Passing new path to controller.
+[INFO] [1733392441.075029324] [controller_server]: Passing new path to controller.
+[INFO] [1733392442.125019500] [controller_server]: Passing new path to controller.
+[INFO] [1733392443.125015804] [controller_server]: Passing new path to controller.
+[INFO] [1733392444.175021876] [controller_server]: Passing new path to controller.
+[INFO] [1733392445.225023497] [controller_server]: Passing new path to controller.
+[INFO] [1733392446.225025037] [controller_server]: Passing new path to controller.
+[INFO] [1733392447.275024629] [controller_server]: Passing new path to controller.
+[INFO] [1733392448.275025392] [controller_server]: Passing new path to controller.
+[INFO] [1733392449.325044988] [controller_server]: Passing new path to controller.
+[INFO] [1733392450.375025075] [controller_server]: Passing new path to controller.
+[INFO] [1733392451.375029279] [controller_server]: Passing new path to controller.
+[INFO] [1733392452.425019583] [controller_server]: Passing new path to controller.
+[INFO] [1733392452.784575271] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392452.409 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392452.984622321] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392452.610 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392453.425028765] [controller_server]: Passing new path to controller.
+[INFO] [1733392454.475106431] [controller_server]: Passing new path to controller.
+[INFO] [1733392455.384554189] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392454.999 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392455.525021290] [controller_server]: Passing new path to controller.
+[INFO] [1733392455.584568902] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392455.199 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392455.784521576] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392455.407 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392456.525025866] [controller_server]: Passing new path to controller.
+[INFO] [1733392457.575021134] [controller_server]: Passing new path to controller.
+[INFO] [1733392458.575025539] [controller_server]: Passing new path to controller.
+[INFO] [1733392459.625019429] [controller_server]: Passing new path to controller.
+[INFO] [1733392460.675019412] [controller_server]: Passing new path to controller.
+[INFO] [1733392461.675022396] [controller_server]: Passing new path to controller.
+[INFO] [1733392462.725025081] [controller_server]: Passing new path to controller.
+[WARN] [1733392462.835351977] [local_costmap.local_costmap]: Sensor origin at (5.62, 2.66 -0.20) is out of map bounds (3.95, 1.25, -0.20) to (6.92, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392463.035314822] [local_costmap.local_costmap]: Sensor origin at (5.68, 2.66 -0.21) is out of map bounds (4.00, 1.25, -0.20) to (6.97, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392463.235324919] [local_costmap.local_costmap]: Sensor origin at (5.73, 2.66 -0.21) is out of map bounds (4.05, 1.25, -0.20) to (7.02, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392463.435317984] [local_costmap.local_costmap]: Sensor origin at (5.78, 2.66 -0.22) is out of map bounds (4.15, 1.20, -0.20) to (7.12, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392463.635321079] [local_costmap.local_costmap]: Sensor origin at (5.83, 2.66 -0.22) is out of map bounds (4.20, 1.20, -0.20) to (7.17, 4.18, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392463.725029631] [controller_server]: Passing new path to controller.
+[WARN] [1733392463.835332374] [local_costmap.local_costmap]: Sensor origin at (5.89, 2.66 -0.23) is out of map bounds (4.25, 1.20, -0.20) to (7.22, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392464.035334413] [local_costmap.local_costmap]: Sensor origin at (5.94, 2.67 -0.23) is out of map bounds (4.30, 1.20, -0.20) to (7.27, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392464.235302213] [local_costmap.local_costmap]: Sensor origin at (5.99, 2.67 -0.24) is out of map bounds (4.35, 1.20, -0.20) to (7.32, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392464.435327891] [local_costmap.local_costmap]: Sensor origin at (5.99, 2.67 -0.24) is out of map bounds (4.35, 1.20, -0.20) to (7.32, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392464.635325485] [local_costmap.local_costmap]: Sensor origin at (6.04, 2.66 -0.24) is out of map bounds (4.40, 1.20, -0.20) to (7.37, 4.18, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392464.775028966] [controller_server]: Passing new path to controller.
+[WARN] [1733392464.835325041] [local_costmap.local_costmap]: Sensor origin at (6.15, 2.64 -0.26) is out of map bounds (4.50, 1.20, -0.20) to (7.47, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392465.035321729] [local_costmap.local_costmap]: Sensor origin at (6.20, 2.62 -0.26) is out of map bounds (4.55, 1.20, -0.20) to (7.52, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392465.235303971] [local_costmap.local_costmap]: Sensor origin at (6.25, 2.60 -0.27) is out of map bounds (4.60, 1.20, -0.20) to (7.57, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392465.435324713] [local_costmap.local_costmap]: Sensor origin at (6.30, 2.58 -0.27) is out of map bounds (4.65, 1.15, -0.20) to (7.62, 4.13, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392465.635337926] [local_costmap.local_costmap]: Sensor origin at (6.34, 2.56 -0.28) is out of map bounds (4.70, 1.15, -0.20) to (7.67, 4.13, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392465.825025168] [controller_server]: Passing new path to controller.
+[WARN] [1733392465.835327213] [local_costmap.local_costmap]: Sensor origin at (6.40, 2.54 -0.28) is out of map bounds (4.75, 1.15, -0.20) to (7.72, 4.13, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392466.035328072] [local_costmap.local_costmap]: Sensor origin at (6.44, 2.52 -0.28) is out of map bounds (4.80, 1.10, -0.20) to (7.77, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392466.235305119] [local_costmap.local_costmap]: Sensor origin at (6.44, 2.52 -0.28) is out of map bounds (4.80, 1.10, -0.20) to (7.77, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392466.435325201] [local_costmap.local_costmap]: Sensor origin at (6.49, 2.51 -0.29) is out of map bounds (4.85, 1.10, -0.20) to (7.82, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392466.635326460] [local_costmap.local_costmap]: Sensor origin at (6.59, 2.49 -0.30) is out of map bounds (4.95, 1.05, -0.20) to (7.92, 4.03, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392466.825025685] [controller_server]: Passing new path to controller.
+[WARN] [1733392466.835331991] [local_costmap.local_costmap]: Sensor origin at (6.65, 2.50 -0.30) is out of map bounds (5.00, 1.05, -0.20) to (7.97, 4.03, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392467.035303128] [local_costmap.local_costmap]: Sensor origin at (6.71, 2.50 -0.31) is out of map bounds (5.05, 1.05, -0.20) to (8.02, 4.03, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392467.235300962] [local_costmap.local_costmap]: Sensor origin at (6.77, 2.51 -0.32) is out of map bounds (5.10, 1.05, -0.20) to (8.07, 4.03, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392467.435323382] [local_costmap.local_costmap]: Sensor origin at (6.82, 2.53 -0.32) is out of map bounds (5.15, 1.05, -0.20) to (8.12, 4.03, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392467.635322695] [local_costmap.local_costmap]: Sensor origin at (6.88, 2.54 -0.33) is out of map bounds (5.25, 1.05, -0.20) to (8.22, 4.03, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392467.835331550] [local_costmap.local_costmap]: Sensor origin at (6.88, 2.54 -0.33) is out of map bounds (5.25, 1.05, -0.20) to (8.22, 4.03, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392467.875030735] [controller_server]: Passing new path to controller.
+[WARN] [1733392468.035329371] [local_costmap.local_costmap]: Sensor origin at (6.93, 2.56 -0.33) is out of map bounds (5.30, 1.05, -0.20) to (8.27, 4.03, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392468.235297295] [local_costmap.local_costmap]: Sensor origin at (7.02, 2.58 -0.34) is out of map bounds (5.35, 1.05, -0.20) to (8.32, 4.03, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392468.435314726] [local_costmap.local_costmap]: Sensor origin at (7.08, 2.59 -0.35) is out of map bounds (5.40, 1.05, -0.20) to (8.37, 4.03, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392468.635325106] [local_costmap.local_costmap]: Sensor origin at (7.13, 2.60 -0.35) is out of map bounds (5.45, 1.10, -0.20) to (8.42, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392468.835332438] [local_costmap.local_costmap]: Sensor origin at (7.18, 2.61 -0.36) is out of map bounds (5.55, 1.10, -0.20) to (8.52, 4.08, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392468.925026173] [controller_server]: Passing new path to controller.
+[WARN] [1733392469.035312938] [local_costmap.local_costmap]: Sensor origin at (7.23, 2.61 -0.36) is out of map bounds (5.60, 1.10, -0.20) to (8.57, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392469.235304209] [local_costmap.local_costmap]: Sensor origin at (7.23, 2.61 -0.36) is out of map bounds (5.60, 1.10, -0.20) to (8.57, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392469.435309585] [local_costmap.local_costmap]: Sensor origin at (7.33, 2.61 -0.38) is out of map bounds (5.65, 1.10, -0.20) to (8.62, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392469.635306139] [local_costmap.local_costmap]: Sensor origin at (7.38, 2.61 -0.38) is out of map bounds (5.70, 1.10, -0.20) to (8.67, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392469.835305301] [local_costmap.local_costmap]: Sensor origin at (7.44, 2.61 -0.39) is out of map bounds (5.80, 1.10, -0.20) to (8.77, 4.08, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392469.925028954] [controller_server]: Passing new path to controller.
+[WARN] [1733392470.035314624] [local_costmap.local_costmap]: Sensor origin at (7.49, 2.61 -0.39) is out of map bounds (5.85, 1.10, -0.20) to (8.82, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392470.235324830] [local_costmap.local_costmap]: Sensor origin at (7.54, 2.61 -0.40) is out of map bounds (5.90, 1.10, -0.20) to (8.87, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392470.435309186] [local_costmap.local_costmap]: Sensor origin at (7.61, 2.61 -0.40) is out of map bounds (5.95, 1.10, -0.20) to (8.92, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392470.635306089] [local_costmap.local_costmap]: Sensor origin at (7.61, 2.61 -0.40) is out of map bounds (5.95, 1.10, -0.20) to (8.92, 4.08, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392470.784545788] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392470.421 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392470.835324607] [local_costmap.local_costmap]: Sensor origin at (7.61, 2.61 -0.40) is out of map bounds (5.95, 1.10, -0.20) to (8.92, 4.08, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392470.975025705] [controller_server]: Passing new path to controller.
+[INFO] [1733392470.984480726] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392470.608 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392471.035301435] [local_costmap.local_costmap]: Sensor origin at (7.70, 2.63 -0.41) is out of map bounds (6.00, 1.10, -0.20) to (8.97, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392471.235332950] [local_costmap.local_costmap]: Sensor origin at (7.76, 2.64 -0.42) is out of map bounds (6.15, 1.15, -0.20) to (9.12, 4.13, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392471.435305740] [local_costmap.local_costmap]: Sensor origin at (7.76, 2.64 -0.42) is out of map bounds (6.15, 1.15, -0.20) to (9.12, 4.13, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392471.635311208] [local_costmap.local_costmap]: Sensor origin at (7.85, 2.66 -0.43) is out of map bounds (6.25, 1.15, -0.20) to (9.22, 4.13, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392471.835304513] [local_costmap.local_costmap]: Sensor origin at (7.96, 2.68 -0.44) is out of map bounds (6.30, 1.15, -0.20) to (9.27, 4.13, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392472.025021540] [controller_server]: Passing new path to controller.
+[WARN] [1733392472.035332185] [local_costmap.local_costmap]: Sensor origin at (8.01, 2.69 -0.44) is out of map bounds (6.35, 1.15, -0.20) to (9.32, 4.13, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392472.235309145] [local_costmap.local_costmap]: Sensor origin at (8.07, 2.69 -0.45) is out of map bounds (6.40, 1.20, -0.20) to (9.37, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392472.435317951] [local_costmap.local_costmap]: Sensor origin at (8.07, 2.69 -0.45) is out of map bounds (6.40, 1.20, -0.20) to (9.37, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392472.635326804] [local_costmap.local_costmap]: Sensor origin at (8.12, 2.70 -0.45) is out of map bounds (6.45, 1.20, -0.20) to (9.42, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392472.835323884] [local_costmap.local_costmap]: Sensor origin at (8.22, 2.71 -0.46) is out of map bounds (6.55, 1.20, -0.20) to (9.52, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392473.035326235] [local_costmap.local_costmap]: Sensor origin at (8.27, 2.72 -0.47) is out of map bounds (6.60, 1.20, -0.20) to (9.57, 4.18, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392473.075026834] [controller_server]: Passing new path to controller.
+[WARN] [1733392473.235332258] [local_costmap.local_costmap]: Sensor origin at (8.32, 2.73 -0.47) is out of map bounds (6.65, 1.20, -0.20) to (9.62, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392473.435330769] [local_costmap.local_costmap]: Sensor origin at (8.32, 2.73 -0.47) is out of map bounds (6.65, 1.20, -0.20) to (9.62, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392473.635321434] [local_costmap.local_costmap]: Sensor origin at (8.36, 2.73 -0.47) is out of map bounds (6.75, 1.20, -0.20) to (9.72, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392473.835323129] [local_costmap.local_costmap]: Sensor origin at (8.48, 2.75 -0.49) is out of map bounds (6.80, 1.25, -0.20) to (9.77, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392474.035324458] [local_costmap.local_costmap]: Sensor origin at (8.54, 2.76 -0.49) is out of map bounds (6.90, 1.25, -0.20) to (9.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392474.075017526] [controller_server]: Passing new path to controller.
+[WARN] [1733392474.235322835] [local_costmap.local_costmap]: Sensor origin at (8.60, 2.78 -0.50) is out of map bounds (6.95, 1.25, -0.20) to (9.92, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392474.435350022] [local_costmap.local_costmap]: Sensor origin at (8.65, 2.78 -0.50) is out of map bounds (7.00, 1.25, -0.20) to (9.97, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392474.635318852] [local_costmap.local_costmap]: Sensor origin at (8.70, 2.78 -0.51) is out of map bounds (7.05, 1.25, -0.20) to (10.02, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392474.835311775] [local_costmap.local_costmap]: Sensor origin at (8.76, 2.77 -0.51) is out of map bounds (7.10, 1.25, -0.20) to (10.07, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392475.035343182] [local_costmap.local_costmap]: Sensor origin at (8.76, 2.77 -0.51) is out of map bounds (7.10, 1.25, -0.20) to (10.07, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392475.125025424] [controller_server]: Passing new path to controller.
+[WARN] [1733392475.235336446] [local_costmap.local_costmap]: Sensor origin at (8.80, 2.78 -0.52) is out of map bounds (7.15, 1.25, -0.20) to (10.12, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392475.435325609] [local_costmap.local_costmap]: Sensor origin at (8.90, 2.77 -0.53) is out of map bounds (7.20, 1.25, -0.20) to (10.17, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392475.635326139] [local_costmap.local_costmap]: Sensor origin at (8.94, 2.76 -0.53) is out of map bounds (7.30, 1.25, -0.20) to (10.27, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392475.835346566] [local_costmap.local_costmap]: Sensor origin at (9.00, 2.75 -0.54) is out of map bounds (7.35, 1.25, -0.20) to (10.32, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392476.035328710] [local_costmap.local_costmap]: Sensor origin at (9.05, 2.75 -0.55) is out of map bounds (7.40, 1.25, -0.20) to (10.37, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392476.175024880] [controller_server]: Passing new path to controller.
+[WARN] [1733392476.235330160] [local_costmap.local_costmap]: Sensor origin at (9.05, 2.75 -0.55) is out of map bounds (7.40, 1.25, -0.20) to (10.37, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392476.435313364] [local_costmap.local_costmap]: Sensor origin at (9.10, 2.75 -0.55) is out of map bounds (7.50, 1.25, -0.20) to (10.47, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392476.635306554] [local_costmap.local_costmap]: Sensor origin at (9.21, 2.75 -0.56) is out of map bounds (7.55, 1.25, -0.20) to (10.52, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392476.835329238] [local_costmap.local_costmap]: Sensor origin at (9.25, 2.75 -0.56) is out of map bounds (7.60, 1.25, -0.20) to (10.57, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392477.035306550] [local_costmap.local_costmap]: Sensor origin at (9.25, 2.75 -0.56) is out of map bounds (7.60, 1.25, -0.20) to (10.57, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392477.225032017] [controller_server]: Passing new path to controller.
+[WARN] [1733392477.235323272] [local_costmap.local_costmap]: Sensor origin at (9.31, 2.76 -0.57) is out of map bounds (7.70, 1.25, -0.20) to (10.67, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392477.435320275] [local_costmap.local_costmap]: Sensor origin at (9.41, 2.75 -0.58) is out of map bounds (7.75, 1.25, -0.20) to (10.72, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392477.635334506] [local_costmap.local_costmap]: Sensor origin at (9.46, 2.75 -0.58) is out of map bounds (7.80, 1.25, -0.20) to (10.77, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392477.835342310] [local_costmap.local_costmap]: Sensor origin at (9.46, 2.75 -0.58) is out of map bounds (7.85, 1.25, -0.20) to (10.82, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392478.035326868] [local_costmap.local_costmap]: Sensor origin at (9.46, 2.75 -0.58) is out of map bounds (7.85, 1.25, -0.20) to (10.82, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392478.225019795] [controller_server]: Passing new path to controller.
+[WARN] [1733392478.235316765] [local_costmap.local_costmap]: Sensor origin at (9.55, 2.76 -0.59) is out of map bounds (7.90, 1.25, -0.20) to (10.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392478.435303972] [local_costmap.local_costmap]: Sensor origin at (9.56, 2.79 -0.59) is out of map bounds (7.90, 1.25, -0.20) to (10.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392478.635309714] [local_costmap.local_costmap]: Sensor origin at (9.54, 2.83 -0.59) is out of map bounds (7.90, 1.25, -0.20) to (10.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392478.835306495] [local_costmap.local_costmap]: Sensor origin at (9.52, 2.86 -0.59) is out of map bounds (7.90, 1.25, -0.20) to (10.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392479.035325024] [local_costmap.local_costmap]: Sensor origin at (9.52, 2.86 -0.59) is out of map bounds (7.90, 1.25, -0.20) to (10.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392479.184584358] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392478.809 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392479.235329349] [local_costmap.local_costmap]: Sensor origin at (9.52, 2.86 -0.59) is out of map bounds (7.90, 1.25, -0.20) to (10.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392479.275030524] [controller_server]: Passing new path to controller.
+[INFO] [1733392479.384494950] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392479.009 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392479.435314140] [local_costmap.local_costmap]: Sensor origin at (9.52, 2.86 -0.59) is out of map bounds (7.90, 1.25, -0.20) to (10.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392479.584664600] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392479.207 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392479.635335917] [local_costmap.local_costmap]: Sensor origin at (9.52, 2.86 -0.59) is out of map bounds (7.90, 1.25, -0.20) to (10.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392479.784511933] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392479.437 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392479.835324628] [local_costmap.local_costmap]: Sensor origin at (9.52, 2.86 -0.59) is out of map bounds (7.90, 1.25, -0.20) to (10.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392480.035332630] [local_costmap.local_costmap]: Sensor origin at (9.42, 2.97 -0.58) is out of map bounds (7.90, 1.30, -0.20) to (10.87, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392480.235332445] [local_costmap.local_costmap]: Sensor origin at (9.42, 2.97 -0.58) is out of map bounds (7.90, 1.30, -0.20) to (10.87, 4.28, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392480.275026566] [controller_server]: Passing new path to controller.
+[WARN] [1733392480.435307015] [local_costmap.local_costmap]: Sensor origin at (9.33, 2.97 -0.57) is out of map bounds (7.90, 1.30, -0.20) to (10.87, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392480.635310422] [local_costmap.local_costmap]: Sensor origin at (9.28, 2.98 -0.56) is out of map bounds (7.85, 1.35, -0.20) to (10.82, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392480.835329643] [local_costmap.local_costmap]: Sensor origin at (9.22, 3.01 -0.57) is out of map bounds (7.80, 1.40, -0.20) to (10.77, 4.38, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392481.035320277] [local_costmap.local_costmap]: Sensor origin at (9.19, 3.06 -0.56) is out of map bounds (7.80, 1.45, -0.20) to (10.77, 4.43, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392481.235320823] [local_costmap.local_costmap]: Sensor origin at (9.17, 3.11 -0.56) is out of map bounds (7.75, 1.50, -0.20) to (10.72, 4.48, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392481.325040589] [controller_server]: Passing new path to controller.
+[WARN] [1733392481.435340855] [local_costmap.local_costmap]: Sensor origin at (9.17, 3.11 -0.56) is out of map bounds (7.75, 1.50, -0.20) to (10.72, 4.48, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392481.635325456] [local_costmap.local_costmap]: Sensor origin at (9.11, 3.19 -0.55) is out of map bounds (7.70, 1.55, -0.20) to (10.67, 4.53, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392481.835327053] [local_costmap.local_costmap]: Sensor origin at (9.08, 3.23 -0.55) is out of map bounds (7.70, 1.60, -0.20) to (10.67, 4.58, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392482.035332776] [local_costmap.local_costmap]: Sensor origin at (9.08, 3.23 -0.55) is out of map bounds (7.65, 1.65, -0.20) to (10.62, 4.63, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392482.235304424] [local_costmap.local_costmap]: Sensor origin at (9.04, 3.29 -0.54) is out of map bounds (7.65, 1.65, -0.20) to (10.62, 4.63, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392482.375052016] [controller_server]: Passing new path to controller.
+[WARN] [1733392482.635330315] [local_costmap.local_costmap]: Sensor origin at (9.07, 3.29 -0.54) is out of map bounds (7.65, 1.65, -0.20) to (10.62, 4.63, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392482.835313433] [local_costmap.local_costmap]: Sensor origin at (9.11, 3.29 -0.55) is out of map bounds (7.65, 1.65, -0.20) to (10.62, 4.63, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392483.035331950] [local_costmap.local_costmap]: Sensor origin at (9.15, 3.30 -0.56) is out of map bounds (7.65, 1.65, -0.20) to (10.62, 4.63, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392483.235313472] [local_costmap.local_costmap]: Sensor origin at (9.15, 3.30 -0.56) is out of map bounds (7.65, 1.65, -0.20) to (10.62, 4.63, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392483.375039785] [controller_server]: Passing new path to controller.
+[WARN] [1733392483.435322924] [local_costmap.local_costmap]: Sensor origin at (9.15, 3.30 -0.56) is out of map bounds (7.65, 1.65, -0.20) to (10.62, 4.63, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392483.635321871] [local_costmap.local_costmap]: Sensor origin at (9.20, 3.29 -0.55) is out of map bounds (7.65, 1.65, -0.20) to (10.62, 4.63, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392483.835337563] [local_costmap.local_costmap]: Sensor origin at (9.20, 3.29 -0.55) is out of map bounds (7.65, 1.65, -0.20) to (10.62, 4.63, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392484.035338887] [local_costmap.local_costmap]: Sensor origin at (9.20, 3.29 -0.55) is out of map bounds (7.65, 1.65, -0.20) to (10.62, 4.63, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392484.235307216] [local_costmap.local_costmap]: Sensor origin at (9.26, 3.25 -0.57) is out of map bounds (7.65, 1.65, -0.20) to (10.62, 4.63, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392484.425018311] [controller_server]: Passing new path to controller.
+[WARN] [1733392484.435340505] [local_costmap.local_costmap]: Sensor origin at (9.27, 3.22 -0.56) is out of map bounds (7.65, 1.65, -0.20) to (10.62, 4.63, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392485.425018605] [controller_server]: Passing new path to controller.
+[ERROR] [1733392486.325105572] [controller_server]: Failed to make progress
+[WARN] [1733392486.325209191] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733392486.341825851] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733392486.343158074] [controller_server]: Received a goal, begin computing control effort.
+[WARN] [1733392486.445502654] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[INFO] [1733392486.497404204] [controller_server]: Passing new path to controller.
+[WARN] [1733392487.035320412] [local_costmap.local_costmap]: Sensor origin at (9.29, 3.25 -0.56) is out of map bounds (7.65, 1.75, -0.20) to (10.62, 4.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392487.235309430] [local_costmap.local_costmap]: Sensor origin at (9.28, 3.28 -0.56) is out of map bounds (7.65, 1.75, -0.20) to (10.62, 4.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392487.435336899] [local_costmap.local_costmap]: Sensor origin at (9.27, 3.31 -0.56) is out of map bounds (7.65, 1.75, -0.20) to (10.62, 4.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392487.495570384] [controller_server]: Passing new path to controller.
+[WARN] [1733392487.635328746] [local_costmap.local_costmap]: Sensor origin at (9.27, 3.34 -0.56) is out of map bounds (7.65, 1.75, -0.20) to (10.62, 4.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392487.835336800] [local_costmap.local_costmap]: Sensor origin at (9.27, 3.37 -0.56) is out of map bounds (7.65, 1.75, -0.20) to (10.62, 4.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392488.035332033] [local_costmap.local_costmap]: Sensor origin at (9.26, 3.40 -0.56) is out of map bounds (7.65, 1.75, -0.20) to (10.62, 4.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392488.545572230] [controller_server]: Passing new path to controller.
+[WARN] [1733392488.835346633] [local_costmap.local_costmap]: Sensor origin at (9.20, 3.60 -0.56) is out of map bounds (7.70, 1.95, -0.20) to (10.67, 4.93, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392489.035337243] [local_costmap.local_costmap]: Sensor origin at (9.20, 3.60 -0.56) is out of map bounds (7.70, 2.00, -0.20) to (10.67, 4.98, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392489.545567674] [controller_server]: Passing new path to controller.
+[WARN] [1733392490.035331762] [local_costmap.local_costmap]: Sensor origin at (9.09, 3.90 -0.55) is out of map bounds (7.65, 2.25, -0.20) to (10.62, 5.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392490.595570131] [controller_server]: Passing new path to controller.
+[INFO] [1733392491.645570925] [controller_server]: Passing new path to controller.
+[INFO] [1733392492.645570140] [controller_server]: Passing new path to controller.
+[INFO] [1733392493.695578369] [controller_server]: Passing new path to controller.
+[INFO] [1733392494.695569354] [controller_server]: Passing new path to controller.
+[INFO] [1733392495.745585180] [controller_server]: Passing new path to controller.
+[INFO] [1733392496.795574636] [controller_server]: Passing new path to controller.
+[INFO] [1733392497.795573750] [controller_server]: Passing new path to controller.
+[INFO] [1733392498.845578026] [controller_server]: Passing new path to controller.
+[INFO] [1733392499.845570150] [controller_server]: Passing new path to controller.
+[INFO] [1733392500.895569433] [controller_server]: Passing new path to controller.
+[WARN] [1733392501.035344267] [local_costmap.local_costmap]: Sensor origin at (8.75, 6.67 -0.51) is out of map bounds (7.20, 5.00, -0.20) to (10.17, 7.97, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392501.235360400] [local_costmap.local_costmap]: Sensor origin at (8.75, 6.70 -0.50) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392501.435360712] [local_costmap.local_costmap]: Sensor origin at (8.75, 6.72 -0.50) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392501.635336471] [local_costmap.local_costmap]: Sensor origin at (8.75, 6.72 -0.50) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392501.835336958] [local_costmap.local_costmap]: Sensor origin at (8.76, 6.72 -0.50) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392501.945569869] [controller_server]: Passing new path to controller.
+[WARN] [1733392502.035336401] [local_costmap.local_costmap]: Sensor origin at (8.79, 6.69 -0.51) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392502.235330306] [local_costmap.local_costmap]: Sensor origin at (8.83, 6.67 -0.51) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392502.435343517] [local_costmap.local_costmap]: Sensor origin at (8.84, 6.67 -0.51) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392502.635321724] [local_costmap.local_costmap]: Sensor origin at (8.84, 6.67 -0.51) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392502.835315098] [local_costmap.local_costmap]: Sensor origin at (8.84, 6.67 -0.51) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392502.945573466] [controller_server]: Passing new path to controller.
+[WARN] [1733392503.035352273] [local_costmap.local_costmap]: Sensor origin at (8.85, 6.65 -0.51) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392503.235319783] [local_costmap.local_costmap]: Sensor origin at (8.86, 6.63 -0.52) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392503.298631037] [controller_server]: Reached the goal!
+[WARN] [1733392503.435333152] [local_costmap.local_costmap]: Sensor origin at (8.87, 6.63 -0.51) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392503.568252979] [controller_server]: Received a goal, begin computing control effort.
+[WARN] [1733392503.635326745] [local_costmap.local_costmap]: Sensor origin at (8.87, 6.63 -0.51) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392503.835321288] [local_costmap.local_costmap]: Sensor origin at (8.87, 6.63 -0.51) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392504.035325065] [local_costmap.local_costmap]: Sensor origin at (8.87, 6.63 -0.51) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392504.235320703] [local_costmap.local_costmap]: Sensor origin at (8.87, 6.63 -0.51) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392504.435355800] [local_costmap.local_costmap]: Sensor origin at (8.87, 6.63 -0.51) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392504.618531862] [controller_server]: Passing new path to controller.
+[WARN] [1733392504.635324114] [local_costmap.local_costmap]: Sensor origin at (8.88, 6.63 -0.51) is out of map bounds (7.20, 5.05, -0.20) to (10.17, 8.02, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392504.835318989] [local_costmap.local_costmap]: Sensor origin at (8.93, 6.59 -0.52) is out of map bounds (7.25, 5.10, -0.20) to (10.22, 8.07, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392505.035327774] [local_costmap.local_costmap]: Sensor origin at (8.96, 6.56 -0.53) is out of map bounds (7.30, 5.10, -0.20) to (10.27, 8.07, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392505.235336326] [local_costmap.local_costmap]: Sensor origin at (8.98, 6.53 -0.53) is out of map bounds (7.35, 5.10, -0.20) to (10.32, 8.07, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392505.668566047] [controller_server]: Passing new path to controller.
+[INFO] [1733392505.984517798] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392505.615 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392506.184603834] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392505.836 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392506.668559561] [controller_server]: Passing new path to controller.
+[INFO] [1733392507.718555708] [controller_server]: Passing new path to controller.
+[INFO] [1733392508.768569935] [controller_server]: Passing new path to controller.
+[INFO] [1733392509.384605458] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392509.013 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392509.584493814] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392509.208 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392509.768571245] [controller_server]: Passing new path to controller.
+[INFO] [1733392509.784605114] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392509.409 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392509.984541813] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392509.605 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392510.818557073] [controller_server]: Passing new path to controller.
+[INFO] [1733392511.818561568] [controller_server]: Passing new path to controller.
+[INFO] [1733392512.868576209] [controller_server]: Passing new path to controller.
+[INFO] [1733392513.868560710] [controller_server]: Passing new path to controller.
+[INFO] [1733392514.918672980] [controller_server]: Passing new path to controller.
+[INFO] [1733392515.968562160] [controller_server]: Passing new path to controller.
+[WARN] [1733392516.835338568] [local_costmap.local_costmap]: Sensor origin at (8.99, 3.53 -0.54) is out of map bounds (7.45, 2.20, -0.20) to (10.42, 5.18, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392516.968567492] [controller_server]: Passing new path to controller.
+[WARN] [1733392517.035356470] [local_costmap.local_costmap]: Sensor origin at (9.00, 3.47 -0.54) is out of map bounds (7.45, 2.15, -0.20) to (10.42, 5.13, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392517.235319918] [local_costmap.local_costmap]: Sensor origin at (8.99, 3.42 -0.54) is out of map bounds (7.50, 2.10, -0.20) to (10.47, 5.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392517.435328861] [local_costmap.local_costmap]: Sensor origin at (9.00, 3.37 -0.54) is out of map bounds (7.50, 2.00, -0.20) to (10.47, 4.98, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392517.635325217] [local_costmap.local_costmap]: Sensor origin at (8.99, 3.31 -0.54) is out of map bounds (7.50, 1.95, -0.20) to (10.47, 4.93, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392517.835319755] [local_costmap.local_costmap]: Sensor origin at (8.99, 3.31 -0.54) is out of map bounds (7.50, 1.95, -0.20) to (10.47, 4.93, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392518.018555650] [controller_server]: Passing new path to controller.
+[WARN] [1733392518.035360411] [local_costmap.local_costmap]: Sensor origin at (9.00, 3.26 -0.54) is out of map bounds (7.50, 1.90, -0.20) to (10.47, 4.88, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392518.235379087] [local_costmap.local_costmap]: Sensor origin at (9.01, 3.17 -0.54) is out of map bounds (7.50, 1.85, -0.20) to (10.47, 4.83, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392518.435316192] [local_costmap.local_costmap]: Sensor origin at (9.02, 3.11 -0.54) is out of map bounds (7.50, 1.80, -0.20) to (10.47, 4.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392518.635339114] [local_costmap.local_costmap]: Sensor origin at (9.03, 3.05 -0.54) is out of map bounds (7.50, 1.75, -0.20) to (10.47, 4.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392518.835351205] [local_costmap.local_costmap]: Sensor origin at (9.05, 3.00 -0.54) is out of map bounds (7.50, 1.65, -0.20) to (10.47, 4.63, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392519.018570643] [controller_server]: Passing new path to controller.
+[WARN] [1733392519.035314386] [local_costmap.local_costmap]: Sensor origin at (9.07, 2.95 -0.54) is out of map bounds (7.55, 1.60, -0.20) to (10.52, 4.58, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392519.235357432] [local_costmap.local_costmap]: Sensor origin at (9.10, 2.90 -0.55) is out of map bounds (7.55, 1.55, -0.20) to (10.52, 4.53, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392519.435379744] [local_costmap.local_costmap]: Sensor origin at (9.13, 2.86 -0.55) is out of map bounds (7.55, 1.50, -0.20) to (10.52, 4.48, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392519.635337719] [local_costmap.local_costmap]: Sensor origin at (9.16, 2.82 -0.55) is out of map bounds (7.60, 1.45, -0.20) to (10.57, 4.43, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392519.835346153] [local_costmap.local_costmap]: Sensor origin at (9.21, 2.78 -0.56) is out of map bounds (7.65, 1.40, -0.20) to (10.62, 4.38, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392520.035328966] [local_costmap.local_costmap]: Sensor origin at (9.21, 2.78 -0.56) is out of map bounds (7.65, 1.40, -0.20) to (10.62, 4.38, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392520.068555836] [controller_server]: Passing new path to controller.
+[WARN] [1733392520.235318128] [local_costmap.local_costmap]: Sensor origin at (9.25, 2.74 -0.56) is out of map bounds (7.65, 1.40, -0.20) to (10.62, 4.38, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392520.435360414] [local_costmap.local_costmap]: Sensor origin at (9.30, 2.72 -0.57) is out of map bounds (7.70, 1.35, -0.20) to (10.67, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392520.635352065] [local_costmap.local_costmap]: Sensor origin at (9.35, 2.69 -0.57) is out of map bounds (7.75, 1.30, -0.20) to (10.72, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392520.835331938] [local_costmap.local_costmap]: Sensor origin at (9.41, 2.68 -0.58) is out of map bounds (7.80, 1.30, -0.20) to (10.77, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392521.035341683] [local_costmap.local_costmap]: Sensor origin at (9.52, 2.66 -0.59) is out of map bounds (7.85, 1.25, -0.20) to (10.82, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392521.118556284] [controller_server]: Passing new path to controller.
+[WARN] [1733392521.235336520] [local_costmap.local_costmap]: Sensor origin at (9.57, 2.66 -0.60) is out of map bounds (7.90, 1.25, -0.20) to (10.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392521.435378588] [local_costmap.local_costmap]: Sensor origin at (9.57, 2.66 -0.60) is out of map bounds (7.90, 1.25, -0.20) to (10.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392521.584556422] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392521.206 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392521.635340952] [local_costmap.local_costmap]: Sensor origin at (9.57, 2.66 -0.60) is out of map bounds (7.90, 1.25, -0.20) to (10.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392521.784504330] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392521.403 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392521.835355762] [local_costmap.local_costmap]: Sensor origin at (9.57, 2.66 -0.60) is out of map bounds (7.90, 1.25, -0.20) to (10.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392521.984476884] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392521.616 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392522.035331758] [local_costmap.local_costmap]: Sensor origin at (9.64, 2.65 -0.60) is out of map bounds (7.95, 1.25, -0.20) to (10.92, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392522.118567055] [controller_server]: Passing new path to controller.
+[WARN] [1733392522.235340221] [local_costmap.local_costmap]: Sensor origin at (9.74, 2.66 -0.61) is out of map bounds (8.20, 1.20, -0.20) to (11.17, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392522.435396387] [local_costmap.local_costmap]: Sensor origin at (9.88, 2.68 -0.62) is out of map bounds (8.25, 1.20, -0.20) to (11.22, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392522.635325200] [local_costmap.local_costmap]: Sensor origin at (9.94, 2.68 -0.63) is out of map bounds (8.30, 1.20, -0.20) to (11.27, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392522.835362478] [local_costmap.local_costmap]: Sensor origin at (9.94, 2.68 -0.63) is out of map bounds (8.30, 1.20, -0.20) to (11.27, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392523.035331573] [local_costmap.local_costmap]: Sensor origin at (10.05, 2.70 -0.64) is out of map bounds (8.35, 1.20, -0.20) to (11.32, 4.18, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392523.168575663] [controller_server]: Passing new path to controller.
+[WARN] [1733392523.235371463] [local_costmap.local_costmap]: Sensor origin at (10.11, 2.71 -0.65) is out of map bounds (8.45, 1.20, -0.20) to (11.42, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392523.435342305] [local_costmap.local_costmap]: Sensor origin at (10.16, 2.72 -0.65) is out of map bounds (8.50, 1.20, -0.20) to (11.47, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392523.635344587] [local_costmap.local_costmap]: Sensor origin at (10.21, 2.73 -0.66) is out of map bounds (8.55, 1.20, -0.20) to (11.52, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392523.835340852] [local_costmap.local_costmap]: Sensor origin at (10.26, 2.74 -0.66) is out of map bounds (8.60, 1.20, -0.20) to (11.57, 4.18, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392524.035318300] [local_costmap.local_costmap]: Sensor origin at (10.31, 2.75 -0.67) is out of map bounds (8.65, 1.25, -0.20) to (11.62, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392524.168560664] [controller_server]: Passing new path to controller.
+[WARN] [1733392524.235351385] [local_costmap.local_costmap]: Sensor origin at (10.36, 2.76 -0.67) is out of map bounds (8.70, 1.25, -0.20) to (11.67, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392524.435350249] [local_costmap.local_costmap]: Sensor origin at (10.41, 2.77 -0.68) is out of map bounds (8.75, 1.25, -0.20) to (11.72, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392524.635330235] [local_costmap.local_costmap]: Sensor origin at (10.46, 2.78 -0.68) is out of map bounds (8.80, 1.25, -0.20) to (11.77, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392524.835326801] [local_costmap.local_costmap]: Sensor origin at (10.46, 2.78 -0.68) is out of map bounds (8.80, 1.25, -0.20) to (11.77, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392525.035317662] [local_costmap.local_costmap]: Sensor origin at (10.50, 2.78 -0.69) is out of map bounds (8.90, 1.25, -0.20) to (11.87, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392525.218563165] [controller_server]: Passing new path to controller.
+[WARN] [1733392525.235326418] [local_costmap.local_costmap]: Sensor origin at (10.56, 2.79 -0.69) is out of map bounds (8.95, 1.30, -0.20) to (11.92, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392525.435344446] [local_costmap.local_costmap]: Sensor origin at (10.67, 2.80 -0.70) is out of map bounds (9.00, 1.30, -0.20) to (11.97, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392525.635324527] [local_costmap.local_costmap]: Sensor origin at (10.73, 2.81 -0.71) is out of map bounds (9.05, 1.30, -0.20) to (12.02, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392525.835373796] [local_costmap.local_costmap]: Sensor origin at (10.78, 2.81 -0.71) is out of map bounds (9.10, 1.30, -0.20) to (12.07, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392526.035340533] [local_costmap.local_costmap]: Sensor origin at (10.83, 2.81 -0.72) is out of map bounds (9.15, 1.30, -0.20) to (12.12, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392526.235334004] [local_costmap.local_costmap]: Sensor origin at (10.88, 2.82 -0.72) is out of map bounds (9.25, 1.30, -0.20) to (12.22, 4.28, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392526.268562148] [controller_server]: Passing new path to controller.
+[WARN] [1733392526.435327258] [local_costmap.local_costmap]: Sensor origin at (10.88, 2.82 -0.72) is out of map bounds (9.25, 1.30, -0.20) to (12.22, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392526.635327133] [local_costmap.local_costmap]: Sensor origin at (10.95, 2.83 -0.73) is out of map bounds (9.30, 1.30, -0.20) to (12.27, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392526.835350566] [local_costmap.local_costmap]: Sensor origin at (11.03, 2.83 -0.74) is out of map bounds (9.35, 1.30, -0.20) to (12.32, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392527.035350183] [local_costmap.local_costmap]: Sensor origin at (11.09, 2.83 -0.75) is out of map bounds (9.40, 1.35, -0.20) to (12.37, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392527.235358251] [local_costmap.local_costmap]: Sensor origin at (11.14, 2.84 -0.75) is out of map bounds (9.50, 1.35, -0.20) to (12.47, 4.33, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392527.268560308] [controller_server]: Passing new path to controller.
+[WARN] [1733392527.435322895] [local_costmap.local_costmap]: Sensor origin at (11.19, 2.83 -0.75) is out of map bounds (9.55, 1.35, -0.20) to (12.52, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392527.635329410] [local_costmap.local_costmap]: Sensor origin at (11.19, 2.83 -0.75) is out of map bounds (9.55, 1.35, -0.20) to (12.52, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392527.835321407] [local_costmap.local_costmap]: Sensor origin at (11.23, 2.83 -0.76) is out of map bounds (9.60, 1.35, -0.20) to (12.57, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392528.035321268] [local_costmap.local_costmap]: Sensor origin at (11.35, 2.83 -0.77) is out of map bounds (9.70, 1.35, -0.20) to (12.67, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392528.235330759] [local_costmap.local_costmap]: Sensor origin at (11.40, 2.83 -0.78) is out of map bounds (9.75, 1.35, -0.20) to (12.72, 4.33, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392528.318569896] [controller_server]: Passing new path to controller.
+[WARN] [1733392528.435322093] [local_costmap.local_costmap]: Sensor origin at (11.46, 2.82 -0.78) is out of map bounds (9.80, 1.35, -0.20) to (12.77, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392528.635329046] [local_costmap.local_costmap]: Sensor origin at (11.51, 2.82 -0.79) is out of map bounds (9.85, 1.35, -0.20) to (12.82, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392528.835324800] [local_costmap.local_costmap]: Sensor origin at (11.55, 2.81 -0.79) is out of map bounds (9.90, 1.35, -0.20) to (12.88, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392529.035321831] [local_costmap.local_costmap]: Sensor origin at (11.61, 2.81 -0.80) is out of map bounds (9.95, 1.35, -0.20) to (12.93, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392529.235320097] [local_costmap.local_costmap]: Sensor origin at (11.61, 2.81 -0.80) is out of map bounds (9.95, 1.35, -0.20) to (12.93, 4.33, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392529.318565008] [controller_server]: Passing new path to controller.
+[WARN] [1733392529.435327278] [local_costmap.local_costmap]: Sensor origin at (11.66, 2.81 -0.80) is out of map bounds (10.05, 1.35, -0.20) to (13.03, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392529.635311558] [local_costmap.local_costmap]: Sensor origin at (11.77, 2.81 -0.81) is out of map bounds (10.10, 1.35, -0.20) to (13.08, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392529.835306989] [local_costmap.local_costmap]: Sensor origin at (11.81, 2.82 -0.82) is out of map bounds (10.15, 1.35, -0.20) to (13.13, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392530.035324702] [local_costmap.local_costmap]: Sensor origin at (11.87, 2.82 -0.82) is out of map bounds (10.20, 1.35, -0.20) to (13.18, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392530.235339018] [local_costmap.local_costmap]: Sensor origin at (11.92, 2.83 -0.83) is out of map bounds (10.25, 1.35, -0.20) to (13.23, 4.33, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392530.368562110] [controller_server]: Passing new path to controller.
+[WARN] [1733392530.435324566] [local_costmap.local_costmap]: Sensor origin at (11.92, 2.83 -0.83) is out of map bounds (10.25, 1.35, -0.20) to (13.23, 4.33, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392530.584448957] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392530.205 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392530.635317207] [local_costmap.local_costmap]: Sensor origin at (11.92, 2.83 -0.83) is out of map bounds (10.25, 1.35, -0.20) to (13.23, 4.33, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392530.784532665] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392530.428 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392530.835337318] [local_costmap.local_costmap]: Sensor origin at (11.92, 2.83 -0.83) is out of map bounds (10.35, 1.35, -0.20) to (13.33, 4.33, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392530.984643297] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392530.608 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[WARN] [1733392531.035309604] [local_costmap.local_costmap]: Sensor origin at (11.92, 2.83 -0.83) is out of map bounds (10.35, 1.35, -0.20) to (13.33, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392531.235317403] [local_costmap.local_costmap]: Sensor origin at (12.14, 2.87 -0.85) is out of map bounds (10.50, 1.35, -0.20) to (13.48, 4.33, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392531.418561087] [controller_server]: Passing new path to controller.
+[WARN] [1733392531.435325081] [local_costmap.local_costmap]: Sensor origin at (12.23, 2.88 -0.86) is out of map bounds (10.55, 1.35, -0.20) to (13.53, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392531.635339763] [local_costmap.local_costmap]: Sensor origin at (12.28, 2.89 -0.86) is out of map bounds (10.60, 1.35, -0.20) to (13.58, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392531.835322058] [local_costmap.local_costmap]: Sensor origin at (12.34, 2.89 -0.87) is out of map bounds (10.70, 1.40, -0.20) to (13.68, 4.38, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392532.035324627] [local_costmap.local_costmap]: Sensor origin at (12.38, 2.89 -0.87) is out of map bounds (10.70, 1.40, -0.20) to (13.68, 4.38, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392532.235355407] [local_costmap.local_costmap]: Sensor origin at (12.42, 2.87 -0.88) is out of map bounds (10.75, 1.40, -0.20) to (13.73, 4.38, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392532.418559761] [controller_server]: Passing new path to controller.
+[WARN] [1733392532.435336411] [local_costmap.local_costmap]: Sensor origin at (12.42, 2.87 -0.88) is out of map bounds (10.75, 1.40, -0.20) to (13.73, 4.38, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392532.635327923] [local_costmap.local_costmap]: Sensor origin at (12.43, 2.87 -0.88) is out of map bounds (10.75, 1.40, -0.20) to (13.73, 4.38, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392532.835334903] [local_costmap.local_costmap]: Sensor origin at (12.38, 2.82 -0.87) is out of map bounds (10.75, 1.40, -0.20) to (13.73, 4.38, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392533.035314873] [local_costmap.local_costmap]: Sensor origin at (12.35, 2.78 -0.87) is out of map bounds (10.75, 1.40, -0.20) to (13.73, 4.38, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392533.235321153] [local_costmap.local_costmap]: Sensor origin at (12.35, 2.75 -0.87) is out of map bounds (10.75, 1.40, -0.20) to (13.73, 4.38, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392533.435313739] [local_costmap.local_costmap]: Sensor origin at (12.37, 2.72 -0.87) is out of map bounds (10.75, 1.35, -0.20) to (13.73, 4.33, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392533.468557889] [controller_server]: Passing new path to controller.
+[WARN] [1733392533.635325977] [local_costmap.local_costmap]: Sensor origin at (12.39, 2.69 -0.87) is out of map bounds (10.75, 1.35, -0.20) to (13.73, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392533.835334838] [local_costmap.local_costmap]: Sensor origin at (12.39, 2.69 -0.87) is out of map bounds (10.75, 1.35, -0.20) to (13.73, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392534.035313166] [local_costmap.local_costmap]: Sensor origin at (12.42, 2.69 -0.88) is out of map bounds (10.80, 1.30, -0.20) to (13.78, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392534.235326726] [local_costmap.local_costmap]: Sensor origin at (12.52, 2.71 -0.89) is out of map bounds (10.85, 1.30, -0.20) to (13.83, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392534.435323101] [local_costmap.local_costmap]: Sensor origin at (12.56, 2.72 -0.89) is out of map bounds (10.90, 1.30, -0.20) to (13.88, 4.28, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392534.518560697] [controller_server]: Passing new path to controller.
+[WARN] [1733392534.635350596] [local_costmap.local_costmap]: Sensor origin at (12.60, 2.73 -0.89) is out of map bounds (10.95, 1.30, -0.20) to (13.93, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392534.835329830] [local_costmap.local_costmap]: Sensor origin at (12.66, 2.77 -0.90) is out of map bounds (11.05, 1.30, -0.20) to (14.03, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392535.035310585] [local_costmap.local_costmap]: Sensor origin at (12.66, 2.77 -0.90) is out of map bounds (11.05, 1.30, -0.20) to (14.03, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392535.235315005] [local_costmap.local_costmap]: Sensor origin at (12.75, 2.84 -0.91) is out of map bounds (11.10, 1.30, -0.20) to (14.08, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392535.435316995] [local_costmap.local_costmap]: Sensor origin at (12.80, 2.86 -0.92) is out of map bounds (11.15, 1.30, -0.20) to (14.13, 4.28, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392535.568575947] [controller_server]: Passing new path to controller.
+[WARN] [1733392535.635339469] [local_costmap.local_costmap]: Sensor origin at (12.87, 2.87 -0.92) is out of map bounds (11.20, 1.35, -0.20) to (14.18, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392535.835329531] [local_costmap.local_costmap]: Sensor origin at (12.92, 2.86 -0.93) is out of map bounds (11.25, 1.35, -0.20) to (14.23, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392536.035315558] [local_costmap.local_costmap]: Sensor origin at (12.92, 2.86 -0.93) is out of map bounds (11.25, 1.35, -0.20) to (14.23, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392536.235333678] [local_costmap.local_costmap]: Sensor origin at (12.96, 2.84 -0.94) is out of map bounds (11.35, 1.35, -0.20) to (14.33, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392536.435337291] [local_costmap.local_costmap]: Sensor origin at (13.03, 2.76 -0.94) is out of map bounds (11.35, 1.35, -0.20) to (14.33, 4.33, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392536.568560351] [controller_server]: Passing new path to controller.
+[WARN] [1733392536.635322601] [local_costmap.local_costmap]: Sensor origin at (13.03, 2.76 -0.94) is out of map bounds (11.35, 1.35, -0.20) to (14.33, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392536.835323650] [local_costmap.local_costmap]: Sensor origin at (13.04, 2.76 -0.94) is out of map bounds (11.35, 1.35, -0.20) to (14.33, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392537.035324737] [local_costmap.local_costmap]: Sensor origin at (13.05, 2.76 -0.94) is out of map bounds (11.35, 1.35, -0.20) to (14.33, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392537.235325477] [local_costmap.local_costmap]: Sensor origin at (13.05, 2.76 -0.94) is out of map bounds (11.35, 1.35, -0.20) to (14.33, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392537.435344794] [local_costmap.local_costmap]: Sensor origin at (13.01, 2.73 -0.94) is out of map bounds (11.35, 1.35, -0.20) to (14.33, 4.33, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392537.618557850] [controller_server]: Passing new path to controller.
+[WARN] [1733392537.635310445] [local_costmap.local_costmap]: Sensor origin at (13.00, 2.72 -0.94) is out of map bounds (11.35, 1.35, -0.20) to (14.33, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392537.835345093] [local_costmap.local_costmap]: Sensor origin at (13.00, 2.72 -0.94) is out of map bounds (11.35, 1.35, -0.20) to (14.33, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392538.035338723] [local_costmap.local_costmap]: Sensor origin at (13.01, 2.71 -0.93) is out of map bounds (11.35, 1.35, -0.20) to (14.33, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392538.235342969] [local_costmap.local_costmap]: Sensor origin at (13.01, 2.71 -0.93) is out of map bounds (11.40, 1.35, -0.20) to (14.38, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392538.435323882] [local_costmap.local_costmap]: Sensor origin at (13.01, 2.71 -0.93) is out of map bounds (11.40, 1.35, -0.20) to (14.38, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392538.635326807] [local_costmap.local_costmap]: Sensor origin at (13.02, 2.70 -0.93) is out of map bounds (11.40, 1.35, -0.20) to (14.38, 4.33, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392538.668564635] [controller_server]: Passing new path to controller.
+[WARN] [1733392538.835343141] [local_costmap.local_costmap]: Sensor origin at (13.02, 2.66 -0.94) is out of map bounds (11.40, 1.35, -0.20) to (14.38, 4.33, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392539.035318549] [local_costmap.local_costmap]: Sensor origin at (13.00, 2.63 -0.93) is out of map bounds (11.45, 1.30, -0.20) to (14.43, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392539.235322588] [local_costmap.local_costmap]: Sensor origin at (13.00, 2.63 -0.93) is out of map bounds (11.45, 1.30, -0.20) to (14.43, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392539.435329497] [local_costmap.local_costmap]: Sensor origin at (12.97, 2.58 -0.93) is out of map bounds (11.45, 1.30, -0.20) to (14.43, 4.28, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392539.635336100] [local_costmap.local_costmap]: Sensor origin at (12.96, 2.56 -0.93) is out of map bounds (11.50, 1.25, -0.20) to (14.48, 4.23, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392539.668565948] [controller_server]: Passing new path to controller.
+[WARN] [1733392539.835316310] [local_costmap.local_costmap]: Sensor origin at (12.93, 2.56 -0.93) is out of map bounds (11.50, 1.25, -0.20) to (14.48, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392540.035325639] [local_costmap.local_costmap]: Sensor origin at (12.88, 2.57 -0.92) is out of map bounds (11.45, 1.25, -0.20) to (14.43, 4.23, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392540.435357873] [local_costmap.local_costmap]: Sensor origin at (12.75, 2.56 -0.92) is out of map bounds (11.40, 1.15, -0.20) to (14.38, 4.13, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392540.635323510] [local_costmap.local_costmap]: Sensor origin at (12.75, 2.56 -0.92) is out of map bounds (11.40, 1.15, -0.20) to (14.38, 4.13, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392540.718564010] [controller_server]: Passing new path to controller.
+[WARN] [1733392540.835324997] [local_costmap.local_costmap]: Sensor origin at (12.70, 2.53 -0.91) is out of map bounds (11.35, 1.15, -0.20) to (14.33, 4.13, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392541.035319864] [local_costmap.local_costmap]: Sensor origin at (12.62, 2.53 -0.90) is out of map bounds (11.30, 1.10, -0.20) to (14.28, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392541.235328293] [local_costmap.local_costmap]: Sensor origin at (12.57, 2.53 -0.90) is out of map bounds (11.25, 1.10, -0.20) to (14.23, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392541.435321772] [local_costmap.local_costmap]: Sensor origin at (12.51, 2.52 -0.89) is out of map bounds (11.15, 1.10, -0.20) to (14.13, 4.08, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392541.635326751] [local_costmap.local_costmap]: Sensor origin at (12.46, 2.51 -0.88) is out of map bounds (11.10, 1.05, -0.20) to (14.08, 4.03, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392541.768577161] [controller_server]: Passing new path to controller.
+[WARN] [1733392541.835327653] [local_costmap.local_costmap]: Sensor origin at (12.41, 2.50 -0.88) is out of map bounds (11.05, 1.05, -0.20) to (14.03, 4.03, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392542.035328443] [local_costmap.local_costmap]: Sensor origin at (12.41, 2.50 -0.88) is out of map bounds (11.05, 1.05, -0.20) to (14.03, 4.03, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392542.235327282] [local_costmap.local_costmap]: Sensor origin at (12.37, 2.49 -0.87) is out of map bounds (11.00, 1.05, -0.20) to (13.98, 4.03, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392542.435336223] [local_costmap.local_costmap]: Sensor origin at (12.26, 2.48 -0.86) is out of map bounds (10.95, 1.05, -0.20) to (13.93, 4.03, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392542.635328745] [local_costmap.local_costmap]: Sensor origin at (12.21, 2.47 -0.86) is out of map bounds (10.90, 1.00, -0.20) to (13.88, 3.98, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392542.768570784] [controller_server]: Passing new path to controller.
+[WARN] [1733392542.835333863] [local_costmap.local_costmap]: Sensor origin at (12.16, 2.46 -0.85) is out of map bounds (10.85, 1.00, -0.20) to (13.83, 3.98, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392543.035319818] [local_costmap.local_costmap]: Sensor origin at (12.10, 2.45 -0.85) is out of map bounds (10.75, 1.00, -0.20) to (13.73, 3.98, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392543.235319867] [local_costmap.local_costmap]: Sensor origin at (12.05, 2.45 -0.84) is out of map bounds (10.70, 1.00, -0.20) to (13.68, 3.98, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392543.435315699] [local_costmap.local_costmap]: Sensor origin at (12.00, 2.44 -0.84) is out of map bounds (10.65, 1.00, -0.20) to (13.63, 3.98, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392543.635317702] [local_costmap.local_costmap]: Sensor origin at (11.95, 2.43 -0.83) is out of map bounds (10.60, 0.95, -0.20) to (13.58, 3.93, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392543.818563502] [controller_server]: Passing new path to controller.
+[WARN] [1733392543.835330460] [local_costmap.local_costmap]: Sensor origin at (11.95, 2.43 -0.83) is out of map bounds (10.60, 0.95, -0.20) to (13.58, 3.93, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392544.035326404] [local_costmap.local_costmap]: Sensor origin at (11.90, 2.42 -0.83) is out of map bounds (10.55, 0.95, -0.20) to (13.53, 3.93, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392544.235334356] [local_costmap.local_costmap]: Sensor origin at (11.79, 2.41 -0.82) is out of map bounds (10.50, 0.95, -0.20) to (13.48, 3.93, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392544.435338950] [local_costmap.local_costmap]: Sensor origin at (11.74, 2.40 -0.81) is out of map bounds (10.40, 0.95, -0.20) to (13.38, 3.93, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392544.635310308] [local_costmap.local_costmap]: Sensor origin at (11.69, 2.40 -0.81) is out of map bounds (10.35, 0.95, -0.20) to (13.33, 3.93, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392544.818566485] [controller_server]: Passing new path to controller.
+[WARN] [1733392544.835323776] [local_costmap.local_costmap]: Sensor origin at (11.64, 2.40 -0.80) is out of map bounds (10.30, 0.95, -0.20) to (13.28, 3.93, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392545.035315746] [local_costmap.local_costmap]: Sensor origin at (11.59, 2.40 -0.80) is out of map bounds (10.25, 0.95, -0.20) to (13.22, 3.93, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392545.235322005] [local_costmap.local_costmap]: Sensor origin at (11.54, 2.40 -0.79) is out of map bounds (10.20, 0.95, -0.20) to (13.17, 3.93, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392545.435331976] [local_costmap.local_costmap]: Sensor origin at (11.48, 2.39 -0.79) is out of map bounds (10.15, 0.95, -0.20) to (13.12, 3.93, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392545.635316056] [local_costmap.local_costmap]: Sensor origin at (11.42, 2.40 -0.78) is out of map bounds (10.10, 0.90, -0.20) to (13.07, 3.88, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392545.835368673] [local_costmap.local_costmap]: Sensor origin at (11.42, 2.40 -0.78) is out of map bounds (10.10, 0.90, -0.20) to (13.07, 3.88, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392545.868562975] [controller_server]: Passing new path to controller.
+[WARN] [1733392546.035311607] [local_costmap.local_costmap]: Sensor origin at (11.38, 2.39 -0.78) is out of map bounds (10.00, 0.90, -0.20) to (12.97, 3.88, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392546.235308357] [local_costmap.local_costmap]: Sensor origin at (11.28, 2.39 -0.76) is out of map bounds (9.95, 0.90, -0.20) to (12.92, 3.88, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392546.435328625] [local_costmap.local_costmap]: Sensor origin at (11.23, 2.38 -0.76) is out of map bounds (9.90, 0.90, -0.20) to (12.87, 3.88, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392546.635317143] [local_costmap.local_costmap]: Sensor origin at (11.18, 2.38 -0.75) is out of map bounds (9.85, 0.90, -0.20) to (12.82, 3.88, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392546.835326038] [local_costmap.local_costmap]: Sensor origin at (11.13, 2.37 -0.75) is out of map bounds (9.80, 0.90, -0.20) to (12.77, 3.88, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392546.918564471] [controller_server]: Passing new path to controller.
+[WARN] [1733392547.035322661] [local_costmap.local_costmap]: Sensor origin at (11.08, 2.37 -0.75) is out of map bounds (9.75, 0.90, -0.20) to (12.72, 3.88, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392547.235304066] [local_costmap.local_costmap]: Sensor origin at (11.02, 2.36 -0.74) is out of map bounds (9.70, 0.90, -0.20) to (12.67, 3.88, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392547.435329503] [local_costmap.local_costmap]: Sensor origin at (10.98, 2.35 -0.74) is out of map bounds (9.60, 0.90, -0.20) to (12.57, 3.88, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392547.635312449] [local_costmap.local_costmap]: Sensor origin at (10.98, 2.35 -0.74) is out of map bounds (9.60, 0.90, -0.20) to (12.57, 3.88, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392547.835320365] [local_costmap.local_costmap]: Sensor origin at (10.91, 2.34 -0.73) is out of map bounds (9.55, 0.90, -0.20) to (12.52, 3.88, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392547.918554755] [controller_server]: Passing new path to controller.
+[WARN] [1733392548.035306688] [local_costmap.local_costmap]: Sensor origin at (10.81, 2.33 -0.72) is out of map bounds (9.50, 0.90, -0.20) to (12.47, 3.88, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392548.235361659] [local_costmap.local_costmap]: Sensor origin at (10.76, 2.33 -0.71) is out of map bounds (9.45, 0.85, -0.20) to (12.42, 3.83, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392548.435355430] [local_costmap.local_costmap]: Sensor origin at (10.71, 2.32 -0.71) is out of map bounds (9.40, 0.85, -0.20) to (12.37, 3.83, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392548.635332759] [local_costmap.local_costmap]: Sensor origin at (10.66, 2.32 -0.70) is out of map bounds (9.30, 0.85, -0.20) to (12.27, 3.83, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392548.835343055] [local_costmap.local_costmap]: Sensor origin at (10.61, 2.31 -0.70) is out of map bounds (9.25, 0.85, -0.20) to (12.22, 3.83, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392548.968570802] [controller_server]: Passing new path to controller.
+[WARN] [1733392549.035318230] [local_costmap.local_costmap]: Sensor origin at (10.54, 2.31 -0.69) is out of map bounds (9.20, 0.85, -0.20) to (12.17, 3.83, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392549.235329578] [local_costmap.local_costmap]: Sensor origin at (10.49, 2.30 -0.69) is out of map bounds (9.15, 0.85, -0.20) to (12.12, 3.83, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392549.435344299] [local_costmap.local_costmap]: Sensor origin at (10.49, 2.30 -0.69) is out of map bounds (9.15, 0.85, -0.20) to (12.12, 3.83, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392549.635316847] [local_costmap.local_costmap]: Sensor origin at (10.44, 2.30 -0.68) is out of map bounds (9.10, 0.85, -0.20) to (12.07, 3.83, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392549.835323403] [local_costmap.local_costmap]: Sensor origin at (10.35, 2.28 -0.67) is out of map bounds (9.00, 0.85, -0.20) to (11.97, 3.83, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392549.968571216] [controller_server]: Passing new path to controller.
+[WARN] [1733392550.035348787] [local_costmap.local_costmap]: Sensor origin at (10.29, 2.27 -0.67) is out of map bounds (8.95, 0.80, -0.20) to (11.92, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392550.235314544] [local_costmap.local_costmap]: Sensor origin at (10.24, 2.26 -0.66) is out of map bounds (8.90, 0.80, -0.20) to (11.87, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392550.435310604] [local_costmap.local_costmap]: Sensor origin at (10.20, 2.25 -0.66) is out of map bounds (8.85, 0.80, -0.20) to (11.82, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392550.635333481] [local_costmap.local_costmap]: Sensor origin at (10.15, 2.25 -0.65) is out of map bounds (8.80, 0.80, -0.20) to (11.77, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392550.835340073] [local_costmap.local_costmap]: Sensor origin at (10.09, 2.24 -0.65) is out of map bounds (8.75, 0.80, -0.20) to (11.72, 3.78, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392551.018567784] [controller_server]: Passing new path to controller.
+[WARN] [1733392551.035328720] [local_costmap.local_costmap]: Sensor origin at (10.04, 2.24 -0.64) is out of map bounds (8.65, 0.75, -0.20) to (11.62, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392551.235316788] [local_costmap.local_costmap]: Sensor origin at (10.04, 2.24 -0.64) is out of map bounds (8.65, 0.75, -0.20) to (11.62, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392551.435330415] [local_costmap.local_costmap]: Sensor origin at (9.98, 2.23 -0.64) is out of map bounds (8.60, 0.75, -0.20) to (11.57, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392551.635351457] [local_costmap.local_costmap]: Sensor origin at (9.92, 2.23 -0.63) is out of map bounds (8.55, 0.75, -0.20) to (11.52, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392551.835320770] [local_costmap.local_costmap]: Sensor origin at (9.84, 2.24 -0.62) is out of map bounds (8.50, 0.75, -0.20) to (11.47, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392552.035327814] [local_costmap.local_costmap]: Sensor origin at (9.77, 2.26 -0.62) is out of map bounds (8.45, 0.75, -0.20) to (11.42, 3.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392552.068560057] [controller_server]: Passing new path to controller.
+[WARN] [1733392552.235336434] [local_costmap.local_costmap]: Sensor origin at (9.72, 2.27 -0.61) is out of map bounds (8.40, 0.75, -0.20) to (11.37, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392552.435334901] [local_costmap.local_costmap]: Sensor origin at (9.72, 2.27 -0.61) is out of map bounds (8.40, 0.75, -0.20) to (11.37, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392552.635326142] [local_costmap.local_costmap]: Sensor origin at (9.64, 2.31 -0.60) is out of map bounds (8.30, 0.75, -0.20) to (11.27, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392552.835334028] [local_costmap.local_costmap]: Sensor origin at (9.64, 2.31 -0.60) is out of map bounds (8.25, 0.75, -0.20) to (11.22, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392553.035324758] [local_costmap.local_costmap]: Sensor origin at (9.53, 2.33 -0.59) is out of map bounds (8.20, 0.75, -0.20) to (11.17, 3.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392553.068561643] [controller_server]: Passing new path to controller.
+[WARN] [1733392553.235321324] [local_costmap.local_costmap]: Sensor origin at (9.47, 2.33 -0.59) is out of map bounds (8.15, 0.80, -0.20) to (11.12, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392553.435334215] [local_costmap.local_costmap]: Sensor origin at (9.42, 2.32 -0.58) is out of map bounds (8.10, 0.80, -0.20) to (11.07, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392553.635332829] [local_costmap.local_costmap]: Sensor origin at (9.38, 2.31 -0.58) is out of map bounds (8.00, 0.80, -0.20) to (10.97, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392553.835312538] [local_costmap.local_costmap]: Sensor origin at (9.38, 2.31 -0.58) is out of map bounds (8.00, 0.80, -0.20) to (10.97, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392554.035327636] [local_costmap.local_costmap]: Sensor origin at (9.31, 2.29 -0.57) is out of map bounds (7.95, 0.80, -0.20) to (10.92, 3.78, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392554.118560641] [controller_server]: Passing new path to controller.
+[WARN] [1733392554.235324576] [local_costmap.local_costmap]: Sensor origin at (9.20, 2.27 -0.56) is out of map bounds (7.90, 0.80, -0.20) to (10.87, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392554.435315930] [local_costmap.local_costmap]: Sensor origin at (9.15, 2.26 -0.55) is out of map bounds (7.85, 0.80, -0.20) to (10.82, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392554.635327630] [local_costmap.local_costmap]: Sensor origin at (9.11, 2.26 -0.55) is out of map bounds (7.75, 0.80, -0.20) to (10.72, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392554.835328827] [local_costmap.local_costmap]: Sensor origin at (9.11, 2.26 -0.55) is out of map bounds (7.75, 0.80, -0.20) to (10.72, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392555.035323439] [local_costmap.local_costmap]: Sensor origin at (9.06, 2.26 -0.54) is out of map bounds (7.70, 0.80, -0.20) to (10.67, 3.78, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392555.118560864] [controller_server]: Passing new path to controller.
+[WARN] [1733392555.235337369] [local_costmap.local_costmap]: Sensor origin at (8.96, 2.25 -0.53) is out of map bounds (7.65, 0.80, -0.20) to (10.62, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392555.435331081] [local_costmap.local_costmap]: Sensor origin at (8.90, 2.25 -0.53) is out of map bounds (7.55, 0.80, -0.20) to (10.52, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392555.635349778] [local_costmap.local_costmap]: Sensor origin at (8.85, 2.25 -0.52) is out of map bounds (7.50, 0.80, -0.20) to (10.47, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392555.835320293] [local_costmap.local_costmap]: Sensor origin at (8.85, 2.25 -0.52) is out of map bounds (7.50, 0.80, -0.20) to (10.47, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392556.035329072] [local_costmap.local_costmap]: Sensor origin at (8.80, 2.25 -0.52) is out of map bounds (7.45, 0.75, -0.20) to (10.42, 3.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392556.168578704] [controller_server]: Passing new path to controller.
+[WARN] [1733392556.235313312] [local_costmap.local_costmap]: Sensor origin at (8.69, 2.23 -0.51) is out of map bounds (7.35, 0.75, -0.20) to (10.32, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392556.435321341] [local_costmap.local_costmap]: Sensor origin at (8.64, 2.22 -0.50) is out of map bounds (7.30, 0.75, -0.20) to (10.27, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392556.635331819] [local_costmap.local_costmap]: Sensor origin at (8.58, 2.22 -0.50) is out of map bounds (7.25, 0.75, -0.20) to (10.22, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392556.835320621] [local_costmap.local_costmap]: Sensor origin at (8.53, 2.21 -0.49) is out of map bounds (7.20, 0.75, -0.20) to (10.17, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392557.035318809] [local_costmap.local_costmap]: Sensor origin at (8.53, 2.21 -0.49) is out of map bounds (7.20, 0.75, -0.20) to (10.17, 3.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392557.218574869] [controller_server]: Passing new path to controller.
+[WARN] [1733392557.235332992] [local_costmap.local_costmap]: Sensor origin at (8.50, 2.21 -0.49) is out of map bounds (7.10, 0.75, -0.20) to (10.07, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392557.435310772] [local_costmap.local_costmap]: Sensor origin at (8.38, 2.20 -0.48) is out of map bounds (7.05, 0.75, -0.20) to (10.02, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392557.635315435] [local_costmap.local_costmap]: Sensor origin at (8.32, 2.19 -0.47) is out of map bounds (7.00, 0.75, -0.20) to (9.97, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392557.835336990] [local_costmap.local_costmap]: Sensor origin at (8.28, 2.19 -0.47) is out of map bounds (6.95, 0.75, -0.20) to (9.92, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392558.035369357] [local_costmap.local_costmap]: Sensor origin at (8.28, 2.19 -0.47) is out of map bounds (6.95, 0.75, -0.20) to (9.92, 3.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392558.218557741] [controller_server]: Passing new path to controller.
+[WARN] [1733392558.235319890] [local_costmap.local_costmap]: Sensor origin at (8.18, 2.19 -0.46) is out of map bounds (6.85, 0.70, -0.20) to (9.82, 3.68, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392558.435328820] [local_costmap.local_costmap]: Sensor origin at (8.13, 2.18 -0.45) is out of map bounds (6.80, 0.70, -0.20) to (9.77, 3.68, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392558.635331548] [local_costmap.local_costmap]: Sensor origin at (8.07, 2.18 -0.45) is out of map bounds (6.75, 0.70, -0.20) to (9.72, 3.68, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392558.835350322] [local_costmap.local_costmap]: Sensor origin at (8.03, 2.18 -0.44) is out of map bounds (6.65, 0.70, -0.20) to (9.62, 3.68, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392559.035335685] [local_costmap.local_costmap]: Sensor origin at (7.97, 2.19 -0.44) is out of map bounds (6.60, 0.70, -0.20) to (9.57, 3.68, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392559.235308493] [local_costmap.local_costmap]: Sensor origin at (7.97, 2.19 -0.44) is out of map bounds (6.60, 0.70, -0.20) to (9.57, 3.68, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392559.268573381] [controller_server]: Passing new path to controller.
+[WARN] [1733392559.435337617] [local_costmap.local_costmap]: Sensor origin at (7.91, 2.20 -0.43) is out of map bounds (6.55, 0.70, -0.20) to (9.52, 3.68, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392559.635329688] [local_costmap.local_costmap]: Sensor origin at (7.81, 2.22 -0.42) is out of map bounds (6.50, 0.70, -0.20) to (9.47, 3.68, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392559.835329738] [local_costmap.local_costmap]: Sensor origin at (7.77, 2.23 -0.42) is out of map bounds (6.45, 0.70, -0.20) to (9.42, 3.68, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392560.035324381] [local_costmap.local_costmap]: Sensor origin at (7.72, 2.24 -0.41) is out of map bounds (6.35, 0.70, -0.20) to (9.32, 3.68, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392560.235334978] [local_costmap.local_costmap]: Sensor origin at (7.66, 2.25 -0.41) is out of map bounds (6.30, 0.70, -0.20) to (9.27, 3.68, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392560.268564495] [controller_server]: Passing new path to controller.
+[WARN] [1733392560.435328379] [local_costmap.local_costmap]: Sensor origin at (7.61, 2.26 -0.40) is out of map bounds (6.25, 0.70, -0.20) to (9.22, 3.68, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392560.635323696] [local_costmap.local_costmap]: Sensor origin at (7.56, 2.27 -0.39) is out of map bounds (6.20, 0.70, -0.20) to (9.17, 3.68, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392560.835348015] [local_costmap.local_costmap]: Sensor origin at (7.50, 2.27 -0.39) is out of map bounds (6.15, 0.75, -0.20) to (9.12, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392561.035340190] [local_costmap.local_costmap]: Sensor origin at (7.50, 2.27 -0.39) is out of map bounds (6.15, 0.75, -0.20) to (9.12, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392561.235368061] [local_costmap.local_costmap]: Sensor origin at (7.44, 2.28 -0.38) is out of map bounds (6.10, 0.75, -0.20) to (9.07, 3.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392561.318562000] [controller_server]: Passing new path to controller.
+[WARN] [1733392561.435327824] [local_costmap.local_costmap]: Sensor origin at (7.35, 2.27 -0.37) is out of map bounds (6.05, 0.75, -0.20) to (9.02, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392561.635343160] [local_costmap.local_costmap]: Sensor origin at (7.29, 2.26 -0.37) is out of map bounds (5.95, 0.75, -0.20) to (8.92, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392561.835313808] [local_costmap.local_costmap]: Sensor origin at (7.29, 2.26 -0.37) is out of map bounds (5.95, 0.75, -0.20) to (8.92, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392562.035330828] [local_costmap.local_costmap]: Sensor origin at (7.24, 2.24 -0.36) is out of map bounds (5.90, 0.75, -0.20) to (8.87, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392562.235323180] [local_costmap.local_costmap]: Sensor origin at (7.13, 2.23 -0.35) is out of map bounds (5.80, 0.75, -0.20) to (8.77, 3.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392562.368561233] [controller_server]: Passing new path to controller.
+[WARN] [1733392562.435328424] [local_costmap.local_costmap]: Sensor origin at (7.08, 2.22 -0.35) is out of map bounds (5.75, 0.75, -0.20) to (8.72, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392562.635323601] [local_costmap.local_costmap]: Sensor origin at (7.08, 2.22 -0.35) is out of map bounds (5.75, 0.75, -0.20) to (8.72, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392562.835340107] [local_costmap.local_costmap]: Sensor origin at (7.02, 2.21 -0.34) is out of map bounds (5.70, 0.75, -0.20) to (8.67, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392563.035312878] [local_costmap.local_costmap]: Sensor origin at (6.92, 2.21 -0.33) is out of map bounds (5.60, 0.75, -0.20) to (8.57, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392563.235327375] [local_costmap.local_costmap]: Sensor origin at (6.86, 2.22 -0.33) is out of map bounds (5.55, 0.75, -0.20) to (8.52, 3.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392563.368567835] [controller_server]: Passing new path to controller.
+[WARN] [1733392563.435321732] [local_costmap.local_costmap]: Sensor origin at (6.81, 2.24 -0.32) is out of map bounds (5.45, 0.75, -0.20) to (8.42, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392563.635343151] [local_costmap.local_costmap]: Sensor origin at (6.77, 2.25 -0.32) is out of map bounds (5.40, 0.75, -0.20) to (8.37, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392563.835306320] [local_costmap.local_costmap]: Sensor origin at (6.77, 2.25 -0.32) is out of map bounds (5.40, 0.75, -0.20) to (8.37, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392564.035323851] [local_costmap.local_costmap]: Sensor origin at (6.71, 2.28 -0.31) is out of map bounds (5.35, 0.75, -0.20) to (8.32, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392564.235325963] [local_costmap.local_costmap]: Sensor origin at (6.61, 2.32 -0.30) is out of map bounds (5.30, 0.75, -0.20) to (8.27, 3.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392564.418566109] [controller_server]: Passing new path to controller.
+[WARN] [1733392564.435321889] [local_costmap.local_costmap]: Sensor origin at (6.56, 2.33 -0.30) is out of map bounds (5.25, 0.75, -0.20) to (8.22, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392564.635332023] [local_costmap.local_costmap]: Sensor origin at (6.51, 2.33 -0.29) is out of map bounds (5.15, 0.80, -0.20) to (8.12, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392564.835317126] [local_costmap.local_costmap]: Sensor origin at (6.46, 2.33 -0.29) is out of map bounds (5.10, 0.80, -0.20) to (8.07, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392565.035329870] [local_costmap.local_costmap]: Sensor origin at (6.46, 2.33 -0.29) is out of map bounds (5.10, 0.80, -0.20) to (8.07, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392565.235324269] [local_costmap.local_costmap]: Sensor origin at (6.42, 2.32 -0.28) is out of map bounds (5.05, 0.80, -0.20) to (8.02, 3.78, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392565.418564910] [controller_server]: Passing new path to controller.
+[WARN] [1733392565.435323381] [local_costmap.local_costmap]: Sensor origin at (6.30, 2.29 -0.27) is out of map bounds (5.00, 0.80, -0.20) to (7.97, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392565.635311172] [local_costmap.local_costmap]: Sensor origin at (6.25, 2.27 -0.27) is out of map bounds (4.90, 0.80, -0.20) to (7.87, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392565.835365023] [local_costmap.local_costmap]: Sensor origin at (6.19, 2.25 -0.26) is out of map bounds (4.85, 0.80, -0.20) to (7.82, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392566.035361301] [local_costmap.local_costmap]: Sensor origin at (6.13, 2.23 -0.26) is out of map bounds (4.80, 0.80, -0.20) to (7.77, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392566.235314034] [local_costmap.local_costmap]: Sensor origin at (6.13, 2.23 -0.26) is out of map bounds (4.80, 0.80, -0.20) to (7.77, 3.78, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392566.435321649] [local_costmap.local_costmap]: Sensor origin at (6.10, 2.22 -0.25) is out of map bounds (4.70, 0.75, -0.20) to (7.67, 3.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392566.468559147] [controller_server]: Passing new path to controller.
+[WARN] [1733392566.635333240] [local_costmap.local_costmap]: Sensor origin at (5.98, 2.20 -0.24) is out of map bounds (4.65, 0.75, -0.20) to (7.62, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392566.835340518] [local_costmap.local_costmap]: Sensor origin at (5.93, 2.20 -0.24) is out of map bounds (4.60, 0.75, -0.20) to (7.57, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392567.035341142] [local_costmap.local_costmap]: Sensor origin at (5.87, 2.21 -0.23) is out of map bounds (4.55, 0.75, -0.20) to (7.52, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392567.235335876] [local_costmap.local_costmap]: Sensor origin at (5.82, 2.21 -0.23) is out of map bounds (4.45, 0.75, -0.20) to (7.42, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392567.435331415] [local_costmap.local_costmap]: Sensor origin at (5.82, 2.21 -0.23) is out of map bounds (4.45, 0.75, -0.20) to (7.42, 3.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392567.518562098] [controller_server]: Passing new path to controller.
+[WARN] [1733392567.635333203] [local_costmap.local_costmap]: Sensor origin at (5.72, 2.24 -0.22) is out of map bounds (4.40, 0.75, -0.20) to (7.37, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392567.835326292] [local_costmap.local_costmap]: Sensor origin at (5.67, 2.25 -0.21) is out of map bounds (4.35, 0.75, -0.20) to (7.32, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392568.035333738] [local_costmap.local_costmap]: Sensor origin at (5.62, 2.27 -0.21) is out of map bounds (4.25, 0.75, -0.20) to (7.22, 3.73, 0.57). The costmap cannot raytrace for it.
+[WARN] [1733392568.235344343] [local_costmap.local_costmap]: Sensor origin at (5.57, 2.29 -0.20) is out of map bounds (4.20, 0.75, -0.20) to (7.17, 3.73, 0.57). The costmap cannot raytrace for it.
+[INFO] [1733392568.518562794] [controller_server]: Passing new path to controller.
+[INFO] [1733392569.568570051] [controller_server]: Passing new path to controller.
+[INFO] [1733392570.568557684] [controller_server]: Passing new path to controller.
+[INFO] [1733392571.618570634] [controller_server]: Passing new path to controller.
+[INFO] [1733392572.618560698] [controller_server]: Passing new path to controller.
+[INFO] [1733392573.668567233] [controller_server]: Passing new path to controller.
+[INFO] [1733392574.718558232] [controller_server]: Passing new path to controller.
+[INFO] [1733392575.718573145] [controller_server]: Passing new path to controller.
+[INFO] [1733392576.768560863] [controller_server]: Passing new path to controller.
+[INFO] [1733392577.818557053] [controller_server]: Passing new path to controller.
+[INFO] [1733392578.818565957] [controller_server]: Passing new path to controller.
+[INFO] [1733392579.868565022] [controller_server]: Passing new path to controller.
+[INFO] [1733392580.868560670] [controller_server]: Passing new path to controller.
+[INFO] [1733392581.918585997] [controller_server]: Passing new path to controller.
+[INFO] [1733392582.918560496] [controller_server]: Passing new path to controller.
+[INFO] [1733392583.968570232] [controller_server]: Passing new path to controller.
+[INFO] [1733392585.018560237] [controller_server]: Passing new path to controller.
+[INFO] [1733392586.068575420] [controller_server]: Passing new path to controller.
+[INFO] [1733392587.118568961] [controller_server]: Passing new path to controller.
+[ERROR] [1733392587.119323870] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733392587.119355604] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733392587.146803217] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733392587.147570893] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [1733392587.147623795] [controller_server]: Invalid path, Path is empty.
+[WARN] [1733392587.147643455] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [1733392589.918210217] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [1733392590.819303549] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [1733392591.869650228] [controller_server]: Passing new path to controller.
+[INFO] [1733392592.919650241] [controller_server]: Passing new path to controller.
+[INFO] [1733392593.584498528] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392593.207 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392593.784528021] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392593.411 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392593.919644544] [controller_server]: Passing new path to controller.
+[INFO] [1733392593.984547888] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733392593.604 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [1733392594.969652713] [controller_server]: Passing new path to controller.
+[INFO] [1733392595.969664461] [controller_server]: Passing new path to controller.
+[INFO] [1733392597.019652183] [controller_server]: Passing new path to controller.
+[INFO] [1733392598.019645065] [controller_server]: Passing new path to controller.
+[INFO] [1733392599.069651178] [controller_server]: Passing new path to controller.
+[INFO] [1733392600.119653396] [controller_server]: Passing new path to controller.
+[INFO] [1733392601.119652924] [controller_server]: Passing new path to controller.
+[INFO] [1733392602.169657679] [controller_server]: Passing new path to controller.
+[INFO] [1733392602.372648587] [controller_server]: Reached the goal!
+[INFO] [1733392609.591810371] [rclcpp]: signal_handler(signum=2)
+[INFO] [1733392609.591897869] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[INFO] [1733392609.592041494] [controller_server]: Deactivating
+[INFO] [1733392609.592132179] [local_costmap.local_costmap]: Deactivating
+[INFO] [1733392609.635361711] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[INFO] [1733392609.725597549] [controller_server]: Cleaning up
+[INFO] [1733392609.725793878] [local_costmap.local_costmap]: Cleaning up
+[INFO] [1733392609.754968172] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
