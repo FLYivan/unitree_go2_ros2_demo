@@ -174,14 +174,14 @@ local_costmap:
       height: 3
       resolution: 0.05
       footprint: "[[-0.4, -0.15], [0.3, -0.15], [0.3, -0.07], [0.4, -0.07], [0.4, 0.07], [0.3, 0.07], [0.3, 0.15], [-0.4, 0.15]]"   # 与圆形机器人不同
-      footprint_padding: 0.04   # 额外填充距离，确保安全
+      footprint_padding: 0.05   # 额外填充距离，确保安全
       # robot_radius: 0.4                         # 参数不要动（通常半径0.4,进门半径只能0.2）
       plugins: ["voxel_layer", "inflation_layer"]
       # plugins: ["static_layer", "voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         enabled: True
-        cost_scaling_factor: 3.0
+        cost_scaling_factor: 2.5              # 可能会影响路径太长的计算
         inflation_radius: 0.35                # 参数不要动（通常半径0.4,进门半径只能0.25）
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
@@ -221,7 +221,7 @@ global_costmap:
       # robot_radius: 0.4                           # 参数不要动
       resolution: 0.05
       footprint: "[[-0.4, -0.15], [0.3, -0.15], [0.3, -0.07], [0.4, -0.07], [0.4, 0.07], [0.3, 0.07], [0.3, 0.15], [-0.4, 0.15]]"  # 与圆形机器人不同
-      footprint_padding: 0.04   # 额外填充距离，确保安全
+      footprint_padding: 0.05   # 额外填充距离，确保安全
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
       obstacle_layer:
@@ -245,7 +245,7 @@ global_costmap:
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         enabled: True                         # 启用膨胀层
-        cost_scaling_factor: 3.0
+        cost_scaling_factor: 2.5             # 可能会影响路径太长的计算
         inflation_radius: 0.35                 # 参数不要动(通常半径0.4,进门半径只能0.25)
       always_send_full_costmap: True
 
@@ -281,10 +281,8 @@ planner_server:
       # plugin: "nav2_smac_planner/SmacPlannerHybrid"
       # downsample_costmap: false           # 是否对地图进行下采样
       # downsampling_factor: 1              # 代价地图层分辨率的倍数（例如，在5cm的代价地图上设置为2将变为10cm）
-      # tolerance: 0.25                     # 如果无法找到精确的目标，作为有效容忍度终点的距离-目标启发式代价（距离）
       # allow_unknown: true                 # 允许在未知空间中行驶
       # max_iterations: 1000000             # 在失败（如果无法到达）之前搜索的最大总迭代次数，设置为-1以禁用
-      # max_on_approach_iterations: 1000    # 在达到容忍度范围内后继续尝试找到精确解决方案的最大迭代次数
       # max_planning_time: 5.0              # 规划器规划和平滑的最大时间（秒）
       # motion_model_for_search: "REEDS_SHEPP"    # Hybrid-A* Dubin, Redds-Shepp
       # angle_quantization_bins: 72         # 搜索的角度量化箱数量
@@ -298,15 +296,15 @@ planner_server:
       # retrospective_penalty: 0.015
       # lookup_table_size: 20.0             # 缓存的dubin/reeds-sheep距离窗口的大小，以米为单位。
       # cache_obstacle_heuristic: false     # 在同一目标位置的后续重新规划之间缓存障碍物地图动态规划距离扩展启发式。如果代价地图基本上是静态的，这会显著加快重新规划性能（40倍）。
-      # viz_expansions: false               # 对于Hybrid节点：是否在/expansions话题上发布扩展作为姿态数组（方向没有意义）。警告：计算和显示都很重，仅用于调试，因为它会降低性能。
       # smooth_path: True                   # 如果为true，则对路径进行简单快速的平滑后处理
+
       # smoother:
       #   max_iterations: 1000
       #   w_smooth: 0.3
       #   w_data: 0.2
       #   tolerance: 1.0e-10
       #   do_refinement: true
-      #   refinement_num: 2
+
 
 smoother_server:
   ros__parameters:
