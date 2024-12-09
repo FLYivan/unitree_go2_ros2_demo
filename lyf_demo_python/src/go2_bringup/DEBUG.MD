@@ -53,3 +53,11 @@ ros2 run go2_bringup find_stairs
 ros2 launch nav2_bringup tb3_simulation_launch.py slam:=True
 ros2 launch explore_lite explore.launch.py
 
+# 问题记录
+
+1、向上楼梯，激光会认为障碍物
+2、激光的位置误差不断累计，导致行进一段时间后无法规划路径
+3、研究使用smac方法时，无法规划路径的debug
+4、路径规划报错，[ERROR] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1733724519.410517 but the earliest data is at time 1733724525.674672, when looking up transform from frame [base] to frame [map]
+5、move模块报错
+6、路径选择的权重，避免往返走

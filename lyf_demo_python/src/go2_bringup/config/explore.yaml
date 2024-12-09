@@ -144,7 +144,7 @@ controller_server:
       sim_time: 1.7
       linear_granularity: 0.05
       angular_granularity: 0.025
-      transform_tolerance: 1.3                 # controller的transform最大容忍时间差，实际工况下1.5秒内的时间差都存在
+      transform_tolerance: 2.0                 # controller的transform最大容忍时间差，实际工况下1.5秒内的时间差都存在
       xy_goal_tolerance: 0.25
       trans_stopped_velocity: 0.25
       short_circuit_trajectory_evaluation: True
@@ -173,9 +173,9 @@ local_costmap:
       width: 3
       height: 3
       resolution: 0.05
-      # footprint: "[[-0.4, -0.15], [0.3, -0.15], [0.3, -0.07], [0.4, -0.07], [0.4, 0.07], [0.3, 0.07], [0.3, 0.15], [-0.4, 0.15]]"   # 与圆形机器人不同
-      # footprint_padding: 0.05   # 额外填充距离，确保安全
-      robot_radius: 0.4                         # 参数不要动（通常半径0.4,进门半径只能0.2）
+      footprint: "[[-0.4, -0.15], [0.3, -0.15], [0.3, -0.07], [0.4, -0.07], [0.4, 0.07], [0.3, 0.07], [0.3, 0.15], [-0.4, 0.15]]"   # 与圆形机器人不同
+      footprint_padding: 0.05   # 额外填充距离，确保安全
+      # robot_radius: 0.4                         # 参数不要动（通常半径0.4,进门半径只能0.2）
       plugins: ["voxel_layer", "inflation_layer"]
       # plugins: ["static_layer", "voxel_layer", "inflation_layer"]
       inflation_layer:
@@ -188,7 +188,7 @@ local_costmap:
         enabled: True
         publish_voxel_map: True 
         origin_z: 0.0                 # z轴=origin_z+z_voxels*z_resolution，为了避免control节点报错
-        z_resolution: 0.05
+        z_resolution: 0.1
         z_voxels: 16                    # 这个值不能动，过大会使膨胀层消失
         max_obstacle_height: 2.0
         mark_threshold: 0
@@ -218,10 +218,10 @@ global_costmap:
       global_frame: map
       robot_base_frame: base
       use_sim_time: True
-      robot_radius: 0.4                           # 参数不要动
+      # robot_radius: 0.4                           # 参数不要动
       resolution: 0.05
-      # footprint: "[[-0.4, -0.15], [0.3, -0.15], [0.3, -0.07], [0.4, -0.07], [0.4, 0.07], [0.3, 0.07], [0.3, 0.15], [-0.4, 0.15]]"  # 与圆形机器人不同
-      # footprint_padding: 0.05   # 额外填充距离，确保安全
+      footprint: "[[-0.4, -0.15], [0.3, -0.15], [0.3, -0.07], [0.4, -0.07], [0.4, 0.07], [0.3, 0.07], [0.3, 0.15], [-0.4, 0.15]]"  # 与圆形机器人不同
+      footprint_padding: 0.05   # 额外填充距离，确保安全
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
       obstacle_layer:
@@ -273,37 +273,37 @@ planner_server:
     use_sim_time: True
     planner_plugins: ["GridBased"]
     GridBased:
-      plugin: "nav2_navfn_planner/NavfnPlanner"
-      tolerance: 0.2                        # 允许到达目标点附近的距离容差
-      use_astar: false
-      allow_unknown: true
+      # plugin: "nav2_navfn_planner/NavfnPlanner"
+      # tolerance: 0.2                        # 允许到达目标点附近的距离容差
+      # use_astar: false
+      # allow_unknown: true
 
-      # plugin: "nav2_smac_planner/SmacPlannerHybrid"
-      # downsample_costmap: false           # 是否对地图进行下采样
-      # downsampling_factor: 1              # 代价地图层分辨率的倍数（例如，在5cm的代价地图上设置为2将变为10cm）
-      # allow_unknown: true                 # 允许在未知空间中行驶
-      # max_iterations: 1000000             # 在失败（如果无法到达）之前搜索的最大总迭代次数，设置为-1以禁用
-      # max_planning_time: 5.0              # 规划器规划和平滑的最大时间（秒）
-      # motion_model_for_search: "REEDS_SHEPP"    # Hybrid-A* Dubin, Redds-Shepp
-      # angle_quantization_bins: 72         # 搜索的角度量化箱数量
-      # analytic_expansion_ratio: 3.5       # 在搜索最终接近时尝试分析扩展的比例
-      # analytic_expansion_max_length: 3.0  # 对于Hybrid/Lattice节点：分析扩展被认为有效的最大长度，以防止不安全的捷径
-      # minimum_turning_radius: 0.40        # 路径/车辆的最小转弯半径（米）
-      # reverse_penalty: 2.0                # 如果运动是倒车，应用的惩罚，必须 >= 1
-      # change_penalty: 0.0                 # 如果运动改变方向（左到右），应用的惩罚，必须 >= 0
-      # non_straight_penalty: 1.2           # 如果运动不是直线，应用的惩罚，必须 >= 1
-      # cost_penalty: 2.0                   # 在将障碍物地图动态规划距离扩展启发式添加到障碍地图时应用的惩罚。这会驱动机器人更靠近通道的中心。合理的值在1.3 - 3.5之间。
-      # retrospective_penalty: 0.015
-      # lookup_table_size: 20.0             # 缓存的dubin/reeds-sheep距离窗口的大小，以米为单位。
-      # cache_obstacle_heuristic: false     # 在同一目标位置的后续重新规划之间缓存障碍物地图动态规划距离扩展启发式。如果代价地图基本上是静态的，这会显著加快重新规划性能（40倍）。
-      # smooth_path: True                   # 如果为true，则对路径进行简单快速的平滑后处理
+      plugin: "nav2_smac_planner/SmacPlannerHybrid"
+      downsample_costmap: false           # 是否对地图进行下采样
+      downsampling_factor: 1              # 代价地图层分辨率的倍数（例如，在5cm的代价地图上设置为2将变为10cm）
+      allow_unknown: true                 # 允许在未知空间中行驶
+      max_iterations: -1             # 在失败（如果无法到达）之前搜索的最大总迭代次数，设置为-1以禁用
+      max_planning_time: 5.0              # 规划器规划和平滑的最大时间（秒）
+      motion_model_for_search: "DUBIN"    # Hybrid-A* Dubin, Redds-Shepp
+      angle_quantization_bins: 72         # 搜索的角度量化箱数量
+      analytic_expansion_ratio: 3.5       # 在搜索最终接近时尝试分析扩展的比例
+      analytic_expansion_max_length: 3.0  # 对于Hybrid/Lattice节点：分析扩展被认为有效的最大长度，以防止不安全的捷径
+      minimum_turning_radius: 0.40        # 路径/车辆的最小转弯半径（米）
+      reverse_penalty: 2.0                # 如果运动是倒车，应用的惩罚，必须 >= 1
+      change_penalty: 0.0                 # 如果运动改变方向（左到右），应用的惩罚，必须 >= 0
+      non_straight_penalty: 1.2           # 如果运动不是直线，应用的惩罚，必须 >= 1
+      cost_penalty: 2.0                   # 在将障碍物地图动态规划距离扩展启发式添加到障碍地图时应用的惩罚。这会驱动机器人更靠近通道的中心。合理的值在1.3 - 3.5之间。
+      retrospective_penalty: 0.015
+      lookup_table_size: 20.0             # 缓存的dubin/reeds-sheep距离窗口的大小，以米为单位。
+      cache_obstacle_heuristic: false     # 在同一目标位置的后续重新规划之间缓存障碍物地图动态规划距离扩展启发式。如果代价地图基本上是静态的，这会显著加快重新规划性能（40倍）。
+      smooth_path: True                   # 如果为true，则对路径进行简单快速的平滑后处理
 
-      # smoother:
-      #   max_iterations: 1000
-      #   w_smooth: 0.3
-      #   w_data: 0.2
-      #   tolerance: 1.0e-10
-      #   do_refinement: true
+      smoother:
+        max_iterations: 1000
+        w_smooth: 0.3
+        w_data: 0.2
+        tolerance: 1.0e-10
+        do_refinement: true
 
 
 smoother_server:

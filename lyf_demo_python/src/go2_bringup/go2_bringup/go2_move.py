@@ -82,12 +82,12 @@ class CmdVelSubscriber(Node):
         self.sport_req.Move(self.req,vx, vy, vyaw)                              # 获取与高级运动命令对应的请求消息
         self.cmd_vel_pub.publish(self.req)                                      # 发布速度命令
 
-        # self.get_logger().info(f'{YELLOW}Sending to go2: vx ={vx}, vy={vy}, vyaw={vyaw}{RESET}')
+        self.get_logger().info(f'{YELLOW}Sending to go2: vx ={vx}, vy={vy}, vyaw={vyaw}{RESET}')
 
     # 定时器回调，启动主控
     def timer_callback(self):
-        self.active_control()             # 避障行进
-        # self.only_nav2()
+        # self.active_control()             # 避障行进
+        self.only_nav2()
 
     # 只用nav2的结果来控制的方法
     def only_nav2(self):
