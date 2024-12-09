@@ -37,7 +37,7 @@ setup(
             'wavefront_frontier  = go2_bringup.wavefront_frontier:main', 
 
             'timestamp_test  = go2_bringup.timestamp_test:main', 
-            
+            'find_stairs  = go2_bringup.find_stairs:main',              
           
 
 
