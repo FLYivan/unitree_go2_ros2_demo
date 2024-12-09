@@ -173,9 +173,9 @@ local_costmap:
       width: 3
       height: 3
       resolution: 0.05
-      footprint: "[[-0.4, -0.15], [0.3, -0.15], [0.3, -0.07], [0.4, -0.07], [0.4, 0.07], [0.3, 0.07], [0.3, 0.15], [-0.4, 0.15]]"   # 与圆形机器人不同
-      footprint_padding: 0.05   # 额外填充距离，确保安全
-      # robot_radius: 0.4                         # 参数不要动（通常半径0.4,进门半径只能0.2）
+      # footprint: "[[-0.4, -0.15], [0.3, -0.15], [0.3, -0.07], [0.4, -0.07], [0.4, 0.07], [0.3, 0.07], [0.3, 0.15], [-0.4, 0.15]]"   # 与圆形机器人不同
+      # footprint_padding: 0.05   # 额外填充距离，确保安全
+      robot_radius: 0.4                         # 参数不要动（通常半径0.4,进门半径只能0.2）
       plugins: ["voxel_layer", "inflation_layer"]
       # plugins: ["static_layer", "voxel_layer", "inflation_layer"]
       inflation_layer:
@@ -218,10 +218,10 @@ global_costmap:
       global_frame: map
       robot_base_frame: base
       use_sim_time: True
-      # robot_radius: 0.4                           # 参数不要动
+      robot_radius: 0.4                           # 参数不要动
       resolution: 0.05
-      footprint: "[[-0.4, -0.15], [0.3, -0.15], [0.3, -0.07], [0.4, -0.07], [0.4, 0.07], [0.3, 0.07], [0.3, 0.15], [-0.4, 0.15]]"  # 与圆形机器人不同
-      footprint_padding: 0.05   # 额外填充距离，确保安全
+      # footprint: "[[-0.4, -0.15], [0.3, -0.15], [0.3, -0.07], [0.4, -0.07], [0.4, 0.07], [0.3, 0.07], [0.3, 0.15], [-0.4, 0.15]]"  # 与圆形机器人不同
+      # footprint_padding: 0.05   # 额外填充距离，确保安全
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
       obstacle_layer:
