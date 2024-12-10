@@ -5,13 +5,10 @@ explore_node:
     costmap_topic: /global_costmap/costmap
     costmap_updates_topic: /global_costmap/costmap_updates
 
-    # costmap_topic: map
-    # costmap_updates_topic: map_updates
-
     visualize: true
     planner_frequency: 0.016     # 频率为0.2Hz,即1/planner_frequency 秒触发一次定时器，改变一次策略（60秒自启动一次）
     progress_timeout: 30.0
-    potential_scale: 3.0        # 用于对边界进行加权。较大的 potential_scale_ 值会使得距离对成本的影响更大。
+    potential_scale: 5.0        # 用于对边界进行加权。较大的 potential_scale_ 值会使得距离对成本的影响更大。
     orientation_scale: 0.5
     gain_scale: 1.0             # 用于对边界进行加权。较大的 gain_scale_ 值会使得前沿的大小对成本的影响更大。
                                 # 较大的前沿通常意味着更多的未知区域可以被探索，因此在成本计算中，前沿越大，成本越低。
@@ -22,10 +19,9 @@ explore_node:
 bt_navigator:
   ros__parameters:
     use_sim_time: True
-    # global_frame: map_slamtoolbox               # mapfind
     global_frame: map 
     robot_base_frame: base
-    odom_topic: /lio_sam_ros2/dogOdomProcess/DogOdomGlobal
+    odom_topic: /odom
     bt_loop_duration: 10
     default_server_timeout: 20
     wait_for_service_timeout: 1000
@@ -90,10 +86,10 @@ bt_navigator_navigate_to_pose_rclcpp_node:
   ros__parameters:
     use_sim_time: True
 
-controller_server:
+controller_server:                                  # 局部规划器服务器
   ros__parameters:
     use_sim_time: True
-    controller_frequency: 20.0
+    controller_frequency: 20.0                      # 分层规划
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
@@ -174,15 +170,30 @@ local_costmap:
       height: 3
       resolution: 0.05
       footprint: "[[-0.4, -0.15], [0.3, -0.15], [0.3, -0.07], [0.4, -0.07], [0.4, 0.07], [0.3, 0.07], [0.3, 0.15], [-0.4, 0.15]]"   # 与圆形机器人不同
-      footprint_padding: 0.05   # 额外填充距离，确保安全
+      footprint_padding: 0.1                      # 局部规划中使用较大值
       # robot_radius: 0.4                         # 参数不要动（通常半径0.4,进门半径只能0.2）
-      plugins: ["voxel_layer", "inflation_layer"]
-      # plugins: ["static_layer", "voxel_layer", "inflation_layer"]
+      # plugins: ["voxel_layer", "inflation_layer"]
+      plugins: ["obstacle_layer", "inflation_layer"]          # 2d建图，不使用体素层
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         enabled: True
         cost_scaling_factor: 2.5              # 可能会影响路径太长的计算
         inflation_radius: 0.35                # 参数不要动（通常半径0.4,进门半径只能0.25）
+      obstacle_layer:
+        plugin: "nav2_costmap_2d::ObstacleLayer"
+        enabled: True
+        observation_sources: scan
+        scan:
+          topic: /scan
+          max_obstacle_height: 2.0      # 障碍物最大高度(米)，应大于机器人高度，室内建议2-3米，室外可设置更高
+          clearing: True                # 是否清除探测范围内的障碍物，通常设为True以保证动态避障，特殊场景可设为False
+          marking: True                 # 是否标记探测到的障碍物，通常设为True以实现避障，特殊场景可设为False
+          data_type: "LaserScan"        # 传感器数据类型，支持"LaserScan"和"PointCloud2"，根据实际传感器选择
+          raytrace_max_range: 3.0       # 射线追踪最大范围(米)，应略大于obstacle_max_range，建议为雷达量程的0.9-1.2倍
+          raytrace_min_range: 0.3       # 射线追踪最小范围(米)，通常为0，存在近距离盲区时可适当增大，取值范围0-1米
+          obstacle_max_range: 2.5       # 障碍物探测最大范围(米)，建议为雷达量程的0.8-1.0倍，室内建议2-3米，室外可更大
+          obstacle_min_range: 0.25      # 障碍物探测最小范围(米)，通常为0，雷达存在盲区时可适当增大，取值范围0-1米，路由器问题解决 (路由器盒子距离0.25)
+
       voxel_layer:
         plugin: "nav2_costmap_2d::VoxelLayer"
         enabled: True
@@ -214,14 +225,13 @@ global_costmap:
     ros__parameters:
       update_frequency: 1.0
       publish_frequency: 1.0
-      # global_frame: map_slamtoolbox               # mapfind
       global_frame: map
       robot_base_frame: base
       use_sim_time: True
       # robot_radius: 0.4                           # 参数不要动
       resolution: 0.05
       footprint: "[[-0.4, -0.15], [0.3, -0.15], [0.3, -0.07], [0.4, -0.07], [0.4, 0.07], [0.3, 0.07], [0.3, 0.15], [-0.4, 0.15]]"  # 与圆形机器人不同
-      footprint_padding: 0.05   # 额外填充距离，确保安全
+      footprint_padding: 0.05           # 额外填充距离，确保安全
       track_unknown_space: true
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
       obstacle_layer:
@@ -230,14 +240,14 @@ global_costmap:
         observation_sources: scan
         scan:
           topic: /scan
-          max_obstacle_height: 2.0
-          clearing: True
-          marking: True
-          data_type: "LaserScan"
-          raytrace_max_range: 4.0         # 射线追踪最大范围，范围太大会使得探索时出现频繁切换路线
-          raytrace_min_range: 0.3        # 射线追踪最小范围 (路由器盒子距离0.3)
-          obstacle_max_range: 3.5         # 检测到障碍物最大范围（这个参数是否跟地图障碍物标记有关）
-          obstacle_min_range: 0.25         # 障碍物最小范围，小于这个范围的被忽略，路由器问题解决 (路由器盒子距离0.3)
+          max_obstacle_height: 2.0      # 障碍物最大高度(米)，应大于机器人高度，室内建议2-3米，室外可设置更高
+          clearing: True                # 是否清除探测范围内的障碍物，通常设为True以保证动态避障，特殊场景可设为False
+          marking: True                 # 是否标记探测到的障碍物，通常设为True以实现避障，特殊场景可设为False
+          data_type: "LaserScan"        # 传感器数据类型，支持"LaserScan"和"PointCloud2"，根据实际传感器选择
+          raytrace_max_range: 3.0       # 室外可以设置较大，用于构建完整环境地图，射线追踪最大范围(米)，应略大于obstacle_max_range，建议为雷达量程的0.9-1.2倍
+          raytrace_min_range: 0.3       # 射线追踪最小范围(米)，通常为0，存在近距离盲区时可适当增大，取值范围0-1米
+          obstacle_max_range: 2.5       # 室外可以设置较大，用于构建完整环境地图，障碍物探测最大范围(米)，建议为雷达量程的0.8-1.0倍，室内建议2-3米，室外可更大
+          obstacle_min_range: 0.25      # 障碍物探测最小范围(米)，通常为0，雷达存在盲区时可适当增大，取值范围0-1米，路由器问题解决 (路由器盒子距离0.25)
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
         enabled: True
@@ -267,7 +277,7 @@ map_saver:
     occupied_thresh_default: 0.65
     map_subscribe_transient_local: True
 
-planner_server:
+planner_server:                              # 全局规划器服务器
   ros__parameters:
     expected_planner_frequency: 20.0
     use_sim_time: True
@@ -279,31 +289,32 @@ planner_server:
       # allow_unknown: true
 
       plugin: "nav2_smac_planner/SmacPlannerHybrid"
-      downsample_costmap: false           # 是否对地图进行下采样
-      downsampling_factor: 1              # 代价地图层分辨率的倍数（例如，在5cm的代价地图上设置为2将变为10cm）
-      allow_unknown: true                 # 允许在未知空间中行驶
-      max_iterations: -1             # 在失败（如果无法到达）之前搜索的最大总迭代次数，设置为-1以禁用
-      max_planning_time: 5.0              # 规划器规划和平滑的最大时间（秒）
-      motion_model_for_search: "DUBIN"    # Hybrid-A* Dubin, Redds-Shepp
-      angle_quantization_bins: 72         # 搜索的角度量化箱数量
-      analytic_expansion_ratio: 3.5       # 在搜索最终接近时尝试分析扩展的比例
-      analytic_expansion_max_length: 3.0  # 对于Hybrid/Lattice节点：分析扩展被认为有效的最大长度，以防止不安全的捷径
-      minimum_turning_radius: 0.40        # 路径/车辆的最小转弯半径（米）
-      reverse_penalty: 2.0                # 如果运动是倒车，应用的惩罚，必须 >= 1
-      change_penalty: 0.0                 # 如果运动改变方向（左到右），应用的惩罚，必须 >= 0
-      non_straight_penalty: 1.2           # 如果运动不是直线，应用的惩罚，必须 >= 1
-      cost_penalty: 2.0                   # 在将障碍物地图动态规划距离扩展启发式添加到障碍地图时应用的惩罚。这会驱动机器人更靠近通道的中心。合理的值在1.3 - 3.5之间。
-      retrospective_penalty: 0.015
-      lookup_table_size: 20.0             # 缓存的dubin/reeds-sheep距离窗口的大小，以米为单位。
-      cache_obstacle_heuristic: false     # 在同一目标位置的后续重新规划之间缓存障碍物地图动态规划距离扩展启发式。如果代价地图基本上是静态的，这会显著加快重新规划性能（40倍）。
-      smooth_path: True                   # 如果为true，则对路径进行简单快速的平滑后处理
+      downsample_costmap: false           # 是否对代价地图进行降采样,复杂环境建议false,简单环境可设为true以提高性能
+      downsampling_factor: 1              # 代价地图降采样因子,仅当downsample_costmap为true时有效,取值范围1-4,值越大精度越低但速度越快
+      tolerance: 0.5                      # 到达目标点的距离容差(米),取值范围0.1-1.0,开阔环境可设大些,狭窄环境需设小些
+      allow_unknown: true                 # 是否允许规划穿过未知区域,未知区域多时建议true,已知环境可设为false
+      max_iterations: 1000000             # 路径搜索最大迭代次数,取值范围10000-2000000,复杂环境需要更大的迭代次数
+      max_planning_time: 10.0             # 路径规划最大允许时间(秒),取值范围1.0-30.0,根据实时性要求设置
+      motion_model_for_search: "REEDS_SHEPP"    # 运动模型类型,DUBIN适合前进受限的机器人,REEDS_SHEPP适合可后退的机器人
+      angle_quantization_bins: 64         # 角度量化区间数,取值16-72,值越大转向越平滑但计算量越大
+      analytic_expansion_ratio: 2.5       # 解析扩展比例,取值2.0-5.0,开阔环境可设大些以加快规划,狭窄环境设小些以提高精度
+      analytic_expansion_max_length: 1.5  # 最大解析扩展长度(米),取值0.5-5.0,空旷处可设大些,狭窄处设小些
+      minimum_turning_radius: 0.05         # 最小转弯半径(米),根据机器人运动学约束设置,轮式机器人一般0.3-1.0,全向机器人可接近0
+      reverse_penalty: 2.0                # 倒车代价权重,取值>=1.0,不允许倒车设很大,允许倒车可设1.0-3.0
+      change_penalty: 0.0                 # 改变方向的惩罚系数,取值>=0,动态环境设小些,静态环境可设大些提高路径平滑度
+      non_straight_penalty: 1.2           # 非直线运动惩罚系数,取值>=1.0,追求更直的路径设大些,追求更灵活设小些
+      cost_penalty: 2.0                   # 代价地图惩罚系数,取值1.3-3.5,值越大离障碍物越远,但可能导致路径过长
+      retrospective_penalty: 0.015        # 回溯惩罚系数,取值0.01-0.1,值越大越不易产生回头路,但可能导致找不到路径
+      lookup_table_size: 20.0             # 查找表大小(米),取值10.0-30.0,值越大预计算越多内存占用越大,但规划更快
+      cache_obstacle_heuristic: false     # 是否缓存启发式值,静态环境设true可提高性能,动态环境需设false
+      smooth_path: True                   # 是否对规划路径进行平滑处理,一般建议开启以获得更平滑的路径
 
-      smoother:
-        max_iterations: 1000
-        w_smooth: 0.3
-        w_data: 0.2
-        tolerance: 1.0e-10
-        do_refinement: true
+      smoother:                           # 路径平滑器参数配置
+        max_iterations: 1000              # 平滑最大迭代次数,取值500-2000,值越大越平滑但耗时越长
+        w_smooth: 0.3                     # 平滑权重,取值0.1-0.4,值越大越平滑但可能偏离原始路径
+        w_data: 0.2                       # 数据保持权重,取值0.1-0.3,值越大越接近原始路径
+        tolerance: 1.0e-10                # 平滑收敛阈值,取值1e-10到1e-5,值越小越精确但耗时越长
+        do_refinement: true               # 是否进行路径细化,开启可获得更高质量的路径,但会增加计算时间
 
 
 smoother_server:
@@ -366,7 +377,7 @@ velocity_smoother:
     min_velocity: [-0.26, 0.0, -1.0]
     max_accel: [2.5, 0.0, 3.2]
     max_decel: [-2.5, 0.0, -3.2]
-    odom_topic: "lio_sam_ros2/dogOdomProcess/DogOdomGlobal"
+    odom_topic: "odom"
     odom_duration: 0.1
     deadband_velocity: [0.0, 0.0, 0.0]
     velocity_timeout: 1.0

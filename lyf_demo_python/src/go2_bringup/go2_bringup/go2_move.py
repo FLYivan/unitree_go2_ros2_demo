@@ -86,8 +86,8 @@ class CmdVelSubscriber(Node):
 
     # 定时器回调，启动主控
     def timer_callback(self):
-        # self.active_control()             # 避障行进
-        self.only_nav2()
+        self.active_control()             # 避障行进
+        # self.only_nav2()
 
     # 只用nav2的结果来控制的方法
     def only_nav2(self):
@@ -95,6 +95,10 @@ class CmdVelSubscriber(Node):
 
     # go2行进策略执行函数
     def active_control(self):
+
+        if not hasattr(self, 'current_scan') or self.current_scan is None:
+            self.get_logger().warn('等待避障scan数据...')
+            return
 
         # 调用避障函数，判断如何行进
         # action = self.avoid_obstacle()
