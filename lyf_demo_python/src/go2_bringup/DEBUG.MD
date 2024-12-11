@@ -68,7 +68,12 @@ ros2 launch explore_lite explore.launch.py
 9、分析smac算法每个参数的意义——pass
 10、odom_topic要调整——pass
 5、move模块报错——在move代码中增加初始化保护机制 pass
+6、[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.  在楼梯死胡同 ——pass
 
+
+6、 [ERROR] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1733820797.110452 but the earliest data is at time 1733820823.080866, when looking up transform from frame [base] to frame [map]——罕见错误，1、增大tf缓存，2、增大tf频率
+调整动态tf发布频率，由20到100
 5、改变目标点容差，要再大点？
 
 
@@ -77,21 +82,51 @@ ros2 launch explore_lite explore.launch.py
 ——调整failure_tolerance参数
 ——修改nav2_costmap_2d/costmap_2d_ros源码的transform_tolerance对应值，  没用，再调整
 
+
+
+bool transformPose(
+  const std::shared_ptr<tf2_ros::Buffer> tf,
+  const std::string frame,
+  const geometry_msgs::msg::PoseStamped & in_pose,
+  geometry_msgs::msg::PoseStamped & out_pose,
+  rclcpp::Duration & transform_tolerance
+)
+{
+  // 在函数最开始添加此行
+  RCLCPP_INFO(rclcpp::get_logger("tf_help"), "In transformPose, received transform_tolerance = %f",
+              transform_tolerance.seconds());
+
+
+// 在 transformGlobalPlan 函数中的 transformGlobalPoseToLocal lambda 函数里：
+auto transformGlobalPoseToLocal = [&](const auto & global_plan_pose) {
+    nav_2d_msgs::msg::Pose2DStamped stamped_pose, transformed_pose;
+    stamped_pose.header.frame_id = global_plan_.header.frame_id;
+    stamped_pose.pose = global_plan_pose;
+    
+    // 在调用 transformPose 前添加此行
+    RCLCPP_INFO(logger_, "Before calling transformPose, transform_tolerance_ = %f", 
+                transform_tolerance_.seconds());
+
+
+  // let's get the pose of the robot in the frame of the plan
+  nav_2d_msgs::msg::Pose2DStamped robot_pose;
+  
+  // 在这里添加日志
+  RCLCPP_INFO(logger_, "Before calling transformPose for robot pose, transform_tolerance_ = %f", 
+              transform_tolerance_.seconds());
+              
+  goal_pose.header.frame_id = global_plan_.header.frame_id;
+  goal_pose.pose = global_plan_.poses.back();
+  
+  // 在这里添加日志
+  RCLCPP_INFO(logger_, "Before calling transformPose for goal pose, transform_tolerance_ = %f", 
+              transform_tolerance_.seconds());
+
+
+
 6、降低全局规划器频率（针对狭窄走廊）
 
-[ERROR] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1733820797.110452 but the earliest data is at time 1733820823.080866, when looking up transform from frame [base] to frame [map]
 
-[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
-[ERROR] [tf_help]: Data time: 1733823508s 564122457ns, Transform time: 1733823508s 210295278ns, tolerance is 0.300000
-[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
-[ERROR] [tf_help]: Data time: 1733823508s 564122457ns, Transform time: 1733823508s 210295278ns, tolerance is 0.300000
-[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
-[ERROR] [tf_help]: Data time: 1733823508s 564122457ns, Transform time: 1733823508s 210295278ns, tolerance is 0.300000
-[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
-[ERROR] [tf_help]: Data time: 1733823508s 564122457ns, Transform time: 1733823508s 210295278ns, tolerance is 0.300000
-
-[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
-[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.  在楼梯死胡同
 
 9、往复跑的问题 还是要解决 调explore参数
 
@@ -102,23 +137,11 @@ ros2 launch explore_lite explore.launch.py
 
 1、向上楼梯，激光会认为障碍物
 12、避障在长时间原地踏步？时才启动检测
-
-a星计算超时
-解决方案：
-调整规划参数，如增加超时时间或最大迭代次数
-优化启发式函数
-降低地图分辨率
-使用分层规划策略
-在关键位置添加路径点，将长路径分解为多个短路径
-适当放宽规划约束条件
+13、死胡同时，避章走法接管
 
 
-狭窄走廊的路径规划更复杂
-解决方案：
-使用分层规划策略，先规划粗略路径，再细化局部路径——调整不同规划器频率，全局路径不需要频繁重新规划（1Hz）
-针对狭窄区域使用特殊的启发式函数
-在关键位置设置中间路径点
-适当调整代价地图的膨胀参数
+
+
 
 
 
