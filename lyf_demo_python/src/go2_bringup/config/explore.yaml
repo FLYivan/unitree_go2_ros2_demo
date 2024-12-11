@@ -7,10 +7,10 @@ explore_node:
 
     visualize: true
     planner_frequency: 0.016     # 频率为0.2Hz,即1/planner_frequency 秒触发一次定时器，改变一次策略（60秒自启动一次）
-    progress_timeout: 30.0
-    potential_scale: 5.0        # 用于对边界进行加权。较大的 potential_scale_ 值会使得距离对成本的影响更大。
+    progress_timeout: 120.0
+    potential_scale: 3.0        # 用于对边界进行加权。较大的 potential_scale_ 值会使得距离对成本的影响更大。
     orientation_scale: 0.5
-    gain_scale: 1.0             # 用于对边界进行加权。较大的 gain_scale_ 值会使得前沿的大小对成本的影响更大。
+    gain_scale: 1.0           # 用于对边界进行加权。较大的 gain_scale_ 值会使得前沿的大小对成本的影响更大。
                                 # 较大的前沿通常意味着更多的未知区域可以被探索，因此在成本计算中，前沿越大，成本越低。
     transform_tolerance: 0.5    # 在调用TF（变换）库的transform函数时，作为一个时间容差参数传递。以便在获取变换时能够成功匹配到合适的时间戳。
     min_frontier_size: 0.4      # 将边界视为勘探目标的最小边界尺寸。数值单位为米。=分辨率*前沿点个数
@@ -93,7 +93,7 @@ controller_server:                                  # 局部规划器服务器
     min_x_velocity_threshold: 0.001
     min_y_velocity_threshold: 0.5
     min_theta_velocity_threshold: 0.001
-    failure_tolerance: 0.3                       
+    failure_tolerance: 0.4                         # TF变换容忍时间        
     progress_checker_plugin: "progress_checker"
     goal_checker_plugins: ["general_goal_checker"] # "precise_goal_checker"
     controller_plugins: ["FollowPath"]
@@ -173,7 +173,7 @@ local_costmap:
       footprint_padding: 0.1                      # 局部规划中使用较大值
       # robot_radius: 0.4                         # 参数不要动（通常半径0.4,进门半径只能0.2）
       # plugins: ["voxel_layer", "inflation_layer"]
-      plugins: ["obstacle_layer", "inflation_layer"]          # 2d建图，不使用体素层
+      plugins: ["static_layer", "obstacle_layer", "inflation_layer"]          # 2d建图，不使用体素层
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
         enabled: True
@@ -210,9 +210,9 @@ local_costmap:
           clearing: True
           marking: True
           data_type: "LaserScan"
-          raytrace_max_range: 4.0         # 射线追踪最大范围
+          raytrace_max_range: 3.0         # 射线追踪最大范围
           raytrace_min_range: 0.3        # 射线追踪最小范围 (路由器盒子距离0.3)
-          obstacle_max_range: 3.5         # 障碍物最大范围
+          obstacle_max_range: 2.5         # 障碍物最大范围
           obstacle_min_range: 0.25         # 障碍物最小范围  (路由器盒子距离0.3)
       static_layer:
         plugin: "nav2_costmap_2d::StaticLayer"
@@ -294,12 +294,12 @@ planner_server:                              # 全局规划器服务器
       tolerance: 0.5                      # 到达目标点的距离容差(米),取值范围0.1-1.0,开阔环境可设大些,狭窄环境需设小些
       allow_unknown: true                 # 是否允许规划穿过未知区域,未知区域多时建议true,已知环境可设为false
       max_iterations: 1000000             # 路径搜索最大迭代次数,取值范围10000-2000000,复杂环境需要更大的迭代次数
-      max_planning_time: 10.0             # 路径规划最大允许时间(秒),取值范围1.0-30.0,根据实时性要求设置
+      max_planning_time: 20.0             # 路径规划最大允许时间(秒),取值范围1.0-30.0,根据实时性要求设置
       motion_model_for_search: "REEDS_SHEPP"    # 运动模型类型,DUBIN适合前进受限的机器人,REEDS_SHEPP适合可后退的机器人
-      angle_quantization_bins: 64         # 角度量化区间数,取值16-72,值越大转向越平滑但计算量越大
+      angle_quantization_bins: 72         # 角度量化区间数,取值16-72,值越大转向越平滑但计算量越大
       analytic_expansion_ratio: 2.5       # 解析扩展比例,取值2.0-5.0,开阔环境可设大些以加快规划,狭窄环境设小些以提高精度
       analytic_expansion_max_length: 1.5  # 最大解析扩展长度(米),取值0.5-5.0,空旷处可设大些,狭窄处设小些
-      minimum_turning_radius: 0.05         # 最小转弯半径(米),根据机器人运动学约束设置,轮式机器人一般0.3-1.0,全向机器人可接近0
+      minimum_turning_radius: 0.05       # 最小转弯半径(米),根据机器人运动学约束设置,轮式机器人一般0.3-1.0,全向机器人可接近0
       reverse_penalty: 2.0                # 倒车代价权重,取值>=1.0,不允许倒车设很大,允许倒车可设1.0-3.0
       change_penalty: 0.0                 # 改变方向的惩罚系数,取值>=0,动态环境设小些,静态环境可设大些提高路径平滑度
       non_straight_penalty: 1.2           # 非直线运动惩罚系数,取值>=1.0,追求更直的路径设大些,追求更灵活设小些

@@ -1,0 +1,639 @@
+[INFO] [controller_server]: 
+	controller_server lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [controller_server]: Creating controller server
+[INFO] [local_costmap.local_costmap]: 
+	local_costmap lifecycle node launched. 
+	Waiting on external lifecycle transitions to activate
+	See https://design.ros2.org/articles/node_lifecycle.html for more information.
+[INFO] [local_costmap.local_costmap]: Creating Costmap
+[INFO] [controller_server]: Configuring controller interface
+[INFO] [controller_server]: getting goal checker plugins..
+[INFO] [controller_server]: Controller frequency set to 20.0000Hz
+[INFO] [local_costmap.local_costmap]: Configuring
+[INFO] [local_costmap.local_costmap]: Using plugin "static_layer"
+[INFO] [local_costmap.local_costmap]: Subscribing to the map topic (/map) with transient local durability
+[INFO] [local_costmap.local_costmap]: Initialized plugin "static_layer"
+[INFO] [local_costmap.local_costmap]: Using plugin "obstacle_layer"
+[INFO] [local_costmap.local_costmap]: Subscribed to Topics: scan
+[INFO] [local_costmap.local_costmap]: Initialized plugin "obstacle_layer"
+[INFO] [local_costmap.local_costmap]: Using plugin "inflation_layer"
+[INFO] [local_costmap.local_costmap]: Initialized plugin "inflation_layer"
+[INFO] [controller_server]: Created progress_checker : progress_checker of type nav2_controller::SimpleProgressChecker
+[INFO] [controller_server]: Created goal checker : general_goal_checker of type nav2_controller::SimpleGoalChecker
+[INFO] [controller_server]: Controller Server has general_goal_checker  goal checkers available.
+[INFO] [controller_server]: Created controller : FollowPath of type dwb_core::DWBLocalPlanner
+[INFO] [controller_server]: Setting transform_tolerance to 2.000000
+[INFO] [controller_server]: Using critic "RotateToGoal" (dwb_critics::RotateToGoalCritic)
+[INFO] [controller_server]: Critic plugin initialized
+[INFO] [controller_server]: Using critic "Oscillation" (dwb_critics::OscillationCritic)
+[INFO] [controller_server]: Critic plugin initialized
+[INFO] [controller_server]: Using critic "BaseObstacle" (dwb_critics::BaseObstacleCritic)
+[INFO] [controller_server]: Critic plugin initialized
+[INFO] [controller_server]: Using critic "GoalAlign" (dwb_critics::GoalAlignCritic)
+[INFO] [controller_server]: Critic plugin initialized
+[INFO] [controller_server]: Using critic "PathAlign" (dwb_critics::PathAlignCritic)
+[INFO] [controller_server]: Critic plugin initialized
+[INFO] [controller_server]: Using critic "PathDist" (dwb_critics::PathDistCritic)
+[INFO] [controller_server]: Critic plugin initialized
+[INFO] [controller_server]: Using critic "GoalDist" (dwb_critics::GoalDistCritic)
+[INFO] [controller_server]: Critic plugin initialized
+[INFO] [controller_server]: Controller Server has FollowPath  controllers available.
+[INFO] [controller_server]: Activating
+[INFO] [local_costmap.local_costmap]: Activating
+[INFO] [local_costmap.local_costmap]: Checking transform
+[INFO] [local_costmap.local_costmap]: start
+[INFO] [controller_server]: Creating bond (controller_server) to lifecycle manager.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 677 X 125 at 0.050000 m/pix
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[WARN] [controller_server]: No goal checker was specified in parameter 'current_goal_checker'. Server will use only plugin loaded general_goal_checker . This warning will appear once.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [controller_server]: Failed to make progress
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[WARN] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 679 X 127 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 690 X 308 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 691 X 438 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Reached the goal!
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 691 X 439 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 691 X 567 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823460.223 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823460.424 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823460.622 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823460.817 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823461.022 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823461.215 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823462.418 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823462.639 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823469.456 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823469.637 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [controller_server]: Invalid path, Path is empty.
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [controller_server]: Invalid path, Path is empty.
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823474s 234668040ns, Transform time: 1733823473s 818114165ns, tolerance is 0.300000
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823474.835 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823475.026 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823476s 396189217ns, Transform time: 1733823476s 24458677ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823476s 396189217ns, Transform time: 1733823476s 24458677ns, tolerance is 0.300000
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 691 X 574 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823478.417 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823478.619 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 691 X 574 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 691 X 574 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823507.806 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823508.010 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 783 X 574 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823508s 564122457ns, Transform time: 1733823508s 210295278ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823508s 564122457ns, Transform time: 1733823508s 210295278ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823508s 564122457ns, Transform time: 1733823508s 210295278ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823508s 564122457ns, Transform time: 1733823508s 210295278ns, tolerance is 0.300000
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 785 X 574 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 786 X 574 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823527.037 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823527.232 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 786 X 575 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [controller_server]: Invalid path, Path is empty.
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [controller_server]: Invalid path, Path is empty.
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823546.231 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823546.432 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823553.825 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823554.036 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [controller_server]: Invalid path, Path is empty.
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [controller_server]: Invalid path, Path is empty.
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 787 X 575 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 787 X 575 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 787 X 574 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 787 X 574 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 787 X 574 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823607.827 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823608.030 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: StaticLayer: Resizing static layer to 787 X 574 at 0.050000 m/pix
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823620.406 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823620.611 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823620.807 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823621s 129055543ns, Transform time: 1733823620s 406939381ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823621s 129055543ns, Transform time: 1733823620s 406939381ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823621s 129055543ns, Transform time: 1733823620s 406939381ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823621s 129055543ns, Transform time: 1733823620s 406939381ns, tolerance is 0.300000
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823621.010 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823621s 129055543ns, Transform time: 1733823620s 406939381ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823621s 129055543ns, Transform time: 1733823620s 406939381ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823621s 129055543ns, Transform time: 1733823620s 406939381ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823621s 129055543ns, Transform time: 1733823620s 406939381ns, tolerance is 0.300000
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823621.208 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823621s 129055543ns, Transform time: 1733823620s 406939381ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823621s 129055543ns, Transform time: 1733823620s 406939381ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823621s 129055543ns, Transform time: 1733823620s 406939381ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823621s 129055543ns, Transform time: 1733823620s 406939381ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823621s 129055543ns, Transform time: 1733823620s 406939381ns, tolerance is 0.300000
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [controller_server]: Invalid path, Path is empty.
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [controller_server]: Invalid path, Path is empty.
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Reached the goal!
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [controller_server]: Controller patience exceeded
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [controller_server]: Invalid path, Path is empty.
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [controller_server]: Controller patience exceeded
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [controller_server]: Controller patience exceeded
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [controller_server]: Controller patience exceeded
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[WARN] [controller_server]: Control loop missed its desired rate of 20.0000Hz
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.
+[WARN] [controller_server]: No valid trajectories out of 419! 
+[ERROR] [controller_server]: Controller patience exceeded
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823685.001 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823685.203 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823685.404 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823685.602 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823685.807 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823686.006 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823694.813 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823695.025 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [controller_server]: Invalid path, Path is empty.
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[ERROR] [controller_server]: Invalid path, Path is empty.
+[WARN] [controller_server]: [follow_path] [ActionServer] Aborting handle.
+[INFO] [local_costmap.local_costmap]: Received request to clear entirely the local_costmap
+[INFO] [controller_server]: Received a goal, begin computing control effort.
+[INFO] [controller_server]: Passing new path to controller.
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823726.626 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823726.757 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823726.983 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823727.180 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823727.180 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823727.612 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823727.798 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823727s 211573771ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[INFO] [controller_server]: Passing new path to controller.
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823728s 272351716ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823727.973 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823728s 272351716ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823728s 272351716ns, Transform time: 1733823726s 623858369ns, tolerance is 0.300000
+[INFO] [rclcpp]: signal_handler(signum=2)
+[INFO] [controller_server]: Running Nav2 LifecycleNode rcl preshutdown (controller_server)
+[INFO] [controller_server]: Deactivating
+[WARN] [controller_server]: [follow_path] [ActionServer] Requested to deactivate server but goal is still executing. Should check if action server is running before deactivating.
+[WARN] [controller_server]: [follow_path] [ActionServer] Stopping the thread per request.
+[INFO] [controller_server]: [follow_path] [ActionServer] Client requested to cancel the goal. Cancelling.
+[INFO] [local_costmap.local_costmap]: Deactivating
+[INFO] [local_costmap.local_costmap]: Message Filter dropping message: frame 'go2_lidar' at time 1733823728.125 for reason 'the timestamp on the message is earlier than all the data in the transform cache'
+[INFO] [controller_server]: Destroying bond (controller_server) to lifecycle manager.
+[INFO] [controller_server]: Cleaning up
+[INFO] [local_costmap.local_costmap]: Cleaning up
+[INFO] [rclcpp]: signal_handler(signum=15)
+[INFO] [controller_server]: Destroying bond (controller_server) to lifecycle manager.

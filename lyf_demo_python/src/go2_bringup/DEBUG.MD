@@ -23,7 +23,7 @@ ros2 run go2_bringup motion_to_tf
 ros2 run nav2_map_server map_saver_cli -f room --ros-args --remap map:=/map_slamtoolbox_go2
 
 # 启动nav2
-ros2 launch go2_bringup clou
+ros2 launch go2_bringup cloud_to_scan.launch.py
 ros2 launch go2_bringup go2_nav2_bringup.launch.py
 
 # 启动slam联动nav2
@@ -45,6 +45,11 @@ colcon build --packages-select explore_lite
 
 colcon build --packages-select nav2_bringup
 colcon build --packages-select nav2_navfn_planner
+colcon build --packages-select nav2_smac_planner
+colcon build --packages-select nav_2d_utils
+
+colcon build --packages-select nav2_costmap_2d
+
 
 # 高度数据获取
 colcon build --packages-select go2_bringup
@@ -53,13 +58,50 @@ ros2 run go2_bringup find_stairs
 ros2 launch nav2_bringup tb3_simulation_launch.py slam:=True
 ros2 launch explore_lite explore.launch.py
 
+# 调试步骤
+1、去除体素层 不能去除 pass
+2、调小minimum_turning_radius pass
+3、调整探索权重，优先距离,调小成本大小的权重 （目前参数可以有效行进，不要动了） not pass
+4、重启时常   pass
+4、PLAN超时，提高时间 pass
+8、看下路由器延迟情况 20ms内极好 pass
+9、分析smac算法每个参数的意义——pass
+10、odom_topic要调整——pass
+5、move模块报错——在move代码中增加初始化保护机制 pass
+
+5、改变目标点容差，要再大点？
+
+
+4、修改nav2_costmap_2d/costmap_2d_ros源码的transform_tolerance对应值,编译
+——在源码中增加transform_tolerance打印，再进行观察
+——调整failure_tolerance参数
+——修改nav2_costmap_2d/costmap_2d_ros源码的transform_tolerance对应值，  没用，再调整
+
+6、降低全局规划器频率（针对狭窄走廊）
+
+[ERROR] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1733820797.110452 but the earliest data is at time 1733820823.080866, when looking up transform from frame [base] to frame [map]
+
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823508s 564122457ns, Transform time: 1733823508s 210295278ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823508s 564122457ns, Transform time: 1733823508s 210295278ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823508s 564122457ns, Transform time: 1733823508s 210295278ns, tolerance is 0.300000
+[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
+[ERROR] [tf_help]: Data time: 1733823508s 564122457ns, Transform time: 1733823508s 210295278ns, tolerance is 0.300000
+
+[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
+[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.  在楼梯死胡同
+
+9、往复跑的问题 还是要解决 调explore参数
+
+10、走廊中间走，一些惩罚参苏
+
+
 # 问题记录
 
 1、向上楼梯，激光会认为障碍物
-2、激光的位置误差不断累计，导致行进一段时间后无法规划路径——2d建图，不使用体素层
-3、研究使用smac方法时，无法规划路径的debug——1、把最大迭代次数设为1000000 ，2、调小最小转弯半径，这是一个约束 3、调大终点容差范围参数 4、增加迭代时间 5、a星源代码中增加报错日志打印
-
-6、降低全局规划器频率（针对狭窄走廊）
+12、避障在长时间原地踏步？时才启动检测
 
 a星计算超时
 解决方案：
@@ -85,22 +127,6 @@ a星计算超时
 需要在实际场景中反复测试和验证
 记录不同参数组合的效果，找到最适合的配置
 可以为不同类型的场景（开阔区域/狭窄走廊）准备不同的参数配置
-
-
-4、路径规划报错，[ERROR] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1733724519.410517 but the earliest data is at time 1733724525.674672, when looking up transform from frame [base] to frame [map]
-
-5、move模块报错——在move代码中增加初始化保护机制
-6、路径选择的权重，避免往返走——调大距离成本，从3调到5
-
-7、control节点报错：[ERROR] [tf_help]: Transform data too old when converting from map to odom_slamtoolbox
-[ERROR] [tf_help]: Data time: 1733726742s 360768119ns, Transform time: 1733726741s 595490964ns
-——在源码中增加transform_tolerance打印，再进行观察
-
-8、看下路由器延迟情况
-
-9、分析smac算法每个参数的意义——已分析
-
-10、odom_topic要调整——已经调整
 
 
 

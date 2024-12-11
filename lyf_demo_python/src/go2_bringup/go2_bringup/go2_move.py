@@ -86,8 +86,8 @@ class CmdVelSubscriber(Node):
 
     # 定时器回调，启动主控
     def timer_callback(self):
-        self.active_control()             # 避障行进
-        # self.only_nav2()
+        # self.active_control()             # 避障行进
+        self.only_nav2()
 
     # 只用nav2的结果来控制的方法
     def only_nav2(self):
