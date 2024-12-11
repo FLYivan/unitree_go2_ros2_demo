@@ -83,6 +83,9 @@ Explore::Explore()
   this->get_parameter("return_to_init", return_to_init_);
   this->get_parameter("robot_base_frame", robot_base_frame_);
 
+  // 添加日志以确认参数值
+  RCLCPP_INFO(logger_, "Planner frequency set to: %f", planner_frequency_);
+
   progress_timeout_ = timeout; // 设置进度超时时间
   // 创建move_base客户端
   move_base_client_ =
@@ -132,7 +135,8 @@ Explore::Explore()
 
   // 创建定时器，定期调用makePlan函数
   exploring_timer_ = this->create_wall_timer(
-      std::chrono::milliseconds((uint16_t)(1000.0 / planner_frequency_)),
+      // std::chrono::milliseconds((uint16_t)(1000.0 / planner_frequency_)),
+      std::chrono::seconds((size_t)(1.0 / planner_frequency_)),
       [this]() { restart(); });
   // 立即开始探索
   makePlan();

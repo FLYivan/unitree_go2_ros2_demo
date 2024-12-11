@@ -102,7 +102,9 @@ ros2 launch explore_lite explore.launch.py
 # 问题记录
 
 1、向上楼梯，激光会认为障碍物
-
+2、
+1）避障接管，当cmd_vel连续100下左右原地踏步
+2）取消接管，当cmd_vel连续X下有值
 
 
 
