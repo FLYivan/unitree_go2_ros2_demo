@@ -49,6 +49,8 @@ colcon build --packages-select nav2_smac_planner
 colcon build --packages-select nav_2d_utils
 
 colcon build --packages-select nav2_costmap_2d
+colcon build --packages-select nav2_dwb_controller
+colcon build --packages-select dwb_core
 
 
 # 高度数据获取
@@ -82,45 +84,6 @@ ros2 launch explore_lite explore.launch.py
 ——调整failure_tolerance参数
 ——修改nav2_costmap_2d/costmap_2d_ros源码的transform_tolerance对应值，  没用，再调整
 
-
-
-bool transformPose(
-  const std::shared_ptr<tf2_ros::Buffer> tf,
-  const std::string frame,
-  const geometry_msgs::msg::PoseStamped & in_pose,
-  geometry_msgs::msg::PoseStamped & out_pose,
-  rclcpp::Duration & transform_tolerance
-)
-{
-  // 在函数最开始添加此行
-  RCLCPP_INFO(rclcpp::get_logger("tf_help"), "In transformPose, received transform_tolerance = %f",
-              transform_tolerance.seconds());
-
-
-// 在 transformGlobalPlan 函数中的 transformGlobalPoseToLocal lambda 函数里：
-auto transformGlobalPoseToLocal = [&](const auto & global_plan_pose) {
-    nav_2d_msgs::msg::Pose2DStamped stamped_pose, transformed_pose;
-    stamped_pose.header.frame_id = global_plan_.header.frame_id;
-    stamped_pose.pose = global_plan_pose;
-    
-    // 在调用 transformPose 前添加此行
-    RCLCPP_INFO(logger_, "Before calling transformPose, transform_tolerance_ = %f", 
-                transform_tolerance_.seconds());
-
-
-  // let's get the pose of the robot in the frame of the plan
-  nav_2d_msgs::msg::Pose2DStamped robot_pose;
-  
-  // 在这里添加日志
-  RCLCPP_INFO(logger_, "Before calling transformPose for robot pose, transform_tolerance_ = %f", 
-              transform_tolerance_.seconds());
-              
-  goal_pose.header.frame_id = global_plan_.header.frame_id;
-  goal_pose.pose = global_plan_.poses.back();
-  
-  // 在这里添加日志
-  RCLCPP_INFO(logger_, "Before calling transformPose for goal pose, transform_tolerance_ = %f", 
-              transform_tolerance_.seconds());
 
 
 
