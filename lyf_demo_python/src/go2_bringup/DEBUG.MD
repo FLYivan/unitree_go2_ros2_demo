@@ -62,8 +62,6 @@ ros2 launch explore_lite explore.launch.py
 
 # 调试步骤
 1、去除体素层 不能去除 pass
-2、调小minimum_turning_radius pass
-3、调整探索权重，优先距离,调小成本大小的权重 （目前参数可以有效行进，不要动了） not pass
 4、重启时常   pass
 4、PLAN超时，提高时间 pass
 8、看下路由器延迟情况 20ms内极好 pass
@@ -72,11 +70,17 @@ ros2 launch explore_lite explore.launch.py
 5、move模块报错——在move代码中增加初始化保护机制 pass
 6、[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
 [ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.  在楼梯死胡同 ——pass
-
+5、改变目标点容差，要再大点？——大一点才不会abord pass 
 
 6、 [ERROR] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1733820797.110452 but the earliest data is at time 1733820823.080866, when looking up transform from frame [base] to frame [map]——罕见错误，1、增大tf缓存，2、增大tf频率
 调整动态tf发布频率，由20到100
-5、改变目标点容差，要再大点？
+2、调小minimum_turning_radius ——可以调到0.01吗？
+6、降低全局规划器频率（针对狭窄走廊）
+
+
+
+6、定时器重启有最小值？？
+7、自探索时，Goal was aborted什么原因
 
 
 4、修改nav2_costmap_2d/costmap_2d_ros源码的transform_tolerance对应值,编译
@@ -87,8 +91,6 @@ ros2 launch explore_lite explore.launch.py
 
 
 
-6、降低全局规划器频率（针对狭窄走廊）
-
 
 
 9、往复跑的问题 还是要解决 调explore参数
@@ -96,11 +98,11 @@ ros2 launch explore_lite explore.launch.py
 10、走廊中间走，一些惩罚参苏
 
 
+
 # 问题记录
 
 1、向上楼梯，激光会认为障碍物
-12、避障在长时间原地踏步？时才启动检测
-13、死胡同时，避章走法接管
+
 
 
 
@@ -119,45 +121,4 @@ ros2 launch explore_lite explore.launch.py
 
 # 不同场景参数配置方法
 # A.狭窄通道
-
-
-planner_server:
-  ros__parameters:
-    SmacHybrid:  
-      # 额外的代价调整
-      analytic_expansion_ratio: 3.5      # 分析扩展比例
-      analytic_expansion_max_length: 3.0 # 最大扩展长度
-
-
-      # 调整搜索参数
-      allow_unknown: true                # 允许探索未知区域
-      max_iterations: 500000             # 增加最大迭代次数                    2、如果路径仍不理想，进一步调整：
-      max_on_approach_iterations: 1000   # 增加接近目标时的迭代次数
-      smooth_path: true                  # 启用路径平滑                     3、最后优化平滑度：
-
-
-      # 方向变化的代价权重
-      non_straight_penalty: 1.2          # 非直线运动惩罚                   2、如果路径仍不理想，进一步调整：
-
-      # reverse_penalty 和 change_penalty: 可以适当调小以允许更灵活的运动
-      change_penalty: 0.05               # 方向改变惩罚                     2、如果路径仍不理想，进一步调整：
-      reverse_penalty: 2.0               # 倒车惩罚
-      
-      # 通道相关参数
-      minimum_turning_radius: 0.40       # 最小转弯半径，调小可以让机器人更容易通过狭窄区域                     3、最后优化平滑度：
-      downsampling_factor: 1             # 降采样因子
-      angle_quantization_bins: 64        # 角度量化bins数                   3、最后优化平滑度：
-
-
-global_costmap:
-  ros__parameters:
-    inflation_layer:
-      inflation_radius: 0.5              # 减小膨胀半径                          1、首先调整基础参数：
-      cost_scaling_factor: 15.0          # 增大代价衰减因子， 使代价更快衰减        1、首先调整基础参数：
-      
-
-
-
-
-
 

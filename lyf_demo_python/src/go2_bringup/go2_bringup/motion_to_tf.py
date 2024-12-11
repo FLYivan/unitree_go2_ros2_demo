@@ -80,7 +80,7 @@ class DynamicTFPublisher(Node):
 
 
         # 创建动态 TF 缓存和广播器
-        self.tf_buffer = Buffer(cache_time=rclpy.duration.Duration(seconds=50))  # 设置缓存时间
+        self.tf_buffer = Buffer(cache_time=rclpy.duration.Duration(seconds=10))  # 设置缓存时间
         self.tf_broadcaster = TransformBroadcaster(self)
         self.transform = TransformStamped()  # 初始化 transform
 
