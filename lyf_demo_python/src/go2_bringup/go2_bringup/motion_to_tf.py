@@ -86,7 +86,7 @@ class DynamicTFPublisher(Node):
 
 
         # 将定时器间隔设置为0.05秒（即20Hz）
-        self.publish_frequency = 20                  # 设置发布频率为20Hz
+        self.publish_frequency = 100                  # 设置发布频率为20Hz
         self.publish_period = 1.0 / self.publish_frequency                                  # 计算发布周期
         self.timer = self.create_timer(self.publish_period , self.publish_all)        # 动态tf发布的频率为20hz(不可动参数)
         
