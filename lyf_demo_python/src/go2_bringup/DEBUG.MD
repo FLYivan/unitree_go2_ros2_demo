@@ -104,9 +104,7 @@ explore
 1、调试如何才能在死胡同调头走出来
     5）调大激光最大值，能看的远一些——可行，调到4和3.5
     1）调小minimum_turning_radius，最小转弯半径——无效必须保证0.05
-    2）调整激光最小值
-    3）调整footprint 膨胀层
-    4）缩小整体膨胀层
+    3）调小局部地图中的footprint 膨胀层
     
 
 colcon build --packages-select go2_bringup
@@ -116,7 +114,7 @@ ros2 launch go2_bringup test_explore.launch.py
 
 ros2 run go2_bringup go2_move
 
-4、测试合适的权重参数，不会往复跑
+
 3、测试定时器重启最小值
 
 
