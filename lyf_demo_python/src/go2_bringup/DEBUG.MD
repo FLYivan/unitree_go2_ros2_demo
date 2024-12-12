@@ -8,6 +8,7 @@ ros2 run rqt_tf_tree rqt_tf_tree --force-discover
 colcon build --packages-select go2_ros2_slam
 colcon build --packages-select go2_description
 colcon build --packages-select go2_bringup
+colcon build --packages-select explore_lite
 
 # go2位置校准
 ros2 run go2_ros2_basic sport_demo 
@@ -72,30 +73,43 @@ ros2 launch explore_lite explore.launch.py
 [ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.  在楼梯死胡同 ——pass
 5、改变目标点容差，要再大点？——大一点才不会abord pass 
 
-6、 [ERROR] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1733820797.110452 but the earliest data is at time 1733820823.080866, when looking up transform from frame [base] to frame [map]——罕见错误，1、增大tf缓存，2、增大tf频率
-调整动态tf发布频率，由20到100
-2、调小minimum_turning_radius ——可以调到0.01吗？
-6、降低全局规划器频率（针对狭窄走廊）
 
 
 
-6、定时器重启有最小值？？
-7、自探索时，Goal was aborted什么原因
+1、头朝外走3次，能走出来
+
+1、调整动态tf发布频率，由20到100
+2、调整tf的缓存
+3、测试定时器重启最小值
+4、测试使用纯追踪控制算法
 
 
-4、修改nav2_costmap_2d/costmap_2d_ros源码的transform_tolerance对应值,编译
-——在源码中增加transform_tolerance打印，再进行观察
-——调整failure_tolerance参数
-——修改nav2_costmap_2d/costmap_2d_ros源码的transform_tolerance对应值，  没用，再调整
+1、调试如何才能在死胡同调头走出来
+    5）调大激光最大值，能看的远一些
+    1）调小minimum_turning_radius，最小转弯半径
+    2）调整激光最小值
+    3）调整footprint 膨胀层
+    4）缩小整体膨胀层
+    
+
+4、测试合适的权重参数，不会往复跑
+5、调整惩罚参数，让狗靠走廊中间走
+    1)cost_penalty: 越大，离障碍物越远
+6、降低全局规划器频率（针对狭窄走廊），看效果
+
+
+
+# 代码逻辑分析
+1、为什么定时器一触发就abord
+2、为什么tf会突变0.3
+
+
+
+9\ 不要定时器胡同出不来？从死角转头，一开始为什么就成功了？
 
 
 
 
-
-
-9、往复跑的问题 还是要解决 调explore参数
-
-10、走廊中间走，一些惩罚参苏
 
 
 
@@ -119,8 +133,4 @@ ros2 launch explore_lite explore.launch.py
 可以为不同类型的场景（开阔区域/狭窄走廊）准备不同的参数配置
 
 
-
-
-# 不同场景参数配置方法
-# A.狭窄通道
 

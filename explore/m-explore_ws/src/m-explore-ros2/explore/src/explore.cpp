@@ -135,8 +135,8 @@ Explore::Explore()
 
   // 创建定时器，定期调用makePlan函数
   exploring_timer_ = this->create_wall_timer(
-      // std::chrono::milliseconds((uint16_t)(1000.0 / planner_frequency_)),
-      std::chrono::seconds((size_t)(1.0 / planner_frequency_)),
+      std::chrono::milliseconds((uint16_t)(1000.0 / planner_frequency_)),
+      // std::chrono::seconds((size_t)(1.0 / planner_frequency_)),
       [this]() { restart(); });
   // 立即开始探索
   makePlan();
