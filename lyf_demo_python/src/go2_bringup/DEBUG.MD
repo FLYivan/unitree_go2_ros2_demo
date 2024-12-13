@@ -78,6 +78,7 @@ ros2 run go2_bringup go2_move
 
 3、测试定时器重启最小值
 
+test
 
 # 代码逻辑分析
 1、为什么定时器一触发就abord
