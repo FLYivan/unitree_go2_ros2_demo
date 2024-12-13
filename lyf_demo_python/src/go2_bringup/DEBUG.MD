@@ -62,48 +62,8 @@ ros2 launch nav2_bringup tb3_simulation_launch.py slam:=True
 ros2 launch explore_lite explore.launch.py
 
 # 调试步骤
-1、去除体素层 不能去除 pass
-4、重启时常   pass
-4、PLAN超时，提高时间 pass
-8、看下路由器延迟情况 20ms内极好 pass
-9、分析smac算法每个参数的意义——pass
-10、odom_topic要调整——pass
-5、move模块报错——在move代码中增加初始化保护机制 pass
-6、[ERROR] [DWBLocalPlanner]: No valid trajectories out of 419! 
-[ERROR] [DWBLocalPlanner]: 1.00: BaseObstacle/Trajectory Hits Obstacle.  在楼梯死胡同 ——pass
-5、改变目标点容差，要再大点？——大一点才不会abord pass 
-
-
-
-
-1、头朝外走3次，能走出来
-
-1)调高explore的 progress_timeout到50
-2）其他参数参考12月10日早上数据
-
-1、调整动态tf发布频率，由20到100 ——效果非常号
-2、调整tf的缓存 30 测试无效
--planner
-——ERROR] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1733970614.097182 but the earliest data is at time 1733970657.233162, when looking up transform from frame [base] to frame [map]
-——[ERROR] [planner_server]: [compute_path_to_pose] [ActionServer] Action callback is still running and missed deadline to stop
-bt-naviga
-——[ERROR] [transformPoseInTargetFrame]: Extrapolation Error looking up target frame: Lookup would require extrapolation into the past.  Requested time 1733970614.097182 but the earliest data is at time 1733970634.512001, when looking up transform from frame [base] to frame [map]
-explore
-——[ERROR] [explore_node]: Extrapolation Error looking up robot pose: Lookup would require extrapolation into the future.  Requested time 1733970647.707089 but the latest data is at time 1733970647.579348, when looking up transform from frame [base] to frame [map]
-4、测试使用纯追踪控制算法 ——效果不好
-——尝试调大tf tolerance到1
-5、调大explore的加入黑名单的时间阈值——测试 50正好
-调大 100
-调小 15
-5、调整惩罚参数，让狗靠走廊中间走
-    1)cost_penalty: 越大，离障碍物越远——效果不佳，放弃， 保持2.0
-6、降低全局规划器频率（针对狭窄走廊），看效果
-——planner的频率从20降到10hz  5hz不行
-
 
 1、调试如何才能在死胡同调头走出来
-    5）调大激光最大值，能看的远一些——可行，调到4和3.5
-    1）调小minimum_turning_radius，最小转弯半径——无效必须保证0.05
     3）调小局部地图中的footprint 膨胀层
     
 
@@ -131,11 +91,8 @@ ros2 run go2_bringup go2_move
 2、为什么tf会突变0.3
 ——第一处，直接调用了3d
 
-3、关注网络问题
 
-4、kazam坏了可能跟n卡驱动有关
 
-5、记录调试手札
 
 
 # 问题记录
@@ -158,11 +115,66 @@ ros2 run go2_bringup go2_move
 3、反复起停
 4、大理石，玻璃墙面，对激光不友好，自探索时容易误检
 
-关键建议：
-参数调整要循序渐进，每次只改动少量参数
-需要在实际场景中反复测试和验证
-记录不同参数组合的效果，找到最适合的配置
-可以为不同类型的场景（开阔区域/狭窄走廊）准备不同的参数配置
 
 
 
+# 参数调试结论
+1、explore——progress_timeout
+1）调整动作：由30调整到50；
+2）结论：可行
+3）备注：影响目标点纳入黑名单的等待时长，不能调大（100）或调小（15），否则影响正常探索
+
+2、动态tf变换节点——tf发布频率
+1）调整动作：由20hz到100hz
+2）结论：效果非常好
+3）备注：
+
+3、动态tf变换节点——动态tf的缓存
+1）调整动作：由10提升到30
+2）结论：负面影响
+3）备注：不要动
+
+4、control节点——followpath插件
+1）调整动作：改为纯追踪控制算法插件
+2）结论：运动时左右摇摆，效果不好
+3）备注：不要更换这个插件
+
+5、planner——smacHybrid——cost_penalty
+1）调整动作：调大
+2）结论：效果不佳，
+3）备注：无法起到原理障碍物规划路径的效果，且影响路径生成，需保持2.0
+
+6、planner——expected_planner_frequency
+1）调整动作：从20hz降到10hz,降到5hz
+2）结论：不行，影响路径正常规划，保持20hz
+3）备注：
+
+6、局部和全局代价地图——激光最大值
+1）调整动作：分别调高到4和3.5
+2）结论：有效
+3）备注：调整后能看远一点，有助于走出死胡同
+
+6、planner——minimum_turning_radius
+1）调整动作：从0.05下调到0.03,0.01
+2）结论：都造成原地打转
+3）备注：最小转完半径可能就是0.05
+
+6、局部和全局代价地图——体素层
+1）调整动作：用障碍物层代替体素层
+2）结论：可以满足2d的规划，且解决z轴总是超出的报错
+3）备注：需要同时加上静态层
+
+6、explore——progress_timeout
+1）调整动作：
+2）结论：
+3）备注：
+
+6、explore——progress_timeout
+1）调整动作：
+2）结论：
+3）备注：
+
+6、explore——progress_timeout
+1）调整动作：
+2）结论：
+3）备注：
