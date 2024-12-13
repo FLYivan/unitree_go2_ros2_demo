@@ -195,7 +195,7 @@ local_costmap:
     ros__parameters:
       update_frequency: 5.0
       publish_frequency: 2.0
-      transform_tolerance: 1.9                         # TF变化的容忍值
+      transform_tolerance: 1.9                         # costmap_2d_ros中的TF变化的容忍值
       global_frame: odom_slamtoolbox
       robot_base_frame: base
       use_sim_time: True

@@ -52,7 +52,7 @@ colcon build --packages-select nav_2d_utils
 colcon build --packages-select nav2_costmap_2d
 colcon build --packages-select nav2_dwb_controller
 colcon build --packages-select dwb_core
-
+colcon build --packages-select nav2_controller
 
 # 高度数据获取
 colcon build --packages-select go2_bringup
@@ -74,6 +74,7 @@ ros2 launch go2_bringup test_explore.launch.py
 
 ros2 run go2_bringup go2_move
 
+2、确认tolerance问题，如果确认后，把日志打印注释
 
 3、测试定时器重启最小值
 

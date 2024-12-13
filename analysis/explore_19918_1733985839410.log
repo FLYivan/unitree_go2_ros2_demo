@@ -1,0 +1,114 @@
+[INFO] [explore_node]: Waiting for costmap to become available, topic: /global_costmap/costmap
+[INFO] [ExploreNode]: Planner frequency set to: 0.016000
+[INFO] [ExploreNode]: Waiting to connect to move_base nav2 server
+[INFO] [ExploreNode]: Connected to move_base nav2 server
+[INFO] [ExploreNode]: Getting initial pose of the robot
+[DEBUG] [ExploreNode]: found 1 frontiers
+[DEBUG] [ExploreNode]: frontier 0 cost: -3.486743
+[DEBUG] [ExploreNode]: visualising 1 frontiers
+[DEBUG] [ExploreNode]: Sending goal to move base nav2
+[DEBUG] [ExploreNode]: Goal was successful
+[DEBUG] [ExploreNode]: found 1 frontiers
+[DEBUG] [ExploreNode]: frontier 0 cost: -0.884764
+[DEBUG] [ExploreNode]: visualising 1 frontiers
+[DEBUG] [ExploreNode]: Sending goal to move base nav2
+[DEBUG] [ExploreNode]: Goal was successful
+[DEBUG] [ExploreNode]: found 12 frontiers
+[DEBUG] [ExploreNode]: frontier 0 cost: -24.234764
+[DEBUG] [ExploreNode]: frontier 1 cost: -4.504493
+[DEBUG] [ExploreNode]: frontier 2 cost: -0.767170
+[DEBUG] [ExploreNode]: frontier 3 cost: -0.511351
+[DEBUG] [ExploreNode]: frontier 4 cost: -0.475736
+[DEBUG] [ExploreNode]: frontier 5 cost: 0.042550
+[DEBUG] [ExploreNode]: frontier 6 cost: 0.137763
+[DEBUG] [ExploreNode]: frontier 7 cost: 0.525574
+[DEBUG] [ExploreNode]: frontier 8 cost: 0.586184
+[DEBUG] [ExploreNode]: frontier 9 cost: 0.884645
+[DEBUG] [ExploreNode]: frontier 10 cost: 0.975053
+[DEBUG] [ExploreNode]: frontier 11 cost: 1.012714
+[DEBUG] [ExploreNode]: visualising 12 frontiers
+[DEBUG] [ExploreNode]: Sending goal to move base nav2
+[DEBUG] [ExploreNode]: Goal was successful
+[DEBUG] [ExploreNode]: found 25 frontiers
+[DEBUG] [ExploreNode]: frontier 0 cost: -33.424172
+[DEBUG] [ExploreNode]: frontier 1 cost: -11.515422
+[DEBUG] [ExploreNode]: frontier 2 cost: -10.085456
+[DEBUG] [ExploreNode]: frontier 3 cost: -7.374891
+[DEBUG] [ExploreNode]: frontier 4 cost: -3.117598
+[DEBUG] [ExploreNode]: frontier 5 cost: -1.862120
+[DEBUG] [ExploreNode]: frontier 6 cost: -0.516991
+[DEBUG] [ExploreNode]: frontier 7 cost: 0.986695
+[DEBUG] [ExploreNode]: frontier 8 cost: 1.512541
+[DEBUG] [ExploreNode]: frontier 9 cost: 1.525244
+[DEBUG] [ExploreNode]: frontier 10 cost: 1.998974
+[DEBUG] [ExploreNode]: frontier 11 cost: 2.478596
+[DEBUG] [ExploreNode]: frontier 12 cost: 2.621822
+[DEBUG] [ExploreNode]: frontier 13 cost: 2.835786
+[DEBUG] [ExploreNode]: frontier 14 cost: 2.838924
+[DEBUG] [ExploreNode]: frontier 15 cost: 2.949502
+[DEBUG] [ExploreNode]: frontier 16 cost: 3.008193
+[DEBUG] [ExploreNode]: frontier 17 cost: 3.033147
+[DEBUG] [ExploreNode]: frontier 18 cost: 3.121386
+[DEBUG] [ExploreNode]: frontier 19 cost: 3.258976
+[DEBUG] [ExploreNode]: frontier 20 cost: 3.269213
+[DEBUG] [ExploreNode]: frontier 21 cost: 3.699007
+[DEBUG] [ExploreNode]: frontier 22 cost: 3.787432
+[DEBUG] [ExploreNode]: frontier 23 cost: 4.011987
+[DEBUG] [ExploreNode]: frontier 24 cost: 4.100411
+[DEBUG] [ExploreNode]: visualising 25 frontiers
+[DEBUG] [ExploreNode]: Sending goal to move base nav2
+[INFO] [ExploreNode]: 定时器被触发，调用makePlan函数
+[DEBUG] [ExploreNode]: found 28 frontiers
+[DEBUG] [ExploreNode]: frontier 0 cost: -33.657363
+[DEBUG] [ExploreNode]: frontier 1 cost: -0.762369
+[DEBUG] [ExploreNode]: frontier 2 cost: 0.750174
+[DEBUG] [ExploreNode]: frontier 3 cost: 1.667245
+[DEBUG] [ExploreNode]: frontier 4 cost: 1.764270
+[DEBUG] [ExploreNode]: frontier 5 cost: 1.784033
+[DEBUG] [ExploreNode]: frontier 6 cost: 1.937199
+[DEBUG] [ExploreNode]: frontier 7 cost: 2.810799
+[DEBUG] [ExploreNode]: frontier 8 cost: 3.498368
+[DEBUG] [ExploreNode]: frontier 9 cost: 3.552871
+[DEBUG] [ExploreNode]: frontier 10 cost: 3.797591
+[DEBUG] [ExploreNode]: frontier 11 cost: 3.935648
+[DEBUG] [ExploreNode]: frontier 12 cost: 3.984318
+[DEBUG] [ExploreNode]: frontier 13 cost: 4.002077
+[DEBUG] [ExploreNode]: frontier 14 cost: 4.023705
+[DEBUG] [ExploreNode]: frontier 15 cost: 4.127693
+[DEBUG] [ExploreNode]: frontier 16 cost: 4.161763
+[DEBUG] [ExploreNode]: frontier 17 cost: 4.164499
+[DEBUG] [ExploreNode]: frontier 18 cost: 4.190885
+[DEBUG] [ExploreNode]: frontier 19 cost: 4.250016
+[DEBUG] [ExploreNode]: frontier 20 cost: 4.316501
+[DEBUG] [ExploreNode]: frontier 21 cost: 4.362002
+[DEBUG] [ExploreNode]: frontier 22 cost: 4.373535
+[DEBUG] [ExploreNode]: frontier 23 cost: 4.442118
+[DEBUG] [ExploreNode]: frontier 24 cost: 4.496812
+[DEBUG] [ExploreNode]: frontier 25 cost: 4.605310
+[DEBUG] [ExploreNode]: frontier 26 cost: 4.687848
+[DEBUG] [ExploreNode]: frontier 27 cost: 4.730927
+[DEBUG] [ExploreNode]: visualising 28 frontiers
+[DEBUG] [ExploreNode]: Goal was successful
+[DEBUG] [ExploreNode]: found 6 frontiers
+[DEBUG] [ExploreNode]: frontier 0 cost: -4.889557
+[DEBUG] [ExploreNode]: frontier 1 cost: 3.455293
+[DEBUG] [ExploreNode]: frontier 2 cost: 4.574580
+[DEBUG] [ExploreNode]: frontier 3 cost: 4.579121
+[DEBUG] [ExploreNode]: frontier 4 cost: 5.172160
+[DEBUG] [ExploreNode]: frontier 5 cost: 5.667417
+[DEBUG] [ExploreNode]: visualising 6 frontiers
+[DEBUG] [ExploreNode]: Sending goal to move base nav2
+[INFO] [ExploreNode]: 定时器被触发，调用makePlan函数
+[ERROR] [explore_node]: Extrapolation Error looking up robot pose: Lookup would require extrapolation into the future.  Requested time 1733985967.456459 but the latest data is at time 1733985966.651112, when looking up transform from frame [base] to frame [map]
+
+[DEBUG] [ExploreNode]: found 5 frontiers
+[DEBUG] [ExploreNode]: frontier 0 cost: 4.226689
+[DEBUG] [ExploreNode]: frontier 1 cost: 5.232347
+[DEBUG] [ExploreNode]: frontier 2 cost: 5.481072
+[DEBUG] [ExploreNode]: frontier 3 cost: 6.108808
+[DEBUG] [ExploreNode]: frontier 4 cost: 6.505221
+[DEBUG] [ExploreNode]: visualising 5 frontiers
+[DEBUG] [ExploreNode]: Sending goal to move base nav2
+[DEBUG] [ExploreNode]: Goal was aborted
+[DEBUG] [ExploreNode]: Adding current goal to black list
+[INFO] [rclcpp]: signal_handler(signum=2)
