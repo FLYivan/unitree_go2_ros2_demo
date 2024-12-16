@@ -66,6 +66,9 @@ ros2 launch explore_lite explore.launch.py
 1、调试如何才能在死胡同调头走出来
     3）调小局部地图中的footprint 膨胀层
     
+2、调整判断为有进展的最小距离
+3、调整等待进展的最大时长
+
 
 colcon build --packages-select go2_bringup
 
@@ -76,9 +79,10 @@ ros2 run go2_bringup go2_move
 
 2、确认tolerance问题，如果确认后，把日志打印注释
 
-3、测试定时器重启最小值
 
-test3
+3、测试定时器重启最小值（1、同步将return改break，2、超时加入黑名单的，也添加打印信息，以便区别）
+
+
 
 # 代码逻辑分析
 1、为什么定时器一触发就abord
@@ -86,13 +90,34 @@ test3
 看日志，触发定时器后到底作了什么？
 但同时，定时器触发会在锁死的情况下，重新规划路线并发送控制信号
 
-为什么自动切换路径就卡死，定时器启动就有了？
+为什么自动切换路径就卡死，定时器启动就有了？——aborted的时候，定时器启动才会再次探索
 
-3、explore超时了，会触发什么？
+
+void Explore::reachedGoal(const NavigationGoalHandle::WrappedResult& result,
+                          const geometry_msgs::msg::Point& frontier_goal)
+{
+  switch (result.code) {
+    case rclcpp_action::ResultCode::SUCCEEDED:
+      RCLCPP_DEBUG(logger_, "Goal was successful");
+      break;
+    case rclcpp_action::ResultCode::ABORTED:
+      RCLCPP_DEBUG(logger_, "Goal was aborted");
+      frontier_blacklist_.push_back(frontier_goal);
+      RCLCPP_DEBUG(logger_, "Adding current goal to black list");
+      break //直接break
+    // ... 其他情况 ...
+  }
+  makePlan();
+}
+
+5、超时加入黑名单的，也添加打印信息，以便区别
+
+3、explore超时了，会触发什么？——加入黑名单，并生成新计划
 
 2、为什么tf会突变0.3
 ——第一处，直接调用了3d
 
+3、死胡同？全局规划器？
 
 
 
@@ -116,7 +141,28 @@ test3
 2、实例只有仿真，真实环境也非常简单
 3、反复起停
 4、大理石，玻璃墙面，对激光不友好，自探索时容易误检
+5、机器人被困在局部最小值中（例如陷入死角）
+     机器人想要到达目标G
+    但被U形障碍物包围
+    需要先远离目标才能绕过障碍到达目标
+    但局部规划可能总是倾向于向目标方向移动
+6、源代码在实际工况验证时，不合理，比如定时器
+6、后退行为的触发
+后退通常是作为恢复行为(Recovery Behavior)的一部分
+不是常规路径规划的选项
+只在遇到问题时作为应急手段
+这就解释了为什么在遇到死角时：
+局部规划器会陷入局部最小值
+不会自动选择倒退作为解决方案
+需要触发恢复行为才会执行后退动作
+这确实是 Nav2 局部规划器的一个局限性。在某些场景下,允许规划器考虑后退路径可能会是更好的选择。
 
+    为什么会陷入
+    局部路径规划器往往只考虑局部环境
+    基于梯度下降等方法可能会:
+    不断尝试向目标靠近
+    被障碍物阻挡
+    来回摆动或停滞不前
 
 
 
