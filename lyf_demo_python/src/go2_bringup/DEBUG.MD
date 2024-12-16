@@ -63,11 +63,6 @@ ros2 launch explore_lite explore.launch.py
 
 # 调试步骤
 
-1、调试如何才能在死胡同调头走出来
-    3）调小局部地图中的footprint 膨胀层
-    
-2、调整判断为有进展的最小距离
-3、调整等待进展的最大时长
 
 
 colcon build --packages-select go2_bringup
@@ -77,48 +72,29 @@ ros2 launch go2_bringup test_explore.launch.py
 
 ros2 run go2_bringup go2_move
 
-2、确认tolerance问题，如果确认后，把日志打印注释
+
+2、还是调大定时器间隔，——有没有定时器都差不多
+3、在卡死时用遥控器模拟外部控制信号
+
+解决问题
+1、死胡同转向，头朝死胡同
+2、死胡同逃离
+3、背后负载
+4、根据参数文件再看下
+
+花了大量时间调参，以适应真实传感器和真实环境
 
 
-3、测试定时器重启最小值（1、同步将return改break，2、超时加入黑名单的，也添加打印信息，以便区别）
 
 
 
-# 代码逻辑分析
-1、为什么定时器一触发就abord
-定时器触发，会改变原来正在行进的路线
-看日志，触发定时器后到底作了什么？
-但同时，定时器触发会在锁死的情况下，重新规划路线并发送控制信号
-
-为什么自动切换路径就卡死，定时器启动就有了？——aborted的时候，定时器启动才会再次探索
 
 
-void Explore::reachedGoal(const NavigationGoalHandle::WrappedResult& result,
-                          const geometry_msgs::msg::Point& frontier_goal)
-{
-  switch (result.code) {
-    case rclcpp_action::ResultCode::SUCCEEDED:
-      RCLCPP_DEBUG(logger_, "Goal was successful");
-      break;
-    case rclcpp_action::ResultCode::ABORTED:
-      RCLCPP_DEBUG(logger_, "Goal was aborted");
-      frontier_blacklist_.push_back(frontier_goal);
-      RCLCPP_DEBUG(logger_, "Adding current goal to black list");
-      break //直接break
-    // ... 其他情况 ...
-  }
-  makePlan();
-}
+# 调试时记录的问题
 
-5、超时加入黑名单的，也添加打印信息，以便区别
 
-3、explore超时了，会触发什么？——加入黑名单，并生成新计划
-
-2、为什么tf会突变0.3
-——第一处，直接调用了3d
-
-3、死胡同？全局规划器？
-
+2、定时器的高频启动有助于避免navetopose的过程中，由于长路径的索死，但会把更多的点因为aborted加入黑名单
+3、大理石 瓷砖墙面
 
 
 
@@ -213,7 +189,12 @@ void Explore::reachedGoal(const NavigationGoalHandle::WrappedResult& result,
 3）备注：需要同时加上静态层
 
 6、explore——progress_timeout
-1）调整动作：
+1）调整动作：调小局部地图中的footprint 膨胀层——将膨胀层从0.1降低到0.05,有助于从狭窄空间逃脱
+2）结论：
+3）备注：
+
+6、explore——progress_timeout
+1）调整动作：将return改break
 2）结论：
 3）备注：
 
@@ -226,3 +207,22 @@ void Explore::reachedGoal(const NavigationGoalHandle::WrappedResult& result,
 1）调整动作：
 2）结论：
 3）备注：
+
+
+6、explore——progress_timeout
+1）调整动作：
+2）结论：
+3）备注：
+
+
+6、explore——progress_timeout
+1）调整动作：
+2）结论：
+3）备注：
+
+
+6、explore——progress_timeout
+1）调整动作：
+2）结论：
+3）备注：
+

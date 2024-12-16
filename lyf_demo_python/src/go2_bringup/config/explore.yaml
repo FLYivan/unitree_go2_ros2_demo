@@ -6,12 +6,13 @@ explore_node:
     costmap_updates_topic: /global_costmap/costmap_updates
 
     visualize: true
-    planner_frequency: 0.016   # 频率为0.2Hz,即1/planner_frequency 秒触发一次定时器，改变一次策略（60秒自启动一次）
+    # planner_frequency: 0.05   # 频率为0.2Hz,即1/planner_frequency 秒触发一次定时器，改变一次策略（60秒自启动一次）
+    planner_frequency: 0.001   # 即/1/planner_frequency =1000秒触发一次定时器，改变一次策略（60秒自启动一次）
 
     progress_timeout: 50.0      # 多久没有响应就加入黑名单的时间间隔
     potential_scale: 5.0        # 用于对边界进行加权。较大的 potential_scale_ 值会使得距离对成本的影响更大。
     orientation_scale: 0.5
-    gain_scale: 1.0           # 用于对边界进行加权。较大的 gain_scale_ 值会使得前沿的大小对成本的影响更大。
+    gain_scale: 1.0          # 用于对边界进行加权。较大的 gain_scale_ 值会使得前沿的大小对成本的影响更大。
                                 # 较大的前沿通常意味着更多的未知区域可以被探索，因此在成本计算中，前沿越大，成本越低。
     transform_tolerance: 0.5   # 在调用TF（变换）库的transform函数时，作为一个时间容差参数传递。以便在获取变换时能够成功匹配到合适的时间戳。
     min_frontier_size: 0.4      # 将边界视为勘探目标的最小边界尺寸。数值单位为米。=分辨率*前沿点个数
@@ -204,7 +205,7 @@ local_costmap:
       height: 3
       resolution: 0.05
       footprint: "[[-0.4, -0.15], [0.3, -0.15], [0.3, -0.07], [0.4, -0.07], [0.4, 0.07], [0.3, 0.07], [0.3, 0.15], [-0.4, 0.15]]"   # 与圆形机器人不同
-      footprint_padding: 0.1                      # 局部规划中使用较大值
+      footprint_padding: 0.05                      # 局部规划中使用较大值
       # robot_radius: 0.4                         # 参数不要动（通常半径0.4,进门半径只能0.2）
       # plugins: ["voxel_layer", "inflation_layer"]
       plugins: ["static_layer", "obstacle_layer", "inflation_layer"]          # 2d建图，不使用体素层

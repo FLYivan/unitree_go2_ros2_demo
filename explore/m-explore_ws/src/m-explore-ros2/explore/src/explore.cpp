@@ -135,8 +135,8 @@ Explore::Explore()
 
   // 创建定时器，定期调用makePlan函数
   exploring_timer_ = this->create_wall_timer(
-      std::chrono::milliseconds((uint16_t)(1000.0 / planner_frequency_)),
-      // std::chrono::seconds((size_t)(1.0 / planner_frequency_)),
+      // std::chrono::milliseconds((uint16_t)(1000.0 / planner_frequency_)),
+      std::chrono::seconds((size_t)(1.0 / planner_frequency_)),
       [this]() { restart(); });
   // 立即开始探索
   makePlan();
@@ -324,7 +324,7 @@ void Explore::makePlan()
   if ((this->now() - last_progress_ >
       tf2::durationFromSec(progress_timeout_)) && !resuming_) {
     frontier_blacklist_.push_back(target_position); // 将目标加入黑名单
-    RCLCPP_DEBUG(logger_, "Adding current goal to black list"); // 打印将目标加入黑名单的信息
+    RCLCPP_DEBUG(logger_, "Because of Timeout, Adding current goal to black list"); // 打印将目标加入黑名单的信息
     makePlan(); // 重新生成计划
     return;
   }
@@ -377,7 +377,7 @@ void Explore::returnToInitialPose()
 // goalOnBlacklist函数，用于判断目标是否在黑名单中
 bool Explore::goalOnBlacklist(const geometry_msgs::msg::Point& goal)
 {
-  constexpr static size_t tolerace = 2; // 定义容差是分辨率的几倍，容差约大，约容易误判目标点在黑名单 （自定义）
+  constexpr static size_t tolerace = 1.0; // 定义容差是分辨率的几倍，容差约大，约容易误判目标点在黑名单 （自定义）
   nav2_costmap_2d::Costmap2D* costmap2d = costmap_client_.getCostmap(); // 获取costmap
 
   // 检查目标是否在黑名单中
@@ -403,8 +403,9 @@ void Explore::reachedGoal(const NavigationGoalHandle::WrappedResult& result,
     case rclcpp_action::ResultCode::ABORTED:        // nav2返回目标点不可行，或有障碍
       RCLCPP_DEBUG(logger_, "Goal was aborted"); // 如果目标被中止，打印调试信息
       frontier_blacklist_.push_back(frontier_goal); // 将目标加入黑名单
-      RCLCPP_DEBUG(logger_, "Adding current goal to black list"); // 打印将目标加入黑名单的信息
-      return;
+      RCLCPP_DEBUG(logger_, "Because of aborted, Adding current goal to black list"); // 打印将目标加入黑名单的信息
+      // return;
+      break;
     case rclcpp_action::ResultCode::CANCELED:
       RCLCPP_DEBUG(logger_, "Goal was canceled"); // 如果目标被取消，打印调试信息
       return;
