@@ -21,7 +21,7 @@ ros2 launch go2_bringup only_slam.launch.py
 ros2 run go2_bringup motion_to_tf 
 
 # 地图保存
-ros2 run nav2_map_server map_saver_cli -f room --ros-args --remap map:=/map_slamtoolbox_go2
+ros2 run nav2_map_server map_saver_cli -f room --ros-args 
 
 # 启动nav2
 ros2 launch go2_bringup cloud_to_scan.launch.py
@@ -72,15 +72,26 @@ ros2 launch go2_bringup test_explore.launch.py
 
 ros2 run go2_bringup go2_move
 
+0、调整速度插件
+1.1、调整为闭环控制？
 
-2、还是调大定时器间隔，——有没有定时器都差不多
+1、还是调大定时器间隔，——有没有定时器都差不多
+2、判定为有进展的最小移动距离：从0.5调到0.15
+3、允许的最大无进展时间：从10秒调大5秒
+
+
 3、在卡死时用遥控器模拟外部控制信号
+
+4、保存地图
 
 解决问题
 1、死胡同转向，头朝死胡同
 2、死胡同逃离
-3、背后负载
+3、背后负载，激光数据缺失
 4、根据参数文件再看下
+5、路线频繁切换，原算法弊端
+6、膨胀半径太大进不了过道，太小撞墙
+
 
 花了大量时间调参，以适应真实传感器和真实环境
 
