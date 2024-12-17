@@ -21,7 +21,8 @@ ros2 launch go2_bringup only_slam.launch.py
 ros2 run go2_bringup motion_to_tf 
 
 # 地图保存
-ros2 run nav2_map_server map_saver_cli -f room --ros-args 
+ros2 run nav2_map_server map_saver_cli -f f12-room --ros-args 
+ros2 run nav2_map_server map_saver_cli -f b1-room
 
 # 启动nav2
 ros2 launch go2_bringup cloud_to_scan.launch.py

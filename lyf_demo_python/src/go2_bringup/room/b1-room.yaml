@@ -1,0 +1,7 @@
+image: b1-room.pgm
+mode: trinary
+resolution: 0.05
+origin: [-28.6, -6.39, 0]
+negate: 0
+occupied_thresh: 0.65
+free_thresh: 0.25
