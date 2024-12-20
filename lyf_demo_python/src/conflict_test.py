@@ -4,3 +4,4 @@ TIME_STEP = 64
 
 robot = Robot()
 # 获取传感器和电机
+test3 = 1
