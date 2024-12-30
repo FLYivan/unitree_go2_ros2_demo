@@ -55,12 +55,12 @@ colcon build --packages-select nav2_dwb_controller
 colcon build --packages-select dwb_core
 colcon build --packages-select nav2_controller
 
-# 高度数据获取
+# 楼梯检测
 colcon build --packages-select go2_bringup
-ros2 run go2_bringup find_stairs
+ros2 run go2_bringup stair_detector
+ros2 run go2_bringup height_map_visualizer
 
-ros2 launch nav2_bringup tb3_simulation_launch.py slam:=True
-ros2 launch explore_lite explore.launch.py
+
 
 # 调试步骤
 
