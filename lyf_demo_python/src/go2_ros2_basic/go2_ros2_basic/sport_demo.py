@@ -44,12 +44,45 @@ class SportDemo(Node):
         self.sport_req.Move(self.req, self.vx, self.vy, self.vyaw)                  # 获取与高级运动命令对应的请求消息
         self.req_puber.publish(self.req)                                            # 发布请求消息
 
+    # 坐下 Sit()
+    def Sit(self):
+        pass
+
+
+    # 站起（相对于坐下）RiseSit()
+    def Sit(self):
+        pass
+    
+    # 切换步态 
+    def ChangeGait(self):
+        # 取值  0~4，0  为  idle， 1  为  trot，2  为  trot running，3  正向爬楼模式，4：逆向爬楼模式。
+        # SwitchGait(int d)
+        pass
+    
+    def Relax(self):
+
+        # Sit()
+        # 站起（相对于坐下）RiseSit()
+        # 伸懒腰Stretch()
+        pass
+        # 切换步态 
+
+    def Start(self):
+
+        # 打招呼
+        # Hello()
+        
+        pass
+
+
+
 
     def Stop(self):
 
         self.sport_req.StopMove(self.req)                                           # 获取与高级运动命令对应的请求消息
         self.req_puber.publish(self.req)                                            # 发布请求消息
 
+        # 拜年 Scrape()
 
 def main(args=None):
     rclpy.init(args=args)                                                                   # 初始化rclpy
