@@ -32,13 +32,49 @@ class SportDemo(Node):
         self.current_time = None
         self.last_change_time = None        # 记录步态切换的上次执行时间
         self.change_interval_time = 5.0       # 步态切换的执行间隔，比如5秒
-        
 
-        self.dt = 0.05                                                                 # 设置控制时间步长
+
+        # 在主函数中直接进行动作演示，避免使用定时器
+        for i in range(3):
+            self.Start()
+        
+        for i in range(10):
+           self.VelocityMove()
+
+        for i in range(2):
+            self.ChangeGait(3)
+
+        for i in range(2):
+            self.Stop()
+
+        for i in range(10):
+            self.VelocityMove()
+
+        for i in range(2):
+            self.ChangeGait(1)
+
+        for i in range(10):
+            self.VelocityMove()
+
+        for i in range(2):
+            self.go2Sit()
+
+        for i in range(1):
+            self.go2RiseSit()
+
+        for i in range(4):
+            self.VelocityMove()
+ 
+        for i in range(2):
+            self.Stop()
+
+        # for i in range(2):
+        #     self.NewYear()
+
+        self.dt = 0.5                                                                 # 设置控制时间步长
         self.t = -1                                                                     # 初始化运行时间计数
         # 创建一个定时器
-        self.timer = self.create_timer(self.dt, self.timer_callback)                    
-
+        # self.timer = self.create_timer(self.dt, self.timer_callback)                    
         self.callback_lock = threading.Lock()  # 添加锁
 
 
@@ -56,44 +92,44 @@ class SportDemo(Node):
             self.t += self.dt                                                               # 等待1秒后启动
             self.get_logger().info(f"当前时刻为：{self.t}")
 
-            if self.t >= 0 and self.t <3:                                                                 # 检查运行时间计数是否为非负
+            if self.t >= 0 and self.t <5:                                                                 # 检查运行时间计数是否为非负
                 if self.start_enabled:    
                     self.Start()
                 self.VelocityMove()
                 
 
-            elif self.t >= 3 and self.t < 15:
-                if self.relax_flag :
-                    self.Relax()
+            # elif self.t >= 5 and self.t < 15:
+            #     if self.relax_flag :
+            #         self.Relax()
 
-                elif self.sit_enabled :
-                    self.go2Sit()
+            #     elif self.sit_enabled :
+            #         self.go2Sit()
 
-                elif self.resit_enabled :
-                    self.go2RiseSit()
+            #     elif self.resit_enabled :
+            #         self.go2RiseSit()
 
-                elif self.change_enabled :
-                    self.ChangeGait(3)
+            #     elif self.change_enabled :
+            #         self.ChangeGait(3)
                     
 
-                else :
-                    self.VelocityMove()
+            #     else :
+            #         self.VelocityMove()
 
-            elif self.t >=15 and self.t <20:
-                if self.current_time - self.last_change_time >= self.change_interval_time :
-                    self.change_enabled = True
+            # elif self.t >=15 and self.t <20:
+            #     if self.current_time - self.last_change_time >= self.change_interval_time :
+            #         self.change_enabled = True
                 
-                if self.change_enabled:
-                    self.ChangeGait(0) 
+            #     if self.change_enabled:
+            #         self.ChangeGait(1) 
 
-                self.VelocityMove()
+            #     self.VelocityMove()
 
-            elif self.t >=20:
-                self.Stop()
-                if self.newyear :
-                    self.NewYear()
-                else :
-                    self.Stop()
+            # elif self.t >=20:
+            #     self.Stop()
+            #     if self.newyear :
+            #         self.NewYear()
+            #     else :
+            #         self.Stop()
 
         finally:
             self.callback_lock.release()  # 释放锁
@@ -115,31 +151,32 @@ class SportDemo(Node):
         self.vyaw = 0.0                                                                  # 初始化初始偏航角
         self.sport_req.Move(self.req, self.vx, self.vy, self.vyaw)                  # 获取与高级运动命令对应的请求消息
         self.req_puber.publish(self.req)                                            # 发布请求消息
-
-        # self.get_logger().info(f'当前x方向速度{self.vx}， y方向速度{self.vy}， 偏航角速度{self.vyaw}')
+        time.sleep(0.5)
+        self.get_logger().info(f'当前x方向速度{self.vx}， y方向速度{self.vy}， 偏航角速度{self.vyaw}')
 
     # 切换步态 (只要一次，后面还要切回正常步态)
     def ChangeGait(self,num: int):
         # 0  为  idle， 1  为  trot，2  为  trot running，3  正向爬楼模式，4：逆向爬楼模式。
-        self.get_logger().info(f"切换步态为{num}")
+        
         self.sport_req.SwitchGait(self.req,num)
         self.req_puber.publish(self.req) 
+        self.get_logger().info(f"切换步态为{num}")
 
+        time.sleep(2)
         self.last_change_time = self.current_time
         self.change_enabled = False
 
-    def Relax(self):
-        self.get_logger().info("休息中....")
 
-        # 伸懒腰Stretch()
+    # 伸懒腰Stretch()
+    def Relax(self):    
+        
         self.sport_req.Stretch(self.req)
         self.req_puber.publish(self.req) 
-
+    
+        self.get_logger().info("休息中....")
+        time.sleep(5)
         self.relax_flag = False
 
-
-
-        self.get_logger().info(f"当前休息标志为{self.relax_flag}")
 
     # 拜年(只能一次性)
     def NewYear(self):
@@ -165,23 +202,24 @@ class SportDemo(Node):
         self.sport_req.RiseSit(self.req)
         self.req_puber.publish(self.req) 
 
-        time.sleep(2)
+        time.sleep(5)
         self.resit_enabled = False
 
     def Start(self):
 
-        self.get_logger().info("初始化中....")
-
         # 打招呼
         self.sport_req.Hello(self.req)
         self.req_puber.publish(self.req)  
+        self.get_logger().info("初始化中....")
 
+        time.sleep(4)
         self.start_enabled = False
 
     def Stop(self):
         self.sport_req.StopMove(self.req)                                           # 获取与高级运动命令对应的请求消息
         self.req_puber.publish(self.req)                                            # 发布请求消息
-
+        self.get_logger().info("停止运动....")
+        time.sleep(0.5)
 
 
 
