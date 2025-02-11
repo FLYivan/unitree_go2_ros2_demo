@@ -11,7 +11,7 @@ class SportDemo(Node):
         super().__init__('sport_demo')
 
         
-        self.dt = 5.0                                                                 # 设置控制时间步长
+        self.dt = 0.05                                                                 # 设置控制时间步长
         
         self.req = Request()                                                            # 初始化Request消息
         self.sport_req = SportClient()                                                  # 实例化一个SportClient对象(这里是json封装的client)
@@ -27,35 +27,48 @@ class SportDemo(Node):
         self.req_puber = self.create_publisher(Request, '/api/sport/request', 10)                               # 创建'/api/sport/request'的发布者
 
         # 启动
-        self.Start() 
+        self.one_time= self.create_timer(self.dt, self.one_timer_callback, callback_group=None)   
+
 
 
         self.timer = self.create_timer(self.dt, self.timer_callback)                    # 创建一个定时器，每0.05秒（create_time单位秒）调用一次timer_callback函数
 
+    def one_timer_callback(self):
+        self.Start() 
+        self.one_time.cancel()
+
     def timer_callback(self):
         self.t += self.dt                                                               # 等待1秒后启动
-        if self.t >= 0:                                                                 # 检查运行时间计数是否为非负
+        self.get_logger().info(f"当前时刻为：{self.t}")
+        if self.t >= 0 and self.t <3:                                                                 # 检查运行时间计数是否为非负
 
             self.VelocityMove()
             
 
-        elif self.t >=6:
+        elif self.t >= 3 and self.t < 15:
             if self.relax_flag :
                 self.Relax()
-            
+                time.sleep(5)
+
+                self.go2Sit()
+                time.sleep(5)
+
+                # self.go2RiseSit()
+
+
             else :
               self.VelocityMove()
 
-        elif self.t >=15:
-            self.ChangeGait(0)
-            self.VelocityMove()
+        # elif self.t >=15 and self.t <20:
+        #     self.ChangeGait(0)
+        #     self.VelocityMove()
 
-        elif self.t >=20:
-            self.Stop()
-            if self.newyear :
-                self.NewYear()
-            else :
-                self.Stop()
+        # elif self.t >=20:
+        #     self.Stop()
+        #     if self.newyear :
+        #         self.NewYear()
+        #     else :
+        #         self.Stop()
 
 
     def VelocityMove(self):
@@ -73,32 +86,38 @@ class SportDemo(Node):
         self.req_puber.publish(self.req) 
     
     def Relax(self):
+        self.get_logger().info("休息中....")
 
         # 伸懒腰Stretch()
         self.sport_req.Stretch(self.req)
         self.req_puber.publish(self.req) 
 
-        # 坐下
-        self.sport_req.Sit(self.req)
-        self.req_puber.publish(self.req) 
+        
 
-        time.sleep(2)
+        # self.ChangeGait(3)
 
-        # 站起（相对于坐下）
-        self.sport_req.RiseSit(self.req)
-        self.req_puber.publish(self.req) 
-
-
-        self.ChangeGait(3)
-        self.relax_flag = False
-
+        # self.relax_flag = False
+        # self.get_logger().info(f"当前休息标志为{self.relax_flag}")
 
     def NewYear(self):
         # 拜年(只能一次性)
         self.sport_req.Scrape(self.req)
         self.req_puber.publish(self.req) 
 
+    def go2Sit(self):
+        # 坐下
+        self.sport_req.Sit(self.req)
+        self.req_puber.publish(self.req) 
+
+
+    def go2RiseSit(self):
+        # 站起（相对于坐下）
+        self.sport_req.RiseSit(self.req)
+        self.req_puber.publish(self.req) 
+
     def Start(self):
+
+        self.get_logger().info("初始化中....")
 
         # 打招呼
         self.sport_req.Hello(self.req)
