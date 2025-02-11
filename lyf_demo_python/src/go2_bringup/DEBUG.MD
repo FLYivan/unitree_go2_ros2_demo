@@ -43,6 +43,10 @@ ros2 launch hesai_ros_driver start.py
 # 优化explore算法
 colcon build --packages-select explore_lite
 
+# 运动轨迹显示
+colcon build --packages-select go2_bringup
+ros2 run go2_bringup trajectory_visualizer
+
 # nav2调试
 
 colcon build --packages-select nav2_bringup

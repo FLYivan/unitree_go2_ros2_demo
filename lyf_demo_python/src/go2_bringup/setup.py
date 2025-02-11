@@ -34,6 +34,7 @@ setup(
             'initialpose_publisher  = go2_bringup.initialpose_publisher:main',  
             'motion_to_tf  = go2_bringup.motion_to_tf:main',  
             'stair_detector  = go2_bringup.stair_detector:main',   
+            'trajectory_visualizer'= go2_bringup.trajectory_visualizer:main', 
 
             'wavefront_frontier  = go2_bringup.wavefront_frontier:main', 
 
