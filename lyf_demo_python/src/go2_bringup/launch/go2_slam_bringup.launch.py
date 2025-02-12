@@ -92,7 +92,16 @@ def generate_launch_description():
             output='screen'
         )
 
-    
+    # 运动轨迹显示节点
+    start_traject_node =  Node(
+        package='go2_bringup',                      
+        executable='trajectory_visualizer',             
+        name='trajectory_visualizer',
+        output='screen',
+    )
+
+
+
     return launch.LaunchDescription([
 
         
@@ -106,6 +115,8 @@ def generate_launch_description():
         # start_go2_model_launch_file,               # 启动go2实体模型launch文件
         start_async_slam_toolbox_node,  # slam-toolbox算法节点
         start_rviz_node,
+
+        start_traject_node,             # 运动轨迹显示节点
 
 
 
