@@ -9,5 +9,10 @@
         ollama run deepseek-r1:32b
     
     3、安装openai库，以便通过api调用
+        1、新建虚拟环境
+        conda create --name deepseek python=3.8
+        运行deepseek目录下的test.py脚本
+
+    4、提问时，以\n开头
 
     
