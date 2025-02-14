@@ -11,10 +11,10 @@ chat_completion = client.chat.completions.create(
     messages=[
         {
             'role': 'user',
-            'content': '\n你好，帮我写一段ros2框架下的python代码，可以实现调用机器人的摄像头接口识别环境中是否有苹果',
+            'content': '\n请写一首歌颂赵灵儿的四言绝句',
         }
     ],
-    model='deepseek-r1:7b',
+    model='deepseek-r1:32b',
     temperature = 0.7,                               # 控制生成的随机性
     # max_tokens = 256,                                # 生成的最大token数
 )
