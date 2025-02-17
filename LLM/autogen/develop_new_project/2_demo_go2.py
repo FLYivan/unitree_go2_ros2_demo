@@ -131,21 +131,25 @@ class RobotMover(Node):
 
 
 
-    def move_forward(self, distance: float) -> None:
+    def move_forward(self, distance: float, vx: float, vy: float, vyaw: float) -> None:
         """
-        Move the robot forward for a specified distance.Using the dedicated API for robots
+        Move the robot for a specified distance or specified angle.Using the dedicated API for robots
 
         Args:
-            distance (float): The distance to move forward in meters.
+            distance (float): The distance to move in meters.
+            vx (float): x轴正方向的线速度，单位为m/s,x轴正方向为机器人面朝方向,取值范围[-2.5~3.8]
+            vy (float): y轴正方向的线速度，单位为m/s,y轴正方向和x轴正方向满足右手系,取值范围[-1.0~1.0].
+            vyaw (float): 偏航角速度，单位[-4~4]rad/s.
         """
         req: Request = Request()
         sport_req: SportClient = SportClient()
-        vx = 0.2
-        vy = 0.0
-        vyaw = 0.0
+        # vx = 0.5
+        # vy = 0.0
+        # vyaw = 0.0
         sport_req.Move(req,vx, vy, vyaw)
 
-        time_to_move: float = distance / 0.2  # Calculate time needed to move the specified distance
+        # time_to_move: float = distance /vx  # Calculate time needed to move the specified distance
+        time_to_move: float = 5.0
 
         # Ensure the message is received by publishing multiple times
         for _ in range(10):
@@ -156,30 +160,37 @@ class RobotMover(Node):
 
         time.sleep(time_to_move)  # Wait for the calculated time
 
+        print(f'move time:{time_to_move}')
+
         # Stop the robot
-        vx = 0.0
-        vy = 0.0
-        vyaw = 0.0
-        sport_req.Move(req,vx, vy, vyaw)
-        for _ in range(10):
-            self.cmd_vel_pub.publish(req)
-            time.sleep(0.1)
+        # vx = 0.0
+        # vy = 0.0
+        # vyaw = 0.0
+        # sport_req.Move(req,vx, vy, vyaw)
+        # for _ in range(10):
+        #     self.cmd_vel_pub.publish(req)
+        #     time.sleep(0.1)
 
+        # print(f'now,x={vx}, y={vy}, vyaw={vyaw}')
 
-def move_forward(distance: float) -> str:
+def move_forward(distance: float, vx: float, vy: float, vyaw: float) -> str:
     """
     Initialize ROS2, create a RobotMover node, move the robot, and then shut down.
 
     Args:
-        distance (float): The distance for the robot to move forward in meters.
+        distance (float): The distance for the robot to move in meters.
+        vx (float): x轴正方向的线速度，单位为m/s,x轴正方向为机器人面朝方向,取值范围[-2.5~3.8]
+        vy (float): y轴正方向的线速度，单位为m/s,y轴正方向和x轴正方向满足右手系,取值范围[-1.0~1.0].
+        vyaw (float): 偏航角速度，单位[-4~4]rad/s.
+
     """
     rclpy.init()
     mover: RobotMover = RobotMover()
-    mover.move_forward(distance)
+    mover.move_forward(distance,vx,vy,vyaw)
     mover.destroy_node()
     rclpy.shutdown()
     return f"Robot moved forward {distance} meters."
-    
+    #  vx: float, vy: float, vyaw: float
 
 go2bot_system_prompt = """
 go2是一个开源的四足机器人，有一个摄像头在它的正前方，
@@ -200,6 +211,11 @@ llm_config_gpt4o = {
     "model": os.getenv("OPENAI_MODEL"),
     "api_key": os.getenv("OPENAI_API_KEY"),
     "base_url": os.getenv("OPENAI_BASE_URL"),
+
+    # "model": os.getenv("LOCAL_LLM_MODEL"),
+    # "api_key": os.getenv("LOCAL_LLM_API_KEY"),
+    # "base_url": os.getenv("LOCAL_LLM_BASE_URL"),
+
     # "api_type": "azure",
     # "api_version": "2024-02-15-preview",
     "temperature": 0.8,
@@ -274,20 +290,20 @@ register_function(
     description="让go2向前移动一段距离",  # A description of the tool.
 )
 
-register_function(
-    write_to_file,
-    caller=code_copy,
-    executor=code_executor,
-    name="write_to_file",
-    description="把指定的内容写入一下指定的路径",
-)
+# register_function(
+#     write_to_file,
+#     caller=code_copy,
+#     executor=code_executor,
+#     name="write_to_file",
+#     description="把指定的内容写入一下指定的路径",
+# )
 
 
 graph_dict = {}
 graph_dict[initializer] = [robotic_expert]
 graph_dict[human_proxy] = [robotic_expert]
-graph_dict[robotic_expert] = [code_copy, code_executor]
-graph_dict[code_copy] = [code_executor]
+graph_dict[robotic_expert] = [code_executor]
+# graph_dict[code_copy] = [code_executor]
 graph_dict[code_executor] = [human_proxy]
 
 agents = [initializer, human_proxy, robotic_expert, code_executor, code_copy]
@@ -304,7 +320,7 @@ manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=llm_config_gp
 
 initializer.initiate_chat(
     manager,
-    message="向前走一段距离",
+    message="正常速度一直向前走",
     clear_history=False     # 不能清除历史记忆
 )
 
