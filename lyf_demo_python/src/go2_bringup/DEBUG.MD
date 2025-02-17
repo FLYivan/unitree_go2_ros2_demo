@@ -47,6 +47,10 @@ colcon build --packages-select explore_lite
 colcon build --packages-select go2_bringup
 ros2 run go2_bringup trajectory_visualizer
 
+# 摄像头拉流驱动
+ros2 run go2_bringup video_stream
+
+
 # nav2调试
 
 colcon build --packages-select nav2_bringup
