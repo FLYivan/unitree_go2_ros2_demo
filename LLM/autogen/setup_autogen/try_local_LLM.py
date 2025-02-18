@@ -15,9 +15,13 @@ llm_config = {
     # "base_url": os.getenv("LOCAL_LLM_BASE_URL"),
 
 
-    "model": os.getenv("OPENAI_MODEL"),
-    "api_key": os.getenv("OPENAI_API_KEY"),
-    "base_url": os.getenv("OPENAI_BASE_URL"),
+    # "model": os.getenv("OPENAI_MODEL"),
+    # "api_key": os.getenv("OPENAI_API_KEY"),
+    # "base_url": os.getenv("OPENAI_BASE_URL"),
+
+    # "model": os.getenv("UNIPAY_LLM_MODEL"),
+    # "api_key": os.getenv("UNIPAY_LLM_API_KEY"),
+    # "base_url": os.getenv("UNIPAY_LLM_BASE_URL"),
 
 
     "temperature": 0.8,
@@ -30,5 +34,5 @@ user_proxy = UserProxyAgent("user_proxy", code_execution_config=False)      # �
 # Start the chat
 user_proxy.initiate_chat(
     assistant,
-    message="中医里说的“望”和“闻”指的是什么",
+    message="你是谁",
 )

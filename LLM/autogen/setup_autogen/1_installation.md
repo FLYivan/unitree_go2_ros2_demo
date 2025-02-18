@@ -14,3 +14,10 @@ pip install -r requirements.txt --index-url https://mirrors.aliyun.com/pypi/simp
 
 如果在安装过程中，提示依赖的版本不适配，可以把该依赖的版本号从requirements.txt去掉，
 或者先跳过该依赖，等到提示缺少该依赖时，再手动安装。
+
+
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'Provider API error: Stream not yet supported with tool calls (request id: 20250217150358353950878v4Pzkeaj)', 'param': 'stream', 'type': 'invalid_request_error'}}
+
+
+openai.BadRequestError: Error code: 400 - {'error': {'message': 'registry.ollama.ai/library/deepseek-r1:7b does not support tools', 'type': 'api_error', 'param': None, 'code': None}}

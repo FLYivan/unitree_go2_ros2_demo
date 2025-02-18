@@ -1,0 +1,7 @@
+# 查看 CPU 占用最多的进程
+echo "占用 CPU 最多的进程："
+ps aux --sort=-%cpu | head -n 5
+
+# 查看内存占用最多的进程
+echo "占用内存最多的进程："
+ps aux --sort=-%mem | head -n 5

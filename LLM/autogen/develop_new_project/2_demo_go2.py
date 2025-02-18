@@ -208,18 +208,23 @@ go2是一个开源的四足机器人，有一个摄像头在它的正前方，
 """
 
 llm_config_gpt4o = {
-    "model": os.getenv("OPENAI_MODEL"),
-    "api_key": os.getenv("OPENAI_API_KEY"),
-    "base_url": os.getenv("OPENAI_BASE_URL"),
+    # "model": os.getenv("OPENAI_MODEL"),
+    # "api_key": os.getenv("OPENAI_API_KEY"),
+    # "base_url": os.getenv("OPENAI_BASE_URL"),
 
-    # "model": os.getenv("LOCAL_LLM_MODEL"),
-    # "api_key": os.getenv("LOCAL_LLM_API_KEY"),
-    # "base_url": os.getenv("LOCAL_LLM_BASE_URL"),
+    # "model": os.getenv("UNIPAY_LLM_MODEL"),
+    # "api_key": os.getenv("UNIPAY_LLM_API_KEY"),
+    # "base_url": os.getenv("UNIPAY_LLM_BASE_URL"),
+
+
+    "model": os.getenv("LOCAL_LLM_MODEL"),
+    "api_key": os.getenv("LOCAL_LLM_API_KEY"),
+    "base_url": os.getenv("LOCAL_LLM_BASE_URL"),
 
     # "api_type": "azure",
     # "api_version": "2024-02-15-preview",
     "temperature": 0.8,
-    "stream": True,
+    # "stream": False,
 }
 
 initializer = autogen.UserProxyAgent(
@@ -320,7 +325,7 @@ manager = autogen.GroupChatManager(groupchat=groupchat, llm_config=llm_config_gp
 
 initializer.initiate_chat(
     manager,
-    message="正常速度一直向前走",
+    message="正常速度前进一小段距离",
     clear_history=False     # 不能清除历史记忆
 )
 

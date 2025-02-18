@@ -35,38 +35,39 @@ class SportDemo(Node):
 
 
         # 在主函数中直接进行动作演示，避免使用定时器
-        for i in range(3):
-            self.Start()
+        # for i in range(3):
+        #     self.Start()
         
-        for i in range(10):
+        for i in range(15000):
+           self.get_logger().info(f'第{i+1}次指令')
            self.VelocityMove()
 
-        for i in range(2):
-            self.ChangeGait(3)
+        # for i in range(2):
+        #     self.ChangeGait(3)
 
-        for i in range(2):
-            self.Stop()
+        # for i in range(2):
+        #     self.Stop()
 
-        for i in range(10):
-            self.VelocityMove()
+        # for i in range(10):
+        #     self.VelocityMove()
 
-        for i in range(2):
-            self.ChangeGait(1)
+        # for i in range(2):
+        #     self.ChangeGait(1)
 
-        for i in range(10):
-            self.VelocityMove()
+        # for i in range(10):
+        #     self.VelocityMove()
 
-        for i in range(2):
-            self.go2Sit()
+        # for i in range(2):
+        #     self.go2Sit()
 
-        for i in range(1):
-            self.go2RiseSit()
+        # for i in range(1):
+        #     self.go2RiseSit()
 
-        for i in range(4):
-            self.VelocityMove()
+        # for i in range(4):
+        #     self.VelocityMove()
  
-        for i in range(2):
-            self.Stop()
+        # for i in range(2):
+        #     self.Stop()
 
         # for i in range(2):
         #     self.NewYear()
@@ -151,7 +152,7 @@ class SportDemo(Node):
         self.vyaw = 0.0                                                                  # 初始化初始偏航角
         self.sport_req.Move(self.req, self.vx, self.vy, self.vyaw)                  # 获取与高级运动命令对应的请求消息
         self.req_puber.publish(self.req)                                            # 发布请求消息
-        time.sleep(0.5)
+        time.sleep(0.05)
         self.get_logger().info(f'当前x方向速度{self.vx}， y方向速度{self.vy}， 偏航角速度{self.vyaw}')
 
     # 切换步态 (只要一次，后面还要切回正常步态)

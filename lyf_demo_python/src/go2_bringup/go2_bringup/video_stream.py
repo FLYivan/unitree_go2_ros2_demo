@@ -9,11 +9,11 @@ class VideoStreamNode(Node):
         super().__init__('video_stream')  # 初始化节点
         self.image_publisher_ = self.create_publisher(Image, "/camera/image/raw", 10)
 
-        multicast_iface = "wlp0s20f3"
+        multicast_iface = "enp0s31f6"
         self.declare_parameter("multicast_iface", multicast_iface)
         multicast_iface = self.get_parameter("multicast_iface").get_parameter_value().string_value
   
-        gstreamer_str = "udpsrc address=230.1.1.1 port=1720 multicast-iface=wlp0s20f3 ! application/x-rtp, media=video, encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! video/x-raw,width=1280,height=720,format=BGR ! appsink drop=1"
+        gstreamer_str = "udpsrc address=230.1.1.1 port=1720 multicast-iface={multicast_iface} ! application/x-rtp, media=video, encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! video/x-raw,width=1280,height=720,format=BGR ! appsink drop=1"
         """
         注意！要确保opencv版本支持gstreamer,该开关打开，通过“print(cv2.getBuildInformation())”查看
         """       
