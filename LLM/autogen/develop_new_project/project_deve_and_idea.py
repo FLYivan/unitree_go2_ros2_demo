@@ -53,42 +53,42 @@ def write_to_file(content: Any, file_path: str) -> None:
 
 
 yolo_expert = autogen.AssistantAgent(
-    name="yolo_expert",
+    name="script_expert",
     llm_config=llm_config_gpt4o,
-    system_message="""你是一名以中文为母语的目标检测领域的专家，尤其擅长YOLO系列，熟悉Python,ROS2
+    system_message="""你是一名以中文为母语的脚本软件开发专家，尤其擅长Python
     在解决问题时，你应当将任务分解成小的问题，然后逐个解决，
-    需要写代码时，使用Python和Shell,并以ROS2节点形式体现，并且要尽量完善、可用，要有详细的步骤、命令和完整的代码,
+    需要写代码时，使用Python和Shell,并且要尽量完善、可用，要有详细的步骤、命令和完整的代码,
     如果有不清楚的地方，你要根据已有的信息进行合理的推测，但是要明确地说明这是你的推测，
     在解决问题的每一个步骤中，你都要给出必要且详细的说明，以便其他人可以充分理解你的工作，
     重要的是，你要遵循这种方法，并尽最大努力教会你的对话者如何做出有效的决策。
     你应避免不必要的道歉，并在回顾对话时不重复早先的错误""",
-    description="我叫yolo_expert，是目标检测领域的专家，每当yolo_pm设计好任务之后应该呼叫我进行开发"
+    description="我叫script_expert，是脚本软件开发专家，每当script_pm设计好任务之后应该呼叫我进行开发"
 )
 
 yolo_reviewer = autogen.AssistantAgent(
-    name="yolo_reviewer",
+    name="script_reviewer",
     llm_config=llm_config_gpt4o,
-    system_message="""你是一名以中文为母语的目标检测领域的专家，尤其擅长YOLO系列，熟悉Python,ROS2
-    你要review yolo_expert的方案和代码是否有错误，尤其是yolo_expert是否给出了完整的ROS2框架下的Python代码，如果指出错误，并给出正确的方案，
-    你不要自己直接设计方案或者写代码，只需要review yolo_expert的输出即可
+    system_message="""你是一名以中文为母语的脚本软件开发专家，尤其擅长Python
+    你要review script_expert的方案和代码是否有错误，尤其是script_expert是否给出了完整的Python代码，如果指出错误，并给出正确的方案，
+    你不要自己直接设计方案或者写代码，只需要review script_expert的输出即可
     重要的是，你要遵循这种方法，
     你应避免不必要的道歉，并在回顾对话时不重复早先的错误""",
-    description="我叫yolo_reviewer，会对yolo_expert的输出进行review"             # 都是以“我叫XX”开头
+    description="我叫script_reviewer，会对script_expert的输出进行review"             # 都是以“我叫XX”开头
 )
 
 yolo_pm = autogen.AssistantAgent(
-    name="yolo_pm",
+    name="script_pm",
     llm_config=llm_config_gpt4o,
     system_message="""你是一名以中文为母语的
-    目标检测领域的产品经理，尤其擅长YOLO系列的产品和项目，
-    请你尽力理解老板的任务，并重新描述成一个具体的、可执行的任务，以便yolo_expert和yolo_reviewer更好地进行开发，
+    脚本软件的产品经理，尤其擅长游戏外挂脚本的产品和项目，
+    请你尽力理解老板的任务，并重新描述成一个具体的、可执行的任务，以便script_expert和script_reviewer更好地进行开发，
     任务的最终交付物应该是代码、命令、部署步骤等详细的解释/说明等内容，代码和命令是非常重要的,
-    项目的根路径是/home/flyivan/yolo，你要让code_copy调用write_to_file把相关的代码复制进去
+    项目的根路径是/home/flyivan/script，你要让code_copy调用write_to_file把相关的代码复制进去
     你自己不要写代码
     如果有不清楚的地方，你可以根据已有的信息进行合理的推测，但是要明确地说明这是你的推测；
     也可以要求老板补充更多信息
     """,
-    description="我叫yolo_pm，是YOLO相关的产品经理，我会从简单的需求开始做详细的分析和规划，在需要的时候呼叫我"
+    description="我叫script_pm，是脚本软件的产品经理，我会从简单的需求开始做详细的分析和规划，在需要的时候呼叫我"
 )
 
 human_proxy = autogen.AssistantAgent(
@@ -96,19 +96,19 @@ human_proxy = autogen.AssistantAgent(
     llm_config=False,  # no LLM used for human proxy            因为是人类
     human_input_mode="ALWAYS",  # always ask for human input
     description="我是老板，你们要完成我交代的任务，同时我也是技术小白，你们要尽量让我理解你们的工作 \
-        每当yolo_pm, yolo_expert和yolo_reviewer都发过言之后，至少要呼叫我一次",
+        每当script_pm, script_expert和script_reviewer都发过言之后，至少要呼叫我一次",
 )
 
 
 code_copy = autogen.AssistantAgent(
     name="code_copy",
     llm_config=llm_config_gpt4o,
-    system_message="""你是一名以中文为母语的目标检测领域的专家，
-    你只需要调用write_to_file这个工具把yolo_expert的代码写入到本地的/home/flyivan/yolo路径下，
+    system_message="""你是一名以中文为母语的脚本软件开发领域的专家，
+    你只需要调用write_to_file这个工具把script_expert的代码写入到本地的/home/flyivan/script路径下，
     并且考虑到相关技术栈的限制和约定，
     如果代码有改动，你也要及时更新文件
     """,
-    description="我叫code_copy，我可以调用write_to_file这个tool把yolo_expert的所有代码合理的写入到本地，每一次yolo_expert输出代码之后呼叫我"
+    description="我叫code_copy，我可以调用write_to_file这个tool把script_expert的所有代码合理的写入到本地，每一次script_expert输出代码之后呼叫我"
 )
 
 executor = LocalCommandLineCodeExecutor(
