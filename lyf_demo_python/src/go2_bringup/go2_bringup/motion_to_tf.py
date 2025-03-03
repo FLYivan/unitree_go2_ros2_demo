@@ -265,7 +265,7 @@ class DynamicTFPublisher(Node):
         self.imu.header.stamp = self.get_clock().now().to_msg()    # 以上位机时间戳为准
 
         self.imu.header.frame_id = 'hesai_lidar'                   # 设置消息的坐标系ID
-        self.imu.child_frame_id = 'base'                           # 设置子坐标系ID
+       
 
         
         # 设置线性加速度
@@ -279,10 +279,10 @@ class DynamicTFPublisher(Node):
         self.imu.angular_velocity.z = self.vthz
         
         # 设置四元数姿态
-        msg.orientation.w = relative_rotation.as_quat()[3]
-        msg.orientation.x = relative_rotation.as_quat()[0]
-        msg.orientation.y = relative_rotation.as_quat()[1]
-        msg.orientation.z = relative_rotation.as_quat()[2]
+        self.imu.orientation.w = relative_rotation.as_quat()[3]
+        self.imu.orientation.x = relative_rotation.as_quat()[0]
+        self.imu.orientation.y = relative_rotation.as_quat()[1]
+        self.imu.orientation.z = relative_rotation.as_quat()[2]
 
 
 
