@@ -36,6 +36,10 @@ setup(
             'stair_detector  = go2_bringup.stair_detector:main',   
             'trajectory_visualizer = go2_bringup.trajectory_visualizer:main', 
             'video_stream = go2_bringup.video_stream:main', 
+            'transfor_tare = go2_bringup.transfor_tare:main', 
+
+
+
 
             'wavefront_frontier  = go2_bringup.wavefront_frontier:main', 
 

@@ -38,6 +38,7 @@ ros2 run go2_bringup go2_move
 
 # 雷达驱动
 ros2 launch hesai_ros_driver start.py
+ros2 run go2_bringup transfor_tare
 
 
 # 优化explore算法
@@ -49,6 +50,8 @@ ros2 run go2_bringup trajectory_visualizer
 
 # 摄像头拉流驱动
 ros2 run go2_bringup video_stream
+
+
 
 
 # nav2调试

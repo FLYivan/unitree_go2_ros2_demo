@@ -7,7 +7,6 @@ from sensor_msgs.msg import PointCloud2
 from sensor_msgs.msg import Imu
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy
 
-from tf2_ros import Buffer, TransformListener
 from scipy.spatial.transform import Rotation as R
 
 
@@ -34,9 +33,9 @@ RESET = '\033[0m'  # 重置颜色
 
 
 
-class DynamicTFPublisher(Node):
+class TransforTarePublisher(Node):
     def __init__(self):
-        super().__init__('motion_to_tf')
+        super().__init__('transfor_tare')
                          
         self.x = 0.0                                    # 初始化x位置
         self.y = 0.0                                    # 初始化y位置
@@ -56,6 +55,14 @@ class DynamicTFPublisher(Node):
         self.accex = 0.0
         self.accey = 0.0
         self.accez = 9.81  # 重力加速度
+
+        # 初始变换：从坐标系A到坐标系B
+        self.initial_position_A = None
+        self.initial_orientation_A = None
+
+        # 坐标系B的初始位置和旋转
+        self.initial_position_B = np.array([0, 0, 0.3])
+        self.initial_orientation_B = R.from_quat([0.0, 0.0, 0.0, 1.0])
 
         
         # 自定义QoS配置
@@ -164,9 +171,17 @@ class DynamicTFPublisher(Node):
         self.imu.orientation.y = relative_rotation.as_quat()[1]
         self.imu.orientation.z = relative_rotation.as_quat()[2]
 
-    def lidar_callback(self):
-        self.lidar.header.stamp = self.get_clock().now().to_msg()    # 以上位机时间戳为准    
-
+    def lidar_callback(self, msg):
+        self.lidar.header = msg.header   # 保留原始头部信息
+        self.lidar.header.stamp = self.get_clock().now().to_msg()    # 以上位机时间戳为准  
+        self.lidar.height = msg.height
+        self.lidar.width = msg.width
+        self.lidar.fields = msg.fields
+        self.lidar.is_bigendian = msg.is_bigendian
+        self.lidar.point_step = msg.point_step
+        self.lidar.row_step = msg.row_step
+        self.lidar.data = msg.data  # 保留原始数据
+        self.lidar.is_dense = msg.is_dense
 
     # 回调函数，处理接收到的odom消息，并发布tf
     def publish_all(self):
@@ -180,7 +195,7 @@ class DynamicTFPublisher(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    dynamic_tf_publisher = DynamicTFPublisher()
+    dynamic_tf_publisher = TransforTarePublisher()
     rclpy.spin(dynamic_tf_publisher)
     dynamic_tf_publisher.destroy_node()
     rclpy.shutdown()
