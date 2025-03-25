@@ -28,17 +28,16 @@ ros2 run nav2_map_server map_saver_cli -f b1-room
 ros2 launch go2_bringup cloud_to_scan.launch.py
 ros2 launch go2_bringup go2_nav2_bringup.launch.py
 
-# 启动slam联动nav2
-ros2 launch hesai_ros_driver start.py
+# 启动explore节点并同步建图
+    # 拓展乌
+    ros2 launch hesai_ros_driver start.py
 
-ros2 launch go2_bringup go2_m_explore.launch.py 	
-ros2 launch go2_bringup test_explore.launch.py 
+    # 上位机
+    ros2 launch go2_bringup go2_m_explore.launch.py 	
 
-ros2 run go2_bringup go2_move
 
 # 雷达驱动
 ros2 launch hesai_ros_driver start.py
-ros2 run go2_bringup transfor_tare
 
 
 # 优化explore算法
@@ -86,72 +85,10 @@ ros2 run go2_bringup go2_move
 
 
 
-解决问题
-1、死胡同转向，头朝死胡同
-2、死胡同逃离
-3、背后负载，激光数据缺失
-4、根据参数文件再看下
-5、路线频繁切换，原算法弊端
-6、膨胀半径太大进不了过道，太小撞墙
-
-
-花了大量时间调参，以适应真实传感器和真实环境
 
 
 
 
-
-
-
-# 调试时记录的问题
-
-
-2、定时器的高频启动有助于避免navetopose的过程中，由于长路径的索死，但会把更多的点因为aborted加入黑名单
-3、大理石 瓷砖墙面
-
-
-
-# 问题记录
-
-1、向上楼梯，激光会认为障碍物
-2、
-1）避障接管，当cmd_vel连续100下左右原地踏步
-2）取消接管，当cmd_vel连续X下有值
-
-3、
-1）定时器正常情况下不要启动
-2）卡死情况下启动定时器
-3）启动后仍不能解救，启动辟障程序
-4）比章脱离后，要再次触发定时器启动规划
-
-
-# 解决问题
-1、复杂环境，算不出来
-2、实例只有仿真，真实环境也非常简单
-3、反复起停
-4、大理石，玻璃墙面，对激光不友好，自探索时容易误检
-5、机器人被困在局部最小值中（例如陷入死角）
-     机器人想要到达目标G
-    但被U形障碍物包围
-    需要先远离目标才能绕过障碍到达目标
-    但局部规划可能总是倾向于向目标方向移动
-6、源代码在实际工况验证时，不合理，比如定时器
-6、后退行为的触发
-后退通常是作为恢复行为(Recovery Behavior)的一部分
-不是常规路径规划的选项
-只在遇到问题时作为应急手段
-这就解释了为什么在遇到死角时：
-局部规划器会陷入局部最小值
-不会自动选择倒退作为解决方案
-需要触发恢复行为才会执行后退动作
-这确实是 Nav2 局部规划器的一个局限性。在某些场景下,允许规划器考虑后退路径可能会是更好的选择。
-
-    为什么会陷入
-    局部路径规划器往往只考虑局部环境
-    基于梯度下降等方法可能会:
-    不断尝试向目标靠近
-    被障碍物阻挡
-    来回摆动或停滞不前
 
 
 

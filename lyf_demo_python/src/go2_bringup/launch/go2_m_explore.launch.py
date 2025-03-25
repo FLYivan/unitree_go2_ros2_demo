@@ -111,8 +111,8 @@ def generate_launch_description():
             slam_launch,                    # 启动slam功能
             nav2_bringup_launch,            # 启动nav2功能
             # start_explore_node,            # 启动探索节点
-            # delayed_start_explore_node,       # 延迟启动探索节点
-            # start_go2Move_node,             # 运动控制节点
+            delayed_start_explore_node,       # 延迟启动探索节点
+            start_go2Move_node,             # 运动控制节点
             start_rviz_node,
         ]
     )
