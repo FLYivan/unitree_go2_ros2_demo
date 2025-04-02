@@ -1,7 +1,0 @@
-setup.py
-deepseek.egg-info/PKG-INFO
-deepseek.egg-info/SOURCES.txt
-deepseek.egg-info/dependency_links.txt
-deepseek.egg-info/requires.txt
-deepseek.egg-info/top_level.txt
-deepseek_test/__init__.py

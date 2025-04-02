@@ -1,1 +1,0 @@
-bash check_system_resources.sh
