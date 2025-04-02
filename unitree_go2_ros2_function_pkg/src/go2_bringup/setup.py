@@ -18,7 +18,6 @@ setup(
         (os.path.join('share', package_name, 'config'), glob(os.path.join('config', '*.*'))), 
         (os.path.join('share', package_name, 'rviz'), glob(os.path.join('rviz', '*.rviz'))),
         (os.path.join('share', package_name, 'map'), glob(os.path.join('map', '*.*'))),
-
     ],
     install_requires=['setuptools'],
     zip_safe=True,

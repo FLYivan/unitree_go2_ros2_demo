@@ -750,7 +750,7 @@ def wait_for_future(node, future, result):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = SlamNode('go2_obstacle avoidance')
+    node = SlamNode('go2_obstacle_avoidance')
 
 
     """
