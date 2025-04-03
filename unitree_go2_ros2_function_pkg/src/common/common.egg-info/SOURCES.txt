@@ -5,8 +5,8 @@ common.egg-info/dependency_links.txt
 common.egg-info/requires.txt
 common.egg-info/top_level.txt
 go2_sport/__init__.py
+go2_sport/go2_python_sport_client.py
 go2_sport/ros2_sport_client.py
 go2_sport/sport_api.py
-go2_sport/unitree_slam_api.py
 go2_test/__init__.py
 go2_test/logdata_clean.py

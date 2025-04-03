@@ -7,11 +7,8 @@ from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String
 from unitree_sdk2py.core.channel import ChannelFactoryInitialize
-from unitree_sdk2py.go2.sport.sport_client import (
-    SportClient,
-    PathPoint,
-    SPORT_PATH_POINT_SIZE,
-)
+from unitree_sdk2py.go2.sport.sport_client import SportClient
+
 
 # ANSI 转义序列，定义打印颜色
 RED = '\033[91m'
@@ -23,13 +20,18 @@ RESET = '\033[0m'  # 重置颜色
 class Python2RosCmd(Node):
     def __init__(self,name):
         super().__init__(name)
-        self.sport_client = SportClient()  
-        self.sport_client.SetTimeout(10.0)
-        self.sport_client.Init()
+        
+
 
         # 初始化网络通道
         ChannelFactoryInitialize(0, "wlp0s20f3")
-        
+        self.get_logger().info(f'{YELLOW}通道初始化成功{RESET}')
+
+        # self.sport_client = UserInterface()  
+        self.sport_client = SportClient()  
+        self.sport_client.SetTimeout(10.0)
+        self.sport_client.Init()
+        self.get_logger().info(f'{RED}客户端初始化成功{RESET}')
         
         # 创建nav2控制指令订阅者
         self.subscription = self.create_subscription(
@@ -43,8 +45,9 @@ class Python2RosCmd(Node):
     def cmd_vel_callback(self, msg):
         # 收到移动命令时调用API
 
-        self.sport_client.Move(msg.vx, msg.vy, msg.vyaw)
-        self.get_logger().info(f'{YELLOW}Sending to go2: vx ={msg.vx}, vy={msg.vy}, vyaw={msg.vyaw}{RESET}')
+        # self.sport_client.move(msg.vx, msg.vy, msg.vyaw)
+        self.sport_client.Move(msg.linear.x, msg.linear.y, msg.angular.z)
+        self.get_logger().info(f'{YELLOW}Sending to go2: vx ={msg.linear.x}, vy={msg.linear.y}, vyaw={msg.angular.z}{RESET}')
 
 def main():
     rclpy.init()

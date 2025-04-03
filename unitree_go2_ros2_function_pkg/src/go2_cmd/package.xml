@@ -25,6 +25,7 @@
   <depend>unitree_interfaces</depend>
   <depend>custom_interface</depend> 
   <depend>go2_sport</depend>
+  <depend>unitree_sdk2py</depend>
 
   <exec_depend>python3-scipy</exec_depend>
   <exec_depend>sshpass</exec_depend>

@@ -9,7 +9,10 @@ setup(name='common',
       description='go2 sport client for ros2 using python',
       python_requires='>=3.8',
       install_requires=[
+            "cyclonedds==0.10.2",
             "numpy",
-           
+
       ],
       )
+
+
