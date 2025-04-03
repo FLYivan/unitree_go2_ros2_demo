@@ -10,6 +10,6 @@ setup(name='common',
       python_requires='>=3.8',
       install_requires=[
             "numpy",
-            "opencv-python",
+           
       ],
       )

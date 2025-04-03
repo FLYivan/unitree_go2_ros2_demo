@@ -32,6 +32,9 @@ setup(
 
             'go2_move  = go2_cmd.go2_move:main',  
             'go2_obstacle_avoidance  = go2_cmd.go2_obstacle_avoidance:main',   
+
+            'go2_p2r_cmd  = go2_cmd.go2_p2r_cmd:main',  
+            'cmd_pub_test  = go2_cmd.cmd_pub_test:main',  
         ],
     },
 )
