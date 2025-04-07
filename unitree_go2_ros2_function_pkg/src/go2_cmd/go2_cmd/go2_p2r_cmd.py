@@ -42,7 +42,7 @@ class Python2RosCmd(Node):
         # 创建模式控制指令订阅者
         self.command_subscription = self.create_subscription(
             String,
-            'control_command',
+            'cmd_control_command',
             self.command_callback,
             10)
         
