@@ -43,8 +43,8 @@ def generate_launch_description():
     # 模拟速度指令发布节点
     start_vel_pub_test_node =  Node(
             package='go2_cmd',                      
-            executable='cmd_pub_test',             
-            name='cmd_pub_test',
+            executable='vel_pub_test',             
+            name='vel_pub_test',
             output='screen',
         )
     
