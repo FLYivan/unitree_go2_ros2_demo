@@ -30,7 +30,7 @@ class VelocityPublisher(Node):
         current_time = self.get_clock().now()
         elapsed_time = (current_time - self.start_time).nanoseconds / 1e9  # 转换为秒
 
-        if elapsed_time < 10 :
+        if elapsed_time < 5 :
             # 前10秒发布A消息
             cmd_msg = String()
             cmd_msg.data = 'velocity_control'
@@ -40,7 +40,7 @@ class VelocityPublisher(Node):
             self.liedown_published = False
 
         
-        elif elapsed_time >= 10 and not self.liedown_published:
+        elif elapsed_time >= 5 and not self.liedown_published:
             # 10秒后切换到发布趴下消息
             cmd_msg = String()
             cmd_msg.data = 'lie_down'
@@ -48,7 +48,7 @@ class VelocityPublisher(Node):
             self.get_logger().info(f'Published: {cmd_msg.data}')
             self.liedown_published = True
         
-        elif elapsed_time >= 15 and not self.standup_published:
+        elif elapsed_time >= 10 and not self.standup_published:
             # 等待5秒后发布起立消息
             cmd_msg = String()
             cmd_msg.data = 'stand'

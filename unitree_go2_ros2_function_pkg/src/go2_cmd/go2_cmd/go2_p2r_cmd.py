@@ -49,13 +49,6 @@ class Python2RosCmd(Node):
         self.velocity_callback_group = MutuallyExclusiveCallbackGroup()
         self.timer_callback_group = ReentrantCallbackGroup()
 
-        # 创建模式控制指令订阅者（使用独立的回调组）
-        self.command_subscription = self.create_subscription(
-            String,
-            'cmd_control_command',
-            self.command_callback,
-            10,
-            callback_group=self.command_callback_group)
             
         # 创建速度指令订阅者（使用独立的回调组）
         self.velocity_subscription = self.create_subscription(
@@ -64,6 +57,14 @@ class Python2RosCmd(Node):
             self.velocity_callback,
             10,
             callback_group=self.velocity_callback_group)
+        
+        # 创建模式控制指令订阅者（使用独立的回调组）
+        self.command_subscription = self.create_subscription(
+            String,
+            'cmd_control_command',
+            self.command_callback,
+            10,
+            callback_group=self.command_callback_group)
         
         # 创建定时器（使用独立的回调组）
         self.timer = self.create_timer(
