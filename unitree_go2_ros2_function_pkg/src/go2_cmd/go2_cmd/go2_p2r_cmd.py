@@ -4,6 +4,10 @@
 
 import rclpy
 from rclpy.node import Node
+# 使用 ReentrantCallbackGroup 允许定时器回调的重入
+# 使用 MutuallyExclusiveCallbackGroup 确保同类回调的互斥执行
+from rclpy.callback_groups import MutuallyExclusiveCallbackGroup, ReentrantCallbackGroup   
+from rclpy.executors import MultiThreadedExecutor   # 替换默认的单线程执行器为 MultiThreadedExecutor
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String
 from unitree_sdk2py.core.channel import ChannelFactoryInitialize
@@ -39,29 +43,40 @@ class Python2RosCmd(Node):
         self.get_logger().info(f'{RED}客户端初始化成功{RESET}')
 
 
-        # 创建模式控制指令订阅者
+
+        # 创建不同的回调组
+        self.command_callback_group = MutuallyExclusiveCallbackGroup()
+        self.velocity_callback_group = MutuallyExclusiveCallbackGroup()
+        self.timer_callback_group = ReentrantCallbackGroup()
+
+        # 创建模式控制指令订阅者（使用独立的回调组）
         self.command_subscription = self.create_subscription(
             String,
             'cmd_control_command',
             self.command_callback,
-            10)
-        
-        # 创建速度控制指令订阅者
+            10,
+            callback_group=self.command_callback_group)
+            
+        # 创建速度指令订阅者（使用独立的回调组）
         self.velocity_subscription = self.create_subscription(
             Twist,
-            'cmd_vel',  # 订阅 cmd_vel 话题
+            'cmd_vel',
             self.velocity_callback,
-            10
-        )
+            10,
+            callback_group=self.velocity_callback_group)
+        
+        # 创建定时器（使用独立的回调组）
+        self.timer = self.create_timer(
+            0.1,  # 10Hz
+            self.control_loop,
+            callback_group=self.timer_callback_group
+        )              
 
         # 初始化当前控制模式
         self.current_mode = 'idle'
         
         # 初始化存储最新的速度指令
         self.latest_twist = Twist()
-        
-        # 创建定时器，定期执行控制循环
-        self.timer = self.create_timer(0.1, self.control_loop)  # 10Hz
         
         self.get_logger().info('机器人控制模式已经完成初始化')
 
@@ -80,6 +95,9 @@ class Python2RosCmd(Node):
     def velocity_callback(self, msg):
         """处理速度控制指令"""
         self.latest_twist = msg
+        # 如果当前模式是速度控制，直接执行速度控制
+        if self.current_mode == 'velocity_control':
+            self.velocity_control(self.latest_twist.linear.x, self.latest_twist.linear.y, self.latest_twist.angular.z)
 
     """
     运动控制技能库
@@ -103,9 +121,7 @@ class Python2RosCmd(Node):
 
     def control_loop(self):
         """主控制循环"""
-        if self.current_mode == 'velocity_control':
-            self.velocity_control(self.latest_twist.linear.x, self.latest_twist.linear.y, self.latest_twist.angular.z)
-        elif self.current_mode == 'stand':
+        if self.current_mode == 'stand':
             self.stand_control()
         elif self.current_mode == 'lie_down':
             self.lie_down_control()
@@ -119,8 +135,20 @@ class Python2RosCmd(Node):
 def main():
     rclpy.init()
     node = Python2RosCmd('go2_p2r_cmd')
-    rclpy.spin(node)
-    rclpy.shutdown()
+
+
+    # 使用多线程执行器
+    executor = MultiThreadedExecutor(num_threads=3)
+    executor.add_node(node)
+
+    try:
+        executor.spin()
+    except KeyboardInterrupt:
+        pass
+    finally:
+        executor.shutdown()
+        node.destroy_node()
+        rclpy.shutdown()
 
 if __name__ == '__main__':
     main()
