@@ -1,5 +1,5 @@
 """
-将宇数的python api 作为模块导入到ros2节点中
+宇树AI运控模式下，将python api 作为模块导入到ros2节点中
 """
 
 import rclpy
@@ -12,6 +12,8 @@ from geometry_msgs.msg import Twist
 from std_msgs.msg import String
 from unitree_sdk2py.core.channel import ChannelFactoryInitialize
 from unitree_sdk2py.go2.sport.sport_client import SportClient
+
+from unitree_sdk2py.comm.motion_switcher.motion_switcher_client import MotionSwitcherClient
 
 
 # ANSI 转义序列，定义打印颜色
@@ -36,11 +38,34 @@ class Python2RosCmd(Node):
 
         self.get_logger().info(f'{YELLOW}通道初始化成功{RESET}')
 
+
+        # 初始化运动模式切换客户端
+        self.msc = MotionSwitcherClient()
+        self.msc.SetTimeout(5.0)
+        self.msc.Init()
+
+        # 定义运动模式参数
+        self.declare_parameter('mode_name', "ai")  
+        # 获取参数值
+        mode_name_value = self.get_parameter('mode_name').get_parameter_value().string_value
+
+        self.msc.SelectMode(mode_name_value)  # 选择运动模式
+
+        ret = self.msc.SelectMode(mode_name_value)
+
+        if not ret :
+            self.get_logger().info(f'{BLUE}运动模式初始化成功，模式为:{mode_name_value}{RESET}')
+        else :
+            self.get_logger().info(f'{BLUE}运动模式初始化失败，错误原因为:{ret}{RESET}')
+
+
         # 初始化客户端
         self.sport_client = SportClient()  
         self.sport_client.SetTimeout(10.0)
         self.sport_client.Init()
         self.sport_client.BalanceStand()   # 在调用Move之前，调用一次BalanceStand，确保解除锁定，进入可移动状态
+        self.sport_client.FreeWalk()       # 进入灵动模式
+        
         self.get_logger().info(f'{RED}客户端初始化成功{RESET}')
 
 

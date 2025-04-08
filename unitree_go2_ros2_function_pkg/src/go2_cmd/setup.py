@@ -34,8 +34,11 @@ setup(
             'go2_obstacle_avoidance  = go2_cmd.go2_obstacle_avoidance:main',   
 
             'go2_p2r_cmd  = go2_cmd.go2_p2r_cmd:main',  
+            'go2_ai_cmd  = go2_cmd.go2_ai_cmd:main',  
+
             'vel_pub_test  = go2_cmd.vel_pub_test:main',  
             'cmd_pub_test  = go2_cmd.cmd_pub_test:main', 
+
         ],
     },
 )
