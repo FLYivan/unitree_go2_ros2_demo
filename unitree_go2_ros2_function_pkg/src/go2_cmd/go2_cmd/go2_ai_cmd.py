@@ -39,21 +39,20 @@ class Python2RosCmd(Node):
         self.get_logger().info(f'{YELLOW}通道初始化成功{RESET}')
 
 
+        # 定义运动模式参数
+        self.declare_parameter('mode_name', "ai")  
+        # self.declare_parameter('mode_name', "normal")  
+        # 获取参数值
+        mode_name_value = self.get_parameter('mode_name').get_parameter_value().string_value
+
         # 初始化运动模式切换客户端
         self.msc = MotionSwitcherClient()
         self.msc.SetTimeout(5.0)
         self.msc.Init()
 
-        # 定义运动模式参数
-        self.declare_parameter('mode_name', "ai")  
-        # 获取参数值
-        mode_name_value = self.get_parameter('mode_name').get_parameter_value().string_value
+        ret = self.msc.SelectMode(mode_name_value) # 选择运动模式
 
-        self.msc.SelectMode(mode_name_value)  # 选择运动模式
-
-        ret = self.msc.SelectMode(mode_name_value)
-
-        if not ret :
+        if not ret[0] :
             self.get_logger().info(f'{BLUE}运动模式初始化成功，模式为:{mode_name_value}{RESET}')
         else :
             self.get_logger().info(f'{BLUE}运动模式初始化失败，错误原因为:{ret}{RESET}')
@@ -64,7 +63,7 @@ class Python2RosCmd(Node):
         self.sport_client.SetTimeout(10.0)
         self.sport_client.Init()
         self.sport_client.BalanceStand()   # 在调用Move之前，调用一次BalanceStand，确保解除锁定，进入可移动状态
-        self.sport_client.FreeWalk()       # 进入灵动模式
+        self.sport_client.FreeWalk(True)       # 进入灵动模式
         
         self.get_logger().info(f'{RED}客户端初始化成功{RESET}')
 
@@ -100,8 +99,8 @@ class Python2RosCmd(Node):
         )              
 
         # 初始化当前控制模式
-        self.current_mode = 'idle'
-        # self.current_mode = 'velocity_control'  # 调试时使用
+        # self.current_mode = 'idle'
+        self.current_mode = 'velocity_control'  # 调试时使用
         
         # 初始化存储最新的速度指令
         self.latest_twist = Twist()
@@ -162,7 +161,7 @@ class Python2RosCmd(Node):
 
 def main():
     rclpy.init()
-    node = Python2RosCmd('go2_p2r_cmd')
+    node = Python2RosCmd('go2_ai_cmd')
 
 
     # 使用多线程执行器
