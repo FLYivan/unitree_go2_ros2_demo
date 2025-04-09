@@ -144,8 +144,8 @@ def generate_launch_description():
         declare_log_level_cmd,
 
 
-        start_L1_lidar_launch_file,     # 启动L1点云转2d激光文件
-        # start_lidar_launch_file,        # 启动激光frame_id修改launch文件
+        # start_L1_lidar_launch_file,     # 启动L1点云转2d激光文件
+        start_lidar_launch_file,        # 启动激光frame_id修改launch文件
         start_cus_tftree_node,
         start_async_slam_toolbox_node,  # slam-toolbox算法节点
 

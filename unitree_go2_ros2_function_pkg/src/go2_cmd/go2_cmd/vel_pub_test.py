@@ -20,7 +20,7 @@ class VelocityPublisher(Node):
         twist = Twist()
         
         # 设置线速度和角速度
-        twist.linear.x = 0.5 # 前进速度
+        twist.linear.x = 0.1 # 前进速度
         twist.linear.y = 0.0
         twist.linear.z = 0.0
         twist.angular.x = 0.0

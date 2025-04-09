@@ -32,6 +32,10 @@ ros2 launch go2_nav go2_nav2_bringup.launch.py
 
     # 上位机
     ros2 launch go2_explore_algorithm go2_m_explore.launch.py 
+
+    ros2 run go2_cmd go2_move
+
+    ros2 run explore_lite explore
     
 # L1雷达点云转化
 

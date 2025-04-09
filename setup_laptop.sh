@@ -9,7 +9,7 @@ source $HOME/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/insta
 
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 
-# LAN
+# # LAN
 # export CYCLONEDDS_URI='<CycloneDDS><Domain><General><Interfaces>
 #                             <NetworkInterface name="enp0s31f6" priority="default" multicast="default" />
 #                         </Interfaces></General></Domain></CycloneDDS>'
