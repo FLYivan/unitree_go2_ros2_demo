@@ -23,7 +23,8 @@ def generate_launch_description():
     lifecycle_nodes = ['map_saver']
 
     # 获取launch文件和定义地址
-    bringup_dir = get_package_share_directory("go2_slam_algorithm")
+    slam_bringup_dir = get_package_share_directory("go2_slam_algorithm")
+    nav_bringup_dir = get_package_share_directory("go2_nav")
 
     # Create our own temporary YAML files that include substitutions
     param_substitutions = {
@@ -41,7 +42,7 @@ def generate_launch_description():
     # 声明slam-toolbox启动时，参数文件的默认地址
     declare_slam_params_file_cmd = DeclareLaunchArgument(
         'slam_params_file',
-        default_value=os.path.join(bringup_dir,'config', 'mapper_params_online_async.yaml'),                
+        default_value=os.path.join(slam_bringup_dir,'config', 'mapper_params_online_async.yaml'),                
         description='Full path to the slam parameters file to use for the slam_toolbox node')
     
     # Declare the launch arguments
@@ -53,7 +54,7 @@ def generate_launch_description():
     # 声明nav2相关功能包启动时的参数文件地址
     declare_nav2_params_file_cmd = DeclareLaunchArgument(
         'nav2_params_file',
-        default_value=os.path.join(bringup_dir, 'config', 'nav2_params.yaml'),
+        default_value=os.path.join(nav_bringup_dir, 'config', 'nav2_params.yaml'),
         description='Full path to the nav2 parameters file to use for all launched nodes')
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
