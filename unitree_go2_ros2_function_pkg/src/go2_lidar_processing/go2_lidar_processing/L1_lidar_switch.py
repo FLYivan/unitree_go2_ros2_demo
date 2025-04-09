@@ -1,17 +1,23 @@
 #!/usr/bin/env python3
 
+"""
+L1雷达定时开关节点
+"""
+
 import rclpy
 from rclpy.node import Node
 from geometry_msgs.msg import Twist
 from std_msgs.msg import String
-import time
+
+# 定义话题名称
+LIDARSWTICHTOPIC = "utlidar/switch"                             # 添加L1雷达开关话题
 
 class LidarSwtichPublisher(Node):
     def __init__(self, name):
         super().__init__(name)
         
         # 创建一个发布者，发布到控制指令话题
-        self.publisher = self.create_publisher(String, '/utlidar/switch', 10)
+        self.publisher = self.create_publisher(String, LIDARSWTICHTOPIC, 10)
         
         # 设置发布频率
         self.timer = self.create_timer(0.1, self.publish_lidar_switch)  # 每0.1秒发布一次
@@ -31,8 +37,8 @@ class LidarSwtichPublisher(Node):
         current_time = self.get_clock().now()
         elapsed_time = (current_time - self.start_time).nanoseconds / 1e9  # 转换为秒
 
-        if elapsed_time < 10 and not self.switchoff_published:
-            # 前10秒发布A消息
+        if elapsed_time > 10 and elapsed_time <30 and not self.switchoff_published:
+            # 10秒后关闭L1雷达
             switch_msg = String()
             switch_msg.data = 'OFF'
             self.publisher.publish(switch_msg)
@@ -40,8 +46,8 @@ class LidarSwtichPublisher(Node):
             self.switchoff_published = True
 
         
-        elif elapsed_time >= 10 and not self.switchon_published:
-            # 10秒后切换到发布趴下消息
+        elif elapsed_time >= 30 and not self.switchon_published:
+            # 30秒后重新打开L1雷达
             switch_msg = String()
             switch_msg.data = 'ON'
             self.publisher.publish(switch_msg)

@@ -22,9 +22,11 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time')
 
 
-    explore_param_path = LaunchConfiguration(
-        'params_file', default=os.path.join(go2_explore_dir, 'config', 'explore.yaml'))
+    # explore_param_path = LaunchConfiguration(
+    #     'params_file', default=os.path.join(go2_explore_dir, 'config', 'explore.yaml'))
     
+    explore_param_path = LaunchConfiguration(
+        'params_file', default=os.path.join(go2_explore_dir, 'config', 'explore_L1.yaml'))
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
         'use_sim_time', default_value='false', description='Use simulation (Gazebo) clock if true'

@@ -20,12 +20,12 @@ class FrameIdModifier(Node):
         # 设置 QoS 策略
         qos_profile_sub = QoSProfile(
             reliability=ReliabilityPolicy.BEST_EFFORT,  # 或者使用 ReliabilityPolicy.BEST_EFFORT
-            depth=10
+            depth=50
         )
 
         qos_profile_pub = QoSProfile(
             reliability=ReliabilityPolicy.RELIABLE,  # 或者使用 ReliabilityPolicy.BEST_EFFORT
-            depth=10
+            depth=50
         )
 
 

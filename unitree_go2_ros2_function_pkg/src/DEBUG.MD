@@ -31,7 +31,12 @@ ros2 launch go2_nav go2_nav2_bringup.launch.py
     ros2 launch hesai_ros_driver start.py
 
     # 上位机
-    ros2 launch go2_explore_algorithm go2_m_explore.launch.py 	
+    ros2 launch go2_explore_algorithm go2_m_explore.launch.py 
+    
+# L1雷达点云转化
+
+    ros2 run go2_lidar_processing transform_everything
+    ros2 launch go2_lidar_processing cloud_to_scan_L1.launch.py
 
 
 # 雷达驱动

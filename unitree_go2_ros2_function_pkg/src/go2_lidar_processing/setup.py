@@ -27,6 +27,9 @@ setup(
         'console_scripts': [
 
             'timestamp_test  = go2_lidar_processing.timestamp_test:main', 
+
+            'L1_lidar_switch  = go2_lidar_processing.L1_lidar_switch:main', 
+            'transform_everything = go2_lidar_processing.transform_everything:main'
         ],
     },
 )

@@ -70,6 +70,12 @@ def generate_launch_description():
     )	
 
 
+    # L1点云转2d激光
+    start_L1_lidar_launch_file = launch.actions.IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([get_package_share_directory(
+            'go2_lidar_processing'), '/launch', '/cloud_to_scan_L1.launch.py']),
+    )	
+
     # RViz2节点
     start_rviz_node =Node(
             package='rviz2',
@@ -96,8 +102,8 @@ def generate_launch_description():
         declare_slam_params_file_cmd,
         declare_use_sim_time_cmd,
   
-
-        start_lidar_launch_file,        # 启动激光frame_id修改launch文件
+        start_L1_lidar_launch_file,     # 启动L1点云转2d激光文件
+        # start_lidar_launch_file,        # 启动激光frame_id修改launch文件
         start_cus_tftree_node,
         start_async_slam_toolbox_node,  # slam-toolbox算法节点
         start_rviz_node,

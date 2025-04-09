@@ -40,8 +40,8 @@ class Python2RosCmd(Node):
 
 
         # 定义运动模式参数
-        self.declare_parameter('mode_name', "ai")  
-        # self.declare_parameter('mode_name', "normal")  
+        # self.declare_parameter('mode_name', "ai")  
+        self.declare_parameter('mode_name', "normal")  
         # 获取参数值
         mode_name_value = self.get_parameter('mode_name').get_parameter_value().string_value
 
