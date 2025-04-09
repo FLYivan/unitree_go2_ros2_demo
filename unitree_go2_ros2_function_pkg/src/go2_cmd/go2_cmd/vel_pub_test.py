@@ -33,7 +33,7 @@ class VelocityPublisher(Node):
 
 def main(args=None):
     rclpy.init(args=args)
-    node = VelocityPublisher("cmd_pub_test")
+    node = VelocityPublisher("vel_pub_test")
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
