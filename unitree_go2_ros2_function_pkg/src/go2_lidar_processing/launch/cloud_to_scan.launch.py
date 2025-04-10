@@ -1,8 +1,3 @@
-"""
-将3d点云转换为2d的节点
-
-"""
-
 import launch
 from launch import LaunchDescription
 from launch_ros.actions import Node
@@ -41,9 +36,7 @@ def generate_launch_description():
             executable='frame_id_modifier',             
             name='frame_id_modifier',
             output='screen',
-            parameters=[{
-                'new_frame_id': 'go2_lidar',             
-                }]        # 修改后frameid
+            parameters=[{'new_frame_id': 'go2_lidar'}]        # 修改后frameid
         )
 
     # 延迟启动 node_frame

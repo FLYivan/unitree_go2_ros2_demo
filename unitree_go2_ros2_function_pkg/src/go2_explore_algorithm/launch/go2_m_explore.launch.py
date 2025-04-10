@@ -13,6 +13,7 @@ def generate_launch_description():
     go2_slam_dir = FindPackageShare('go2_slam_algorithm')
     go2_nav_dir = get_package_share_directory('go2_nav')
     go2_explore_dir = get_package_share_directory('go2_explore_algorithm')
+
     nav2_bringup_dir = FindPackageShare('nav2_bringup')
 
     rviz_config_dir = os.path.join(
@@ -25,8 +26,6 @@ def generate_launch_description():
     explore_param_path = LaunchConfiguration(
         'params_file', default=os.path.join(go2_explore_dir, 'config', 'explore.yaml'))
     
-    # explore_param_path = LaunchConfiguration(
-    #     'params_file', default=os.path.join(go2_explore_dir, 'config', 'explore_L1.yaml'))
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
         'use_sim_time', default_value='false', description='Use simulation (Gazebo) clock if true'
@@ -81,7 +80,7 @@ def generate_launch_description():
     )
 
  # 延迟启动 node_frame
-    delayed_start_explore_node = TimerAction(period=2.0,  actions=[start_explore_node]) # 延迟 10 秒启动
+    delayed_start_explore_node = TimerAction(period=10.0,  actions=[start_explore_node]) # 延迟 10 秒启动
 
     # 运动控制节点
     start_go2Move_node =  Node(
@@ -114,8 +113,8 @@ def generate_launch_description():
             slam_launch,                    # 启动slam功能
             nav2_bringup_launch,            # 启动nav2功能
             # start_explore_node,            # 启动探索节点
-            # delayed_start_explore_node,       # 延迟启动探索节点
-            # start_go2Move_node,             # 运动控制节点
+            delayed_start_explore_node,       # 延迟启动探索节点
+            start_go2Move_node,             # 运动控制节点
             start_rviz_node,
         ]
     )

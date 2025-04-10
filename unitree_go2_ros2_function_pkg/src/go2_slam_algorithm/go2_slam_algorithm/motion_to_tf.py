@@ -1,9 +1,3 @@
-"""
-为使用slam-toolbox中的算法，发布里程计、TF变化和IMU话题的节点
-
-"""
-
-
 import rclpy
 import subprocess
 import numpy as np
@@ -12,7 +6,6 @@ from rclpy.node import Node
 from geometry_msgs.msg import TransformStamped
 from tf2_ros import StaticTransformBroadcaster, TransformBroadcaster, Buffer
 from nav_msgs.msg import Odometry
-from sensor_msgs.msg import Imu
 from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy
 from scipy.spatial.transform import Rotation as R
 
@@ -58,11 +51,6 @@ class DynamicTFPublisher(Node):
         self.quat_y = 0.0
         self.quat_z = 0.0
 
-
-        self.accex = 0.0
-        self.accey = 0.0
-        self.accez = 9.81  # 重力加速度
-
         # 初始变换：从坐标系A到坐标系B
         self.initial_position_A = None
         self.initial_orientation_A = None
@@ -86,10 +74,6 @@ class DynamicTFPublisher(Node):
         self.odom_pub = self.create_publisher(Odometry, 'odom', qos_profile)    
         self.odom = Odometry()                               # 创建一个Odometry消息对象
 
-        # 创建一个发布器，用于发布IMU消息
-        self.imu_pub = self.create_publisher(Imu, '/hesai/imu', qos_profile)    
-        self.imu = Imu()                               # 创建一个Imu消息对象
-
         # 创建静态变换广播器
         self.static_broadcaster = StaticTransformBroadcaster(self)
         self.static_transform_stamped = TransformStamped()
@@ -102,7 +86,7 @@ class DynamicTFPublisher(Node):
 
 
         # 将定时器间隔设置为0.05秒（即20Hz）
-        self.publish_frequency = 100                  # 设置发布频率为20Hz
+        self.publish_frequency = 20                  # 设置发布频率为20Hz
         self.publish_period = 1.0 / self.publish_frequency                                  # 计算发布周期
         self.timer = self.create_timer(self.publish_period , self.publish_all)        # 动态tf发布的频率为20hz(不可动参数)
         
@@ -159,10 +143,7 @@ class DynamicTFPublisher(Node):
         self.vy = float(msg.velocity[1])   # 获取y轴线速度
         self.vz = float(msg.velocity[2])   # 获取z轴线速度
 
-        # 更新线性加速度
-        self.accex = float(msg.imu_state.accelerometer[0])      # 从消息中获取x轴加速度
-        self.accey = float(msg.imu_state.accelerometer[1])      # 从消息中获取y轴加速度
-        self.accez = float(msg.imu_state.accelerometer[2])      # 从消息中获取z轴加速度
+
 
         """
         时间戳同步
@@ -264,33 +245,6 @@ class DynamicTFPublisher(Node):
         self.transform.transform.rotation.w = relative_rotation.as_quat()[3]
 
         
-        """
-        IMU话题信息生成
-        """
-        # 设置消息头
-        self.imu.header.stamp = self.get_clock().now().to_msg()    # 以上位机时间戳为准
-
-        self.imu.header.frame_id = 'hesai_lidar'                   # 设置消息的坐标系ID
-       
-
-        
-        # 设置线性加速度
-        self.imu.linear_acceleration.x = self.accex
-        self.imu.linear_acceleration.y = self.accey
-        self.imu.linear_acceleration.z = self.accez
-        
-        # 设置角速度
-        self.imu.angular_velocity.x = self.vthx
-        self.imu.angular_velocity.y = self.vthy
-        self.imu.angular_velocity.z = self.vthz
-        
-        # 设置四元数姿态
-        self.imu.orientation.w = relative_rotation.as_quat()[3]
-        self.imu.orientation.x = relative_rotation.as_quat()[0]
-        self.imu.orientation.y = relative_rotation.as_quat()[1]
-        self.imu.orientation.z = relative_rotation.as_quat()[2]
-
-
 
 
     # 回调函数，处理接收到的odom消息，并发布tf
@@ -309,9 +263,7 @@ class DynamicTFPublisher(Node):
         self.tf_broadcaster.sendTransform(self.transform)
         # self.get_logger().info(f'{YELLOW}动态TF时间戳: {self.transform.header.stamp}{RESET}')
 
-        # 发布IMU消息
-        self.imu_pub.publish(self.imu) 
-
+        
 
 def main(args=None):
     rclpy.init(args=args)
