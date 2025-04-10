@@ -1,5 +1,5 @@
 Panels:
-  - Class: rviz_common/Displays
+  - Class: rviz/Displays
     Help Height: 78
     Name: Displays
     Property Tree Widget:
@@ -7,21 +7,21 @@ Panels:
         - /TF1/Frames1
       Splitter Ratio: 0.5
     Tree Height: 746
-  - Class: rviz_common/Selection
+  - Class: rviz/Selection
     Name: Selection
-  - Class: rviz_common/Tool Properties
+  - Class: rviz/Tool Properties
     Expanded:
       - /2D Pose Estimate1
       - /2D Nav Goal1
       - /Publish Point1
     Name: Tool Properties
     Splitter Ratio: 0.5886790156364441
-  - Class: rviz_common/Views
+  - Class: rviz/Views
     Expanded:
       - /Current View1
     Name: Views
     Splitter Ratio: 0.5
-  - Class: rviz_common/Time
+  - Class: rviz/Time
     Name: Time
     SyncMode: 0
     SyncSource: ""
@@ -34,7 +34,7 @@ Visualization Manager:
   Displays:
     - Alpha: 0.5
       Cell Size: 1
-      Class: rviz_default_plugins/Grid
+      Class: rviz/Grid
       Color: 85; 87; 83
       Enabled: true
       Line Style:
@@ -51,7 +51,7 @@ Visualization Manager:
       Reference Frame: <Fixed Frame>
       Value: true
     - Alpha: 1
-      Class: rviz_default_plugins/RobotModel
+      Class: rviz/RobotModel
       Collision Enabled: false
       Enabled: true
       Links:
@@ -159,7 +159,7 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
-    - Class: rviz_default_plugins/TF
+    - Class: rviz/TF
       Enabled: false
       Frame Timeout: 15
       Frames:
@@ -174,7 +174,7 @@ Visualization Manager:
         {}
       Update Interval: 0
       Value: false
-    - Class: rviz_default_plugins/MarkerArray
+    - Class: rviz/MarkerArray
       Enabled: true
       Marker Topic: /link_inertias_viz
       Name: MarkerArray
@@ -190,26 +190,26 @@ Visualization Manager:
     Frame Rate: 30
   Name: root
   Tools:
-    - Class: rviz_default_plugins/Interact
+    - Class: rviz/Interact
       Hide Inactive Objects: true
-    - Class: rviz_default_plugins/MoveCamera
-    - Class: rviz_default_plugins/Select
-    - Class: rviz_default_plugins/FocusCamera
-    - Class: rviz_default_plugins/Measure
-    - Class: rviz_default_plugins/SetInitialPose
+    - Class: rviz/MoveCamera
+    - Class: rviz/Select
+    - Class: rviz/FocusCamera
+    - Class: rviz/Measure
+    - Class: rviz/SetInitialPose
       Theta std deviation: 0.2617993950843811
       Topic: /initialpose
       X std deviation: 0.5
       Y std deviation: 0.5
-    - Class: rviz_default_plugins/SetGoal
+    - Class: rviz/SetGoal
       Topic: /move_base_simple/goal
-    - Class: rviz_default_plugins/PublishPoint
+    - Class: rviz/PublishPoint
       Single click: true
       Topic: /clicked_point
   Value: true
   Views:
     Current:
-      Class: rviz_default_plugins/Orbit
+      Class: rviz/Orbit
       Distance: 0.7113326191902161
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549

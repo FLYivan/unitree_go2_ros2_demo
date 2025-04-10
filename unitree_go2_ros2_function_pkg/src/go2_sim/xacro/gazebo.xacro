@@ -31,12 +31,12 @@
         </plugin>
     </gazebo>
 
-    <!-- <gazebo>
-        <plugin filename="/opt/ros/humble/lib/libgazebo_ros_force.so name="gazebo_ros_force" " >
+    <gazebo>
+        <plugin filename="libgazebo_ros_force.so" name="gazebo_ros_force">
             <bodyName>trunk</bodyName>
             <topicName>/apply_force/trunk</topicName>
         </plugin>
-    </gazebo> -->
+    </gazebo>
 
     <gazebo reference="imu_link">
         <gravity>true</gravity>
