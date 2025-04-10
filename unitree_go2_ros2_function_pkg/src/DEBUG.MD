@@ -27,11 +27,20 @@ ros2 launch go2_lidar_processing cloud_to_scan.launch.py
 ros2 launch go2_nav go2_nav2_bringup.launch.py
 
 # 启动explore节点并同步建图
+   ## go2
+   
     # 拓展乌
     ros2 launch hesai_ros_driver start.py
 
     # 上位机
     ros2 launch go2_explore_algorithm go2_m_explore.launch.py 
+
+   ## g1
+    # 拓展乌
+    ros2 launch livox_ros_driver2 msg_MID360_launch.py
+
+    # 上位机
+    
 
     
 # L1雷达点云转化
