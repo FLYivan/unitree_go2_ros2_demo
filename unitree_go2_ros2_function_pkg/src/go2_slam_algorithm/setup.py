@@ -30,6 +30,7 @@ setup(
             'motion_to_tf  = go2_slam_algorithm.motion_to_tf:main',  
             'height_map_visualizer  = go2_slam_algorithm.height_map_visualizer:main',  
             'frame_id_modifier  = go2_slam_algorithm.frame_id_modifier:main',  
+            'auto_map_saver  = go2_slam_algorithm.auto_map_saver:main',  
         ],
     },
 )

@@ -132,7 +132,17 @@ def generate_launch_description():
             'go2_lidar_processing'), '/launch', '/cloud_to_scan_L1.launch.py']),
     )	
 
+
+    # 自动保存地图
+    start_map_saver_node =  Node(
+            package='go2_slam_algorithm',                      
+            executable='auto_map_saver',             
+            name='auto_map_saver',
+            output='screen',
+        )
     
+
+
     return launch.LaunchDescription([
 
         
@@ -150,6 +160,6 @@ def generate_launch_description():
         start_cus_tftree_node,
         start_async_slam_toolbox_node,  # slam-toolbox算法节点
 
-
+        # start_map_saver_node,           # 自动保存地图
 
     ])
