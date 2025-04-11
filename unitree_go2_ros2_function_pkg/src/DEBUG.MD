@@ -40,7 +40,15 @@ ros2 launch go2_nav go2_nav2_bringup.launch.py
     ros2 launch livox_ros_driver2 msg_MID360_launch.py
 
     # 上位机
+
+# 启动仿真
     
+    ros2 launch go2_sim go2_urdf2tf.launch.py
+    ros2 launch go2_sim go2_xacro2tf.launch.py
+    ros2 launch go2_sim go2_gazebo_sim.launch.py
+    
+
+    ros2 launch g1_sim g1_urdf2tf.launch.py
 
     
 # L1雷达点云转化
