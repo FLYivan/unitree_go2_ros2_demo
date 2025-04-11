@@ -1185,7 +1185,7 @@ Stephen Brawner (brawner@gmail.com)
       xyz="0 0 0" />
   </joint>
   <link
-    name="radar">
+    name="go2_lidar">
     <inertial>
       <origin
         xyz="0 0 0"
@@ -1202,7 +1202,7 @@ Stephen Brawner (brawner@gmail.com)
     </inertial>
   </link>
   <joint
-    name="radar_joint"
+    name="go2_lidar_joint"
     type="fixed">
     <origin
       xyz="0.28945 0 -0.046825"
@@ -1210,7 +1210,7 @@ Stephen Brawner (brawner@gmail.com)
     <parent
       link="base" />
     <child
-      link="radar" />
+      link="go2_lidar" />
     <axis
       xyz="0 0 0" />
   </joint>

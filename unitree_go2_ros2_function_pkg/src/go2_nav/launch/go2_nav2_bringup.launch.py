@@ -32,10 +32,10 @@ def generate_launch_description():
     # nav2启动文件
     nav2_bringup = launch.actions.IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
-                [nav2_bringup_dir, '/launch', '/bringup_launch.py']),
+                [nav2_bringup_dir, '/launch', '/navigation_launch.py']),
             # 使用 Launch 参数替换原有参数
             launch_arguments={
-                'map': map_yaml_path,
+                # 'map': map_yaml_path,
                 'use_sim_time': use_sim_time,
                 'params_file': nav2_param_path}.items(),
         )
@@ -46,6 +46,12 @@ def generate_launch_description():
             'go2_lidar_processing'), '/launch', '/cloud_to_scan.launch.py']),
     )	
 
+
+    # go2的URDF发布launch文件
+    launch_urdf = launch.actions.IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([get_package_share_directory(
+            'go2_sim'), '/launch', '/go2_urdf2tf.launch.py']),
+    )	
 
     # 使用自定义odom，进行tf关系发布节点
     start_cus_tftree_node =  Node(
@@ -87,11 +93,13 @@ def generate_launch_description():
         declare_use_sim_time_cmd,
         declare_map_yaml_path_cmd,
         declare_nav2_param_path_cmd,
+
         launch_lidar,
+        # launch_urdf,
         start_cus_tftree_node,
         node_go2Move,
         nav2_bringup,
         node_rviz,
-        node_initialpose,
+        # node_initialpose,
 
     ])
