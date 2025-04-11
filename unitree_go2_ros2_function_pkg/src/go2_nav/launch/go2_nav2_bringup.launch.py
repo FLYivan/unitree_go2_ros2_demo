@@ -39,13 +39,13 @@ def generate_launch_description():
                 'use_sim_time': use_sim_time,
                 'params_file': nav2_param_path}.items(),
         )
-    
-    # 激光frame_id修改launch文件
-    launch_lidar = launch.actions.IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([get_package_share_directory(
-            'go2_lidar_processing'), '/launch', '/cloud_to_scan.launch.py']),
-    )	
 
+
+    # slam启动launch文件
+    launch_slam = launch.actions.IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([get_package_share_directory(
+            'go2_slam_algorithm'), '/launch', '/go2_slam_toolbox_for_nav.launch.py']),
+    )	
 
     # go2的URDF发布launch文件
     launch_urdf = launch.actions.IncludeLaunchDescription(
@@ -53,13 +53,6 @@ def generate_launch_description():
             'go2_sim'), '/launch', '/go2_urdf2tf.launch.py']),
     )	
 
-    # 使用自定义odom，进行tf关系发布节点
-    start_cus_tftree_node =  Node(
-            package='go2_slam_algorithm',                      
-            executable='motion_to_tf',             
-            name='motion_to_tf',
-            output='screen',
-        )
     
     # 运动控制节点
     node_go2Move =  Node(
@@ -94,9 +87,9 @@ def generate_launch_description():
         declare_map_yaml_path_cmd,
         declare_nav2_param_path_cmd,
 
-        launch_lidar,
+
+        launch_slam,
         # launch_urdf,
-        start_cus_tftree_node,
         node_go2Move,
         nav2_bringup,
         node_rviz,
