@@ -1185,7 +1185,7 @@ Stephen Brawner (brawner@gmail.com)
       xyz="0 0 0" />
   </joint>
   <link
-    name="go2_lidar">
+    name="l1_lidar">
     <inertial>
       <origin
         xyz="0 0 0"
@@ -1202,7 +1202,7 @@ Stephen Brawner (brawner@gmail.com)
     </inertial>
   </link>
   <joint
-    name="go2_lidar_joint"
+    name="l1_lidar_joint"
     type="fixed">
     <origin
       xyz="0.28945 0 -0.046825"
@@ -1210,8 +1210,38 @@ Stephen Brawner (brawner@gmail.com)
     <parent
       link="base" />
     <child
-      link="go2_lidar" />
+      link="l1_lidar" />
     <axis
       xyz="0 0 0" />
+  </joint>
+  <!-- 雷达链接 -->
+  <link name="go2_lidar">
+      <inertial>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <mass value="0.5"/> <!-- 根据实际情况设置质量 -->
+          <inertia ixx="0.00" ixy="0" ixz="0" iyy="0.00" iyz="0" izz="0.00"/> <!-- 根据实际情况设置惯性 -->
+      </inertial>
+      <visual>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <geometry>
+              <cylinder radius="0.05" length="0.07"/> <!-- 根据实际情况设置几何形状 -->
+          </geometry>
+          <material name="black">
+              <color rgba="1 1 1 1"/>
+          </material>
+      </visual>
+      <collision>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
+          <geometry>
+              <cylinder radius="0.05" length="0.07"/> <!-- 根据实际情况设置碰撞形状 -->
+          </geometry>
+      </collision>
+  </link>
+
+  <!-- 雷达与基座之间的关节 -->
+  <joint name="go2_lidar_joint" type="fixed">
+      <parent link="base"/>
+      <child link="go2_lidar"/>
+      <origin xyz="0.171 0.0 0.1108" rpy="0 0 1.5708"/> <!-- 设置平移和旋转关系 -->
   </joint>
 </robot>
