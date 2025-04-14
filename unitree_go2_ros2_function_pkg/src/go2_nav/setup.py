@@ -26,7 +26,7 @@ setup(
     entry_points={
         'console_scripts': [
 
-            'initialpose_publisher  = go2_nav.initialpose_publisher:main', 
+
         ],
     },
 )

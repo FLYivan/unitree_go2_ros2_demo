@@ -72,13 +72,7 @@ def generate_launch_description():
             output='screen'
         )
     
-    # 初始化位置节点
-    node_initialpose =  Node(
-            package='go2_nav',                      
-            executable='initialpose_publisher',             
-            name='initialpose_publisher',
-            output='screen',
-        )
+
 
     return launch.LaunchDescription([
 
