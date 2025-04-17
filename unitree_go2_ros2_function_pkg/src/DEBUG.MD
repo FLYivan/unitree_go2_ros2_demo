@@ -26,6 +26,11 @@ ros2 run nav2_map_server map_saver_cli -f b1-room
 ros2 launch go2_lidar_processing cloud_to_scan.launch.py
 ros2 launch go2_nav go2_nav2_bringup.launch.py
 
+
+# AI运控
+
+    ros2 launch go2_cmd go2_ai_cmd_test.launch.py
+
 # 启动explore节点并同步建图
    ## go2
    
@@ -35,11 +40,7 @@ ros2 launch go2_nav go2_nav2_bringup.launch.py
     # 上位机
     ros2 launch go2_explore_algorithm go2_m_explore.launch.py 
 
-   ## g1
-    # 拓展乌
-    ros2 launch livox_ros_driver2 msg_MID360_launch.py
 
-    # 上位机
 
 # 启动仿真
     

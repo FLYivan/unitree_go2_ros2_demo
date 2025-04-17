@@ -6,4 +6,4 @@ go2_p2r_cmd:
 go2_ai_cmd:
   ros__parameters:
     channel_name: wlp0s20f3
-    mode_name_value: ai       # "ai"为AI模式，"normal"为常规模式。"advanced" 为前沿模式
+    mode_name: ai       # "ai"为AI模式，"normal"为常规模式。"advanced" 为前沿模式
