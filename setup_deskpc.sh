@@ -8,5 +8,5 @@ source $HOME/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/insta
 
 export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
 export CYCLONEDDS_URI='<CycloneDDS><Domain><General><Interfaces>
-                            <NetworkInterface name="ens37" priority="default" multicast="default" />
+                            <NetworkInterface name="ens38" priority="default" multicast="default" />
                         </Interfaces></General></Domain></CycloneDDS>'

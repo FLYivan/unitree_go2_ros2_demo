@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# 导入所需的ROS2和其他Python库
 import rclpy
 from rclpy.node import Node
 from rclpy.time import Time
@@ -18,39 +19,44 @@ import os
 
 class Repuber(Node):
     def __init__(self):
+        # 初始化节点
         super().__init__('sensor_transformer')
+        # 创建订阅者,订阅IMU和点云数据
         self.imu_sub = self.create_subscription(Imu, '/utlidar/imu', self.imu_callback, 50)
         self.cloud_sub = self.create_subscription(PointCloud2, '/utlidar/cloud', self.cloud_callback, 50)
        
-
-        # #订阅禾赛雷达+自身IMU
+        # 禾赛雷达相关订阅(已注释)
         # self.imu_sub = self.create_subscription(Imu, '/hesai/imu', self.imu_callback, 50)
         # self.cloud_sub = self.create_subscription(PointCloud2, '/hesai/lidar', self.cloud_callback, 50)
 
-
+        # 创建发布者,发布转换后的IMU和点云数据
         self.imu_raw_pub = self.create_publisher(Imu, '/utlidar/transformed_raw_imu', 50)
         self.imu_pub = self.create_publisher(Imu, '/utlidar/transformed_imu', 50)
         self.cloud_pub = self.create_publisher(PointCloud2, '/utlidar/transformed_cloud', 50)
 
+        # 用于存储IMU静止状态数据的列表
         self.imu_stationary_list = []
         
+        # 时间戳偏移相关变量
         self.time_stamp_offset = 0
         self.time_stamp_offset_set = False
         
+        # 相机偏移量
         self.cam_offset = 0.046825
 
-        # Load calibration data
+        # 加载标定数据
         calib_data = calib_data = {
-                'acc_bias_x': 0.0,
-                'acc_bias_y': 0.0,
-                'acc_bias_z': 0.0,
-                'ang_bias_x': 0.0,
-                'ang_bias_y': 0.0,
-                'ang_bias_z': 0.0,
-                'ang_z2x_proj': 0.15,
-                'ang_z2y_proj': -0.28
+                'acc_bias_x': 0.0,  # 加速度计X轴偏差
+                'acc_bias_y': 0.0,  # 加速度计Y轴偏差
+                'acc_bias_z': 0.0,  # 加速度计Z轴偏差
+                'ang_bias_x': 0.0,  # 角速度计X轴偏差
+                'ang_bias_y': 0.0,  # 角速度计Y轴偏差
+                'ang_bias_z': 0.0,  # 角速度计Z轴偏差
+                'ang_z2x_proj': 0.15,  # Z轴到X轴的投影补偿
+                'ang_z2y_proj': -0.28  # Z轴到Y轴的投影补偿
             }
         try:
+            # 尝试从配置文件加载标定数据
             home_path = os.path.expanduser('~')
             calib_file_path = os.path.join(home_path, '桌面/imu_calib_data.yaml')
             calib_file = open(calib_file_path, 'r')
@@ -60,6 +66,7 @@ class Repuber(Node):
         except:
             print("imu_calib.yaml not found, using defualt values")
             
+        # 设置标定参数
         self.acc_bias_x = calib_data['acc_bias_x']
         self.acc_bias_y = calib_data['acc_bias_y']
         self.acc_bias_z = calib_data['acc_bias_z']
@@ -69,10 +76,11 @@ class Repuber(Node):
         self.ang_z2x_proj = calib_data['ang_z2x_proj']
         self.ang_z2y_proj = calib_data['ang_z2y_proj']
                 
+        # 设置机体到激光雷达的变换
         self.body2cloud_trans = TransformStamped()
         self.body2cloud_trans.header.stamp = self.get_clock().now().to_msg()
         self.body2cloud_trans.header.frame_id = "go2_lidar"
-        self.body2cloud_trans.child_frame_id = "utlidar_lidar_1"
+        self.body2cloud_trans.child_frame_id = "utlidar_lidar"
         self.body2cloud_trans.transform.translation.x = 0.0
         self.body2cloud_trans.transform.translation.y = 0.0
         self.body2cloud_trans.transform.translation.z = 0.0
@@ -82,10 +90,11 @@ class Repuber(Node):
         self.body2cloud_trans.transform.rotation.z = quat[2]
         self.body2cloud_trans.transform.rotation.w = quat[3]
         
+        # 设置机体到IMU的变换
         self.body2imu_trans = TransformStamped()
         self.body2imu_trans.header.stamp = self.get_clock().now().to_msg()
         self.body2imu_trans.header.frame_id = "go2_lidar"
-        self.body2imu_trans.child_frame_id = "utlidar_imu_1"
+        self.body2imu_trans.child_frame_id = "utlidar_imu"
         self.body2imu_trans.transform.translation.x = 0.0
         self.body2imu_trans.transform.translation.y = 0.0
         self.body2imu_trans.transform.translation.z = 0.0
@@ -95,6 +104,7 @@ class Repuber(Node):
         self.body2imu_trans.transform.rotation.z = quat[2]
         self.body2imu_trans.transform.rotation.w = quat[3]
         
+        # 设置点云过滤框的范围
         self.x_filter_min = -0.7
         self.x_filter_max = -0.1
         self.y_filter_min = -0.3
@@ -105,7 +115,7 @@ class Repuber(Node):
         rclpy.spin(self)
                 
     def is_in_filter_box(self, point):
-        # Check if the point is in the filter box
+        # 检查点是否在过滤框内
         is_in_box = point[0] > self.x_filter_min and \
                     point[0] < self.x_filter_max and \
                     point[1] > self.y_filter_min and \
@@ -114,72 +124,61 @@ class Repuber(Node):
                     point[2] < self.z_filter_max
         return is_in_box
 
-    def cloud_callback(self, data):  # 定义云回调函数，接收数据
-
-        if not self.time_stamp_offset_set:  # 如果时间戳偏移量未设置
-            self.time_stamp_offset = self.get_clock().now().nanoseconds - Time.from_msg(data.header.stamp).nanoseconds  # 计算时间戳偏移量
-            self.time_stamp_offset_set = True  # 设置时间戳偏移量为已设置
+    def cloud_callback(self, data):  # 点云数据回调函数
+        # 设置时间戳偏移
+        # 如果时间戳偏移量尚未设置
+        if not self.time_stamp_offset_set:
+            # 计算时间戳偏移量:
+            # 1. self.get_clock().now().nanoseconds 获取当前ROS系统时间(纳秒)
+            # 2. Time.from_msg(data.header.stamp).nanoseconds 获取点云数据的时间戳(纳秒) 
+            # 3. 两者相减得到时间偏移量,用于后续同步点云数据和其他传感器数据
+            self.time_stamp_offset = self.get_clock().now().nanoseconds - Time.from_msg(data.header.stamp).nanoseconds
+            # 标记时间戳偏移量已设置,避免重复计算
+            self.time_stamp_offset_set = True
                 
-        cloud_arr = pc2.read_points_list(data)  # 从数据中读取点云数组
-        points = np.array(cloud_arr)  # 将点云数组转换为NumPy数组
+        # 读取点云数据并转换为numpy数组
+        cloud_arr = pc2.read_points_list(data)
+        points = np.array(cloud_arr)
 
-
-        # # 添加以下打印语句
-        # print("Point data shape:", points.shape)
-        # if len(points) > 0:
-        #     print("Sample point structure:", points[0])
-        #     print("Sample point length:", len(points[0]))
-
-        transform = self.body2cloud_trans.transform  # 获取身体到点云的变换
-        mat = quat2mat(np.array([transform.rotation.w, transform.rotation.x, transform.rotation.y, transform.rotation.z]))  # 将四元数转换为旋转矩阵
-        translation = np.array([transform.translation.x, transform.translation.y, transform.translation.z])  # 获取平移向量
+        # 获取变换矩阵
+        transform = self.body2cloud_trans.transform
+        mat = quat2mat(np.array([transform.rotation.w, transform.rotation.x, transform.rotation.y, transform.rotation.z]))
+        translation = np.array([transform.translation.x, transform.translation.y, transform.translation.z])
         
-        transformed_points = points  # 初始化变换后的点
-        transformed_points[:, 0:3] = points[:, 0:3] @ mat.T + translation  # 应用旋转和位移变换
-        transformed_points[:, 2] -= self.cam_offset  # 调整Z轴坐标，减去相机偏移
-        i = 0  # 初始化索引
-        remove_list = []  # 初始化待移除的点索引列表
-        transformed_points = transformed_points.tolist()  # 将变换后的点转换为列表
+        # 对点云进行变换
+        transformed_points = points
+        transformed_points[:, 0:3] = points[:, 0:3] @ mat.T + translation
+        transformed_points[:, 2] -= self.cam_offset
+        i = 0
+        remove_list = []
+        transformed_points = transformed_points.tolist()
 
+        # 处理每个点的强度值并检查是否在过滤框内
+        for i in range(len(transformed_points)):
+            transformed_points[i][4] = int(transformed_points[i][4])
+            if self.is_in_filter_box(transformed_points[i]):
+                remove_list.append(i)
 
-        # for i in range(len(transformed_points)):
-        #     # 只有当点有足够的字段时才尝试转换强度值
-        #     if len(transformed_points[i]) > 4:
-        #         try:
-        #             transformed_points[i][4] = int(transformed_points[i][4])
-        #         except (ValueError, TypeError):
-        #             # 如果转换失败，保持原值不变
-        #             pass
-                    
-        #     if self.is_in_filter_box(transformed_points[i]):
-        #         remove_list.append(i)
-
-
-
-        for i in range(len(transformed_points)):  # 遍历所有变换后的点
-            transformed_points[i][4] = int(transformed_points[i][4])  # 将点的强度值转换为整数
-            if self.is_in_filter_box(transformed_points[i]):  # 检查点是否在过滤框内
-                remove_list.append(i)  # 如果在过滤框内，添加到待移除列表
-
-
-
-
-
-
-        remove_list.sort(reverse=True)  # 反向排序待移除列表，以便从后向前删除
-
-        for id_to_remove in remove_list:  # 遍历待移除列表
-            del transformed_points[id_to_remove]  # 删除变换后的点
+        # 移除在过滤框内的点
+        remove_list.sort(reverse=True)
+        for id_to_remove in remove_list:
+            del transformed_points[id_to_remove]
         
-        elevated_cloud = pc2.create_cloud(data.header, data.fields, transformed_points)  # 创建新的点云
-        elevated_cloud.header.stamp = Time(nanoseconds=Time.from_msg(elevated_cloud.header.stamp).nanoseconds + self.time_stamp_offset).to_msg()  # 设置点云的时间戳
-        elevated_cloud.header.frame_id = "go2_lidar"  # 设置点云的坐标系
-        elevated_cloud.is_dense = data.is_dense  # 设置点云的稠密性
+        # 创建新的点云消息并发布
+        elevated_cloud = pc2.create_cloud(data.header, data.fields, transformed_points)
+        # 修正点云时间戳:
+        # 1. Time.from_msg() 将ROS消息时间戳转换为Time对象
+        # 2. 获取原始时间戳的纳秒值并加上时间偏移量(self.time_stamp_offset)
+        # 3. 创建新的Time对象并转回消息格式
+        # 这样可以保持点云数据和其他传感器数据的时间同步
+        elevated_cloud.header.stamp = Time(nanoseconds=Time.from_msg(elevated_cloud.header.stamp).nanoseconds + self.time_stamp_offset).to_msg()
+        elevated_cloud.header.frame_id = "go2_lidar"
+        elevated_cloud.is_dense = data.is_dense
 
         self.cloud_pub.publish(elevated_cloud)
             
     def transform_vector(self, vector, rotation):
-        # Transform a vector using a given quaternion rotation
+        # 使用四元数旋转变换向量
         q_vector = [vector.x, vector.y, vector.z, 0.0]
         q_rotated = tf_transformations.quaternion_multiply(
             tf_transformations.quaternion_multiply(rotation, q_vector),
@@ -192,50 +191,60 @@ class Repuber(Node):
         ret_vec.z = q_rotated[2]
         return ret_vec
 
-
     def imu_callback(self, data):    
+        # IMU数据处理回调函数
+        # 获取平移向量
         trans = np.zeros(3)
         trans[0] = self.body2imu_trans.transform.translation.x
         trans[1] = self.body2imu_trans.transform.translation.y
         trans[2] = self.body2imu_trans.transform.translation.z
         
+        # 获取旋转四元数
         rot = np.zeros(4)
         rot[0] = self.body2imu_trans.transform.rotation.x
         rot[1] = self.body2imu_trans.transform.rotation.y
         rot[2] = self.body2imu_trans.transform.rotation.z
         rot[3] = self.body2imu_trans.transform.rotation.w
         
+        # 变换姿态
         transformed_orientation = tf_transformations.quaternion_multiply(rot, [data.orientation.x, data.orientation.y, data.orientation.z, data.orientation.w])
         
+        # 处理角速度数据
         x = data.angular_velocity.x
         y = -data.angular_velocity.y
         z = -data.angular_velocity.z
         
         theta = 15.1 / 180 * 3.1415926
 
+        # 角速度坐标变换
         x2 = np.cos(theta) * x - np.sin(theta) * z
         y2 = y
         z2 = np.sin(theta) * x + np.cos(theta) * z
 
+        # 应用角速度偏差补偿
         x2 -= self.ang_bias_x
         y2 -= self.ang_bias_y
         z2 -= self.ang_bias_z
         
+        # 应用Z轴投影补偿
         x_comp_rate = self.ang_z2x_proj
         y_comp_rate = self.ang_z2y_proj
         
         x2 += x_comp_rate * z2
         y2 += y_comp_rate * z2
         
+        # 设置变换后的角速度
         transformed_angular_velocity = Vector3()
         transformed_angular_velocity.x = x2
         transformed_angular_velocity.y = y2
         transformed_angular_velocity.z = z2
         
+        # 处理线性加速度数据
         acc_x = data.linear_acceleration.x
         acc_y = -data.linear_acceleration.y
         acc_z = -data.linear_acceleration.z
         
+        # 加速度坐标变换
         acc_x2 = np.cos(theta) * acc_x - np.sin(theta) * acc_z
         acc_y2 = acc_y
         acc_z2 = np.sin(theta) * acc_x + np.cos(theta) * acc_z
@@ -244,7 +253,7 @@ class Repuber(Node):
         transformed_linear_acceleration.y = acc_y2 - self.acc_bias_y
         transformed_linear_acceleration.z = acc_z2 - self.acc_bias_z
         
-
+        # 创建并发布变换后的IMU消息
         transformed_imu = Imu()
         transformed_imu.header.stamp = data.header.stamp
         transformed_imu.header.frame_id = 'go2_lidar'
@@ -256,9 +265,10 @@ class Repuber(Node):
         transformed_imu.linear_acceleration = transformed_linear_acceleration
         
         transformed_imu.header.stamp = Time(nanoseconds=Time.from_msg(transformed_imu.header.stamp).nanoseconds + self.time_stamp_offset).to_msg()
-        
+
         self.imu_raw_pub.publish(transformed_imu)
         
+        # 发布零偏置的IMU数据
         transformed_imu.orientation.x = 0.0
         transformed_imu.orientation.y = 0.0
         transformed_imu.orientation.z = 0.0
@@ -271,6 +281,7 @@ class Repuber(Node):
         self.imu_pub.publish(transformed_imu)
 
 def main(args=None):
+    # 主函数
     rclpy.init(args=args)
 
     transform_node = Repuber()

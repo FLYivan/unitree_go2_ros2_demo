@@ -49,17 +49,11 @@ ros2 launch go2_nav go2_nav2_bringup.launch.py
     ros2 launch go2_sim go2_gazebo_sim.launch.py
     
 
-    ros2 launch g1_sim g1_urdf2tf.launch.py
-
     
 # L1雷达点云转化
 
     ros2 run go2_lidar_processing transform_everything
     ros2 launch go2_lidar_processing cloud_to_scan_L1.launch.py
-
-
-# 雷达驱动
-ros2 launch hesai_ros_driver start.py
 
 
 # 优化explore算法
@@ -73,25 +67,8 @@ ros2 run go2_slam_algorithm trajectory_visualizer
 ros2 run go2_camera_processing video_stream --ros-args --remap multicast_iface:=wlp0s20f3
 
 
-
-
-
-# nav2调试
-
-colcon build --packages-select nav2_bringup
-colcon build --packages-select nav2_navfn_planner
-colcon build --packages-select nav2_smac_planner
-colcon build --packages-select nav_2d_utils
-
-colcon build --packages-select nav2_costmap_2d
-colcon build --packages-select nav2_dwb_controller
-colcon build --packages-select dwb_core
-colcon build --packages-select nav2_controller
-
 # 楼梯检测
 colcon build --packages-select go2_bringup
 ros2 run go2_slam_algorithm height_map_visualizer
 
 
-
-# 调试步骤
