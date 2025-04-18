@@ -3,6 +3,9 @@
     1、下载安装包
     https://downloads.nomachine.com/download/?id=1
 
+    2、远程登陆
+        ssh unitree@192.168.123.18
+
 ## 开发板连接wifi下载东西
 
     1、用有线连接路由器，把wifi接口空出来
@@ -77,37 +80,25 @@
         
         2）在上位机上
 
-            ros2 launch realsense2_camera rs_launch.py \
-                camera_namespace:="" \
-                enable_gyro:=true \
-                enable_accel:=true \
-                unite_imu_method:=1 \
-                align_depth.enable:=true \
-                enable_sync:=true \
-                rgb_camera.profile:=640x360x30
+            ros2 launch realsense2_camera rs_launch.py enable_gyro:=true enable_accel:=true unite_imu_method:=2 enable_sync:=true align_depth.enable:=true
 
             ros2 launch rtabmap_examples realsense_d435i_color.launch.py
 
 
     2、激光slam
 
-        ros2 launch livox_ros_driver2 rviz_MID360_launch.py
+        ros2 launch hesai_ros_driver start.py
 
-        ros2 launch rtabmap_examples lidar3d.launch.py lidar_topic:=/livox/lidar frame_id:=mid360_link 
+        ros2 launch rtabmap_examples lidar3d.launch.py lidar_topic:=/lidar_points frame_id:=hesai_lidar 
 
 
     3、室内2d激光和RGB-D融合slam
 
         激光驱动：
-            ros2 launch livox_ros_driver2 rviz_MID360_launch.py
+            ros2 launch hesai_ros_driver start.py
 
         双目驱动：
             ros2 launch realsense2_camera rs_launch.py enable_sync:=true
-
-            ros2 launch realsense2_camera rs_launch.py \
-                align_depth.enable:=true \
-                enable_sync:=true \
-                rgb_camera.profile:=640x360x30
 
         tf和单线激光驱动：
             ros2 launch g1_slam_algorithm g1_rtabmap_pre_pc.launch.py
