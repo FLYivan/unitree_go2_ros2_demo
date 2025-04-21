@@ -66,6 +66,15 @@
 
 ## rtabmap相关
 
+### 仿真验证
+#### 2、室内2d激光和RGB-D融合slam
+
+    SLAM:
+        ros2 launch rtabmap_demos robot_mapping_demo.launch.py rviz:=true rtabmap_viz:=true
+
+    Rosbag:
+        ros2 bag play demo_mapping.db3 --clock
+
 ### 真机测试可用性
     colcon build --packages-select rtabmap_examples
     colcon build --packages-select go2_lidar_processing

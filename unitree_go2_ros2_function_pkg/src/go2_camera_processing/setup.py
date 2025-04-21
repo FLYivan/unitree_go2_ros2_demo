@@ -26,6 +26,7 @@ setup(
     entry_points={
         'console_scripts': [
             'video_stream = go2_camera_processing.video_stream:main', 
+            'video_gui = go2_camera_processing.video_gui:main', 
 
 
 

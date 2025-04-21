@@ -57,11 +57,6 @@ def generate_launch_description():
          ('rgb/image',       'sync/rgb/image'),
          ('depth/image',     'sync/depth/image'),
          ('rgb/camera_info', 'sync/rgb/camera_info'),
-
-        #  ('rgb/image',       '/camera/camera/color/image_raw/compressed'),
-        #  ('depth/image',     '/camera/camera/depth/image_rect_raw/compressedDepth'),
-        #  ('rgb/camera_info', '/camera/camera/color/camera_info'),
-
          ('scan',            'sync/scan')]
 
 
