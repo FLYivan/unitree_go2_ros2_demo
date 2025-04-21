@@ -28,6 +28,10 @@ setup(
             'sport_demo  = go2_demo_show.sport_demo:main',
             'dog_state_sub  = go2_demo_show.read_motion_state:main',
             'dog_control_pub  = go2_demo_show.sport_mode_ctrl:main',
+
+
+            'brain_interface_cmd  = go2_demo_show.brain_interface_cmd:main',
+            'serial_sender_node  = go2_demo_show.serial_sender_node:main',
         ],
     },
 )
