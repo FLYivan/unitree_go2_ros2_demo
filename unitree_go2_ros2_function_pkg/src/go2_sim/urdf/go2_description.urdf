@@ -1244,4 +1244,14 @@ Stephen Brawner (brawner@gmail.com)
       <child link="go2_lidar"/>
       <origin xyz="0.171 0.0 0.1108" rpy="0 0 1.5708"/> <!-- 设置平移和旋转关系 -->
   </joint>
+
+
+  <!-- 双目相机d435 -->
+  <link name="camera_link"></link>
+  <joint name="d435_joint" type="fixed">
+    <origin xyz="0.3 0.0 0.0608" rpy="0 0 0"/>
+    <parent link="base"/>
+    <child link="camera_link"/>
+  </joint>
+
 </robot>

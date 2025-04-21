@@ -68,6 +68,7 @@
 
 ### 真机测试可用性
     colcon build --packages-select rtabmap_examples
+    colcon build --packages-select go2_lidar_processing
 
 
     1、视觉slam
@@ -84,6 +85,8 @@
 
             ros2 launch rtabmap_examples realsense_d435i_color.launch.py
 
+            （realsense接口的正反会有影响）
+
 
     2、激光slam
 
@@ -98,15 +101,16 @@
             ros2 launch hesai_ros_driver start.py
 
         双目驱动：
-            ros2 launch realsense2_camera rs_launch.py enable_sync:=true
+            ros2 launch realsense2_camera rs_launch.py enable_gyro:=true enable_accel:=true unite_imu_method:=2 enable_sync:=true align_depth.enable:=true
 
         tf和单线激光驱动：
-            ros2 launch g1_slam_algorithm g1_rtabmap_pre_pc.launch.py
+            ros2 launch go2_slam_algorithm go2_rtabmap_pre_pc.launch.py
 
-            ros2 run g1_slam_algorithm sensor_sync_node
+            ros2 run go2_lidar_processing sensor_sync_node
 
-
-        ros2 launch g1_slam_algorithm robot_mapping_demo_g1.launch.py rviz:=true rtabmap_viz:=true
+            reliability qos问题
+            
+            ros2 launch go2_slam_algorithm robot_mapping_demo_go2.launch.py rviz:=true rtabmap_viz:=true
         
 
 # 导航
