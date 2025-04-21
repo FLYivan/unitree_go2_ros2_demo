@@ -108,8 +108,21 @@
 
             ros2 run go2_lidar_processing sensor_sync_node
 
-            reliability qos问题
-            
+
+
+
+
+    colcon build --packages-select go2_lidar_processing
+    colcon build --packages-select go2_slam_algorithm
+
+1、调试手册
+    1、将frame_id_modify节点的时间同步取消掉
+    2、用frame_id_modify节点，qos变为reliable
+    2、首先增加队列大小（topic_queue_size和sync_queue_size）到100
+    3、如果问题仍然存在，将QoS改为RELIABLE模式
+    4、如果还有问题，考虑降低激光雷达的发布频率
+    5、sensor_sync_node节点，要求qos一致，并且时间差在0.1秒内
+
             ros2 launch go2_slam_algorithm robot_mapping_demo_go2.launch.py rviz:=true rtabmap_viz:=true
         
 

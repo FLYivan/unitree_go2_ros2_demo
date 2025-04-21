@@ -1215,7 +1215,7 @@ Stephen Brawner (brawner@gmail.com)
       xyz="0 0 0" />
   </joint>
   <!-- 雷达链接 -->
-  <link name="go2_lidar">
+  <link name="hesai_lidar">
       <inertial>
           <origin xyz="0 0 0" rpy="0 0 0"/>
           <mass value="0.5"/> <!-- 根据实际情况设置质量 -->
@@ -1239,9 +1239,9 @@ Stephen Brawner (brawner@gmail.com)
   </link>
 
   <!-- 雷达与基座之间的关节 -->
-  <joint name="go2_lidar_joint" type="fixed">
+  <joint name="hesai_lidar_joint" type="fixed">
       <parent link="base"/>
-      <child link="go2_lidar"/>
+      <child link="hesai_lidar"/>
       <origin xyz="0.171 0.0 0.1108" rpy="0 0 1.5708"/> <!-- 设置平移和旋转关系 -->
   </joint>
 

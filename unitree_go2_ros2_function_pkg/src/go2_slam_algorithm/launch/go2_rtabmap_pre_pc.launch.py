@@ -38,6 +38,14 @@ def generate_launch_description():
     )	
 
 
+    # 使用自定义odom，进行tf关系发布节点
+    start_sensor_sync_node =  Node(
+            package='go2_lidar_processing',                      
+            executable='sensor_sync_node',             
+            name='sensor_sync_node',
+            output='screen',
+        )
+
 
     return launch.LaunchDescription([
  
@@ -48,6 +56,7 @@ def generate_launch_description():
 
 
         start_cus_tftree_node,
+        start_sensor_sync_node,
 
 
 

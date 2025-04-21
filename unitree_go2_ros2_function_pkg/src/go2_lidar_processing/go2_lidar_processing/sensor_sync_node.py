@@ -96,7 +96,11 @@ class SensorSyncNode(Node):
                 history=QoSHistoryPolicy.KEEP_LAST,
                 depth=10
             )
-            self.scan_sub = message_filters.Subscriber(self, LaserScan, '/scan', qos_profile=scan_qos)
+            self.scan_sub = message_filters.Subscriber(self, 
+                                                       LaserScan, 
+                                                       '/scan',
+                                                    #    qos_profile=scan_qos
+                                                       )
             subs.append(self.scan_sub)
 
             # 创建近似时间同步器

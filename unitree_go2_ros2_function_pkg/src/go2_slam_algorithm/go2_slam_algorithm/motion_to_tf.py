@@ -206,7 +206,7 @@ class DynamicTFPublisher(Node):
         self.static_transform_stamped.header.stamp = self.get_clock().now().to_msg()    # 以上位机时间戳为准
 
         self.static_transform_stamped.header.frame_id = 'base'  # 目标frame_id
-        self.static_transform_stamped.child_frame_id = 'go2_lidar'  # 原始frame_id rslidar
+        self.static_transform_stamped.child_frame_id = 'hesai_lidar'  # 原始frame_id rslidar
 
 
         self.static_transform_stamped.transform.translation.x = 0.171
