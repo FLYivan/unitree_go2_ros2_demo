@@ -5,13 +5,26 @@ from launch.actions import TimerAction
 
 def generate_launch_description():
 
+
+    # frame id调整节点
+    frame_change_node = Node(
+            package='pointcloud_to_laserscan', 
+            executable='dummy_pointcloud_publisher',
+            remappings=[('cloud',  '/lidar_points')],
+            parameters=[{'cloud_frame_id': 'hesai_lidar', 
+                        #  'cloud_extent': 2.0, 
+                        #  'cloud_size': 500
+                         
+                         }],
+        )
+
     # 点云转2d激光节点
     node_p2l = Node(
             package='pointcloud_to_laserscan',
             executable='pointcloud_to_laserscan_node',
             name='pointcloud_to_laserscan',
             parameters=[{
-                # 'target_frame': 'cloud_test',
+                'target_frame': 'hesai_lidar',
                 'transform_tolerance': 0.01,
                 'min_height': 0.0,
                 'max_height': 0.5,                       # 障碍物最大高度 （长直走廊如果设的过大，会把过道的屋顶作为障碍物，投射到2d平面）
@@ -45,7 +58,8 @@ def generate_launch_description():
 
     return LaunchDescription([
         node_p2l,
-        delayed_node,
+        # delayed_node,
+        frame_change_node,
     ])
 
 

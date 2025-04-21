@@ -7,6 +7,7 @@ import message_filters
 from cv_bridge import CvBridge
 import cv2
 from datetime import datetime
+from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy
 
 class SensorSyncNode(Node):
     def __init__(self):
@@ -89,7 +90,13 @@ class SensorSyncNode(Node):
             self.pointcloud_sub = message_filters.Subscriber(self, PointCloud2, '/lidar_points')
             subs.append(self.pointcloud_sub)
             
-            self.scan_sub = message_filters.Subscriber(self, LaserScan, '/scan')
+            # 为scan话题创建best effort QoS配置
+            scan_qos = QoSProfile(
+                reliability=QoSReliabilityPolicy.BEST_EFFORT,
+                history=QoSHistoryPolicy.KEEP_LAST,
+                depth=10
+            )
+            self.scan_sub = message_filters.Subscriber(self, LaserScan, '/scan', qos_profile=scan_qos)
             subs.append(self.scan_sub)
 
             # 创建近似时间同步器
