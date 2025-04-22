@@ -26,13 +26,21 @@ def generate_launch_description():
 
     parameters={
           'frame_id':'base',                              # 基础坐标系ID
-          'odom_frame_id':'odom_slamtoolbox',                         # 里程计坐标系ID
+          'odom_frame_id':'odom_go2',                         # 里程计坐标系ID
           'odom_tf_linear_variance':0.001,                # 里程计线性运动的方差
           'odom_tf_angular_variance':0.001,               # 里程计角度运动的方差
           'subscribe_rgbd':True,                          # 订阅RGB-D相机数据
           'subscribe_scan':True,                          # 订阅激光扫描数据
           'approx_sync':True,                             # 启用近似时间同步
-          'sync_queue_size': 10,                          # 同步队列大小
+
+          'sync_queue_size': 20,                          # 同步队列大小
+          'topic_queue_size': 30,
+          'wait_for_transform': 0.5,                        # 默认200ms
+          'tf_delay': 0.05,                                 # 20 Hz
+          'tf_tolerance': 0.5,                              # tf容忍 默认100ms          
+          'Grid/Sensor':               'true',              # 默认没有
+
+
           # RTAB-Map's internal parameters should be strings
           'RGBD/NeighborLinkRefining': 'true',           # 使用连续激光扫描进行里程计校正
           'RGBD/ProximityBySpace':     'true',           # 使用工作内存中的位置进行局部回环检测
@@ -50,7 +58,8 @@ def generate_launch_description():
           'Icp/PM':                    'false',          # 禁用点匹配ICP
           'Icp/PointToPlane':          'false',          # 禁用点到平面ICP
           'Icp/MaxCorrespondenceDistance': '0.15',       # ICP最大对应点距离
-          'Icp/VoxelSize':             '0.05'           # ICP体素大小
+          'Icp/VoxelSize':             '0.05',           # ICP体素大小
+          
     }
     
     remappings=[
@@ -84,7 +93,11 @@ def generate_launch_description():
               {
             #    'rgb_image_transport':'compressed',        # RGB图像使用压缩传输
             #    'depth_image_transport':'compressedDepth', # 深度图像使用压缩传输
-               'approx_sync_max_interval': 0.02}],       # 最大同步时间间隔为0.02秒
+            #    'approx_sync_max_interval': 0.02,            # 最大同步时间间隔为0.02秒
+               'approx_sync_max_interval': 0.5,
+               
+               
+               }],       
             remappings=remappings),          # 使用上面定义的话题重映射
         # SLAM mode:
         Node(

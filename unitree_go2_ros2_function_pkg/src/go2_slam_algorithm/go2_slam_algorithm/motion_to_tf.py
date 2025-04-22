@@ -1,5 +1,4 @@
 import rclpy
-import subprocess
 import numpy as np
 
 from rclpy.node import Node
@@ -11,13 +10,8 @@ from scipy.spatial.transform import Rotation as R
 
 from unitree_go.msg import SportModeState
 
-foot_state = 0                     # Set 1 to info foot states (foot position and velocity in body frame)
-dog_freq = 1                       # Set 1 to subscribe to motion states with high frequencies (500Hz)
 
-if dog_freq == 0 :
-        topic_name = "lf/sportmodestate"
-elif dog_freq == 1 :
-    topic_name = "sportmodestate"
+topic_name = "sportmodestate"
 
 
 # ANSI 转义序列，定义打印颜色
@@ -27,10 +21,6 @@ YELLOW = '\033[93m'
 BLUE = '\033[94m'
 RESET = '\033[0m'  # 重置颜色
 
-# 硬编码密码
-password = "123"
-remote_ip = "192.168.123.18"
-user = "unitree"
 
 
 class DynamicTFPublisher(Node):
@@ -66,6 +56,12 @@ class DynamicTFPublisher(Node):
             depth=10                                       # N=10
         )
 
+        # qos_profile = QoSProfile(
+        # reliability=QoSReliabilityPolicy.BEST_EFFORT,
+        # history=QoSHistoryPolicy.KEEP_LAST,
+        # depth=1
+        # )
+
         # 创建一个订阅器，用于订阅消息
         self.motion_sub = self.create_subscription(SportModeState, topic_name, self.motion_callback, qos_profile)   
 
@@ -74,10 +70,6 @@ class DynamicTFPublisher(Node):
         self.odom_pub = self.create_publisher(Odometry, 'odom', qos_profile)    
         self.odom = Odometry()                               # 创建一个Odometry消息对象
 
-        # 创建静态变换广播器
-        self.static_broadcaster = StaticTransformBroadcaster(self)
-        self.static_transform_stamped = TransformStamped()
-
 
         # 创建动态 TF 缓存和广播器
         self.tf_buffer = Buffer(cache_time=rclpy.duration.Duration(seconds=10))  # 设置缓存时间
@@ -85,10 +77,10 @@ class DynamicTFPublisher(Node):
         self.transform = TransformStamped()  # 初始化 transform
 
 
-        # 将定时器间隔设置为0.05秒（即20Hz）
-        self.publish_frequency = 20                  # 设置发布频率为20Hz
+        # 设置定时器频率
+        self.publish_frequency = 50                  # 设置发布频率为50Hz
         self.publish_period = 1.0 / self.publish_frequency                                  # 计算发布周期
-        self.timer = self.create_timer(self.publish_period , self.publish_all)        # 动态tf发布的频率为20hz(不可动参数)
+        self.timer = self.create_timer(self.publish_period , self.publish_all)        # 动态tf发布的频率为50hz(不可动参数)
         
 
     def motion_callback(self, msg):                     # 定义运动状态回调函数
@@ -145,22 +137,7 @@ class DynamicTFPublisher(Node):
 
 
 
-        """
-        时间戳同步
-        """
-        # 使用 sshpass 获取远程计算机的系统时间
-        remote_time = subprocess.check_output(
-            ["sshpass", "-p", password, "ssh", f"{user}@{remote_ip}", "date +%s%N"]
-        ).strip()
-        
-        # 将时间戳转换为整数
-        timestamp = int(remote_time)
-
-        # 分离秒和纳秒
-        sec = timestamp // 1000000000  # 秒部分
-        nanosec = timestamp % 1000000000  # 纳秒部分
-        # self.get_logger().info(f'{RED}系统时间: sec={sec}, nano={nanosec}{RESET}')
-
+  
 
         """
         里程计话题信息生成
@@ -171,7 +148,7 @@ class DynamicTFPublisher(Node):
 
         self.odom.header.stamp = self.get_clock().now().to_msg()    # 以上位机时间戳为准
 
-        self.odom.header.frame_id = 'odom_slamtoolbox'                   # 设置消息的坐标系ID
+        self.odom.header.frame_id = 'odom_go2'                   # 设置消息的坐标系ID
         self.odom.child_frame_id = 'base'               # 设置子坐标系ID
 
         # 设置位置
@@ -196,29 +173,6 @@ class DynamicTFPublisher(Node):
         self.odom.twist.twist.angular.z = self.vthz                  # 设置角速度z
 
 
-        """
-        静态tf生成
-        """
-        # 使用雷达的时间戳
-        # self.static_transform_stamped.header.stamp.sec = sec
-        # self.static_transform_stamped.header.stamp.nanosec = nanosec
-
-        self.static_transform_stamped.header.stamp = self.get_clock().now().to_msg()    # 以上位机时间戳为准
-
-        self.static_transform_stamped.header.frame_id = 'base'  # 目标frame_id
-        self.static_transform_stamped.child_frame_id = 'hesai_lidar'  # 原始frame_id rslidar
-
-
-        self.static_transform_stamped.transform.translation.x = 0.171
-        self.static_transform_stamped.transform.translation.y = 0.0
-        self.static_transform_stamped.transform.translation.z = 0.0908
-
-        q = R.from_euler('z', np.radians(90)).as_quat()                 # 雷达坐标系默认方向和本体实际坐标系默认方向相差90度,故需修正
-        self.static_transform_stamped.transform.rotation.x = q[0]
-        self.static_transform_stamped.transform.rotation.y = q[1]
-        self.static_transform_stamped.transform.rotation.z = q[2]
-        self.static_transform_stamped.transform.rotation.w = q[3]
-
 
         """
         动态tf关系生成
@@ -230,7 +184,7 @@ class DynamicTFPublisher(Node):
         self.transform.header.stamp = self.get_clock().now().to_msg()    # 以上位机时间戳为准
 
         # 设置坐标系
-        self.transform.header.frame_id = 'odom_slamtoolbox'                          # 设置一个坐标变换的源坐标系
+        self.transform.header.frame_id = 'odom_go2'                          # 设置一个坐标变换的源坐标系
         self.transform.child_frame_id = 'base'                                       # 设置一个坐标变换的目标坐标系
 
         # 设置转化参数
@@ -253,10 +207,6 @@ class DynamicTFPublisher(Node):
         # 发布里程计消息
         self.odom_pub.publish(self.odom) 
         # self.get_logger().info(f'{BLUE}里程计时间戳: {self.transform.header.stamp}{RESET}')                           
-
-        # 发布静态变换
-        # self.static_broadcaster.sendTransform(self.static_transform_stamped)
-        # self.get_logger().info(f'{RED}静态TF时间戳: {self.transform.header.stamp}{RESET}')
 
 
         # 广播坐标变换信息

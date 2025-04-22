@@ -132,6 +132,12 @@ def generate_launch_description():
             'go2_lidar_processing'), '/launch', '/cloud_to_scan_L1.launch.py']),
     )	
 
+    # go2的URDF发布launch文件
+    start_urdf_launch_file = launch.actions.IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([get_package_share_directory(
+            'go2_sim'), '/launch', '/go2_urdf2tf.launch.py']),
+    )	
+
 
     # 自动保存地图
     start_map_saver_node =  Node(
@@ -156,9 +162,10 @@ def generate_launch_description():
 
 
         # start_L1_lidar_launch_file,     # 启动L1点云转2d激光文件
-        start_lidar_launch_file,        # 启动激光frame_id修改launch文件
+        start_lidar_launch_file,          # 启动激光frame_id修改launch文件
         start_cus_tftree_node,
-        start_async_slam_toolbox_node,  # slam-toolbox算法节点
+        start_async_slam_toolbox_node,    # slam-toolbox算法节点
+        start_urdf_launch_file,           # urdf中各种静态tf关系
 
         # start_map_saver_node,           # 自动保存地图
 

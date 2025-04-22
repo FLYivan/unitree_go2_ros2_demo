@@ -156,7 +156,7 @@ Visualization Manager:
           Value: true
         map:
           Value: true
-        odom_slamtoolbox:
+        odom_go2:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -165,7 +165,7 @@ Visualization Manager:
       Show Names: false
       Tree:
         map:
-          odom_slamtoolbox:
+          odom_go2:
             {}
       Update Interval: 0
       Value: true

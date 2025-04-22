@@ -57,6 +57,7 @@
         ros2 launch go2_slam_algorithm go2_slam_toolbox.launch.py 
         ros2 launch go2_lidar_processing cloud_to_scan.launch.py
         ros2 run go2_slam_algorithm motion_to_tf 
+        ros2 launch go2_sim go2_urdf2tf.launch.py
 
     2、地图保存
     ros2 run nav2_map_server map_saver_cli -f f12-room --ros-args 
@@ -112,6 +113,8 @@
         双目驱动：
             ros2 launch realsense2_camera rs_launch.py enable_gyro:=true enable_accel:=true unite_imu_method:=2 enable_sync:=true align_depth.enable:=true
 
+            ros2 launch realsense2_camera rs_launch.py enable_sync:=true
+
         tf和单线激光驱动：
             ros2 launch go2_slam_algorithm go2_rtabmap_pre_pc.launch.py
 
@@ -121,16 +124,19 @@
 
 
 
-    colcon build --packages-select go2_lidar_processing
-    colcon build --packages-select go2_slam_algorithm
+        colcon build --packages-select go2_lidar_processing
+        colcon build --packages-select go2_slam_algorithm
 
-1、调试手册
-    1、将frame_id_modify节点的时间同步取消掉
-    2、用frame_id_modify节点，qos变为reliable
-    2、首先增加队列大小（topic_queue_size和sync_queue_size）到100
-    3、如果问题仍然存在，将QoS改为RELIABLE模式
-    4、如果还有问题，考虑降低激光雷达的发布频率
-    5、sensor_sync_node节点，要求qos一致，并且时间差在0.1秒内
+        1、调试手册
+            1、将frame_id_modify节点的时间同步取消掉
+            2、用frame_id_modify节点，qos变为reliable
+            2、首先增加队列大小（topic_queue_size和sync_queue_size）到100
+            3、如果问题仍然存在，将QoS改为RELIABLE模式
+            4、如果还有问题，考虑降低激光雷达的发布频率
+            5、sensor_sync_node节点，要求qos一致，并且时间差在0.1秒内
+            6、不要发布那么多狗关节的tf,直接回到静态发布
+            6、发布频率上不去，仿真环境都是odom-base 50hz,map-odom 20hz buffer:1
+            6\真机 map-odom 20000hz 太高了
 
             ros2 launch go2_slam_algorithm robot_mapping_demo_go2.launch.py rviz:=true rtabmap_viz:=true
         
