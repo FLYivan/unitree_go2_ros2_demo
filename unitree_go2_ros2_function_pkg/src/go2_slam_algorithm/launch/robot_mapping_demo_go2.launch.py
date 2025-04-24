@@ -35,7 +35,7 @@ def generate_launch_description():
 
           'sync_queue_size': 20,                          # 同步队列大小
           'topic_queue_size': 30,
-          'wait_for_transform': 0.5,                        # 默认200ms
+          'wait_for_transform': 0.1,                        # 默认100ms
           'tf_delay': 0.05,                                 # 20 Hz
           'tf_tolerance': 0.5,                              # tf容忍 默认100ms          
           'Grid/Sensor':               'true',              # 默认没有

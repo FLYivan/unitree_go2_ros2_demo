@@ -111,8 +111,6 @@
             ros2 launch hesai_ros_driver start.py
 
         双目驱动：
-            ros2 launch realsense2_camera rs_launch.py enable_gyro:=true enable_accel:=true unite_imu_method:=2 enable_sync:=true align_depth.enable:=true
-
             ros2 launch realsense2_camera rs_launch.py enable_sync:=true
 
         tf和单线激光驱动：
