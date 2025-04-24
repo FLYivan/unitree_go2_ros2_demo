@@ -34,7 +34,7 @@ class VideoStreamNode(Node):
                     ros_image.header.stamp = self.get_clock().now().to_msg()
                     self.image_publisher_.publish(ros_image)
 
-                    self.get_logger().info("published image frame")
+                    # self.get_logger().info("published image frame")
                 cv2.waitKey(10)
 
 
