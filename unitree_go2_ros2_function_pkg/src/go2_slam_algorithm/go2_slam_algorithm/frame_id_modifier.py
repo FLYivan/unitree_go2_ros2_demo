@@ -49,7 +49,7 @@ class FrameIdModifier(Node):
     def listener_callback(self, msg):
         self.latest_msg = msg
         self.latest_msg.header.frame_id = self.new_frame_id
-        # self.latest_msg.header.stamp = self.get_clock().now().to_msg()
+        self.latest_msg.header.stamp = self.get_clock().now().to_msg()
         
 
 

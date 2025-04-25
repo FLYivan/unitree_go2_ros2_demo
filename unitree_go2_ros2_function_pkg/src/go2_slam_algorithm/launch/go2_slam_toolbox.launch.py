@@ -25,6 +25,18 @@ def generate_launch_description():
         'dog_slam_simp.rviz'
     )
 
+    sensor_switch_parameters={
+        # 选择需要融合的传感器类型
+          'sync_rgb':                   False,                     # rgb图像数据
+          'sync_depth':                 False,                     # 深度信息数据
+          'sync_camera_info':           False,                     # 相机内参数据
+          'sync_pointcloud':            True,                     # 点云数据
+          'sync_imu':                   False,                    # IMU数据
+          'sync_scan':                  True,                     # 激光扫描数据
+          'sync_rgb_compressed':        False,                    # 压缩图像数据
+          'sync_depth_compressed':      False,                    # 压缩深度信息数据
+          
+    }
 
     # 声明slam-toolbox启动时，参数文件的默认地址
     declare_slam_params_file_cmd = DeclareLaunchArgument(
@@ -83,6 +95,15 @@ def generate_launch_description():
     )	
 
 
+    # 传感器时间戳同步节点
+    start_sensor_sync_node =  Node(
+            package='go2_lidar_processing',                      
+            executable='sensor_sync_node',             
+            name='sensor_sync_node',
+            output='screen',
+            parameters=[sensor_switch_parameters],
+        )
+
     # RViz2节点
     start_rviz_node =Node(
             package='rviz2',
@@ -110,13 +131,15 @@ def generate_launch_description():
         declare_use_sim_time_cmd,
   
         # start_L1_lidar_launch_file,     # 启动L1点云转2d激光文件
-        start_lidar_launch_file,        # 启动激光frame_id修改launch文件
+        start_lidar_launch_file,        # 启动点云转扫描数据文件
         start_cus_tftree_node,
         start_async_slam_toolbox_node,  # slam-toolbox算法节点
         start_rviz_node,
         start_urdf_launch_file,         # urdf中各种静态tf关系
         start_traject_node,             # 运动轨迹显示节点
 
+
+        start_sensor_sync_node,
 
 
     ])

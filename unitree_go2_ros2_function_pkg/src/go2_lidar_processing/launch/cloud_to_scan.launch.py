@@ -25,7 +25,7 @@ def generate_launch_description():
             }],
             remappings=[
                 ('cloud_in', '/lidar_points'),           # 禾赛sdk独立驱动xt16雷达     
-                ('scan', '/scan_old'),
+                ('scan', '/scan'),
             ]
         )
 
@@ -44,7 +44,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         node_p2l,
-        delayed_node,
+        # delayed_node,
     ])
 
 
