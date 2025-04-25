@@ -26,7 +26,7 @@ def generate_launch_description():
 
     parameters={
           'frame_id':'base',                              # 基础坐标系ID
-          'odom_frame_id':'odom_go2',                         # 里程计坐标系ID
+          'odom_frame_id':'odom_go2',                     # 里程计坐标系ID
           'odom_tf_linear_variance':0.001,                # 里程计线性运动的方差
           'odom_tf_angular_variance':0.001,               # 里程计角度运动的方差
           'subscribe_rgbd':True,                          # 订阅RGB-D相机数据
@@ -35,10 +35,11 @@ def generate_launch_description():
 
           'sync_queue_size': 20,                          # 同步队列大小
           'topic_queue_size': 30,
-          'wait_for_transform': 0.1,                        # 默认100ms
-          'tf_delay': 0.05,                                 # 20 Hz
-          'tf_tolerance': 0.5,                              # tf容忍 默认100ms          
-          'Grid/Sensor':               'true',              # 默认没有
+          'wait_for_transform': 0.5,                      # 默认100ms
+          'tf_delay': 0.5,                                # 20 Hz
+          'tf_tolerance': 0.5,                            # tf容忍 默认100ms          
+          'Rtabmap/DetectionRate': '5',                   # rtabmap发布频率,每秒更新次数
+
 
 
           # RTAB-Map's internal parameters should be strings
@@ -66,7 +67,10 @@ def generate_launch_description():
          ('rgb/image',       'sync/rgb/image'),
          ('depth/image',     'sync/depth/image'),
          ('rgb/camera_info', 'sync/rgb/camera_info'),
-         ('scan',            'sync/scan')]
+         ('scan',            'sync/scan')
+      
+         
+         ]
 
 
     config_rviz = os.path.join(
@@ -81,7 +85,6 @@ def generate_launch_description():
         DeclareLaunchArgument('localization', default_value='false', description='Launch in localization mode.'),
         DeclareLaunchArgument('rviz_cfg', default_value=config_rviz,  description='Configuration path of rviz2.'),
 
-        SetParameter(name='use_sim_time', value=True),
 
         # Nodes to launch
         # 创建一个ROS2节点用于RGB-D相机数据同步
@@ -93,8 +96,7 @@ def generate_launch_description():
               {
             #    'rgb_image_transport':'compressed',        # RGB图像使用压缩传输
             #    'depth_image_transport':'compressedDepth', # 深度图像使用压缩传输
-            #    'approx_sync_max_interval': 0.02,            # 最大同步时间间隔为0.02秒
-               'approx_sync_max_interval': 0.5,
+               'approx_sync_max_interval': 0.02,            # 最大同步时间间隔为0.02秒
                
                
                }],       
@@ -105,7 +107,8 @@ def generate_launch_description():
             package='rtabmap_slam', executable='rtabmap', output='screen',
             parameters=[parameters],
             remappings=remappings,
-            arguments=['-d']), # This will delete the previous database (~/.ros/rtabmap.db)
+            # arguments=['-d']
+            ), # This will delete the previous database (~/.ros/rtabmap.db)
             
         # Localization mode:
         Node(

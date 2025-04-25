@@ -55,7 +55,7 @@ def generate_launch_description():
 
 
         start_cus_tftree_node,
-        start_sensor_sync_node,
+        # start_sensor_sync_node,
 
 
 

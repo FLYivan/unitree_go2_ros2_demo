@@ -35,6 +35,9 @@
         参考如下网址流程
         https://blog.csdn.net/qq_44998513/article/details/131517394
 
+    2、foxy要手动安装压缩插件,以便生成压缩话题
+        sudo apt install ros-foxy-image-transport ros-foxy-image-transport-plugins
+
     2、启动
         ros2 launch realsense2_camera rs_launch.py enable_gyro:=true enable_accel:=true unite_imu_method:=2 enable_sync:=true align_depth.enable:=true
 
@@ -111,7 +114,10 @@
             ros2 launch hesai_ros_driver start.py
 
         双目驱动：
-            ros2 launch realsense2_camera rs_launch.py enable_sync:=true
+            ros2 launch realsense2_camera rs_launch.py 
+
+            调整启动参数匹配压缩格式
+            ros2 launch realsense2_camera rs_launch.py enable_sync:=true rgb_camera.color_format:=Z16
 
         tf和单线激光驱动：
             ros2 launch go2_slam_algorithm go2_rtabmap_pre_pc.launch.py
@@ -134,7 +140,7 @@
             5、sensor_sync_node节点，要求qos一致，并且时间差在0.1秒内
             6、不要发布那么多狗关节的tf,直接回到静态发布
             6、发布频率上不去，仿真环境都是odom-base 50hz,map-odom 20hz buffer:1
-            6\真机 map-odom 20000hz 太高了
+            6、真机 map-odom 20000hz 太高了
 
             ros2 launch go2_slam_algorithm robot_mapping_demo_go2.launch.py rviz:=true rtabmap_viz:=true
         
