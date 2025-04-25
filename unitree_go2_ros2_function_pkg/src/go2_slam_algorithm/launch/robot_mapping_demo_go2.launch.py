@@ -37,10 +37,12 @@ def generate_launch_description():
           'topic_queue_size': 30,
           'wait_for_transform': 0.5,                      # 默认100ms
           'tf_delay': 0.5,                                # 20 Hz
-          'tf_tolerance': 0.5,                            # tf容忍 默认100ms          
-          'Rtabmap/DetectionRate': '5',                   # rtabmap发布频率,每秒更新次数
+          'tf_tolerance': 0.5,                            # tf容忍 默认100ms   
 
-
+          'Rtabmap/DetectionRate': '5',                   # rtabmap发布频率,每秒更新次数，默认5,降低检测率到1
+          'Kp/MaxFeatures':            '400',             # 降低特征点数量（默认1000）
+          'Vis/MinInliers':            '12',              # 降低最小内点数量
+          'GFTT/MinDistance':          '10',               # 增加特征点最小距离
 
           # RTAB-Map's internal parameters should be strings
           'RGBD/NeighborLinkRefining': 'true',           # 使用连续激光扫描进行里程计校正
@@ -100,7 +102,7 @@ def generate_launch_description():
               {
             #    'rgb_image_transport':'compressed',        # RGB图像使用压缩传输
             #    'depth_image_transport':'compressedDepth', # 深度图像使用压缩传输
-               'approx_sync_max_interval': 0.02,            # 最大同步时间间隔为0.02秒
+               'approx_sync_max_interval': 0.02,            # 默认最大同步时间间隔为0.02秒，增加时间同步的容忍度到0.5
                
                
                }],       
