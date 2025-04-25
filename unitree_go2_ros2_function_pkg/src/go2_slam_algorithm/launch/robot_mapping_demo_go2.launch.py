@@ -64,8 +64,12 @@ def generate_launch_description():
     }
     
     remappings=[
-         ('rgb/image',       'sync/rgb/image'),
-         ('depth/image',     'sync/depth/image'),
+        #  ('rgb/image',       'sync/rgb/image'),
+        #  ('depth/image',     'sync/depth/image'),
+         
+         ('rgb/image',       'sync/rgb/image/compressed'),
+         ('depth/image',     'sync/depth/image/compressed'),
+
          ('rgb/camera_info', 'sync/rgb/camera_info'),
          ('scan',            'sync/scan')
       

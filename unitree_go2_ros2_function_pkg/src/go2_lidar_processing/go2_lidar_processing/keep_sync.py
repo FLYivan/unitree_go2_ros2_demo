@@ -12,7 +12,7 @@ from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy
 
 class SensorSyncNode(Node):
     def __init__(self):
-        super().__init__('sensor_sync_node')
+        super().__init__('keep_sync')
         """
         调试日志相关部分的初始化
         """

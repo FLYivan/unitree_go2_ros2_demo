@@ -42,24 +42,31 @@ class SensorSyncNode(Node):
         # 创建CV桥接器用于图像转换
         self.bridge = CvBridge()
 
+        # 发布使用RELIABLE QoS
+        scan_pub_qos = QoSProfile(
+                reliability=QoSReliabilityPolicy.RELIABLE,
+                history=QoSHistoryPolicy.KEEP_LAST, 
+                depth=10
+            )
+
         # 根据参数创建发布器
-        self.publishers = {}
+        self.topic_publishers = {}
         if self.sync_rgb:
-            self.publishers['rgb'] = self.create_publisher(Image, 'sync/rgb/image', 10)
+            self.topic_publishers['rgb'] = self.create_publisher(Image, 'sync/rgb/image', 10)
         if self.sync_depth:
-            self.publishers['depth'] = self.create_publisher(Image, 'sync/depth/image', 10)
+            self.topic_publishers['depth'] = self.create_publisher(Image, 'sync/depth/image', 10)
         if self.sync_camera_info:
-            self.publishers['camera_info'] = self.create_publisher(CameraInfo, 'sync/rgb/camera_info', 10)
+            self.topic_publishers['camera_info'] = self.create_publisher(CameraInfo, 'sync/rgb/camera_info', 10)
         if self.sync_pointcloud:
-            self.publishers['pointcloud'] = self.create_publisher(PointCloud2, 'sync/points', 10)
+            self.topic_publishers['pointcloud'] = self.create_publisher(PointCloud2, 'sync/points', 10)
         if self.sync_imu:
-            self.publishers['imu'] = self.create_publisher(Imu, 'sync/imu', 10)
+            self.topic_publishers['imu'] = self.create_publisher(Imu, 'sync/imu', 10)
         if self.sync_scan:
-            self.publishers['scan'] = self.create_publisher(LaserScan, 'sync/scan', 10)
+            self.topic_publishers['scan'] = self.create_publisher(LaserScan, 'sync/scan', qos_profile=scan_pub_qos)
         if self.sync_rgb_compressed:
-            self.publishers['rgb_compressed'] = self.create_publisher(CompressedImage, 'sync/rgb/image/compressed', 10)
+            self.topic_publishers['rgb_compressed'] = self.create_publisher(CompressedImage, 'sync/rgb/image/compressed', 10)
         if self.sync_depth_compressed:
-            self.publishers['depth_compressed'] = self.create_publisher(CompressedImage, 'sync/depth/image/compressed', 10)
+            self.topic_publishers['depth_compressed'] = self.create_publisher(CompressedImage, 'sync/depth/image/compressed', 10)
 
         # 创建订阅器列表用于时间同步
         subs = []
@@ -86,16 +93,17 @@ class SensorSyncNode(Node):
                 subs.append(self.imu_sub)
             
             if self.sync_scan:
-                scan_qos = QoSProfile(
-                    reliability=QoSReliabilityPolicy.BEST_EFFORT,           # 或修改为 RELIABLE
+                # 订阅使用BEST_EFFORT QoS
+                scan_sub_qos = QoSProfile(
+                    reliability=QoSReliabilityPolicy.BEST_EFFORT,
                     history=QoSHistoryPolicy.KEEP_LAST,
                     depth=10
                 )
                 self.scan_sub = message_filters.Subscriber(self, 
-                                                           LaserScan, 
-                                                           '/scan',
-                                                        #    qos_profile=scan_qos,
-                                                           )
+                                                         LaserScan, 
+                                                         '/scan',
+                                                         qos_profile=scan_sub_qos,
+                                                         )
                 subs.append(self.scan_sub)
 
             if self.sync_rgb_compressed:
@@ -152,11 +160,11 @@ class SensorSyncNode(Node):
             current_time = self.get_clock().now().to_msg()
             
             # 遍历所有接收到的消息
-            for msg, topic_type in zip(args, self.publishers.keys()):
+            for msg, topic_type in zip(args, self.topic_publishers.keys()):
                 # 更新时间戳
                 msg.header.stamp = current_time
                 # 发布消息
-                self.publishers[topic_type].publish(msg)
+                self.topic_publishers[topic_type].publish(msg)
                 self.get_logger().info(f'{topic_type}消息时间戳: {msg.header.stamp.sec}.{msg.header.stamp.nanosec}')
             
             self.get_logger().info('同步数据处理完成并发布')

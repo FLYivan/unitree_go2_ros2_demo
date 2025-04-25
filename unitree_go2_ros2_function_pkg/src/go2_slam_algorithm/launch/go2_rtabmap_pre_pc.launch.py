@@ -16,14 +16,19 @@ def generate_launch_description():
           'sync_rgb':                   True,                     # rgb图像数据
           'sync_depth':                 True,                     # 深度信息数据
           'sync_camera_info':           True,                     # 相机内参数据
-          'sync_pointcloud':            True,                     # 点云数据
+          'sync_pointcloud':            False,                     # 点云数据
           'sync_imu':                   False,                    # IMU数据
           'sync_scan':                  True,                     # 激光扫描数据
-          'sync_rgb_compressed':        False,                    # 压缩图像数据
-          'sync_depth_compressed':      False,                    # 压缩深度信息数据
+          'sync_rgb_compressed':        True,                    # 压缩图像数据
+          'sync_depth_compressed':      True,                    # 压缩深度信息数据
           
     }
 
+    # 激光frame_id修改launch文件
+    start_lidar_launch_file = launch.actions.IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([get_package_share_directory(
+            'go2_lidar_processing'), '/launch', '/cloud_to_scan.launch.py']),
+    )	
 
     
     # 使用自定义odom，进行tf关系发布节点
@@ -56,7 +61,7 @@ def generate_launch_description():
     return launch.LaunchDescription([
  
   
-        # start_lidar_launch_file,        # 启动激光frame_id修改launch文件
+        start_lidar_launch_file,        # 启动激光frame_id修改launch文件
         start_urdf_launch_file,
 
 

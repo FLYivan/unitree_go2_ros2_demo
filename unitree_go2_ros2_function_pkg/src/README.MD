@@ -123,16 +123,16 @@
             ros2 launch go2_slam_algorithm go2_rtabmap_pre_pc.launch.py
 
 
-            试下不要frame_id转换
-            1、时钟同步节点是否要调整qos策略为reliable
-            2、之前frame—id节点把激光雷达发布频率限制在5hz，这要调整后是否有影响
-            ros2 launch go2_lidar_processing cloud_to_scan.launch.py
+
+
+    
 
 
         rtabmap算法启动
             ros2 launch go2_slam_algorithm robot_mapping_demo_go2.launch.py rviz:=true rtabmap_viz:=true
 
-
+        报错
+        Memory.cpp:4914::createSignature() Mem/DepthAsMask is true, but RGB size (1280x720) modulo depth size (848x480) is not 0. Ignoring depth mask for feature detection (Mem/ImagePreDecimation=1)
 
         colcon build --packages-select go2_lidar_processing
         colcon build --packages-select go2_slam_algorithm

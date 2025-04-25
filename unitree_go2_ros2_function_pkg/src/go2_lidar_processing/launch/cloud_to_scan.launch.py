@@ -17,7 +17,7 @@ def generate_launch_description():
                 'angle_min': -3.14,                      # -M_PI/2
                 'angle_max': 3.14,                       # M_PI/2
                 'angle_increment': 0.0087,               # M_PI/360.0
-                'scan_time': 0.1,                        # 10Hz，点云生成的激光雷达频率(不可动参数)
+                'scan_time': 0.1,                        # 默认10Hz，点云生成的激光雷达频率(不可动参数)
                 'range_min': 0.25,                        # 激光扫描中测量的最小距离，单位为米(为了避开路由器，最小距离必须大于0.25米)
                 'range_max': 100.0,                      # 激光扫描中测量的最大距离，单位为米
                 'use_inf': False,                        # 是否使用无穷大值来表示超出测量范围的点。
@@ -25,7 +25,7 @@ def generate_launch_description():
             }],
             remappings=[
                 ('cloud_in', '/lidar_points'),           # 禾赛sdk独立驱动xt16雷达     
-                ('scan', '/scan'),
+                ('scan', '/scan_old'),
             ]
         )
 
@@ -44,7 +44,7 @@ def generate_launch_description():
 
     return LaunchDescription([
         node_p2l,
-        # delayed_node,
+        delayed_node,
     ])
 
 

@@ -30,7 +30,7 @@ def generate_launch_description():
           'sync_rgb':                   False,                     # rgb图像数据
           'sync_depth':                 False,                     # 深度信息数据
           'sync_camera_info':           False,                     # 相机内参数据
-          'sync_pointcloud':            True,                     # 点云数据
+          'sync_pointcloud':            False,                     # 点云数据
           'sync_imu':                   False,                    # IMU数据
           'sync_scan':                  True,                     # 激光扫描数据
           'sync_rgb_compressed':        False,                    # 压缩图像数据

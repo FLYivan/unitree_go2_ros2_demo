@@ -32,6 +32,8 @@ setup(
 
 
             'sensor_sync_node = go2_lidar_processing.sensor_sync_node:main',
+
+            'keep_sync = go2_lidar_processing.keep_sync:main',
         ],
     },
 )
