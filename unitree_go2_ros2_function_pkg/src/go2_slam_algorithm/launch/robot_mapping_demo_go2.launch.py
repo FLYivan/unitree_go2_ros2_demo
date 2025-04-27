@@ -33,16 +33,14 @@ def generate_launch_description():
           'subscribe_scan':True,                          # 订阅激光扫描数据
           'approx_sync':True,                             # 启用近似时间同步
 
-          'sync_queue_size': 20,                          # 同步队列大小
-          'topic_queue_size': 30,
-          'wait_for_transform': 0.5,                      # 默认100ms
-          'tf_delay': 0.5,                                # 20 Hz
-          'tf_tolerance': 0.5,                            # tf容忍 默认100ms   
+          'sync_queue_size': 10,                          # 同步队列大小
+          'topic_queue_size': 30,                         # usb2.0-30,usb3.2-20
+          'wait_for_transform': 0.5,                      # 默认100ms usb2.0-0.5,usb3.2-0.1
+          'tf_delay': 0.5,                                # 20 Hz usb2.0-0.5,usb3.2-0.05
+          'tf_tolerance': 0.5,                            # tf容忍 默认100ms    usb2.0-0.5,usb3.2-0.1
 
           'Rtabmap/DetectionRate': '5',                   # rtabmap发布频率,每秒更新次数，默认5,降低检测率到1
-          'Kp/MaxFeatures':            '400',             # 降低特征点数量（默认1000）
-          'Vis/MinInliers':            '12',              # 降低最小内点数量
-          'GFTT/MinDistance':          '10',               # 增加特征点最小距离
+
 
           # RTAB-Map's internal parameters should be strings
           'RGBD/NeighborLinkRefining': 'true',           # 使用连续激光扫描进行里程计校正
@@ -66,12 +64,8 @@ def generate_launch_description():
     }
     
     remappings=[
-        #  ('rgb/image',       'sync/rgb/image'),
-        #  ('depth/image',     'sync/depth/image'),
-         
-         ('rgb/image',       'sync/rgb/image/compressed'),
-         ('depth/image',     'sync/depth/image/compressed'),
-
+         ('rgb/image',       'sync/rgb/image'),
+         ('depth/image',     'sync/depth/image'),
          ('rgb/camera_info', 'sync/rgb/camera_info'),
          ('scan',            'sync/scan')
       
@@ -100,8 +94,8 @@ def generate_launch_description():
             output='screen',                  # 输出信息到屏幕
             parameters=[parameters,           # 使用上面定义的参数
               {
-            #    'rgb_image_transport':'compressed',        # RGB图像使用压缩传输
-            #    'depth_image_transport':'compressedDepth', # 深度图像使用压缩传输
+               'rgb_image_transport':'compressed',        # RGB图像使用压缩传输
+               'depth_image_transport':'compressedDepth', # 深度图像使用压缩传输
                'approx_sync_max_interval': 0.02,            # 默认最大同步时间间隔为0.02秒，增加时间同步的容忍度到0.5
                
                
@@ -113,7 +107,7 @@ def generate_launch_description():
             package='rtabmap_slam', executable='rtabmap', output='screen',
             parameters=[parameters],
             remappings=remappings,
-            # arguments=['-d']
+            arguments=['-d']
             ), # This will delete the previous database (~/.ros/rtabmap.db)
             
         # Localization mode:

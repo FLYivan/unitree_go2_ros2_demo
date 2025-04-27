@@ -66,7 +66,7 @@ class SensorSyncNode(Node):
         if self.sync_rgb_compressed:
             self.topic_publishers['rgb_compressed'] = self.create_publisher(CompressedImage, 'sync/rgb/image/compressed', 10)
         if self.sync_depth_compressed:
-            self.topic_publishers['depth_compressed'] = self.create_publisher(CompressedImage, 'sync/depth/image/compressed', 10)
+            self.topic_publishers['depth_compressed'] = self.create_publisher(CompressedImage, 'sync/depth/image/compressedDepth', 10)
 
         # 创建订阅器列表用于时间同步
         subs = []

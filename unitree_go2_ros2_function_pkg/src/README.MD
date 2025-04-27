@@ -53,6 +53,10 @@
     2、普通运控
         ros2 run go2_cmd go2_move
 
+## 板载机烧录
+    1、连接github
+
+
 # 三、建图
 ## slam-toolbox相关
 
@@ -114,7 +118,9 @@
             ros2 launch hesai_ros_driver start.py
 
         双目驱动：
-            ros2 launch realsense2_camera rs_launch.py 
+            ros2 launch realsense2_camera rs_launch.py
+
+            realsense-viewer 
 
             调整启动参数匹配压缩格式
             ros2 launch realsense2_camera rs_launch.py enable_sync:=true rgb_camera.color_format:=Z16
@@ -122,17 +128,16 @@
         tf和单线激光驱动：
             ros2 launch go2_slam_algorithm go2_rtabmap_pre_pc.launch.py
 
-
-
-
+            ros2 run go2_lidar_processing keep_sync
     
 
-
-        rtabmap算法启动
+        rtabmap算法启动:
             ros2 launch go2_slam_algorithm robot_mapping_demo_go2.launch.py rviz:=true rtabmap_viz:=true
 
         报错
         Memory.cpp:4914::createSignature() Mem/DepthAsMask is true, but RGB size (1280x720) modulo depth size (848x480) is not 0. Ignoring depth mask for feature detection (Mem/ImagePreDecimation=1)
+
+        ros2 run go2_lidar_processing keep_sync
 
         colcon build --packages-select go2_lidar_processing
         colcon build --packages-select go2_slam_algorithm

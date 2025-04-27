@@ -16,57 +16,57 @@ class SensorSyncNode(Node):
         """
         调试日志相关部分的初始化
         """
-        # # 创建计数器字典，用于跟踪每个话题的接收情况
-        # self.msg_counters = {
-        #     '/camera/color/image_raw': 0,
-        #     '/camera/depth/image_rect_raw': 0,
-        #     '/camera/color/image_raw/compressed': 0,
-        #     '/camera/depth/image_rect_raw/compressedDepth': 0,
-        #     '/camera/color/camera_info': 0,
-        #     '/lidar_points': 0,
-        #     '/livox/imu': 0,
-        #     '/scan': 0
-        # }
+        # 创建计数器字典，用于跟踪每个话题的接收情况
+        self.msg_counters = {
+            '/camera/color/image_raw': 0,
+            '/camera/depth/image_rect_raw': 0,
+            '/camera/color/image_raw/compressed': 0,
+            '/camera/depth/image_rect_raw/compressedDepth': 0,
+            '/camera/color/camera_info': 0,
+            '/lidar_points': 0,
+            '/livox/imu': 0,
+            '/scan': 0
+        }
         
-        # # 创建最后接收时间字典
-        # self.last_msg_times = {topic: None for topic in self.msg_counters.keys()}
+        # 创建最后接收时间字典
+        self.last_msg_times = {topic: None for topic in self.msg_counters.keys()}
         
 
-        # # 创建单独的回调来监控每个话题
-        # self.rgb_monitor = self.create_subscription(
-        #     Image, '/camera/color/image_raw',
-        #     lambda msg: self.monitor_callback(msg, '/camera/color/image_raw'), 10)
+        # 创建单独的回调来监控每个话题
+        self.rgb_monitor = self.create_subscription(
+            Image, '/camera/color/image_raw',
+            lambda msg: self.monitor_callback(msg, '/camera/color/image_raw'), 10)
         
-        # self.depth_monitor = self.create_subscription(
-        #     Image, '/camera/depth/image_rect_raw',
-        #     lambda msg: self.monitor_callback(msg, '/camera/depth/image_rect_raw'), 10)
+        self.depth_monitor = self.create_subscription(
+            Image, '/camera/depth/image_rect_raw',
+            lambda msg: self.monitor_callback(msg, '/camera/depth/image_rect_raw'), 10)
         
-        # self.rgb_compressed_monitor = self.create_subscription(
-        #     CompressedImage, '/camera/color/image_raw/compressed',
-        #     lambda msg: self.monitor_callback(msg, '/camera/color/image_raw/compressed'), 10)
+        self.rgb_compressed_monitor = self.create_subscription(
+            CompressedImage, '/camera/color/image_raw/compressed',
+            lambda msg: self.monitor_callback(msg, '/camera/color/image_raw/compressed'), 10)
         
-        # self.depth_compressed_monitor = self.create_subscription(
-        #     CompressedImage, '/camera/depth/image_rect_raw/compressedDepth',
-        #     lambda msg: self.monitor_callback(msg, '/camera/depth/image_rect_raw/compressedDepth'), 10)
+        self.depth_compressed_monitor = self.create_subscription(
+            CompressedImage, '/camera/depth/image_rect_raw/compressedDepth',
+            lambda msg: self.monitor_callback(msg, '/camera/depth/image_rect_raw/compressedDepth'), 10)
         
-        # self.camera_info_monitor = self.create_subscription(
-        #     CameraInfo, '/camera/color/camera_info',
-        #     lambda msg: self.monitor_callback(msg, '/camera/color/camera_info'), 10)
+        self.camera_info_monitor = self.create_subscription(
+            CameraInfo, '/camera/color/camera_info',
+            lambda msg: self.monitor_callback(msg, '/camera/color/camera_info'), 10)
         
-        # self.pointcloud_monitor = self.create_subscription(
-        #     PointCloud2, '/lidar_points',
-        #     lambda msg: self.monitor_callback(msg, '/lidar_points'), 10)
+        self.pointcloud_monitor = self.create_subscription(
+            PointCloud2, '/lidar_points',
+            lambda msg: self.monitor_callback(msg, '/lidar_points'), 10)
         
-        # self.imu_monitor = self.create_subscription(
-        #     Imu, '/livox/imu',
-        #     lambda msg: self.monitor_callback(msg, '/livox/imu'), 10)
+        self.imu_monitor = self.create_subscription(
+            Imu, '/livox/imu',
+            lambda msg: self.monitor_callback(msg, '/livox/imu'), 10)
             
-        # self.scan_monitor = self.create_subscription(
-        #     LaserScan, '/scan',
-        #     lambda msg: self.monitor_callback(msg, '/scan'), 10)
+        self.scan_monitor = self.create_subscription(
+            LaserScan, '/scan',
+            lambda msg: self.monitor_callback(msg, '/scan'), 10)
         
-        # # 创建定时器，每秒打印一次状态报告
-        # self.create_timer(1.0, self.print_status_report)
+        # 创建定时器，每秒打印一次状态报告
+        self.create_timer(1.0, self.print_status_report)
         
         """
         传感器同步部分的初始化

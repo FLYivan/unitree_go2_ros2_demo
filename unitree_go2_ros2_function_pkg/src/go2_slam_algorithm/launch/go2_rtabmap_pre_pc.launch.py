@@ -13,8 +13,8 @@ def generate_launch_description():
 
     sensor_switch_parameters={
         # 选择需要融合的传感器类型
-          'sync_rgb':                   True,                     # rgb图像数据
-          'sync_depth':                 True,                     # 深度信息数据
+          'sync_rgb':                   False,                     # rgb图像数据
+          'sync_depth':                 False,                     # 深度信息数据
           'sync_camera_info':           True,                     # 相机内参数据
           'sync_pointcloud':            False,                     # 点云数据
           'sync_imu':                   False,                    # IMU数据
