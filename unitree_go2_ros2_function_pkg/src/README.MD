@@ -41,6 +41,10 @@
     2、启动
         ros2 launch realsense2_camera rs_launch.py enable_gyro:=true enable_accel:=true unite_imu_method:=2 enable_sync:=true align_depth.enable:=true
 
+
+
+
+
 ## L1雷达
     1、传感器数据转化
         ros2 run go2_lidar_processing transform_everything
@@ -134,16 +138,22 @@
         rtabmap算法启动:
             ros2 launch go2_slam_algorithm robot_mapping_demo_go2.launch.py rviz:=true rtabmap_viz:=true
 
-        报错
-        Memory.cpp:4914::createSignature() Mem/DepthAsMask is true, but RGB size (1280x720) modulo depth size (848x480) is not 0. Ignoring depth mask for feature detection (Mem/ImagePreDecimation=1)
-
-        ros2 run go2_lidar_processing keep_sync
 
         colcon build --packages-select go2_lidar_processing
         colcon build --packages-select go2_slam_algorithm
 
 
+    3、压缩图像检查频率
+        ros2 topic hz /camera/depth/image_rect_raw
+        ros2 topic hz /camera/depth/image_rect_raw/compressed
+        ros2 topic hz /camera/depth/image_rect_raw/compressedDepth
 
+        ros2 topic hz /camera/color/image_raw
+        ros2 topic hz /camera/color/image_raw/compressed
+
+        ros2 topic hz /scan
+        ros2 topic hz /scan_old
+  
             
         
 

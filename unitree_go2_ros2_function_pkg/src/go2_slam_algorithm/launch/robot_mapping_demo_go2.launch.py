@@ -39,7 +39,7 @@ def generate_launch_description():
           'tf_delay': 0.5,                                # 20 Hz usb2.0-0.5,usb3.2-0.05
           'tf_tolerance': 0.5,                            # tf容忍 默认100ms    usb2.0-0.5,usb3.2-0.1
 
-          'Rtabmap/DetectionRate': '5',                   # rtabmap发布频率,每秒更新次数，默认5,降低检测率到1
+        #   'Rtabmap/DetectionRate': '5',                   # rtabmap发布频率,每秒更新次数，默认5,降低检测率到1
 
 
           # RTAB-Map's internal parameters should be strings
