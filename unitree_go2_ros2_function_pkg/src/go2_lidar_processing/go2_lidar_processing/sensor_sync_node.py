@@ -73,7 +73,7 @@ class SensorSyncNode(Node):
         try:
             # 根据参数创建订阅器
             if self.sync_rgb:
-                self.rgb_sub = message_filters.Subscriber(self, Image, '/camera/color/image_raw')
+                self.rgb_sub = message_filters.Subscriber(self, Image, 'camera/color/image_raw')
                 subs.append(self.rgb_sub)
 
             if self.sync_depth:

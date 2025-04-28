@@ -12,13 +12,14 @@
 #
 
 from launch import LaunchDescription
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription  # 添加IncludeLaunchDescription
 from launch.substitutions import LaunchConfiguration
 from launch.conditions import IfCondition, UnlessCondition
 from launch_ros.actions import Node
 from launch_ros.actions import SetParameter
 import os
 from ament_index_python.packages import get_package_share_directory
+from launch.launch_description_sources import PythonLaunchDescriptionSource  # 添加PythonLaunchDescriptionSource
 
 def generate_launch_description():
 
@@ -72,6 +73,12 @@ def generate_launch_description():
          
          ]
 
+    # 获取其他launch文件的路径
+    start_prepare_launch_file = os.path.join(
+        get_package_share_directory('go2_slam_algorithm'),
+        'launch',
+        'go2_rtabmap_pre_pc.launch.py'
+    )
 
     config_rviz = os.path.join(
         get_package_share_directory('go2_slam_algorithm'), 'rviz', 'demo_robot_mapping.rviz'
@@ -85,6 +92,14 @@ def generate_launch_description():
         DeclareLaunchArgument('localization', default_value='false', description='Launch in localization mode.'),
         DeclareLaunchArgument('rviz_cfg', default_value=config_rviz,  description='Configuration path of rviz2.'),
 
+        # 包含其他launch文件
+        IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(start_prepare_launch_file),
+            # launch_arguments={
+            #     'arg1': 'value1',
+            #     'arg2': 'value2'
+            # }.items()
+        ),
 
         # Nodes to launch
         # 创建一个ROS2节点用于RGB-D相机数据同步

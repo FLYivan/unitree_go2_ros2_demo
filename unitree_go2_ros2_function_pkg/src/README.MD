@@ -41,7 +41,9 @@
     2、启动
         ros2 launch realsense2_camera rs_launch.py enable_gyro:=true enable_accel:=true unite_imu_method:=2 enable_sync:=true align_depth.enable:=true
 
-
+    4、卸载
+        sudo apt remove ros-foxy-librealsense2
+        sudo apt remove ros-foxy-realsense2-*
 
 
 
@@ -118,24 +120,21 @@
 
     3、室内2d激光和RGB-D融合slam
 
-        激光驱动：
+        1）激光驱动：
             ros2 launch hesai_ros_driver start.py
 
-        双目驱动：
+        2）双目驱动：
             ros2 launch realsense2_camera rs_launch.py
+            ros2 launch realsense2_camera rs_launch.py depth_module.profile:=640x480x30
 
-            realsense-viewer 
+            GUI模式：
+                realsense-viewer 
 
-            调整启动参数匹配压缩格式
-            ros2 launch realsense2_camera rs_launch.py enable_sync:=true rgb_camera.color_format:=Z16
-
-        tf和单线激光驱动：
+        3）tf和单线激光驱动：
             ros2 launch go2_slam_algorithm go2_rtabmap_pre_pc.launch.py
 
-            ros2 run go2_lidar_processing keep_sync
-    
 
-        rtabmap算法启动:
+        4）rtabmap算法启动:
             ros2 launch go2_slam_algorithm robot_mapping_demo_go2.launch.py rviz:=true rtabmap_viz:=true
 
 
@@ -143,19 +142,19 @@
         colcon build --packages-select go2_slam_algorithm
 
 
-    3、压缩图像检查频率
-        ros2 topic hz /camera/depth/image_rect_raw
-        ros2 topic hz /camera/depth/image_rect_raw/compressed
-        ros2 topic hz /camera/depth/image_rect_raw/compressedDepth
+        5）压缩图像检查频率
+            ros2 topic hz /camera/depth/image_rect_raw
+            ros2 topic hz /camera/depth/image_rect_raw/compressed
+            ros2 topic hz /camera/depth/image_rect_raw/compressedDepth
 
-        ros2 topic hz /camera/color/image_raw
-        ros2 topic hz /camera/color/image_raw/compressed
+            ros2 topic hz /camera/color/image_raw
+            ros2 topic hz /camera/color/image_raw/compressed
 
-        ros2 topic hz /scan
-        ros2 topic hz /scan_old
+    4、纯激光slam
   
             
-        
+
+
 
 # 导航
     1、启动nav2
