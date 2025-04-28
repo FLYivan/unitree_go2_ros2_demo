@@ -91,7 +91,7 @@ def generate_launch_description():
         declare_use_sim_time_cmd,
   
         # start_lidar_launch_file,
-        start_vel_pub_test_node,        # 启动模拟速度指令发布节点
+        # start_vel_pub_test_node,        # 启动模拟速度指令发布节点
         start_go2_ai_cmd_node,
 
         # start_rviz_node,

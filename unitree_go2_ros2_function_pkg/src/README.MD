@@ -123,6 +123,8 @@
         1）激光驱动：
             ros2 launch hesai_ros_driver start.py
 
+            ros2 run go2_lidar_processing transform_everything
+
         2）双目驱动：
             ros2 launch realsense2_camera rs_launch.py
             ros2 launch realsense2_camera rs_launch.py depth_module.profile:=640x480x30
@@ -132,6 +134,7 @@
 
         3）tf和单线激光驱动：
             ros2 launch go2_slam_algorithm go2_rtabmap_pre_pc.launch.py
+            ros2 run go2_lidar_processing keep_sync
 
 
         4）rtabmap算法启动:

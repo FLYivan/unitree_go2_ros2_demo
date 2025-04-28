@@ -79,7 +79,7 @@ class Repuber(Node):
         # 设置机体到激光雷达的变换
         self.body2cloud_trans = TransformStamped()
         self.body2cloud_trans.header.stamp = self.get_clock().now().to_msg()
-        self.body2cloud_trans.header.frame_id = "go2_lidar"
+        self.body2cloud_trans.header.frame_id = "l1_lidar"
         self.body2cloud_trans.child_frame_id = "utlidar_lidar"
         self.body2cloud_trans.transform.translation.x = 0.0
         self.body2cloud_trans.transform.translation.y = 0.0
@@ -93,7 +93,7 @@ class Repuber(Node):
         # 设置机体到IMU的变换
         self.body2imu_trans = TransformStamped()
         self.body2imu_trans.header.stamp = self.get_clock().now().to_msg()
-        self.body2imu_trans.header.frame_id = "go2_lidar"
+        self.body2imu_trans.header.frame_id = "l1_lidar"
         self.body2imu_trans.child_frame_id = "utlidar_imu"
         self.body2imu_trans.transform.translation.x = 0.0
         self.body2imu_trans.transform.translation.y = 0.0
@@ -172,7 +172,7 @@ class Repuber(Node):
         # 3. 创建新的Time对象并转回消息格式
         # 这样可以保持点云数据和其他传感器数据的时间同步
         elevated_cloud.header.stamp = Time(nanoseconds=Time.from_msg(elevated_cloud.header.stamp).nanoseconds + self.time_stamp_offset).to_msg()
-        elevated_cloud.header.frame_id = "go2_lidar"
+        elevated_cloud.header.frame_id = "l1_lidar"
         elevated_cloud.is_dense = data.is_dense
 
         self.cloud_pub.publish(elevated_cloud)
@@ -256,7 +256,7 @@ class Repuber(Node):
         # 创建并发布变换后的IMU消息
         transformed_imu = Imu()
         transformed_imu.header.stamp = data.header.stamp
-        transformed_imu.header.frame_id = 'go2_lidar'
+        transformed_imu.header.frame_id = 'l1_lidar'
         transformed_imu.orientation.x = transformed_orientation[0]
         transformed_imu.orientation.y = transformed_orientation[1]
         transformed_imu.orientation.z = transformed_orientation[2]
