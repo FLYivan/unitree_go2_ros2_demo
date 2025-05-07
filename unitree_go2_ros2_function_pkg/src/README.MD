@@ -166,6 +166,13 @@
         ros2 launch go2_nav go2_nav2_bringup.launch.py
 
 
+# 测试三维导航
+    ros2 launch go2_cmd go2_ai_cmd_test.launch.py
+
+    ./demo_xt16 wlp0s20f3
+    ros2 run go2_slam_algorithm motion_to_tf 
+    ros2 launch QT_Server graph_star_multifloor.launch.py
+
 # 自探索
 ## explore算法
 

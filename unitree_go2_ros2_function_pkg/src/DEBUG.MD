@@ -72,3 +72,7 @@ colcon build --packages-select go2_bringup
 ros2 run go2_slam_algorithm height_map_visualizer
 
 
+
+# 宇树slam服务
+    1、远程拷贝
+        scp GO2_SLAM20250401.zip unitree@192.168.123.18:/home/unitree/Desktop
