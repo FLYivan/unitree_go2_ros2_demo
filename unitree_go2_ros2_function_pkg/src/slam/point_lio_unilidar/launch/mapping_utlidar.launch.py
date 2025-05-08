@@ -18,7 +18,7 @@ def generate_launch_description():
     rviz_file = PathJoinSubstitution([
         pkg_point_lio_unilidar,
         'rviz_cfg',
-        'loam_livox.rviz'
+        'point_lio_map.rviz'
     ])
 
 

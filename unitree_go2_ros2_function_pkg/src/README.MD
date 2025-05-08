@@ -166,6 +166,18 @@
         ros2 launch go2_nav go2_nav2_bringup.launch.py
 
 
+# 三维建图
+    point-lio
+    1、启动
+        colcon build --packages-select point_lio_unilidar
+        ros2 launch point_lio_unilidar mapping_utlidar.launch.py
+
+
+
+    
+    2、查看建图
+    3、查看里程计话题，尤其z轴数据
+
 # 测试三维导航
     ros2 launch go2_cmd go2_ai_cmd_test.launch.py
 
