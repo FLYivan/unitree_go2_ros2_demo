@@ -14,6 +14,14 @@ def generate_launch_description():
         'utlidar.yaml'
     ])
 
+    # 获取rviz配置文件路径
+    rviz_file = PathJoinSubstitution([
+        pkg_point_lio_unilidar,
+        'rviz_cfg',
+        'loam_livox.rviz'
+    ])
+
+
     # 定义节点
     transform_node = Node(
         package='transform_sensors',
@@ -48,8 +56,19 @@ def generate_launch_description():
         ]
     )
 
+    # RViz2节点
+    start_rviz_node =Node(
+            package='rviz2',
+            executable='rviz2',
+            name='rviz2',
+            arguments=['-d', rviz_file],
+            # parameters=[{'use_sim_time': use_sim_time}],
+            output='screen'
+        )
+
     # 返回启动描述
     return LaunchDescription([
         transform_node,
-        mapping_node
+        mapping_node,
+        start_rviz_node,
     ])
