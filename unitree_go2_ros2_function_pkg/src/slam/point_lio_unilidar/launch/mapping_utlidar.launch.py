@@ -22,7 +22,7 @@ def generate_launch_description():
     ])
 
 
-    # 定义节点
+    # 传感器矫正节点
     transform_node = Node(
         package='transform_sensors',
         executable='transform_everything',
@@ -30,6 +30,7 @@ def generate_launch_description():
         output='screen'
     )
 
+    # 激光雷达建图节点
     mapping_node = Node(
         package='point_lio_unilidar',
         executable='pointlio_mapping',
@@ -56,6 +57,27 @@ def generate_launch_description():
         ]
     )
 
+
+    # frame_id重映射节点1
+    transform_node_1 = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='loamInterfaceTransPubMap',
+        output='screen',
+        arguments=['0', '0', '0', '0', '0', '0', 'map', 'camera_init']
+    )
+
+    # frame_id重映射节点2
+    transform_node_2 = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='loamInterfaceTransPubVehicle',
+        output='screen',
+        arguments=['0', '0', '0', '0', '0', '0', 'aft_mapped', 'sensor']
+    )
+
+
+
     # RViz2节点
     start_rviz_node =Node(
             package='rviz2',
@@ -71,4 +93,6 @@ def generate_launch_description():
         transform_node,
         mapping_node,
         start_rviz_node,
+        transform_node_1,
+        transform_node_2,
     ])
