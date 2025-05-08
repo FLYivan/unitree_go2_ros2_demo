@@ -168,22 +168,20 @@
 
 # 三维建图
     point-lio
-    1、启动
+    1、启动建图
         colcon build --packages-select point_lio_unilidar
         ros2 launch point_lio_unilidar mapping_utlidar.launch.py
 
+    2、启动AI云控
+        ros2 launch go2_cmd go2_ai_cmd_test.launch.py
 
-
-    
     2、查看建图
     3、查看里程计话题，尤其z轴数据
 
-# 测试三维导航
-    ros2 launch go2_cmd go2_ai_cmd_test.launch.py
 
-    ./demo_xt16 wlp0s20f3
-    ros2 run go2_slam_algorithm motion_to_tf 
-    ros2 launch QT_Server graph_star_multifloor.launch.py
+    ros2 run calibrate_imu calibrate_imu
+
+
 
 # 自探索
 ## explore算法
