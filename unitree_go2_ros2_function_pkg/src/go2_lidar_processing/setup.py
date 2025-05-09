@@ -28,7 +28,7 @@ setup(
 
 
             'L1_lidar_switch  = go2_lidar_processing.L1_lidar_switch:main', 
-            'transform_everything = go2_lidar_processing.transform_everything:main',
+
 
 
             'sensor_sync_node = go2_lidar_processing.sensor_sync_node:main',
