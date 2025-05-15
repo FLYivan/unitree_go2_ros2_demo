@@ -195,4 +195,14 @@
     ros2 launch go2_sim go2_urdf2tf.launch.py
     ros2 launch go2_sim go2_xacro2tf.launch.py
     ros2 launch go2_sim go2_gazebo_sim.launch.py
+
+
+# 三维路径规划测试
+    conda create --name pcl_planner python=3.10
+    conda remove --name pcl_planner --all
+
+
+    colcon build --packages-select pct_planner
+    source install/setup.bash
     
+    ros2 launch pct_planner planning.launch.py
