@@ -21,6 +21,7 @@ setup(
     entry_points={
         'console_scripts': [
             'transform_everything = transform_sensors.transform_everything:main'
+            'transform_hesai = transform_sensors.transform_hesai:main'
         ],
     },
 )
