@@ -8,6 +8,7 @@ from geometry_msgs.msg import TransformStamped, Vector3  # 导入变换和向量
 import sensor_msgs_py.point_cloud2 as pc2  # 导入点云处理工具
 import tf_transformations  # 导入TF变换工具
 
+from rclpy.qos import QoSProfile, QoSReliabilityPolicy, QoSHistoryPolicy, QoSDurabilityPolicy
 from transforms3d.quaternions import quat2mat  # 导入四元数到矩阵转换工具
 
 from unitree_go.msg import SportModeState
@@ -21,12 +22,19 @@ import os  # 导入操作系统接口
 class Repuber(Node):  # 定义传感器转换节点类
     def __init__(self):  # 初始化方法
         super().__init__('transform_hesai')  # 调用父类初始化方法
+        # 创建匹配的QoS配置
+        matching_imu_qos = QoSProfile(
+            depth=1,
+            reliability=QoSReliabilityPolicy.RELIABLE,  # 修改为RELIABLE以匹配发布者
+            durability=QoSDurabilityPolicy.VOLATILE,
+            history=QoSHistoryPolicy.KEEP_LAST
+)
         self.imu_sub = self.create_subscription(SportModeState, '/sportmodestate', self.imu_callback, 50)  # 创建IMU订阅者
-        self.cloud_sub = self.create_subscription(PointCloud2, '/lidar_points', self.cloud_callback, 50)  # 创建点云订阅者
+        # self.cloud_sub = self.create_subscription(PointCloud2, '/lidar_points', self.cloud_callback, 50)  # 创建点云订阅者
        
         self.imu_raw_pub = self.create_publisher(Imu, '/hesai_go2/transformed_raw_imu', 50)  # 创建原始IMU发布者
         self.imu_pub = self.create_publisher(Imu, '/hesai_go2/transformed_imu', 50)  # 创建转换后IMU发布者
-        self.cloud_pub = self.create_publisher(PointCloud2, '/hesai_go2/transformed_cloud', 50)  # 创建转换后点云发布者
+        # self.cloud_pub = self.create_publisher(PointCloud2, '/hesai_go2/transformed_cloud', 50)  # 创建转换后点云发布者
 
         self.imu_stationary_list = []  # 初始化IMU静止列表
         
@@ -158,10 +166,17 @@ class Repuber(Node):  # 定义传感器转换节点类
             
 
     def imu_callback(self, data):  # IMU回调函数   
+        start_time = self.get_clock().now()
+        
 
+        # 把宇树时间戳的TimeSpec格式转化成ros2的Time格式
+        ros_time = Time(
+            seconds=data.stamp.sec,
+            nanoseconds=data.stamp.nanosec
+        )
 
         if not self.go2imu_time_stamp_offset_set:  # 如果时间戳偏移未设置
-            self.go2imu_time_stamp_offset = self.get_clock().now().nanoseconds - Time.from_msg(data.header.stamp).nanoseconds  # 计算时间戳偏移
+            self.go2imu_time_stamp_offset = self.get_clock().now().nanoseconds - ros_time.nanoseconds  # 计算时间戳偏移
             self.go2imu_time_stamp_offset_set = True  # 标记时间戳偏移已设置
 
 
@@ -201,7 +216,7 @@ class Repuber(Node):  # 定义传感器转换节点类
         transformed_linear_acceleration.z = acc_z - self.acc_bias_z  # 设置Z加速度
         
         transformed_imu = Imu()  # 创建IMU消息
-        transformed_imu.header.stamp = data.header.stamp  # 设置时间戳
+        transformed_imu.header.stamp = ros_time.to_msg()  # 设置时间戳
         transformed_imu.header.frame_id = 'body'  # 设置坐标系
         transformed_imu.orientation.x = transformed_orientation[0]  # 设置姿态X分量
         transformed_imu.orientation.y = transformed_orientation[1]  # 设置姿态Y分量
@@ -226,6 +241,10 @@ class Repuber(Node):  # 定义传感器转换节点类
         transformed_imu.linear_acceleration.z = 0.0  # 重置加速度Z分量
         
         self.imu_pub.publish(transformed_imu)  # 发布转换后的IMU数据
+
+        end_time = self.get_clock().now()
+        processing_time = (end_time - start_time).nanoseconds / 1e9
+        print(f"处理时间: {processing_time} 秒")
 
 def main(args=None):  # 主函数
     rclpy.init(args=args)  # 初始化ROS2

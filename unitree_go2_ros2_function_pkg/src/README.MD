@@ -123,7 +123,7 @@
         1）激光驱动：
             ros2 launch hesai_ros_driver start.py
 
-            ros2 run go2_lidar_processing transform_everything
+            
 
         2）双目驱动：
             ros2 launch realsense2_camera rs_launch.py
@@ -181,6 +181,16 @@
 
     ros2 run calibrate_imu calibrate_imu
 
+
+# 禾赛雷达IMU融合
+    colcon build --packages-select transform_sensors
+
+    ros2 run transform_sensors transform_hesai
+    ros2 run transform_sensors transform_everything
+
+    ros2 topic info -v /sportmodestate
+    ros2 topic info -v /utlidar/imu
+    ros2 topic hz /hesai_go2/transformed_imu
 
 
 # 自探索

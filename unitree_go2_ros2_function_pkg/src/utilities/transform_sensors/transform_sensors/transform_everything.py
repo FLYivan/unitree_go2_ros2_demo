@@ -117,10 +117,6 @@ class Repuber(Node):
     def cloud_callback(self, data):  # 定义云回调函数，接收数据
 
         if not self.time_stamp_offset_set:  # 如果时间戳偏移量未设置
-            # 计算时间戳偏移量:
-            # 1. self.get_clock().now().nanoseconds 获取当前ROS系统时间(纳秒)
-            # 2. Time.from_msg(data.header.stamp).nanoseconds 获取点云数据的时间戳(纳秒) 
-            # 3. 两者相减得到时间偏移量,用于后续同步点云数据和其他传感器数据
             self.time_stamp_offset = self.get_clock().now().nanoseconds - Time.from_msg(data.header.stamp).nanoseconds  # 计算时间戳偏移量
             self.time_stamp_offset_set = True  # 设置时间戳偏移量为已设置
                 
