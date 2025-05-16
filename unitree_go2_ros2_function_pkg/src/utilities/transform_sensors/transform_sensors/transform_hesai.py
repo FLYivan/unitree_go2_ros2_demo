@@ -253,7 +253,7 @@ class Repuber(Node):  # 定义传感器转换节点类
 
         end_time = self.get_clock().now()
         processing_time = (end_time - start_time).nanoseconds / 1e9
-        print(f"处理时间: {processing_time} 秒")
+        # print(f"处理时间: {processing_time} 秒")
 
 def main(args=None):  # 主函数
     rclpy.init(args=args)  # 初始化ROS2

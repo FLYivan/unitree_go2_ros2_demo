@@ -188,6 +188,8 @@
     ros2 run transform_sensors transform_hesai
     ros2 run transform_sensors transform_everything
 
+    ros2 launch point_lio_unilidar mapping_hesai_lidar.launch.py
+
     ros2 topic info -v /sportmodestate
     ros2 topic info -v /utlidar/imu
     ros2 topic hz /hesai_go2/transformed_imu

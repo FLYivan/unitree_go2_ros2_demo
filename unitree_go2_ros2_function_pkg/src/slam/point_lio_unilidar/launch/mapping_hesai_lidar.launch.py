@@ -25,8 +25,8 @@ def generate_launch_description():
     # 传感器矫正节点
     transform_node = Node(
         package='transform_sensors',
-        executable='transform_everything',
-        name='transform_everything',
+        executable='transform_hesai',
+        name='transform_hesai',
         output='screen'
     )
 
