@@ -18,7 +18,7 @@ def generate_launch_description():
     rviz_file = PathJoinSubstitution([
         pkg_point_lio_hesai_lidar,
         'rviz_cfg',
-        'point_lio_map.rviz'
+        'point_lio_hesai_map.rviz'
     ])
 
 
@@ -90,7 +90,7 @@ def generate_launch_description():
 
     # 返回启动描述
     return LaunchDescription([
-        transform_node,
+        # transform_node,
         mapping_node,
         start_rviz_node,
         transform_node_1,

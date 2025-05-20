@@ -184,10 +184,16 @@
 
 # 禾赛雷达IMU融合
     colcon build --packages-select transform_sensors
+    colcon build --packages-select point_lio_unilidar
 
+    # 启动激光雷达
+    ros2 launch hesai_ros_driver start.py
+
+    # 传感器融合
     ros2 run transform_sensors transform_hesai
     ros2 run transform_sensors transform_everything
 
+    # point-lio启动
     ros2 launch point_lio_unilidar mapping_hesai_lidar.launch.py
 
     ros2 topic info -v /sportmodestate
