@@ -35,27 +35,24 @@ double ang_z2y_proj = 0;                             // Z轴到Y轴的投影系�
 void imu_handler(const unitree_go::msg::SportModeState::SharedPtr msg_in)    // IMU数据处理回调函数
 {
 
-    if (!msg_in) return;  // 添加空指针检查
-    
-    double theta = 15.1 / 180 * 3.1415926;          // 将角度转换为弧度，调整为Z轴向上  
-                                                    // 将角度转换为弧度，调整为Z轴向上
-                                                    // 15.1度是IMU的初始安装角度，3.1415926是π的值
+    RCLCPP_INFO(rclcpp::get_logger("imu_handler"), "进入IMU回调函数");
+
+
+    if (!msg_in) {
+
+        RCLCPP_INFO(rclcpp::get_logger("imu_handler"), "收到空指针");
+        return;  // 添加空指针检查
+    }
 
     double x = static_cast<float>(msg_in->imu_state.gyroscope[0]);          // 获取原始角速度X分量
     double y = static_cast<float>(msg_in->imu_state.gyroscope[1]);          // 获取原始角速度Y分量
     double z = static_cast<float>(msg_in->imu_state.gyroscope[2]);          // 获取原始角速度Z分量
 
-    // double x2 = x * cos(theta) - z * sin(theta);     // 计算旋转后的角速度X分量
-    // double y2 = y;                                   // 角速度Y分量保持不变
-    // double z2 = x * sin(theta) + z * cos(theta);     // 计算旋转后的角速度Z分量
 
     double acc_x = static_cast<float>(msg_in->imu_state.accelerometer[0]);   // 获取原始加速度X分量
     double acc_y = static_cast<float>(msg_in->imu_state.accelerometer[1]);   // 获取原始加速度Y分量
     double acc_z = static_cast<float>(msg_in->imu_state.accelerometer[2]);   // 获取原始加速度Z分量
 
-    // double acc_x2 = acc_x * cos(theta) - acc_z * sin(theta);   // 计算旋转后的加速度X分量
-    // double acc_y2 = acc_y;                                      // 加速度Y分量保持不变
-    // double acc_z2 = acc_x * sin(theta) + acc_z * cos(theta);   // 计算旋转后的加速度Z分量
 
     sensor_msgs::msg::Imu msg_store;                                  // 创建新的IMU消息用于存储
     msg_store.header.frame_id = "body";                              // 设置坐标系
@@ -64,9 +61,7 @@ void imu_handler(const unitree_go::msg::SportModeState::SharedPtr msg_in)    // 
     msg_store.orientation.y = static_cast<float>(msg_in->imu_state.quaternion[2]);
     msg_store.orientation.z = static_cast<float>(msg_in->imu_state.quaternion[3]); 
     msg_store.orientation.w = static_cast<float>(msg_in->imu_state.quaternion[0]);
-    msg_store.orientation_covariance.fill(0.0);                      // 初始化姿态协方差
-    msg_store.angular_velocity_covariance.fill(0.0);                 // 初始化角速度协方差
-    msg_store.linear_acceleration_covariance.fill(0.0);              // 初始化线加速度协方差
+
 
     msg_store.angular_velocity.x = x;               // 存储转换后的角速度X分量
     msg_store.angular_velocity.y = y;               // 存储转换后的角速度Y分量
@@ -77,9 +72,11 @@ void imu_handler(const unitree_go::msg::SportModeState::SharedPtr msg_in)    // 
     
     if (state == 1){                                // 如果处于静止状态
         imu_static.push_back(msg_store);            // 将数据存入静止数据向量
+        RCLCPP_INFO(rclcpp::get_logger("imu_handler"), "存入静止数据向量");
     }
     else if (state == 2){                          // 如果处于正向旋转状态
         imu_rotation_positive_z.push_back(msg_store);  // 将数据存入正向旋转数据向量
+        RCLCPP_INFO(rclcpp::get_logger("imu_handler"), "存入正向旋转数据向量");
     }
 }
 
