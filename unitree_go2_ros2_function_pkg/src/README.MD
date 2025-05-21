@@ -195,6 +195,9 @@
     ros2 run transform_sensors transform_test
     ros2 run transform_sensors transform_everything
 
+    # go2的IMU校准
+    ros2 run calibrate_imu calibrate_go2_imu
+
     # point-lio启动
     ros2 launch point_lio_unilidar mapping_hesai_lidar.launch.py
 
