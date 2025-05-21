@@ -185,6 +185,7 @@
 # 禾赛雷达IMU融合
     colcon build --packages-select transform_sensors
     colcon build --packages-select point_lio_unilidar
+    colcon build --packages-select calibrate_imu
 
     # 启动激光雷达
     ros2 launch hesai_ros_driver start.py

@@ -31,11 +31,11 @@ find_package(unitree_go REQUIRED)
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
 
-add_executable(calibrate_imu src/calibrate_imu.cpp)
-add_executable(calibrate_imu src/calibrate_go2_imu.cpp)
+add_executable(calibrate_imu src/calibrate_imu.cpp src/calibrate_go2_imu.cpp)
 
-ament_target_dependencies(calibrate_imu rclcpp std_msgs sensor_msgs geometry_msgs unitree_api go2_sport_api)
-ament_target_dependencies(calibrate_go2_imu rclcpp std_msgs sensor_msgs geometry_msgs unitree_api go2_sport_api unitree_go)
+
+ament_target_dependencies(calibrate_imu rclcpp std_msgs sensor_msgs geometry_msgs unitree_api go2_sport_api unitree_go)
+
 
 install(TARGETS
   calibrate_imu
