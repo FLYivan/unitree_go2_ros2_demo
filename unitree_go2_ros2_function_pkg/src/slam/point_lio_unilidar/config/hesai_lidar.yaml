@@ -28,7 +28,7 @@
             imu_en: true                   # 启用IMU
             start_in_aggressive_motion: false  # 如果为true，需要在下面提供预知的重力值
             extrinsic_est_en: false        # 对于剧烈运动，设置为false
-            imu_time_inte: 0.002            # IMU频率的倒数                 
+            imu_time_inte: 0.002           # IMU频率的倒数                 
             satu_acc: 30.0                 # IMU加速度的饱和值，与单位无关   
             satu_gyro: 35.0                # IMU角速度的饱和值，与单位无关   
             acc_norm: 9.81                 # IMU加速度单位：1.0表示以g为单位，9.81表示以m/s^2为单位   
@@ -64,6 +64,6 @@
             scan_bodyframe_pub_en: false   # 是否在IMU体坐标系中输出点云扫描
 
         pcd_save:
-            pcd_save_en: true              # 保存地图到pcd文件
+            pcd_save_en: false              # 保存地图到pcd文件
             interval: -1                   # 每个pcd文件保存的激光雷达帧数
                                           # -1：所有帧都保存在一个pcd文件中，帧数过多可能导致内存崩溃

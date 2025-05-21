@@ -191,6 +191,7 @@
 
     # 传感器融合
     ros2 run transform_sensors transform_hesai
+    ros2 run transform_sensors transform_test
     ros2 run transform_sensors transform_everything
 
     # point-lio启动

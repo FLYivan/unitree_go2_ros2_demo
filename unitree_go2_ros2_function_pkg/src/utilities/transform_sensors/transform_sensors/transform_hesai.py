@@ -82,7 +82,8 @@ class Repuber(Node):  # 定义传感器转换节点类
         self.body2cloud_trans.transform.translation.x = 0.0  # 设置X轴平移
         self.body2cloud_trans.transform.translation.y = 0.0  # 设置Y轴平移
         self.body2cloud_trans.transform.translation.z = 0.0  # 设置Z轴平移
-        quat = tf_transformations.quaternion_from_euler(0, 0, 1.5708)  # 计算欧拉角到四元数的转换
+        # quat = tf_transformations.quaternion_from_euler(0, 0, 1.5708)  # 计算欧拉角到四元数的转换
+        quat = tf_transformations.quaternion_from_euler(0, 0, 0)  # 计算欧拉角到四元数的转换
         self.body2cloud_trans.transform.rotation.x = quat[0]  # 设置四元数X分量
         self.body2cloud_trans.transform.rotation.y = quat[1]  # 设置四元数Y分量
         self.body2cloud_trans.transform.rotation.z = quat[2]  # 设置四元数Z分量
@@ -131,6 +132,7 @@ class Repuber(Node):  # 定义传感器转换节点类
             self.hesai_time_stamp_offset = self.get_clock().now().nanoseconds - Time.from_msg(data.header.stamp).nanoseconds  # 计算时间戳偏移
             self.hesai_time_stamp_offset_set = True  # 标记时间戳偏移已设置
                 
+        # # 点云做切割处理        
         # cloud_arr = pc2.read_points_list(data)  # 读取点云数据
         # points = np.array(cloud_arr)  # 转换为numpy数组
 
@@ -146,7 +148,7 @@ class Repuber(Node):  # 定义传感器转换节点类
         # transformed_points = transformed_points.tolist()  # 转换为列表
 
         # for i in range(len(transformed_points)):  # 遍历所有点
-        #     transformed_points[i][4] = int(transformed_points[i][4])  # 转换强度值为整数
+        #     transformed_points[i][4] = int(transformed_points[i][4])  # 转换点云线数值为整数
         #     if self.is_in_filter_box(transformed_points[i]):  # 检查点是否在过滤框内
         #         remove_list.append(i)  # 添加到移除列表
 
