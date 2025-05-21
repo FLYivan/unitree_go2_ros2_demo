@@ -54,7 +54,16 @@ void imu_handler(const unitree_go::msg::SportModeState::SharedPtr msg_in)    // 
     // double acc_y2 = acc_y;                                      // 加速度Y分量保持不变
     // double acc_z2 = acc_x * sin(theta) + acc_z * cos(theta);   // 计算旋转后的加速度Z分量
 
-    sensor_msgs::msg::Imu msg_store = *msg_in;      // 创建新的IMU消息用于存储
+    sensor_msgs::msg::Imu msg_store;                                  // 创建新的IMU消息用于存储
+    msg_store.header.frame_id = "body";                              // 设置坐标系
+    msg_store.header.stamp = rclcpp::Clock().now();  // 使用当前时间作为时间戳
+    msg_store.orientation.x = msg_in->imu_state.quaternion[1];                                   // 初始化姿态四元数
+    msg_store.orientation.y = msg_in->imu_state.quaternion[2];
+    msg_store.orientation.z = msg_in->imu_state.quaternion[3]; 
+    msg_store.orientation.w = msg_in->imu_state.quaternion[0];
+    // msg_store.orientation_covariance.fill(0.0);                      // 初始化姿态协方差
+    // msg_store.angular_velocity_covariance.fill(0.0);                 // 初始化角速度协方差
+    // msg_store.linear_acceleration_covariance.fill(0.0);              // 初始化线加速度协方差
 
     msg_store.angular_velocity.x = x;               // 存储转换后的角速度X分量
     msg_store.angular_velocity.y = y;               // 存储转换后的角速度Y分量
