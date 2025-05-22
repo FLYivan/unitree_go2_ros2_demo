@@ -181,6 +181,10 @@
 
     ros2 run calibrate_imu calibrate_imu
 
+# 禾赛点云降采样
+    colcon build --packages-select prl_process_py
+    rros2 run prl_process_py hesai_downsample_node
+
 
 # 禾赛雷达IMU融合
     colcon build --packages-select transform_sensors

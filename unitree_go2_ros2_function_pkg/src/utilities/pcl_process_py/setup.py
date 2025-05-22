@@ -17,7 +17,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'lidar_odometry = pcl_process_py.lidar_odometry_pointcloud:main',
+            'hesai_downsample_node = pcl_process_py.hesai_downsample_node:main',
         ],
     },
 )

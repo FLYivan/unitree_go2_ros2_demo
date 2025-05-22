@@ -11,7 +11,7 @@ from scipy.spatial.transform import Rotation
 
 class LidarOdometry:
     def __init__(self):
-        self.node = rclpy.create_node('lidar_odometry_node')
+        self.node = rclpy.create_node('hesai_downsample_node')
 
         self.publisher_ = self.node.create_publisher(Odometry, 'pointcloud/odom', 10)
 
