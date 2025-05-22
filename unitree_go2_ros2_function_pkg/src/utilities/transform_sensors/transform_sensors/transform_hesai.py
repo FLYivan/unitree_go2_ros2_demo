@@ -58,10 +58,10 @@ class Repuber(Node):  # 定义传感器转换节点类
             }
         try:  # 尝试加载标定文件
             home_path = os.path.expanduser('~')  # 获取用户主目录
-            calib_file_path = os.path.join(home_path, '桌面/imu_calib_data.yaml')  # 构建标定文件路径
+            calib_file_path = os.path.join(home_path, '桌面/go2_imu_calib_data.yaml')  # 构建标定文件路径
             calib_file = open(calib_file_path, 'r')  # 打开标定文件
             calib_data = yaml.load(calib_file, Loader=yaml.FullLoader)  # 加载标定数据
-            print("imu_calib.yaml loaded")  # 打印加载成功信息
+            print("go2_imu_calib.yaml loaded")  # 打印加载成功信息
             calib_file.close()  # 关闭文件
         except:  # 加载失败时使用默认值
             print("imu_calib.yaml not found, using defualt values")  # 打印使用默认值信息

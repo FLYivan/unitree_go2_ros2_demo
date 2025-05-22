@@ -11,10 +11,6 @@
 #include "unitree_api/msg/request.hpp"               // 包含宇树机器人API请求消息头文件
 #include "common/ros2_sport_client.h"                // 包含运动控制客户端头文件
 
-
-#include "unitree_go/msg/sport_mode_state.hpp"              // 包含状态获取客户端头文件
-
-
 int state = -1;                                      // 定义状态变量，初始化为-1
 
 std::vector<sensor_msgs::msg::Imu> imu_static;                      // 存储静止状态下的IMU数据
@@ -32,36 +28,29 @@ double ang_bias_z = 0;                               // 陀螺仪Z轴偏差
 double ang_z2x_proj = 0;                             // Z轴到X轴的投影系数
 double ang_z2y_proj = 0;                             // Z轴到Y轴的投影系数
 
-void imu_handler(const unitree_go::msg::SportModeState::SharedPtr msg_in)    // IMU数据处理回调函数
+void imu_handler(const sensor_msgs::msg::Imu::ConstSharedPtr msg_in)    // IMU数据处理回调函数
 {
+    // double theta = 15.1 / 180 * 3.1415926;          // 将角度转换为弧度，调整为Z轴向上  
+    //                                                 // 将角度转换为弧度，调整为Z轴向上
+    //                                                 // 15.1度是IMU的初始安装角度，3.1415926是π的值
 
-    RCLCPP_INFO(rclcpp::get_logger("imu_handler"), "进入IMU回调函数");
+    double x = msg_in->angular_velocity.x;           // 获取原始角速度X分量
+    double y = msg_in->angular_velocity.y;          // 获取原始角速度Y分量并取反
+    double z = msg_in->angular_velocity.z;          // 获取原始角速度Z分量并取反
 
+    // double x2 = x * cos(theta) - z * sin(theta);     // 计算旋转后的角速度X分量
+    // double y2 = y;                                   // 角速度Y分量保持不变
+    // double z2 = x * sin(theta) + z * cos(theta);     // 计算旋转后的角速度Z分量
 
-    if (!msg_in) {
+    double acc_x = msg_in->linear_acceleration.x;    // 获取原始加速度X分量
+    double acc_y = msg_in->linear_acceleration.y;   // 获取原始加速度Y分量并取反
+    double acc_z = msg_in->linear_acceleration.z;   // 获取原始加速度Z分量并取反
 
-        RCLCPP_INFO(rclcpp::get_logger("imu_handler"), "收到空指针");
-        return;  // 添加空指针检查
-    }
+    // double acc_x2 = acc_x * cos(theta) - acc_z * sin(theta);   // 计算旋转后的加速度X分量
+    // double acc_y2 = acc_y;                                      // 加速度Y分量保持不变
+    // double acc_z2 = acc_x * sin(theta) + acc_z * cos(theta);   // 计算旋转后的加速度Z分量
 
-    double x = static_cast<float>(msg_in->imu_state.gyroscope[0]);          // 获取原始角速度X分量
-    double y = static_cast<float>(msg_in->imu_state.gyroscope[1]);          // 获取原始角速度Y分量
-    double z = static_cast<float>(msg_in->imu_state.gyroscope[2]);          // 获取原始角速度Z分量
-
-
-    double acc_x = static_cast<float>(msg_in->imu_state.accelerometer[0]);   // 获取原始加速度X分量
-    double acc_y = static_cast<float>(msg_in->imu_state.accelerometer[1]);   // 获取原始加速度Y分量
-    double acc_z = static_cast<float>(msg_in->imu_state.accelerometer[2]);   // 获取原始加速度Z分量
-
-
-    sensor_msgs::msg::Imu msg_store;                                  // 创建新的IMU消息用于存储
-    msg_store.header.frame_id = "body";                              // 设置坐标系
-    msg_store.header.stamp = rclcpp::Time(msg_in->stamp.sec, msg_in->stamp.nanosec);  // 使用当前时间作为时间戳
-    msg_store.orientation.x = static_cast<float>(msg_in->imu_state.quaternion[1]);                                   // 初始化姿态四元数
-    msg_store.orientation.y = static_cast<float>(msg_in->imu_state.quaternion[2]);
-    msg_store.orientation.z = static_cast<float>(msg_in->imu_state.quaternion[3]); 
-    msg_store.orientation.w = static_cast<float>(msg_in->imu_state.quaternion[0]);
-
+    sensor_msgs::msg::Imu msg_store = *msg_in;      // 创建新的IMU消息用于存储
 
     msg_store.angular_velocity.x = x;               // 存储转换后的角速度X分量
     msg_store.angular_velocity.y = y;               // 存储转换后的角速度Y分量
@@ -72,11 +61,9 @@ void imu_handler(const unitree_go::msg::SportModeState::SharedPtr msg_in)    // 
     
     if (state == 1){                                // 如果处于静止状态
         imu_static.push_back(msg_store);            // 将数据存入静止数据向量
-        RCLCPP_INFO(rclcpp::get_logger("imu_handler"), "存入静止数据向量");
     }
     else if (state == 2){                          // 如果处于正向旋转状态
         imu_rotation_positive_z.push_back(msg_store);  // 将数据存入正向旋转数据向量
-        RCLCPP_INFO(rclcpp::get_logger("imu_handler"), "存入正向旋转数据向量");
     }
 }
 
@@ -182,7 +169,7 @@ int main(int argc, char** argv)                   // 主函数
     auto pubGo2Request = nh->create_publisher<unitree_api::msg::Request>("/api/sport/request", 10);    // 创建运动请求发布者
     auto pubSpeed = nh->create_publisher<geometry_msgs::msg::TwistStamped>("/cmd_vel", 5);            // 创建速度命令发布者（用于调试）
 
-    auto subImu = nh->create_subscription<unitree_go::msg::SportModeState>("/sportmodestate", 300,  imu_handler);  // 创建IMU数据订阅者
+    auto subImu = nh->create_subscription<sensor_msgs::msg::Imu>("/go2/imu", 300,  imu_handler);  // 创建IMU数据订阅者
 
     geometry_msgs::msg::TwistStamped cmd_vel;    // 创建速度命令消息
     cmd_vel.header.frame_id = "vehicle";         // 设置速度命令的坐标系

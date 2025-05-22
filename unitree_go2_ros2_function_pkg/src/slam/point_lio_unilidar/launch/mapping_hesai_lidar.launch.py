@@ -90,7 +90,7 @@ def generate_launch_description():
 
     # 返回启动描述
     return LaunchDescription([
-        # transform_node,
+        transform_node,
         mapping_node,
         start_rviz_node,
         transform_node_1,

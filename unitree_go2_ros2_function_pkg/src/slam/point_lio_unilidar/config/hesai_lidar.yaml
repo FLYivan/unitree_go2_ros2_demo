@@ -64,6 +64,6 @@
             scan_bodyframe_pub_en: false   # 是否在IMU体坐标系中输出点云扫描
 
         pcd_save:
-            pcd_save_en: false              # 保存地图到pcd文件
+            pcd_save_en: true             # 保存地图到pcd文件
             interval: -1                   # 每个pcd文件保存的激光雷达帧数
                                           # -1：所有帧都保存在一个pcd文件中，帧数过多可能导致内存崩溃

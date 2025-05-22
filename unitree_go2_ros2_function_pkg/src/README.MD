@@ -186,17 +186,25 @@
     colcon build --packages-select transform_sensors
     colcon build --packages-select point_lio_unilidar
     colcon build --packages-select calibrate_imu
+    colcon build --packages-select go2_lidar_processing
+
+    
+    # 启动AI云控
+    ros2 launch go2_cmd go2_ai_cmd_test.launch.py
 
     # 启动激光雷达
     ros2 launch hesai_ros_driver start.py
 
     # 传感器融合
     ros2 run transform_sensors transform_hesai
-    ros2 run transform_sensors transform_test
-    ros2 run transform_sensors transform_everything
+
 
     # go2的IMU校准
+    ros2 run go2_lidar_processing go2_imu_node
     ros2 run calibrate_imu calibrate_go2_imu
+
+    ros2 launch go2_lidar_processing go2_imu_calibrate.launch.py
+
 
     # point-lio启动
     ros2 launch point_lio_unilidar mapping_hesai_lidar.launch.py
