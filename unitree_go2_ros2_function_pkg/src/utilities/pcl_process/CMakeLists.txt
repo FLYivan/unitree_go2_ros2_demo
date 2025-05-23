@@ -21,6 +21,9 @@ include_directories(
 link_directories(${PCL_LIBRARY_DIRS})
 add_definitions(${PCL_DEFINITIONS})
 
+# 添加编译选项
+add_compile_options(-std=c++17)
+
 # 修改这里：将可执行文件名改为 pcl_study
 add_executable(pcl_study 
   src/hesai_pcl_process.cpp
@@ -32,7 +35,9 @@ ament_target_dependencies(pcl_study
   pcl_conversions
 )
 
-target_link_libraries(pcl_study ${PCL_LIBRARIES})
+target_link_libraries(pcl_study 
+  ${PCL_LIBRARIES}
+)
 
 # Install
 install(

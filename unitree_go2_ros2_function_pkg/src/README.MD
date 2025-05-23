@@ -21,6 +21,8 @@
     
     6、在SSID列表选择iphone这个热点wifi
 
+## 开发板连接远程仓库
+    
 
 
 # 三、传感器驱动安装
@@ -182,10 +184,6 @@
     ros2 run calibrate_imu calibrate_imu
 
 # 禾赛点云降采样
-    colcon build --packages-select pcl_process_py
-    ros2 run pcl_process_py hesai_downsample_node
-
-
     colcon build --packages-select pcl_process
     ros2 run pcl_process pcl_study
 
@@ -209,7 +207,6 @@
     # go2的IMU校准
     ros2 run go2_lidar_processing go2_imu_node
     ros2 run calibrate_imu calibrate_go2_imu
-
     ros2 launch go2_lidar_processing go2_imu_calibrate.launch.py
 
 

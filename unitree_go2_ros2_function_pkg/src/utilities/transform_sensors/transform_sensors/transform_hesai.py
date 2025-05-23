@@ -30,8 +30,8 @@ class Repuber(Node):  # 定义传感器转换节点类
             history=QoSHistoryPolicy.KEEP_LAST
 )
         self.imu_sub = self.create_subscription(SportModeState, '/sportmodestate', self.imu_callback, 50)  # 创建IMU订阅者
-        self.cloud_sub = self.create_subscription(PointCloud2, '/lidar_points', self.cloud_callback, 50)  # 创建点云订阅者
-        # self.cloud_sub = self.create_subscription(PointCloud2, '/cloud_result', self.cloud_callback, 50)  # 创建点云订阅者(降采样)
+        # self.cloud_sub = self.create_subscription(PointCloud2, '/lidar_points', self.cloud_callback, 50)  # 创建点云订阅者
+        self.cloud_sub = self.create_subscription(PointCloud2, '/cloud_result', self.cloud_callback, 50)  # 创建点云订阅者(降采样)
        
         self.imu_raw_pub = self.create_publisher(Imu, '/hesai_go2/transformed_raw_imu', 50)  # 创建原始IMU发布者
         self.imu_pub = self.create_publisher(Imu, '/hesai_go2/transformed_imu', 50)  # 创建转换后IMU发布者
@@ -44,7 +44,7 @@ class Repuber(Node):  # 定义传感器转换节点类
         self.go2imu_time_stamp_offset = 0  # 初始化go2自带IMU时间戳偏移
         self.go2imu_time_stamp_offset_set = False  # 初始化go2自带IMU时间戳偏移设置标志
         
-        self.cam_offset = 0.0908  # 设置相机偏移量
+        self.cam_offset = 0.2908  # 设置相机偏移量
 
         # 加载标定数据
         calib_data = calib_data = {  # 设置默认标定数据
