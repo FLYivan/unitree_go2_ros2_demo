@@ -30,8 +30,8 @@ class Repuber(Node):  # 定义传感器转换节点类
             history=QoSHistoryPolicy.KEEP_LAST
 )
         self.imu_sub = self.create_subscription(SportModeState, '/sportmodestate', self.imu_callback, 50)  # 创建IMU订阅者
-        # self.cloud_sub = self.create_subscription(PointCloud2, '/lidar_points', self.cloud_callback, 50)  # 创建点云订阅者
-        self.cloud_sub = self.create_subscription(PointCloud2, '/cloud_result', self.cloud_callback, 50)  # 创建点云订阅者(降采样)
+        self.cloud_sub = self.create_subscription(PointCloud2, '/lidar_points', self.cloud_callback, 50)  # 创建点云订阅者
+        # self.cloud_sub = self.create_subscription(PointCloud2, '/cloud_result', self.cloud_callback, 50)  # 创建点云订阅者(降采样)
        
         self.imu_raw_pub = self.create_publisher(Imu, '/hesai_go2/transformed_raw_imu', 50)  # 创建原始IMU发布者
         self.imu_pub = self.create_publisher(Imu, '/hesai_go2/transformed_imu', 50)  # 创建转换后IMU发布者
@@ -65,7 +65,7 @@ class Repuber(Node):  # 定义传感器转换节点类
             print("go2_imu_calib.yaml loaded")  # 打印加载成功信息
             calib_file.close()  # 关闭文件
         except:  # 加载失败时使用默认值
-            print("imu_calib.yaml not found, using defualt values")  # 打印使用默认值信息
+            print("go2_imu_calib.yaml not found, using defualt values")  # 打印使用默认值信息
             
         self.acc_bias_x = calib_data['acc_bias_x']  # 设置加速度X轴偏差
         self.acc_bias_y = calib_data['acc_bias_y']  # 设置加速度Y轴偏差

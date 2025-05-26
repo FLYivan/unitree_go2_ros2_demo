@@ -9,9 +9,9 @@ namespace pcl_main
         : Node("pcl_study")
     {
         // 初始化体素滤波参数
-        voxel_size_x_ = 0.05f;
-        voxel_size_y_ = 0.05f;
-        voxel_size_z_ = 0.05f;
+        voxel_size_x_ = 0.15f;
+        voxel_size_y_ = 0.15f;
+        voxel_size_z_ = 0.15f;
 
         pub_res = create_publisher<sensor_msgs::msg::PointCloud2>("cloud_result", 10);
 

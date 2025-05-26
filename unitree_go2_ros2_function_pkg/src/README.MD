@@ -22,7 +22,11 @@
     6、在SSID列表选择iphone这个热点wifi
 
 ## 开发板连接远程仓库
-    
+    1、远程拷贝
+        scp /home/flyivan/桌面/go2_imu_calib_data.yaml unitree@192.168.123.18:/home/unitree/Desktop
+
+    2、反向远程拷贝(仍然上位机操作)
+        scp unitree@192.168.123.18:/home/unitree/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/scans_20250523_155726.pcd /home/flyivan/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/
 
 
 # 三、传感器驱动安装
@@ -192,6 +196,13 @@
     colcon build --packages-select point_lio_unilidar
     colcon build --packages-select calibrate_imu
     colcon build --packages-select go2_lidar_processing
+    colcon build --packages-select go2_cmd
+
+    # go2的IMU校准(普通模式下)
+    ros2 run go2_lidar_processing go2_imu_node
+    ros2 run calibrate_imu calibrate_go2_imu
+    ros2 launch go2_lidar_processing go2_imu_calibrate.launch.py
+    (pc2缺少go2_sport_api)
 
     
     # 启动AI云控
@@ -204,10 +215,6 @@
     ros2 run transform_sensors transform_hesai
 
 
-    # go2的IMU校准
-    ros2 run go2_lidar_processing go2_imu_node
-    ros2 run calibrate_imu calibrate_go2_imu
-    ros2 launch go2_lidar_processing go2_imu_calibrate.launch.py
 
 
     # point-lio启动
@@ -217,6 +224,9 @@
     ros2 topic info -v /utlidar/imu
     ros2 topic hz /hesai_go2/transformed_imu
 
+
+
+scp unitree@192.168.123.18:/home/unitree/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/scans_20250523_161507.pcd /home/flyivan/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/
 
 # 自探索
 ## explore算法
