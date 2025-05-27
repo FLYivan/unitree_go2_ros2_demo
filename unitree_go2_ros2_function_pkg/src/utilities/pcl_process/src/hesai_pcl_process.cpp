@@ -9,9 +9,9 @@ namespace pcl_main // PCL主命名空间
         : Node("pcl_study") // 初始化ROS2节点名称为pcl_study
     {
         // 初始化体素滤波参数
-        voxel_size_x_ = 0.15f; // 设置X轴体素大小为0.15
-        voxel_size_y_ = 0.15f; // 设置Y轴体素大小为0.15
-        voxel_size_z_ = 0.15f; // 设置Z轴体素大小为0.15
+        voxel_size_x_ = 0.15f; // 设置X轴体素大小为0.05
+        voxel_size_y_ = 0.15f; // 设置Y轴体素大小为0.05
+        voxel_size_z_ = 0.15f; // 设置Z轴体素大小为0.05
 
         pub_res = create_publisher<sensor_msgs::msg::PointCloud2>("cloud_result", 10); // 创建点云结果发布器
 
