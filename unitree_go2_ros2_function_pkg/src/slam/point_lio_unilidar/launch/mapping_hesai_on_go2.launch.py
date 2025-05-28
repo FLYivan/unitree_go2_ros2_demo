@@ -32,8 +32,8 @@ def generate_launch_description():
     # 传感器矫正节点
     transform_node = Node(
         package='transform_sensors',
-        executable='transform_hesai',
-        name='transform_hesai',
+        executable='transform_hesai_on_pc2',
+        name='transform_hesai_on_pc2',
         output='screen'
     )
 
@@ -97,9 +97,9 @@ def generate_launch_description():
 
     # 返回启动描述
     return LaunchDescription([
-        pcl_downsample_node,
+        # pcl_downsample_node,
         transform_node,
-        # mapping_node,
+        mapping_node,
         # start_rviz_node,
         transform_node_1,
         transform_node_2,

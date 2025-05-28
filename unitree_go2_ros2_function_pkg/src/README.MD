@@ -60,7 +60,7 @@
 # 三、运控
 
     1、AI运控
-        ros2 launch go2_cmd go2_ai_cmd_test.launch.py
+        ros2 launch go2_cmd go2_ai_cmd.launch.py
 
     2、普通运控
         ros2 run go2_cmd go2_move
@@ -160,9 +160,6 @@
             ros2 topic hz /camera/color/image_raw/compressed
 
     4、纯激光slam
-  
-            
-
 
 
 # 导航
@@ -172,95 +169,87 @@
         ros2 launch go2_nav go2_nav2_bringup.launch.py
 
 
-# 三维建图
-    point-lio
+# 三维建图point-lio(使用L1雷达)
+    
     1、启动建图
         colcon build --packages-select point_lio_unilidar
         ros2 launch point_lio_unilidar mapping_utlidar.launch.py
 
     2、启动AI云控
-        ros2 launch go2_cmd go2_ai_cmd_test.launch.py
+        ros2 launch go2_cmd go2_ai_cmd.launch.py
 
-    2、查看建图
-    3、查看里程计话题，尤其z轴数据
-
-
-    ros2 run calibrate_imu calibrate_imu
 
 # 禾赛点云降采样
     colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release --packages-select pcl_process
     ros2 run pcl_process pcl_study
-    要重新source?
   
 
-# 禾赛雷达IMU融合
-    colcon build --symlink-install --packages-select transform_sensors point_lio_unilidar pcl_process
-    colcon build --packages-select transform_sensors
+# 三维建图point-lio(使用禾赛雷达IMU融合)
+    1、编译
+        colcon build --symlink-install --packages-select transform_sensors point_lio_unilidar pcl_process
+        colcon build --packages-select transform_sensors
 
-    colcon build --symlink-install --packages-select point_lio_unilidar
-    colcon build --packages-select point_lio_unilidar
+        colcon build --symlink-install --packages-select point_lio_unilidar
+        colcon build --packages-select point_lio_unilidar
 
-    colcon build --packages-select calibrate_imu
-    colcon build --packages-select go2_lidar_processing
-    colcon build --packages-select go2_cmd
+        colcon build --packages-select calibrate_imu
+        colcon build --packages-select go2_lidar_processing
+        colcon build --packages-select go2_cmd
 
-    # go2的IMU校准(普通模式下)
-    ros2 run go2_lidar_processing go2_imu_node
-    ros2 run calibrate_imu calibrate_go2_imu
-    ros2 launch go2_lidar_processing go2_imu_calibrate.launch.py
+    2、go2的IMU校准(在普通运控模式下)
+        ros2 run go2_lidar_processing go2_imu_node
+        ros2 run calibrate_imu calibrate_go2_imu
 
+        pc2执行：
+            ros2 launch go2_lidar_processing go2_imu_calibrate_on_pc2.launch.py
+
+        上位机执行：
+            ros2 run go2_lidar_processing go2_imu_node
+            ros2 run calibrate_imu calibrate_go2_imu
+
+            ros2 launch go2_lidar_processing go2_imu_calibrate.launch.py
 
     
-    # 启动AI云控
-    ros2 launch go2_cmd go2_ai_cmd_test.launch.py
+    3、启动AI运控
+        ros2 launch go2_cmd go2_ai_cmd.launch.py
 
-    # 启动激光雷达
-    ros2 launch hesai_ros_driver start.py
+    4、启动激光雷达
+        ros2 launch hesai_ros_driver start.py
 
-    # 传感器融合
-    ros2 run transform_sensors transform_hesai
+    5、传感器融合节点
+        ros2 run transform_sensors transform_hesai
 
+    6、point-lio启动
+        pc2执行：
+            ros2 launch point_lio_unilidar mapping_hesai_on_go2.launch.py
 
+        上位机执行：
+            ros2 launch point_lio_unilidar mapping_hesai_lidar.launch.py
 
+    7、节点调试
+        1）pc2上地图保存
+            scp unitree@192.168.123.18:/home/unitree/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/scans_19700209_143842.pcd /home/flyivan/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/
 
-    # point-lio启动
-    pc2执行：
-        ros2 launch point_lio_unilidar mapping_hesai_on_go2.launch.py
+        2）节点状态查看
 
-    ros2 launch point_lio_unilidar mapping_hesai_lidar.launch.py
+            ros2 topic info -v /sportmodestate
+            ros2 topic info -v /utlidar/imu
+            ros2 topic hz /hesai_go2/transformed_imu
 
-    ros2 topic info -v /sportmodestate
-    ros2 topic info -v /utlidar/imu
-    ros2 topic hz /hesai_go2/transformed_imu
+        3）真实场景测试
 
-    ## 代码结构
-    pc2上运行：
-        降采样节点
-        时间戳同步节点
-
-    上位机运行：
-        point-lio节点
-
-
-scp unitree@192.168.123.18:/home/unitree/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/scans_19700209_143842.pcd /home/flyivan/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/
-
-
-
-## 禾赛slam调试
-LAN口：
-    1、全上位机执行+普通步态  可
-    2、全上位机执行+AI步态   楼梯歪（未校准IMU） scans_20250527_100421  scans_20250527_101517
-    3、时间戳融合pc2+slam算法上位机+AI步态 可   scans_20250527_102922
-    5、全pc2+无降采样+AI步态 scans_19700209_090911 scans_19700209_141527
+            LAN口：
+                1、全上位机执行+普通步态  可
+                2、全上位机执行+AI步态   楼梯歪（未校准IMU） scans_20250527_100421  scans_20250527_101517
+                3、时间戳融合pc2+slam算法上位机+AI步态 可   scans_20250527_102922
+                5、全pc2+无降采样+AI步态 scans_19700209_090911 scans_19700209_141527
 
 
-  将采样节点有问题
-  楼梯有点歪
-    
+            WLAN口：
+                1、时间戳融合pc2+slam算法上位机+AI步态
+                3、全pc2+AI步态 scans_19700209_142658  scans_19700209_143842
 
-WALN口：
-    1、时间戳融合pc2+slam算法上位机+AI步态
-    3、全pc2+AI步态 scans_19700209_142658  scans_19700209_143842
+        4）点云要做切割吗
 
 # 自探索
 ## explore算法

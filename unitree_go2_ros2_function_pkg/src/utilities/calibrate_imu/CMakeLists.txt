@@ -45,6 +45,23 @@ ament_target_dependencies(calibrate_go2_imu                   # 添加目标依�
   unitree_go                                                  # 宇树Go库
 )
 
+
+
+# 编译 pc2 上的Go2 IMU 标定节点                                        # Go2 IMU标定节点编译设置(已注释)
+add_executable(calibrate_go2_imu_on_pc2                              # 添加可执行文件
+  src/calibrate_go2_imu_on_pc2.cpp                                  # 源文件
+)
+ament_target_dependencies(calibrate_go2_imu_on_pc2                   # 添加目标依赖
+  rclcpp                                                      # ROS2 C++客户端库
+  std_msgs                                                    # 标准消息库
+  sensor_msgs                                                 # 传感器消息库
+  geometry_msgs                                               # 几何消息库
+  unitree_api                                                 # 宇树API库
+  go2_sport_api                                               # Go2运动API库
+  unitree_go                                                  # 宇树Go库
+)
+
+
 # 编译标准 IMU 标定节点                                        # 标准IMU标定节点编译设置(已注释)
 add_executable(calibrate_imu                                  # 添加可执行文件
   src/calibrate_imu.cpp                                      # 源文件
@@ -64,6 +81,7 @@ ament_target_dependencies(calibrate_imu                       # 添加目标依�
 install(TARGETS 
   calibrate_go2_imu                                                # 安装目标
   calibrate_imu                                                # 安装calibrate_imu可执行文件
+  calibrate_go2_imu_on_pc2
   DESTINATION lib/${PROJECT_NAME})                             # 安装到lib目录下
 
 # install(DIRECTORY                                            # 安装目录(已注释)

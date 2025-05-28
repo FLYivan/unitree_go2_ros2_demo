@@ -29,7 +29,7 @@ ros2 launch go2_nav go2_nav2_bringup.launch.py
 
 # AI运控
 
-    ros2 launch go2_cmd go2_ai_cmd_test.launch.py
+    ros2 launch go2_cmd go2_ai_cmd.launch.py
 
 # 启动explore节点并同步建图
    ## go2
