@@ -5,8 +5,8 @@
         # use_imu_as_input: true            # 使用IMU作为输入
         runtime_pos_log_enable: false      # 运行时位置日志启用
 
-        filter_size_surf_min: 0.2         # 表面最小滤波尺寸
-        filter_size_map_min: 0.2          # 地图最小滤波尺寸
+        filter_size_surf_min: 0.1         # 表面最小滤波尺寸
+        filter_size_map_min: 0.1         # 地图最小滤波尺寸
 
         common:
             lid_topic: "/hesai_go2/transformed_cloud"  # 激光雷达话题                     （要调整）
@@ -21,7 +21,7 @@
         preprocess:
             lidar_type: 4                  # 激光雷达类型           （未知，需确认）
             scan_line: 16                  # 扫描线数              （未知，需确认）
-            timestamp_unit: 0              # PointCloud2话题中time/t字段的单位：0-秒，1-毫秒，2-微秒，3-纳秒 （可能要调整）
+            timestamp_unit: 3              # PointCloud2话题中time/t字段的单位：0-秒，1-毫秒，2-微秒，3-纳秒 （可能要调整）
             blind: 0.5                     # 盲区距离               （可能要调整）
 
         mapping:

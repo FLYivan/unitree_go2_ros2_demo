@@ -15,6 +15,19 @@ def generate_launch_description():
     cmd_params_file = LaunchConfiguration('cmd_params_file')
     use_sim_time = LaunchConfiguration('use_sim_time')
 
+    # 获取工作空间的src目录
+    workspace_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))))
+    src_dir = os.path.join(workspace_dir, 'src')
+
+    # # 打印路径信息（用于调试）
+    # config_path = os.path.join(src_dir, 'go2_cmd', 'config', 'cmd.yaml')
+    # print("\n=============================================")
+    # print(f"Launch文件位置: {os.path.abspath(__file__)}")
+    # print(f"工作空间目录: {workspace_dir}")
+    # print(f"src目录: {src_dir}")
+    # print(f"配置文件路径: {config_path}")
+    # print("=============================================\n")
+
     # 获取launch文件和定义地址
     bringup_dir = get_package_share_directory("go2_cmd")
 
@@ -25,11 +38,11 @@ def generate_launch_description():
         'dog_slam_simp.rviz'
     )
 
-
     # 声明go2控制节点启动时，参数文件的默认地址
     declare_go2_cmd_params_file = DeclareLaunchArgument(
         'cmd_params_file',
-        default_value=os.path.join(bringup_dir,'config', 'cmd.yaml'),                
+        default_value=os.path.join(src_dir, 'go2_cmd', 'config', 'cmd.yaml'),
+        # default_value=os.path.join(bringup_dir,'config', 'cmd.yaml'),                
         description='Full path to the cmd parameters file to use for the some cmd node')
     
 

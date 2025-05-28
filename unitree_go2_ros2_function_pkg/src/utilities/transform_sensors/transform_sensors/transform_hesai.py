@@ -30,8 +30,8 @@ class Repuber(Node):  # 定义传感器转换节点类
             history=QoSHistoryPolicy.KEEP_LAST
 )
         self.imu_sub = self.create_subscription(SportModeState, '/sportmodestate', self.imu_callback, 50)  # 创建IMU订阅者
-        # self.cloud_sub = self.create_subscription(PointCloud2, '/lidar_points', self.cloud_callback, 50)  # 创建点云订阅者
-        self.cloud_sub = self.create_subscription(PointCloud2, '/cloud_result', self.cloud_callback, 50)  # 创建点云订阅者(降采样)
+        self.cloud_sub = self.create_subscription(PointCloud2, '/lidar_points', self.cloud_callback, 50)  # 创建点云订阅者
+        # self.cloud_sub = self.create_subscription(PointCloud2, '/cloud_result', self.cloud_callback, 50)  # 创建点云订阅者(降采样)
        
         self.imu_raw_pub = self.create_publisher(Imu, '/hesai_go2/transformed_raw_imu', 50)  # 创建原始IMU发布者
         self.imu_pub = self.create_publisher(Imu, '/hesai_go2/transformed_imu', 50)  # 创建转换后IMU发布者
@@ -173,6 +173,7 @@ class Repuber(Node):  # 定义传感器转换节点类
         raw_cloud = data  # 创建点云消息
         raw_cloud.header.stamp = Time(nanoseconds=Time.from_msg(raw_cloud.header.stamp).nanoseconds + self.hesai_time_stamp_offset).to_msg()  # 更新时间戳
         raw_cloud.header.frame_id = "body"  # 设置坐标系
+        raw_cloud.is_dense = data.is_dense  # 设置密度标志
 
         self.cloud_pub.publish(raw_cloud)  # 发布转换后的点云
             

@@ -195,7 +195,11 @@
 
 # 禾赛雷达IMU融合
     colcon build --symlink-install --packages-select transform_sensors point_lio_unilidar pcl_process
+    colcon build --packages-select transform_sensors
+
     colcon build --symlink-install --packages-select point_lio_unilidar
+    colcon build --packages-select point_lio_unilidar
+
     colcon build --packages-select calibrate_imu
     colcon build --packages-select go2_lidar_processing
     colcon build --packages-select go2_cmd
@@ -238,7 +242,7 @@
         point-lio节点
 
 
-scp unitree@192.168.123.18:/home/unitree/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/scans_19700209_090911.pcd /home/flyivan/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/
+scp unitree@192.168.123.18:/home/unitree/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/scans_19700209_143842.pcd /home/flyivan/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/
 
 
 
@@ -247,9 +251,7 @@ LAN口：
     1、全上位机执行+普通步态  可
     2、全上位机执行+AI步态   楼梯歪（未校准IMU） scans_20250527_100421  scans_20250527_101517
     3、时间戳融合pc2+slam算法上位机+AI步态 可   scans_20250527_102922
-    4、降采样0.05&时间戳融合pc2+slam算法上位机+AI步态 否
-    4、降采样0.15&时间戳融合pc2+slam算法上位机+AI步态
-    5、全pc2+无降采样+AI步态 scans_19700209_090911
+    5、全pc2+无降采样+AI步态 scans_19700209_090911 scans_19700209_141527
 
 
   将采样节点有问题
@@ -258,8 +260,7 @@ LAN口：
 
 WALN口：
     1、时间戳融合pc2+slam算法上位机+AI步态
-    2、降采样&时间戳融合pc2+slam算法上位机+AI步态
-    3、全pc2+AI步态
+    3、全pc2+AI步态 scans_19700209_142658  scans_19700209_143842
 
 # 自探索
 ## explore算法
