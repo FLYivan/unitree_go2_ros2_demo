@@ -223,7 +223,7 @@ int main(int argc, char** argv)                   // 主函数
 
             sport_req.Move(req, cmd_vel.twist.linear.x, cmd_vel.twist.linear.y, cmd_vel.twist.angular.z);    // 发送运动请求
             pubGo2Request->publish(req);         // 发布运动请求
-calibrate_go2_imu
+
             state = 2;                           // 设置状态为2
         }
         else if (seconds >= 35 && seconds < 37){ // 35-37秒：停止运动
