@@ -3,6 +3,10 @@ from launch_ros.actions import Node
 from launch.substitutions import PathJoinSubstitution
 from launch_ros.substitutions import FindPackageShare
 
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from ament_index_python.packages import get_package_share_directory
+
 def generate_launch_description():
     # 获取包路径
     pkg_point_lio_hesai_lidar = FindPackageShare('point_lio_unilidar')
@@ -20,6 +24,15 @@ def generate_launch_description():
         'rviz_cfg',
         'point_lio_hesai_map.rviz'
     ])
+
+    # 雷达驱动launch文件
+    start_lidar_launch_file = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([
+            get_package_share_directory('hesai_ros_driver'),
+            '/launch/start.py'
+        ])
+    )
+
 
     # 雷达降采样节点
     pcl_downsample_node = Node(
@@ -97,6 +110,7 @@ def generate_launch_description():
 
     # 返回启动描述
     return LaunchDescription([
+        start_lidar_launch_file,
         # pcl_downsample_node,
         transform_node,
         mapping_node,
