@@ -6,11 +6,14 @@
 # 编译
 
   1、在 unitree_go2_ros2_function_pkg 目录下执行如下命令
+  
   2、colcon build
 
 # 设置环境变量
   将如下命令添加到.bashrc文件
+  
     source 安装目录/unitree_go2_ros2_demo/setup_laptop.sh
+    
   打开新终端
 
 # 运行
