@@ -131,15 +131,15 @@ def generate_launch_description():
         declare_use_sim_time_cmd,
   
         # start_L1_lidar_launch_file,     # 启动L1点云转2d激光文件
-        start_lidar_launch_file,        # 启动点云转扫描数据文件
+        # start_lidar_launch_file,        # 启动点云转扫描数据文件
         start_cus_tftree_node,
         start_async_slam_toolbox_node,  # slam-toolbox算法节点
-        start_rviz_node,
-        start_urdf_launch_file,         # urdf中各种静态tf关系
+        # start_rviz_node,
+        # start_urdf_launch_file,         # urdf中各种静态tf关系
         start_traject_node,             # 运动轨迹显示节点
 
 
-        start_sensor_sync_node,
+        # start_sensor_sync_node,
 
 
     ])
