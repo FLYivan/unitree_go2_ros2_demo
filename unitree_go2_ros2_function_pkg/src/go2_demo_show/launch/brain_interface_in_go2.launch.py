@@ -72,7 +72,7 @@ def generate_launch_description():
         start_camera_node,
         # start_rviz_node,
 
-        start_traject_launch_file,
+        # start_traject_launch_file,
 
     ])
 
