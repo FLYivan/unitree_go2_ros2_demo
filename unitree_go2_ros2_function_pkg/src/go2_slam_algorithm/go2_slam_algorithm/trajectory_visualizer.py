@@ -32,7 +32,7 @@ class TrajectoryVisualizer(Node):
             
         # Initialize trajectory marker
         self.trajectory = Marker()
-        self.trajectory.header.frame_id = "camera"
+        self.trajectory.header.frame_id = "odom_go2"
         self.trajectory.type = Marker.LINE_STRIP
         self.trajectory.action = Marker.ADD
         self.trajectory.scale.x = 0.05  # Line width
