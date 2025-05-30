@@ -192,7 +192,7 @@
         colcon build --symlink-install --packages-select point_lio_unilidar
         colcon build --packages-select point_lio_unilidar
 
-        colcon build --packages-select calibrate_imu
+        colcon build --packages-select go2_h264_repub go2_sport_api unitree_api unitree_go calibrate_imu
         colcon build --packages-select go2_lidar_processing
         colcon build --packages-select go2_cmd
 
@@ -228,7 +228,7 @@
 
     7、节点调试
         1）pc2上地图保存
-            scp unitree@192.168.123.18:/home/unitree/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/scans_19700209_143842.pcd /home/flyivan/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/
+            scp unitree@192.168.123.18:/home/unitree/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/scans_19700210_134658.pcd /home/flyivan/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/
 
         2）节点状态查看
 
