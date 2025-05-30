@@ -154,7 +154,7 @@ class SensorSyncNode(Node):
     def sync_callback(self, *args):             # *args可以接受任意数量的参数，打包成一个元组
         """处理同步后的传感器数据"""
         try:
-            self.get_logger().info('收到同步数据，准备处理...')
+            # self.get_logger().info('收到同步数据，准备处理...')
             
             # 获取当前ROS时间
             current_time = self.get_clock().now().to_msg()
@@ -165,9 +165,9 @@ class SensorSyncNode(Node):
                 msg.header.stamp = current_time
                 # 发布消息
                 self.topic_publishers[topic_type].publish(msg)
-                self.get_logger().info(f'{topic_type}消息时间戳: {msg.header.stamp.sec}.{msg.header.stamp.nanosec}')
+                # self.get_logger().info(f'{topic_type}消息时间戳: {msg.header.stamp.sec}.{msg.header.stamp.nanosec}')
             
-            self.get_logger().info('同步数据处理完成并发布')
+            # self.get_logger().info('同步数据处理完成并发布')
             
         except Exception as e:
             self.get_logger().error(f'处理同步数据时出错: {str(e)}')

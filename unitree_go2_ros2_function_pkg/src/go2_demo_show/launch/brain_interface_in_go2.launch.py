@@ -22,6 +22,12 @@ def generate_launch_description():
         'showcamera.rviz'
     )
 
+    rviz_file_with_traj = os.path.join(
+        get_package_share_directory('go2_camera_processing'),
+        'rviz',
+        'showcamera_with_traj.rviz'
+    )
+
     declare_use_sim_time_cmd = DeclareLaunchArgument(
         'use_sim_time',
         default_value='False',
@@ -53,7 +59,8 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             name='rviz2',
-            arguments=['-d', rviz_file],
+            # arguments=['-d', rviz_file_with_traj],              
+            arguments=['-d', rviz_file_with_traj],              # 需要启动激光雷达
             parameters=[{'use_sim_time': use_sim_time}],
             output='screen'
         )
@@ -68,7 +75,7 @@ def generate_launch_description():
 
         declare_use_sim_time_cmd,
 
-        # start_cmd_node,
+        start_cmd_node,
         start_camera_node,
         start_rviz_node,
 
