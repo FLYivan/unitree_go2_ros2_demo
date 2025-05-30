@@ -14,16 +14,12 @@ def generate_launch_description():
 
     slam_params_file = LaunchConfiguration('slam_params_file')
     use_sim_time = LaunchConfiguration('use_sim_time')
+    rviz_params_file = LaunchConfiguration('rviz_params_file')
 
     # 获取launch文件和定义地址
     bringup_dir = get_package_share_directory("go2_slam_algorithm")
 
-    # 获取rviz配置文件路径
-    rviz_file = os.path.join(
-        get_package_share_directory('go2_slam_algorithm'),
-        'rviz',
-        'dog_slam_simp.rviz'
-    )
+    
 
     sensor_switch_parameters={
         # 选择需要融合的传感器类型
@@ -49,6 +45,16 @@ def generate_launch_description():
         'use_sim_time',
         default_value='False',
         description='Use simulation (Gazebo) clock if true')
+    
+    # 获取rviz配置文件路径
+    declare_rviz_params_file_cmd = DeclareLaunchArgument(
+        'rviz_params_file',
+        default_value=os.path.join(
+        bringup_dir,
+        'rviz',
+        'dog_slam_simp.rviz'
+        ),
+        description='use slam rviz file')
 
     
     
@@ -109,7 +115,7 @@ def generate_launch_description():
             package='rviz2',
             executable='rviz2',
             name='rviz2',
-            arguments=['-d', rviz_file],
+            arguments=['-d', rviz_params_file],
             parameters=[{'use_sim_time': use_sim_time}],
             output='screen'
         )
@@ -129,8 +135,11 @@ def generate_launch_description():
         
         declare_slam_params_file_cmd,
         declare_use_sim_time_cmd,
+        declare_rviz_params_file_cmd,
   
         # start_L1_lidar_launch_file,     # 启动L1点云转2d激光文件
+
+
         start_lidar_launch_file,        # 启动点云转扫描数据文件
         start_cus_tftree_node,
         start_async_slam_toolbox_node,  # slam-toolbox算法节点
@@ -139,7 +148,7 @@ def generate_launch_description():
         start_traject_node,             # 运动轨迹显示节点
 
 
-        start_sensor_sync_node,
+        # start_sensor_sync_node,
 
 
     ])

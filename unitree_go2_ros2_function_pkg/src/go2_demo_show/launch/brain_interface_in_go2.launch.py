@@ -16,12 +16,6 @@ def generate_launch_description():
 
 
     # 获取rviz配置文件路径
-    rviz_file = os.path.join(
-        get_package_share_directory('go2_camera_processing'),
-        'rviz',
-        'showcamera.rviz'
-    )
-
     rviz_file_with_traj = os.path.join(
         get_package_share_directory('go2_camera_processing'),
         'rviz',
@@ -53,22 +47,15 @@ def generate_launch_description():
      
                          }]       
         )
-    
-    # RViz2节点
-    start_rviz_node =Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            # arguments=['-d', rviz_file_with_traj],              
-            arguments=['-d', rviz_file_with_traj],              # 需要启动激光雷达
-            parameters=[{'use_sim_time': use_sim_time}],
-            output='screen'
-        )
+
 
     # slam建图launch文件
     start_traject_launch_file = launch.actions.IncludeLaunchDescription(
         PythonLaunchDescriptionSource([get_package_share_directory(
             'go2_slam_algorithm'), '/launch', '/go2_slam_toolbox.launch.py']),
+             launch_arguments={
+            'rviz_params_file': rviz_file_with_traj
+            }.items()
     )	
 
     return LaunchDescription([
@@ -77,7 +64,7 @@ def generate_launch_description():
 
         start_cmd_node,
         start_camera_node,
-        start_rviz_node,
+
 
         start_traject_launch_file,
 
