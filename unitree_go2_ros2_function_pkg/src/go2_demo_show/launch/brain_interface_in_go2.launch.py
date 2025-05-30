@@ -68,11 +68,11 @@ def generate_launch_description():
 
         declare_use_sim_time_cmd,
 
-        start_cmd_node,
+        # start_cmd_node,
         start_camera_node,
-        # start_rviz_node,
+        start_rviz_node,
 
-        # start_traject_launch_file,
+        start_traject_launch_file,
 
     ])
 
