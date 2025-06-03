@@ -6,14 +6,9 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
-        - /Grid1
-        - /LaserScan1
         - /LaserScan1/Topic1
         - /RobotModel1/Description Topic1
-        - /TF1
         - /TF1/Frames1
-        - /Map1
-        - /Map1/Status1
       Splitter Ratio: 0.5
     Tree Height: 1286
   - Class: rviz_common/Selection
@@ -273,69 +268,69 @@ Visualization Manager:
       Frames:
         All Enabled: false
         FL_calf:
-          Value: true
+          Value: false
         FL_calflower:
-          Value: true
+          Value: false
         FL_calflower1:
-          Value: true
+          Value: false
         FL_foot:
-          Value: true
+          Value: false
         FL_hip:
-          Value: true
+          Value: false
         FL_thigh:
-          Value: true
+          Value: false
         FR_calf:
-          Value: true
+          Value: false
         FR_calflower:
-          Value: true
+          Value: false
         FR_calflower1:
-          Value: true
+          Value: false
         FR_foot:
-          Value: true
+          Value: false
         FR_hip:
-          Value: true
+          Value: false
         FR_thigh:
-          Value: true
+          Value: false
         Head_lower:
-          Value: true
+          Value: false
         Head_upper:
-          Value: true
+          Value: false
         RL_calf:
-          Value: true
+          Value: false
         RL_calflower:
-          Value: true
+          Value: false
         RL_calflower1:
-          Value: true
+          Value: false
         RL_foot:
-          Value: true
+          Value: false
         RL_hip:
-          Value: true
+          Value: false
         RL_thigh:
-          Value: true
+          Value: false
         RR_calf:
-          Value: true
+          Value: false
         RR_calflower:
-          Value: true
+          Value: false
         RR_calflower1:
-          Value: true
+          Value: false
         RR_foot:
-          Value: true
+          Value: false
         RR_hip:
-          Value: true
+          Value: false
         RR_thigh:
-          Value: true
+          Value: false
         base:
           Value: true
         camera_link:
-          Value: true
+          Value: false
         hesai_lidar:
-          Value: true
+          Value: false
         imu:
-          Value: true
+          Value: false
         l1_lidar:
-          Value: true
+          Value: false
         map:
-          Value: true
+          Value: false
         odom_go2:
           Value: true
       Marker Scale: 1
@@ -413,6 +408,19 @@ Visualization Manager:
         Value: /map_updates
       Use Timestamp: false
       Value: true
+    - Class: rviz_default_plugins/Marker
+      Enabled: true
+      Name: Marker
+      Namespaces:
+        "": true
+      Topic:
+        Depth: 5
+        Durability Policy: Volatile
+        Filter size: 10
+        History Policy: Keep Last
+        Reliability Policy: Reliable
+        Value: /robot_trajectory
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -459,25 +467,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 5.35154914855957
+      Distance: 2.626614570617676
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.4582543969154358
-        Y: 0.706839382648468
-        Z: 1.375837802886963
+        X: 0.14433656632900238
+        Y: -0.5359243750572205
+        Z: 1.0845532417297363
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.244796633720398
+      Pitch: 1.2547966241836548
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.0817539244890213
+      Yaw: 6.254940032958984
     Saved: ~
 Window Geometry:
   Displays:

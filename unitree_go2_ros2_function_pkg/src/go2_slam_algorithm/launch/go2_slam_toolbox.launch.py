@@ -139,7 +139,7 @@ def generate_launch_description():
         start_traject_node,             # 运动轨迹显示节点
 
 
-        start_sensor_sync_node,
+        # start_sensor_sync_node,
 
 
     ])
