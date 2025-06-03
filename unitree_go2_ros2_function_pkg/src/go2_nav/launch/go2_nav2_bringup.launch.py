@@ -83,7 +83,7 @@ def generate_launch_description():
 
 
         launch_slam,
-        launch_urdf,
+        # launch_urdf,
         node_go2Move,
         nav2_bringup,
         node_rviz,

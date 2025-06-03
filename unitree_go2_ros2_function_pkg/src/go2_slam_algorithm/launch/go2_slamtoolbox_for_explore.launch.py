@@ -165,7 +165,7 @@ def generate_launch_description():
         start_lidar_launch_file,          # 启动激光frame_id修改launch文件
         start_cus_tftree_node,
         start_async_slam_toolbox_node,    # slam-toolbox算法节点
-        start_urdf_launch_file,           # urdf中各种静态tf关系
+        # start_urdf_launch_file,           # urdf中各种静态tf关系
 
         # start_map_saver_node,           # 自动保存地图
 

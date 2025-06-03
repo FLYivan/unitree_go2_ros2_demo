@@ -135,7 +135,7 @@ def generate_launch_description():
         start_cus_tftree_node,
         start_async_slam_toolbox_node,  # slam-toolbox算法节点
         start_rviz_node,
-        start_urdf_launch_file,         # urdf中各种静态tf关系
+        # start_urdf_launch_file,         # urdf中各种静态tf关系
         start_traject_node,             # 运动轨迹显示节点
 
 
