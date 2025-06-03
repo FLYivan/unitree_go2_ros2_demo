@@ -6,7 +6,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from launch.actions import DeclareLaunchArgument
 from launch.substitutions import LaunchConfiguration
-from launch_ros.descriptions import ParameterFile
+
 from nav2_common.launch import HasNodeParams, RewrittenYaml
 
 def generate_launch_description():
@@ -29,14 +29,6 @@ def generate_launch_description():
     # Create our own temporary YAML files that include substitutions
     param_substitutions = {
         'use_sim_time': use_sim_time}
-
-    configured_params = ParameterFile(
-        RewrittenYaml(
-            source_file=nav2_params_file ,
-            root_key=namespace,
-            param_rewrites=param_substitutions,
-            convert_types=True),
-        allow_substs=True)
 
 
     # 声明slam-toolbox启动时，参数文件的默认地址
@@ -77,14 +69,7 @@ def generate_launch_description():
 
 
     # 两个衔接nav2的节点
-    start_map_saver_server_cmd = Node(
-            package='nav2_map_server',
-            executable='map_saver_server',
-            output='screen',
-            respawn=use_respawn,
-            respawn_delay=2.0,
-            arguments=['--ros-args', '--log-level', log_level],
-            parameters=[configured_params])
+
 
     start_lifecycle_manager_cmd = Node(
             package='nav2_lifecycle_manager',
