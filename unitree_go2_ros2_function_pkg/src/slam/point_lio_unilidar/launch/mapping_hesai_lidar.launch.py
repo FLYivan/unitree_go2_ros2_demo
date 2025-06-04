@@ -45,8 +45,8 @@ def generate_launch_description():
                 'init_map_size': 10,              # 初始地图大小
                 'point_filter_num': 1,            # 点云滤波数量，可选4或3
                 'space_down_sample': True,        # 是否进行空间降采样
-                'filter_size_surf': 0.5,          # 表面特征点滤波大小，可选0.5,0.3,0.2,0.15,0.1
-                'filter_size_map': 0.5,           # 地图点云滤波大小，可选0.5,0.3,0.15,0.1
+                'filter_size_surf': 0.1,          # 表面特征点滤波大小，可选0.5,0.3,0.2,0.15,0.1
+                'filter_size_map': 0.1,           # 地图点云滤波大小，可选0.5,0.3,0.15,0.1
                 'cube_side_length': 1000.0,       # 体素边长，可选2000
                 'runtime_pos_log_enable': False   # 是否启用运行时位置日志记录
             }
@@ -90,7 +90,7 @@ def generate_launch_description():
 
     # 返回启动描述
     return LaunchDescription([
-        transform_node,
+        # transform_node,
         mapping_node,
         start_rviz_node,
         transform_node_1,
