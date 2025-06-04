@@ -5,8 +5,8 @@
         # use_imu_as_input: true            # 使用IMU作为输入
         runtime_pos_log_enable: false      # 运行时位置日志启用
 
-        filter_size_surf_min: 0.1         # 表面最小滤波尺寸
-        filter_size_map_min: 0.1         # 地图最小滤波尺寸
+        # filter_size_surf_min: 0.1         # 表面最小滤波尺寸
+        # filter_size_map_min: 0.1         # 地图最小滤波尺寸
 
         common:
             lid_topic: "/hesai_go2/transformed_cloud"  # 激光雷达话题                     （要调整）

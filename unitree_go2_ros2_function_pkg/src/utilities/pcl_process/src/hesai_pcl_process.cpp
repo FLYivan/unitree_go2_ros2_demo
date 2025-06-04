@@ -9,9 +9,9 @@ namespace pcl_main // PCL主命名空间
         : Node("pcl_study") // 初始化ROS2节点名称为pcl_study
     {
         // 初始化体素滤波参数
-        voxel_size_x_ = 0.02f; // 设置X轴体素大小为0.05
-        voxel_size_y_ = 0.02f; // 设置Y轴体素大小为0.05
-        voxel_size_z_ = 0.02f; // 设置Z轴体素大小为0.05
+        voxel_size_x_ = 0.1f; // 设置X轴体素大小为0.05
+        voxel_size_y_ = 0.1f; // 设置Y轴体素大小为0.05
+        voxel_size_z_ = 0.1f; // 设置Z轴体素大小为0.05
 
         pub_res = create_publisher<sensor_msgs::msg::PointCloud2>("cloud_result", 50); // 创建点云结果发布器
 
@@ -26,6 +26,10 @@ namespace pcl_main // PCL主命名空间
             pcl::VoxelGrid<hesai_ros::PointXYZIRT> sor; // 模板类实例化，创建体素滤波对象
             sor.setInputCloud(cloud); // 设置输入点云
             sor.setLeafSize(voxel_size_x_, voxel_size_y_, voxel_size_z_); // 设置体素大小
+            
+            // 设置对所有字段进行下采样，这样可以保留时间戳信息
+            sor.setDownsampleAllData(true);  // 对所有字段进行下采样
+            
             sor.filter(*cloud_filtered); // 执行滤波操作
 
             sensor_msgs::msg::PointCloud2 ros2_msg; // 创建ROS2点云消息
@@ -46,7 +50,7 @@ namespace pcl_main // PCL主命名空间
     void PclStudy::publish_result(sensor_msgs::msg::PointCloud2 res_msg) // 发布结果的成员函数
     {
         // res_msg.header.frame_id = "id"; // 设置消息帧ID
-        res_msg.header.stamp = now(); // 设置时间戳
+        // res_msg.header.stamp = now(); // 设置时间戳，注释掉以保留原始时间戳
         pub_res->publish(res_msg); // 发布点云处理结果
     }
 }
