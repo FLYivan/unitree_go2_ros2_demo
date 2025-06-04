@@ -18,12 +18,6 @@ def generate_launch_description():
         'hesai_lidar.yaml'
     ])
 
-    # 获取rviz配置文件路径
-    rviz_file = PathJoinSubstitution([
-        pkg_point_lio_hesai_lidar,
-        'rviz_cfg',
-        'point_lio_hesai_map.rviz'
-    ])
 
     # 雷达驱动launch文件
     start_lidar_launch_file = IncludeLaunchDescription(
@@ -34,13 +28,6 @@ def generate_launch_description():
     )
 
 
-    # 雷达降采样节点
-    pcl_downsample_node = Node(
-        package='pcl_process',
-        executable='pcl_study',
-        name='pcl_study',
-        output='screen'
-    )
 
     # 传感器矫正节点
     transform_node = Node(
@@ -49,6 +36,24 @@ def generate_launch_description():
         name='transform_hesai_on_pc2',
         output='screen'
     )
+
+
+    # 点云切割节点
+    pointclouds_cut_node = Node(
+        package='transform_sensors',
+        executable='transform_hesai_process',
+        name='transform_hesai_process',
+        output='screen'
+    )
+
+    # 带点云切割的传感器矫正节点
+    sensor_process_node = Node(
+        package='transform_sensors',
+        executable='sensor_fusion_on_pc2',
+        name='sensor_fusion_on_pc2',
+        output='screen'
+    )
+
 
     # 激光雷达建图节点
     mapping_node = Node(
@@ -98,23 +103,16 @@ def generate_launch_description():
 
 
 
-    # RViz2节点
-    start_rviz_node =Node(
-            package='rviz2',
-            executable='rviz2',
-            name='rviz2',
-            arguments=['-d', rviz_file],
-            # parameters=[{'use_sim_time': use_sim_time}],
-            output='screen'
-        )
-
     # 返回启动描述
     return LaunchDescription([
-        start_lidar_launch_file,
-        # pcl_downsample_node,
-        transform_node,
+        # start_lidar_launch_file,
+        # transform_node,             # 二选一
+
+        pointclouds_cut_node,       # 二选一
+        sensor_process_node,
+
         mapping_node,
-        # start_rviz_node,
+
         transform_node_1,
         transform_node_2,
     ])

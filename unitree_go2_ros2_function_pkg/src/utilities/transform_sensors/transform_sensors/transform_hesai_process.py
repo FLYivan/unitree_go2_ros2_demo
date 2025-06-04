@@ -13,22 +13,16 @@ from transforms3d.quaternions import quat2mat  # 导入四元数到矩阵转换�
 
 from unitree_go.msg import SportModeState
 
-from copy import deepcopy  # 导入深拷贝工具
 import numpy as np  # 导入numpy库
-import yaml  # 导入YAML解析库
 
-import os  # 导入操作系统接口
 
 class Repuber(Node):  # 定义传感器转换节点类
     def __init__(self):  # 初始化方法
-        super().__init__('transform_hesai_only')  # 调用父类初始化方法
+        super().__init__('transform_hesai_process')  # 调用父类初始化方法
 
-        # self.imu_sub = self.create_subscription(SportModeState, '/sportmodestate', self.imu_callback, 50)  # 创建IMU订阅者
+
         self.cloud_sub = self.create_subscription(PointCloud2, '/lidar_points', self.cloud_callback, 50)  # 创建点云订阅者
-        # self.cloud_sub = self.create_subscription(PointCloud2, '/cloud_result', self.cloud_callback, 50)  # 创建点云订阅者(降采样)
-       
-        # self.imu_raw_pub = self.create_publisher(Imu, '/hesai_go2/transformed_raw_imu', 50)  # 创建原始IMU发布者
-        # self.imu_pub = self.create_publisher(Imu, '/hesai_go2/transformed_imu', 50)  # 创建转换后IMU发布者
+
         self.cloud_pub = self.create_publisher(PointCloud2, '/lidar_after_process', 50)  # 创建转换后点云发布者
 
         self.imu_stationary_list = []  # 初始化IMU静止列表
@@ -40,36 +34,7 @@ class Repuber(Node):  # 定义传感器转换节点类
         
         self.cam_offset = 0.2908  # 设置相机偏移量
 
-        # # 加载标定数据
-        # calib_data = calib_data = {  # 设置默认标定数据
-        #         'acc_bias_x': 0.0,  # 加速度X轴偏差
-        #         'acc_bias_y': 0.0,  # 加速度Y轴偏差
-        #         'acc_bias_z': 0.0,  # 加速度Z轴偏差
-        #         'ang_bias_x': 0.0,  # 角速度X轴偏差
-        #         'ang_bias_y': 0.0,  # 角速度Y轴偏差
-        #         'ang_bias_z': 0.0,  # 角速度Z轴偏差
-        #         'ang_z2x_proj': 0.15,  # Z轴到X轴投影
-        #         'ang_z2y_proj': -0.28  # Z轴到Y轴投影
-        #     }
-        # try:  # 尝试加载标定文件
-        #     home_path = os.path.expanduser('~')  # 获取用户主目录
-        #     calib_file_path = os.path.join(home_path, '桌面/go2_imu_calib_data.yaml')  # 构建标定文件路径
-        #     calib_file = open(calib_file_path, 'r')  # 打开标定文件
-        #     calib_data = yaml.load(calib_file, Loader=yaml.FullLoader)  # 加载标定数据
-        #     print("go2_imu_calib.yaml loaded")  # 打印加载成功信息
-        #     calib_file.close()  # 关闭文件
-        # except:  # 加载失败时使用默认值
-        #     print("go2_imu_calib.yaml not found, using defualt values")  # 打印使用默认值信息
-            
-        # self.acc_bias_x = calib_data['acc_bias_x']  # 设置加速度X轴偏差
-        # self.acc_bias_y = calib_data['acc_bias_y']  # 设置加速度Y轴偏差
-        # self.acc_bias_z = calib_data['acc_bias_z']  # 设置加速度Z轴偏差
-        # self.ang_bias_x = calib_data['ang_bias_x']  # 设置角速度X轴偏差
-        # self.ang_bias_y = calib_data['ang_bias_y']  # 设置角速度Y轴偏差
-        # self.ang_bias_z = calib_data['ang_bias_z']  # 设置角速度Z轴偏差
-        # self.ang_z2x_proj = calib_data['ang_z2x_proj']  # 设置Z轴到X轴投影
-        # self.ang_z2y_proj = calib_data['ang_z2y_proj']  # 设置Z轴到Y轴投影
-                
+
         self.body2cloud_trans = TransformStamped()  # 创建机体到点云的变换
         self.body2cloud_trans.header.stamp = self.get_clock().now().to_msg()  # 设置时间戳
         self.body2cloud_trans.header.frame_id = "body"  # 设置父坐标系
@@ -170,88 +135,7 @@ class Repuber(Node):  # 定义传感器转换节点类
         # raw_cloud.is_dense = data.is_dense  # 设置密度标志
 
         # self.cloud_pub.publish(raw_cloud)  # 发布转换后的点云
-            
 
-    def imu_callback(self, data):  # IMU回调函数   
-        start_time = self.get_clock().now()
-        
-
-        # 把宇树时间戳的TimeSpec格式转化成ros2的Time格式
-        ros_time = Time(
-            seconds=data.stamp.sec,
-            nanoseconds=data.stamp.nanosec
-        )
-
-        if not self.go2imu_time_stamp_offset_set:  # 如果时间戳偏移未设置
-            self.go2imu_time_stamp_offset = self.get_clock().now().nanoseconds - ros_time.nanoseconds  # 计算时间戳偏移
-            self.go2imu_time_stamp_offset_set = True  # 标记时间戳偏移已设置
-
-
-        transformed_orientation = np.zeros(4)  # 创建旋转四元数
-        transformed_orientation[0] = float(data.imu_state.quaternion[1])  # 设置X分量
-        transformed_orientation[1] = float(data.imu_state.quaternion[2])  # 设置Y分量
-        transformed_orientation[2] = float(data.imu_state.quaternion[3])  # 设置Z分量
-        transformed_orientation[3] = float(data.imu_state.quaternion[0])  # 设置W分量
-
-        
-        x = float(data.imu_state.gyroscope[0])  # 获取角速度X分量  
-        y = float(data.imu_state.gyroscope[1])  # 获取角速度Y分量
-        z = float(data.imu_state.gyroscope[2])  # 获取角速度Z分量
-
-        x2 = x - self.ang_bias_x  # 应用X轴偏差
-        y2 = y - self.ang_bias_y  # 应用Y轴偏差
-        z2 = z - self.ang_bias_z  # 应用Z轴偏差
-        
-        x_comp_rate = self.ang_z2x_proj  # 获取Z到X投影率
-        y_comp_rate = self.ang_z2y_proj  # 获取Z到Y投影率
-        
-        x2 += x_comp_rate * z2  # 应用Z到X投影
-        y2 += y_comp_rate * z2  # 应用Z到Y投影
-        
-        transformed_angular_velocity = Vector3()  # 创建角速度向量
-        transformed_angular_velocity.x = x2  # 设置X角速度
-        transformed_angular_velocity.y = y2  # 设置Y角速度
-        transformed_angular_velocity.z = z2  # 设置Z角速度
-        
-        acc_x = float(data.imu_state.accelerometer[0])  # 获取线加速度X分量   
-        acc_y = float(data.imu_state.accelerometer[1])  # 获取线加速度Y分量
-        acc_z = float(data.imu_state.accelerometer[2])  # 获取线加速度Z分量
-        
-        transformed_linear_acceleration = Vector3()  # 创建线加速度向量
-        transformed_linear_acceleration.x = acc_x - self.acc_bias_x  # 设置X加速度
-        transformed_linear_acceleration.y = acc_y - self.acc_bias_y  # 设置Y加速度
-        transformed_linear_acceleration.z = acc_z - self.acc_bias_z  # 设置Z加速度
-        
-        transformed_imu = Imu()  # 创建IMU消息
-        transformed_imu.header.stamp = ros_time.to_msg()  # 设置时间戳
-        transformed_imu.header.frame_id = 'body'  # 设置坐标系
-        transformed_imu.orientation.x = transformed_orientation[0]  # 设置姿态X分量
-        transformed_imu.orientation.y = transformed_orientation[1]  # 设置姿态Y分量
-        transformed_imu.orientation.z = transformed_orientation[2]  # 设置姿态Z分量
-        transformed_imu.orientation.w = transformed_orientation[3]  # 设置姿态W分量
-        transformed_imu.angular_velocity = transformed_angular_velocity  # 设置角速度
-        transformed_imu.linear_acceleration = transformed_linear_acceleration  # 设置线加速度
-        
-        # 应用时间偏移到转换后的IMU消息
-        # 新时间戳 = 原始时间戳 + 时间偏移量
-        transformed_imu.header.stamp = Time(nanoseconds=Time.from_msg(transformed_imu.header.stamp).nanoseconds + self.go2imu_time_stamp_offset).to_msg()  # 更新时间戳
-        
-        self.imu_raw_pub.publish(transformed_imu)  # 发布原始IMU数据
-        
-        transformed_imu.orientation.x = 0.0  # 重置姿态X分量
-        transformed_imu.orientation.y = 0.0  # 重置姿态Y分量
-        transformed_imu.orientation.z = 0.0  # 重置姿态Z分量
-        transformed_imu.orientation.w = 1.0  # 重置姿态W分量
-        
-        transformed_imu.linear_acceleration.x = 0.0  # 重置加速度X分量
-        transformed_imu.linear_acceleration.y = 0.0  # 重置加速度Y分量
-        transformed_imu.linear_acceleration.z = 0.0  # 重置加速度Z分量
-        
-        self.imu_pub.publish(transformed_imu)  # 发布转换后的IMU数据
-
-        end_time = self.get_clock().now()
-        processing_time = (end_time - start_time).nanoseconds / 1e9
-        # print(f"处理时间: {processing_time} 秒")
 
 def main(args=None):  # 主函数
     rclpy.init(args=args)  # 初始化ROS2

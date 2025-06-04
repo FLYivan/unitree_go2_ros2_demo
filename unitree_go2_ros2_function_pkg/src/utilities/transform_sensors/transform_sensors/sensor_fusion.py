@@ -21,7 +21,7 @@ import os  # 导入操作系统接口
 
 class Repuber(Node):  # 定义传感器转换节点类
     def __init__(self):  # 初始化方法
-        super().__init__('transform_imu_only')  # 调用父类初始化方法
+        super().__init__('sensor_fusion')  # 调用父类初始化方法
         # 创建匹配的QoS配置
         matching_imu_qos = QoSProfile(
             depth=1,
@@ -133,41 +133,6 @@ class Repuber(Node):  # 定义传感器转换节点类
             self.hesai_time_stamp_offset = self.get_clock().now().nanoseconds - Time.from_msg(data.header.stamp).nanoseconds  # 计算时间戳偏移
             self.hesai_time_stamp_offset_set = True  # 标记时间戳偏移已设置
                 
-        # # 点云做切割处理        
-        # cloud_arr = pc2.read_points_list(data)  # 读取点云数据
-        # points = np.array(cloud_arr)  # 转换为numpy数组
-
-        # transform = self.body2cloud_trans.transform  # 获取变换信息
-        # mat = quat2mat(np.array([transform.rotation.w, transform.rotation.x, transform.rotation.y, transform.rotation.z]))  # 四元数转旋转矩阵
-        # translation = np.array([transform.translation.x, transform.translation.y, transform.translation.z])  # 获取平移向量
-        
-        # transformed_points = points  # 初始化变换后的点
-        # transformed_points[:, 0:3] = points[:, 0:3] @ mat.T + translation  # 应用旋转和平移
-        # transformed_points[:, 2] += self.cam_offset  # 应用相机偏移
-        # i = 0  # 初始化计数器
-        # remove_list = []  # 初始化移除列表
-        # transformed_points = transformed_points.tolist()  # 转换为列表
-
-        # for i in range(len(transformed_points)):  # 遍历所有点
-        #     transformed_points[i][4] = int(transformed_points[i][4])  # 转换点云线数值为整数
-        #     if self.is_in_filter_box(transformed_points[i]):  # 检查点是否在过滤框内
-        #         remove_list.append(i)  # 添加到移除列表
-
-        # remove_list.sort(reverse=True)  # 反向排序移除列表
-
-        # for id_to_remove in remove_list:  # 遍历移除列表
-        #     del transformed_points[id_to_remove]  # 移除点
-        
-        # # 应用时间偏移到转换后的点云消息
-        # # 新时间戳 = 原始时间戳 + 时间偏移量
-        # elevated_cloud = pc2.create_cloud(data.header, data.fields, transformed_points)  # 创建新的点云消息
-        # elevated_cloud.header.stamp = Time(nanoseconds=Time.from_msg(elevated_cloud.header.stamp).nanoseconds + self.hesai_time_stamp_offset).to_msg()  # 更新时间戳
-        # elevated_cloud.header.frame_id = "body"  # 设置坐标系
-        # elevated_cloud.is_dense = data.is_dense  # 设置密度标志
-
-        # self.cloud_pub.publish(elevated_cloud)  # 发布转换后的点云
-
-
 
         # 仅做时间同步，不做其他处理
         raw_cloud = data  # 创建点云消息

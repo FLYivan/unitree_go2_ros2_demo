@@ -30,6 +30,28 @@ def generate_launch_description():
         output='screen'
     )
 
+
+    # 点云切割节点
+    pointclouds_cut_node = Node(
+        package='transform_sensors',
+        executable='transform_hesai_process',
+        name='transform_hesai_process',
+        output='screen'
+    )
+
+    # 带点云切割的传感器矫正节点
+    sensor_process_node = Node(
+        package='transform_sensors',
+        executable='sensor_fusion',
+        name='sensor_fusion',
+        output='screen'
+    )
+
+
+
+
+
+
     # 激光雷达建图节点
     mapping_node = Node(
         package='point_lio_unilidar',
@@ -90,7 +112,11 @@ def generate_launch_description():
 
     # 返回启动描述
     return LaunchDescription([
-        # transform_node,
+        # transform_node,             # 二选一
+
+        pointclouds_cut_node,       # 二选一
+        sensor_process_node,
+
         mapping_node,
         start_rviz_node,
         transform_node_1,
