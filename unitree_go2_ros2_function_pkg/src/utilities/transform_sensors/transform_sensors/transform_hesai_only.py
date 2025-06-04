@@ -22,20 +22,14 @@ import os  # 导入操作系统接口
 class Repuber(Node):  # 定义传感器转换节点类
     def __init__(self):  # 初始化方法
         super().__init__('transform_hesai_only')  # 调用父类初始化方法
-        # 创建匹配的QoS配置
-        matching_imu_qos = QoSProfile(
-            depth=1,
-            reliability=QoSReliabilityPolicy.RELIABLE,  # 修改为RELIABLE以匹配发布者
-            durability=QoSDurabilityPolicy.VOLATILE,
-            history=QoSHistoryPolicy.KEEP_LAST
-)
+
         # self.imu_sub = self.create_subscription(SportModeState, '/sportmodestate', self.imu_callback, 50)  # 创建IMU订阅者
         self.cloud_sub = self.create_subscription(PointCloud2, '/lidar_points', self.cloud_callback, 50)  # 创建点云订阅者
         # self.cloud_sub = self.create_subscription(PointCloud2, '/cloud_result', self.cloud_callback, 50)  # 创建点云订阅者(降采样)
        
         # self.imu_raw_pub = self.create_publisher(Imu, '/hesai_go2/transformed_raw_imu', 50)  # 创建原始IMU发布者
         # self.imu_pub = self.create_publisher(Imu, '/hesai_go2/transformed_imu', 50)  # 创建转换后IMU发布者
-        self.cloud_pub = self.create_publisher(PointCloud2, '/hesai_go2/transformed_cloud', 50)  # 创建转换后点云发布者
+        self.cloud_pub = self.create_publisher(PointCloud2, '/lidar_after_process', 50)  # 创建转换后点云发布者
 
         self.imu_stationary_list = []  # 初始化IMU静止列表
         
@@ -46,35 +40,35 @@ class Repuber(Node):  # 定义传感器转换节点类
         
         self.cam_offset = 0.2908  # 设置相机偏移量
 
-        # 加载标定数据
-        calib_data = calib_data = {  # 设置默认标定数据
-                'acc_bias_x': 0.0,  # 加速度X轴偏差
-                'acc_bias_y': 0.0,  # 加速度Y轴偏差
-                'acc_bias_z': 0.0,  # 加速度Z轴偏差
-                'ang_bias_x': 0.0,  # 角速度X轴偏差
-                'ang_bias_y': 0.0,  # 角速度Y轴偏差
-                'ang_bias_z': 0.0,  # 角速度Z轴偏差
-                'ang_z2x_proj': 0.15,  # Z轴到X轴投影
-                'ang_z2y_proj': -0.28  # Z轴到Y轴投影
-            }
-        try:  # 尝试加载标定文件
-            home_path = os.path.expanduser('~')  # 获取用户主目录
-            calib_file_path = os.path.join(home_path, '桌面/go2_imu_calib_data.yaml')  # 构建标定文件路径
-            calib_file = open(calib_file_path, 'r')  # 打开标定文件
-            calib_data = yaml.load(calib_file, Loader=yaml.FullLoader)  # 加载标定数据
-            print("go2_imu_calib.yaml loaded")  # 打印加载成功信息
-            calib_file.close()  # 关闭文件
-        except:  # 加载失败时使用默认值
-            print("go2_imu_calib.yaml not found, using defualt values")  # 打印使用默认值信息
+        # # 加载标定数据
+        # calib_data = calib_data = {  # 设置默认标定数据
+        #         'acc_bias_x': 0.0,  # 加速度X轴偏差
+        #         'acc_bias_y': 0.0,  # 加速度Y轴偏差
+        #         'acc_bias_z': 0.0,  # 加速度Z轴偏差
+        #         'ang_bias_x': 0.0,  # 角速度X轴偏差
+        #         'ang_bias_y': 0.0,  # 角速度Y轴偏差
+        #         'ang_bias_z': 0.0,  # 角速度Z轴偏差
+        #         'ang_z2x_proj': 0.15,  # Z轴到X轴投影
+        #         'ang_z2y_proj': -0.28  # Z轴到Y轴投影
+        #     }
+        # try:  # 尝试加载标定文件
+        #     home_path = os.path.expanduser('~')  # 获取用户主目录
+        #     calib_file_path = os.path.join(home_path, '桌面/go2_imu_calib_data.yaml')  # 构建标定文件路径
+        #     calib_file = open(calib_file_path, 'r')  # 打开标定文件
+        #     calib_data = yaml.load(calib_file, Loader=yaml.FullLoader)  # 加载标定数据
+        #     print("go2_imu_calib.yaml loaded")  # 打印加载成功信息
+        #     calib_file.close()  # 关闭文件
+        # except:  # 加载失败时使用默认值
+        #     print("go2_imu_calib.yaml not found, using defualt values")  # 打印使用默认值信息
             
-        self.acc_bias_x = calib_data['acc_bias_x']  # 设置加速度X轴偏差
-        self.acc_bias_y = calib_data['acc_bias_y']  # 设置加速度Y轴偏差
-        self.acc_bias_z = calib_data['acc_bias_z']  # 设置加速度Z轴偏差
-        self.ang_bias_x = calib_data['ang_bias_x']  # 设置角速度X轴偏差
-        self.ang_bias_y = calib_data['ang_bias_y']  # 设置角速度Y轴偏差
-        self.ang_bias_z = calib_data['ang_bias_z']  # 设置角速度Z轴偏差
-        self.ang_z2x_proj = calib_data['ang_z2x_proj']  # 设置Z轴到X轴投影
-        self.ang_z2y_proj = calib_data['ang_z2y_proj']  # 设置Z轴到Y轴投影
+        # self.acc_bias_x = calib_data['acc_bias_x']  # 设置加速度X轴偏差
+        # self.acc_bias_y = calib_data['acc_bias_y']  # 设置加速度Y轴偏差
+        # self.acc_bias_z = calib_data['acc_bias_z']  # 设置加速度Z轴偏差
+        # self.ang_bias_x = calib_data['ang_bias_x']  # 设置角速度X轴偏差
+        # self.ang_bias_y = calib_data['ang_bias_y']  # 设置角速度Y轴偏差
+        # self.ang_bias_z = calib_data['ang_bias_z']  # 设置角速度Z轴偏差
+        # self.ang_z2x_proj = calib_data['ang_z2x_proj']  # 设置Z轴到X轴投影
+        # self.ang_z2y_proj = calib_data['ang_z2y_proj']  # 设置Z轴到Y轴投影
                 
         self.body2cloud_trans = TransformStamped()  # 创建机体到点云的变换
         self.body2cloud_trans.header.stamp = self.get_clock().now().to_msg()  # 设置时间戳
