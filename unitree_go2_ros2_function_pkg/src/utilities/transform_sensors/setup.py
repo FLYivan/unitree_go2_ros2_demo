@@ -24,6 +24,10 @@ setup(
             'transform_hesai = transform_sensors.transform_hesai:main',
             'transform_hesai_on_pc2 = transform_sensors.transform_hesai_on_pc2:main',
 
+
+            'transform_hesai_only = transform_sensors.transform_hesai_only:main',
+            'transform_imu_only = transform_sensors.transform_imu_only:main',
+
         ],
     },
 )
