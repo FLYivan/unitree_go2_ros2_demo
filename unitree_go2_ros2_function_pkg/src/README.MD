@@ -219,9 +219,6 @@
     5、传感器融合节点
         ros2 run transform_sensors transform_hesai
 
-        ros2 run transform_sensors transform_hesai_only
-        ros2 run transform_sensors transform_imu_only
-
     6、point-lio启动
         pc2执行：
             ros2 launch point_lio_unilidar mapping_hesai_on_go2.launch.py
