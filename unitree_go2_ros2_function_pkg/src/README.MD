@@ -219,6 +219,10 @@
     5、传感器融合节点
         ros2 run transform_sensors transform_hesai
 
+        ros2 run transform_sensors transform_hesai_process
+        ros2 run transform_sensors sensor_fusion
+
+
     6、point-lio启动
         pc2执行：
             ros2 launch point_lio_unilidar mapping_hesai_on_go2.launch.py
@@ -228,7 +232,7 @@
 
     7、节点调试
         1）pc2上地图保存
-            scp unitree@192.168.123.18:/home/unitree/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/scans_19700210_134658.pcd /home/flyivan/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/
+            scp unitree@192.168.123.18:/home/unitree/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/scans_19700218_085106.pcd /home/flyivan/dog_robot/unitree_go2_ros2_demo/unitree_go2_ros2_function_pkg/src/slam/point_lio_unilidar/PCD/
 
         2）节点状态查看
 

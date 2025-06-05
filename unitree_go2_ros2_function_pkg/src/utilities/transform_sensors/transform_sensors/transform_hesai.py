@@ -31,7 +31,9 @@ class Repuber(Node):  # 定义传感器转换节点类
 )
         self.imu_sub = self.create_subscription(SportModeState, '/sportmodestate', self.imu_callback, 50)  # 创建IMU订阅者
         self.cloud_sub = self.create_subscription(PointCloud2, '/lidar_points', self.cloud_callback, 50)  # 创建点云订阅者
-       
+
+        # self.cloud_sub = self.create_subscription(PointCloud2, '/cloud_result', self.cloud_callback, 50)  # 创建降采样点云订阅者
+
         self.imu_raw_pub = self.create_publisher(Imu, '/hesai_go2/transformed_raw_imu', 50)  # 创建原始IMU发布者
         self.imu_pub = self.create_publisher(Imu, '/hesai_go2/transformed_imu', 50)  # 创建转换后IMU发布者
         self.cloud_pub = self.create_publisher(PointCloud2, '/hesai_go2/transformed_cloud', 50)  # 创建转换后点云发布者

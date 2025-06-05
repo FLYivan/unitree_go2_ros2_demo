@@ -21,7 +21,8 @@ class Repuber(Node):  # 定义传感器转换节点类
         super().__init__('transform_hesai_process')  # 调用父类初始化方法
 
 
-        self.cloud_sub = self.create_subscription(PointCloud2, '/lidar_points', self.cloud_callback, 50)  # 创建点云订阅者
+        # self.cloud_sub = self.create_subscription(PointCloud2, '/lidar_points', self.cloud_callback, 50)  # 创建点云订阅者
+        self.cloud_sub = self.create_subscription(PointCloud2, '/cloud_result', self.cloud_callback, 50)  # 创建降采样点云订阅者
 
         self.cloud_pub = self.create_publisher(PointCloud2, '/lidar_after_process', 50)  # 创建转换后点云发布者
 
