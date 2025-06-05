@@ -13,7 +13,7 @@ export CYCLONEDDS_URI='<CycloneDDS><Domain><General><Interfaces>
                             <NetworkInterface name="enp0s31f6" priority="default" multicast="default" />
                         </Interfaces></General></Domain></CycloneDDS>'
 
-# # WLAN
+# # # WLAN
 # export CYCLONEDDS_URI='<CycloneDDS><Domain><General><Interfaces>
 #                             <NetworkInterface name="wlp0s20f3" priority="default" multicast="default" />
 #                         </Interfaces></General></Domain></CycloneDDS>'

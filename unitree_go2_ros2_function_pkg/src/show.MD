@@ -5,21 +5,28 @@ ctrl+shirt+v 预览
 测试通信192.168.123.18
 
 ## 指令接收情况
-        colcon build --packages-select go2_ros2_basic
-        ros2 run go2_ros2_basic sport_demo
+        colcon build --packages-select go2_demo_show
+        ros2 run go2_demo_show brain_interface_cmd
 
 ## 摄像头拉流
         1）需要先参考CMU方法，安装组件
         2）需要opencv打开gstreamer开关
         3）用rviz2看
 
-        ros2 run go2_camera_processing video_stream --ros-args -p multicast_iface:=wlp0s20f3
+        colcon build --packages-select go2_camera_processing
+
+        ros2 run go2_camera_processing video_stream --ros-args -p multicast_iface:=enp0s31f6
         ros2 run go2_camera_processing video_gui
 
         直接通过拉流插件看视频：
             gst-launch-1.0 udpsrc address=230.1.1.1 port=1720 multicast-iface=enp0s31f6 ! application/x-rtp, media=video, encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! autovideosink
 
+
+gst-launch-1.0 udpsrc address=230.1.1.1 port=1720 multicast-iface=enp0s31f6 ! queue !  application/x-rtp, media=video, encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! autovideosink
+
 ## 轨迹跟踪和障碍物显示
+        colcon build --packages-select go2_slam_algorithm
+
         启动节点
         ros2 launch go2_slam_algorithm go2_slam_toolbox.launch.py 
 
