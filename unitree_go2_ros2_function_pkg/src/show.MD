@@ -22,13 +22,11 @@ ctrl+shirt+v 预览
             gst-launch-1.0 udpsrc address=230.1.1.1 port=1720 multicast-iface=enp0s31f6 ! application/x-rtp, media=video, encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! autovideosink
 
 
-gst-launch-1.0 udpsrc address=230.1.1.1 port=1720 multicast-iface=enp0s31f6 ! queue !  application/x-rtp, media=video, encoding-name=H264 ! rtph264depay ! h264parse ! avdec_h264 ! videoconvert ! autovideosink
-
 ## 轨迹跟踪和障碍物显示
-        colcon build --packages-select go2_slam_algorithm
+        colcon build --packages-select point_lio_unilidar
 
         启动节点
-        ros2 launch go2_slam_algorithm go2_slam_toolbox.launch.py 
+        ros2 launch point_lio_unilidar mapping_utlidar.launch.py
 
         启动雷达
         ros2 launch hesai_ros_driver start.py

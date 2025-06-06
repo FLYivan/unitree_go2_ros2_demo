@@ -18,7 +18,7 @@ def generate_launch_description():
     rviz_file = PathJoinSubstitution([
         pkg_point_lio_unilidar,
         'rviz_cfg',
-        'point_lio_map.rviz'
+        'brain_interface_traj.rviz'
     ])
 
 

@@ -15,12 +15,6 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time')
 
 
-    # 获取rviz配置文件路径
-    rviz_file_with_traj = os.path.join(
-        get_package_share_directory('go2_camera_processing'),
-        'rviz',
-        'showcamera_with_traj.rviz'
-    )
 
     declare_use_sim_time_cmd = DeclareLaunchArgument(
         'use_sim_time',
