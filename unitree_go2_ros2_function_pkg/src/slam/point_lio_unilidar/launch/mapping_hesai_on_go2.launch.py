@@ -106,10 +106,10 @@ def generate_launch_description():
     # 返回启动描述
     return LaunchDescription([
         # start_lidar_launch_file,
-        # transform_node,             # 二选一
+        transform_node,             # 二选一
 
-        pointclouds_cut_node,       # 二选一
-        sensor_process_node,
+        # pointclouds_cut_node,       # 二选一
+        # sensor_process_node,
 
         mapping_node,
 
