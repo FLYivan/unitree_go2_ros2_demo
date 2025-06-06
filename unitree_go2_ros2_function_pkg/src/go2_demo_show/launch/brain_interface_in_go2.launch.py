@@ -52,10 +52,10 @@ def generate_launch_description():
     # slam建图launch文件
     start_traject_launch_file = launch.actions.IncludeLaunchDescription(
         PythonLaunchDescriptionSource([get_package_share_directory(
-            'go2_slam_algorithm'), '/launch', '/go2_slam_toolbox.launch.py']),
-             launch_arguments={
-            'rviz_params_file': rviz_file_with_traj
-            }.items()
+            'point_lio_unilidar'), '/launch', '/mapping_utlidar.launch.py']),
+            #  launch_arguments={
+            # 'rviz_params_file': rviz_file_with_traj
+            # }.items()
     )	
 
     return LaunchDescription([
