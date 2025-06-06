@@ -82,7 +82,7 @@ class SerialCommandNode(Node):
         try:
             # 根据不同的命令设置不同的运动参数
             if data == '1':                             
-                self.vx = 0.0 # 向前移动
+                self.vx = 0.1 # 向前移动
                 self.vel_contrl(self.vx, self.vy, self.vyaw)
                 self.get_logger().info('执行前进命令')
             elif data == '2':
